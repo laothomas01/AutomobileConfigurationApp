@@ -1,2 +1,4 @@
-package Model;public class Automotive {
+package Model;
+
+public class Automotive {
 }

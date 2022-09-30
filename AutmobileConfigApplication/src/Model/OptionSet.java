@@ -1,2 +1,8 @@
-package Model;public class OptionSet {
+package Model;
+
+public class OptionSet {
+    class Option
+    {
+
+    }
 }

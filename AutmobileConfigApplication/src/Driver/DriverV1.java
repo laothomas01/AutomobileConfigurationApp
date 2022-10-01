@@ -1,56 +1,7 @@
 package Driver;
 
-import Model.Automotive;
-import Model.OptionSet;
-
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
-
-public class CarConfigApplication {
-
-//	public static OptionSet readOptionSet(Scanner in) {
-//		String line = in.nextLine();
-//		String[] tokens = line.split("\\|");
-//	}
-
-
-	public static OptionSet readOptionSet(
-			//		Scanner in = new Scanner(new FileInputStream("CarConfigs.txt"), "UTF-8");
-			Scanner in) {
-		String line = in.nextLine();
-		String[] tokens = line.split("\\|");
-
-	}
-
-	public static void main(String args[]) throws FileNotFoundException {
-
-		/**
-		 * Base reference model
-		 *
-		 * we will select configurations from this object to fit into out Focus Wagon ZTW
-		 * tokens[]
-		 * ____________
-		 * 0: name
-		 * 1: options[]
-		 * 2: prices[]
-		 * ____________
-		 *
-		 */
-		//Automotive has 5 option sets
-		Automotive car = new Automotive("car", 5, 100f);
-		Scanner in = new Scanner(new FileInputStream("CarConfigs.txt"), "UTF-8");
-		while (in.hasNextLine()) {
-			String line = in.nextLine();
-			String[] tokens = line.split("\\|");
-			for (int i = 0; i < tokens.length; i++) {
-				System.out.print(i + ":" + tokens[i] + "\n");
-			}
-			System.out.println();
-		}
-
-
-//        /**
+public class DriverV1 {
+	public static void main(String args[]) {    //        /**
 //         * How to think about this when reading a text file
 //         * -option set size = number of options provided
 //         * i.e when reading a .txt file
@@ -95,23 +46,8 @@ public class CarConfigApplication {
 //        car.printOptionSetsData();
 
 
-//		};
-
-		/**
-		 * Need to write to file a format that we will serialize and also read, parse and apply
-		 */
-		/**
-		 * WRITING TO FILE
-		 */
-
-
-		/**
-		 * READING FILE
-		 */
-
-
-		//------------------------------------------------------------------
-
-
 	}
 }
+
+
+

@@ -34,11 +34,11 @@ public class OptionSet {
 
 
 	//access the collection of options
-	public Option[] getOptions() {
+	protected Option[] getOptions() {
 		return options;
 	}
 
-	public int getOptionsSize() {
+	protected int getOptionsSize() {
 		if (getOptions().length == 0) {
 			return 0;
 		}
@@ -46,12 +46,12 @@ public class OptionSet {
 	}
 
 	//retrieve an option by index
-	public Option getOption(int i) {
+	protected Option getOption(int i) {
 		return getOptions()[i];
 	}
 
 
-	public Option getOption(String n) {
+	protected Option getOption(String n) {
 		for (int i = 0; i < getOptionsSize(); i++) {
 			if (getOption(i).getName().equals(n)) {
 				return getOption(i);
@@ -61,25 +61,25 @@ public class OptionSet {
 	}
 
 	//if you want to update the list of options to a new set
-	public void updateOptions(Option[] options) {
+	protected void updateOptions(Option[] options) {
 		this.options = options;
 	}
 
 	//if you want to update an option, specify an index and a new option
-	public void updateOption(int i, Option o) {
+	protected void updateOption(int i, Option o) {
 		options[i] = o;
 	}
 
-	public String getName() {
+	protected String getName() {
 		return name;
 	}
 
-	public void setName(String name) {
+	protected void setName(String name) {
 		this.name = name;
 	}
 
 
-	public void addOption(int i, Option o) {
+	protected void addOption(int i, Option o) {
 		getOptions()[i] = o;
 	}
 
@@ -90,45 +90,45 @@ public class OptionSet {
 
 
 	//inner class
-	public class Option {
+	protected class Option {
 
 
 		private String name;
 		private float price;
 
 
-		public Option() {
+		protected Option() {
 			setName("");
 			setPrice(-1);
 		}
 
-		public Option(String n) {
+		protected Option(String n) {
 			name = n;
 			price = 0f;
 		}
 
-		public Option(String n, float p) {
+		protected Option(String n, float p) {
 			name = n;
 			price = p;
 		}
 
-		public String getName() {
+		protected String getName() {
 			return name;
 		}
 
-		public void setName(String name) {
+		protected void setName(String name) {
 			this.name = name;
 		}
 
-		public float getPrice() {
+		protected float getPrice() {
 			return price;
 		}
 
-		public void setPrice(float price) {
+		protected void setPrice(float price) {
 			this.price = price;
 		}
 
-		public void updateOption(String n, float p) {
+		protected void updateOption(String n, float p) {
 			setName(n);
 			setPrice(p);
 		}

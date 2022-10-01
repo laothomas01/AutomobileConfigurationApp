@@ -11,9 +11,15 @@ public class Automotive {
 
     }
 
-    public Automotive(String n, int size) {
+    /**
+     * @param n    = automotive name
+     * @param size = number of option sets
+     * @param p    = base price of automotive
+     */
+    public Automotive(String n, int size, float p) {
         optionSets = new OptionSet[size];
-        name = n;
+        setName(n);
+        setBasePrice(p);
     }
 
 
@@ -56,8 +62,14 @@ public class Automotive {
         this.optionSets = optionSets;
     }
 
-    public static void main(String args[]) {
-
+    public String toString() {
+        StringBuffer sb = new StringBuffer(
+                "NAME:" +
+                getName() +
+                " BASE-PRICE: "
+                + getBasePrice());
+        return sb.toString();
     }
+
 
 }

@@ -4,8 +4,9 @@ import Model.Automotive;
 
 public class CarConfigApplication {
     public static void main(String args[]) {
-        Automotive a = new Automotive("a", 2);
+        Automotive a = new Automotive("a", 2, 0);
         System.out.println("NAME:" + a.getName());
         System.out.println("LENGTH:" + a.getOptionSetsSize());
+        System.out.println(a.toString());
     }
 }

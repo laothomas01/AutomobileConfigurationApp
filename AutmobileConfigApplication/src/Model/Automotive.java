@@ -11,12 +11,12 @@ public class Automotive {
 	private float basePrice;
 	private OptionSet[] optionSets;
 
-
 	/**
 	 * @param n    = automotive name
 	 * @param size = number of option sets
 	 * @param p    = base price of automotive
 	 */
+
 	public Automotive(String n, int size, float p) {
 		optionSets = new OptionSet[size];
 		setName(n);
@@ -29,10 +29,16 @@ public class Automotive {
 	//chain the constructors
 
 	public Automotive() {
-		name = "";
-		basePrice = -1;
+		setName("");
+		setBasePrice(-1);
 		optionSets = new OptionSet[0];
 	}
+
+	/**
+	 * Create a chaining of constructors
+	 *
+	 * @return
+	 */
 
 	public String getName() {
 		return name;
@@ -50,6 +56,7 @@ public class Automotive {
 		this.basePrice = basePrice;
 	}
 
+	//return array of option sets
 	public OptionSet[] getOptionSets() {
 		return optionSets;
 	}
@@ -59,16 +66,22 @@ public class Automotive {
 		return getOptionSets()[i];
 	}
 
-	public OptionSet getOptionSet(String n) {
-
+	//get an option set based on name
+	public OptionSet getCarOptionSet(String n) {
 		for (int i = 0; i < getOptionSetsSize(); i++) {
 			if (getOptionSet(i).getName().equals(n)) {
 				return getOptionSet(i);
 			}
 		}
-
-
 		return new OptionSet("DOES NOT EXIST!", 0);
+	}
+
+	public OptionSet.Option getOption(int optSetIndex, int optIndex) {
+		return getOptionSet(optSetIndex).getOption(optIndex);
+	}
+
+	public OptionSet.Option getOption(int optSetIndex, String optionName) {
+		return getOptionSet(optSetIndex).getOption(optionName);
 	}
 
 	public int getOptionSetsSize() {
@@ -101,7 +114,6 @@ public class Automotive {
 	public float calculateBasePrice() {
 		return 0;
 	}
-
 
 	public String toString() {
 		StringBuffer sb = new StringBuffer("CAR NAME:" + getName() + " CAR BASE-PRICE: " + getBasePrice());

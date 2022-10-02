@@ -3,8 +3,8 @@ package Driver;
 import Model.Automotive;
 import Model.OptionSet;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.*;
+import java.nio.Buffer;
 import java.util.Scanner;
 
 public class CarConfigApplication {
@@ -15,39 +15,103 @@ public class CarConfigApplication {
 //	}
 
 
-	public static OptionSet readOptionSet(
-			//		Scanner in = new Scanner(new FileInputStream("CarConfigs.txt"), "UTF-8");
-			Scanner in) {
-		String line = in.nextLine();
-		String[] tokens = line.split("\\|");
+//	public static OptionSet readOptionSet(
+//			//		Scanner in = new Scanner(new FileInputStream("CarConfigs.txt"), "UTF-8");
+//			Scanner in) {
+//		String line = in.nextLine();
+//		String[] tokens = line.split("\\|");
+//
+//	}
 
-	}
-
-	public static void main(String args[]) throws FileNotFoundException {
+	public static void main(String args[]) throws IOException {
 
 		/**
 		 * Base reference model
 		 *
 		 * we will select configurations from this object to fit into out Focus Wagon ZTW
+		 * PSEUDO CODE
 		 * tokens[]
 		 * ____________
 		 * 0: name
 		 * 1: options[]
 		 * 2: prices[]
+		 * -> optionset{ option(name,price)... }
+		 *
 		 * ____________
 		 *
 		 */
-		//Automotive has 5 option sets
-		Automotive car = new Automotive("car", 5, 100f);
-		Scanner in = new Scanner(new FileInputStream("CarConfigs.txt"), "UTF-8");
-		while (in.hasNextLine()) {
-			String line = in.nextLine();
-			String[] tokens = line.split("\\|");
-			for (int i = 0; i < tokens.length; i++) {
-				System.out.print(i + ":" + tokens[i] + "\n");
+		int i = 0;
+		try {
+			FileReader f = new FileReader("CarConfigs.txt");
+			BufferedReader b = new BufferedReader(f);
+			boolean eof = false;
+			while (!eof) {
+				String line = b.readLine();
+				if (line == null) {
+					eof = true;
+				} else {
+					i++;
+				}
 			}
-			System.out.println();
+		} catch (IOException e) {
+			System.out.println("ERROR -- " + e.toString());
 		}
+		System.out.println(i);
+//		// we will build an automotive object using FileIO
+//		//------------------- GETTING OPTION SETS SIZE ----------------------
+//		Scanner in = new Scanner(new FileInputStream("CarConfigs.txt"), "UTF-8");
+//		int optionSetsSize = 0;
+//		while (in.hasNextLine()) {
+//			in.nextLine();
+//			optionSetsSize++;
+//		}
+//		//------------------------------------------------------------------
+//		Automotive car = new Automotive("car", optionSetsSize, 100f);
+////		car.printOptionSetsData();
+//		//------------------ RETRIEVE TEXT FILE DATA ----------------------
+//		in = new Scanner(new FileInputStream("CarConfigs.txt"), "UTF-8");
+//		//keep reading the text file
+////		int optionSetIndex = 0;
+////		while (in.hasNextLine()) {
+////			optionSetIndex++;
+//		String line = in.nextLine();
+//		String[] tokens = line.split("\\|");
+//		String name = tokens[0];
+//		System.out.println("NAME: " + name);
+//		String[] optionNames = tokens[1].split(",");
+//		String[] optionPrices = tokens[2].split(",");
+//		for (int i = 0; i < optionNames.length; i++) {
+//
+//			/**
+//			 * option set size = # of options = # of optionNames = # of optionPrices
+//			 * i = 0
+//			 * Option(name,price)
+//			 * i = 1
+//			 * Option(name,price)
+//			 * ...
+//			 * i = n
+//			 * Option(name,price)
+//			 */
+//
+//		}
+////		for (String o : options) {
+////
+////
+////			for (String p : prices) {
+////				System.out.println("OPTION:");
+////				System.out.println(o);
+////				System.out.println("PRICE:");
+////				System.out.println(p);
+////			}
+////		}
+//
+//		//convert to floats
+//
+//
+//		System.out.println("END OF LINE");
+
+
+		//-------------------------------------------------------------------
 
 
 //        /**
@@ -97,21 +161,32 @@ public class CarConfigApplication {
 
 //		};
 
-		/**
-		 * Need to write to file a format that we will serialize and also read, parse and apply
-		 */
-		/**
-		 * WRITING TO FILE
-		 */
-
-
-		/**
-		 * READING FILE
-		 */
-
-
 		//------------------------------------------------------------------
 
 
+//		}
 	}
+
+//	public int getOptionSetsSize(BufferedReader br, String fileName) {
+//
+////		int size = 0;
+////		try {
+////			FileReader file = new FileReader(fileName);
+////			boolean eof = false;
+////			while (!eof) {
+////				String line = br.readLine();
+////				if (line == null) {
+////					eof = true;
+////				} else {
+////					size++;
+////					System.out.println(line);
+////				}
+////			}
+////		} catch (IOException e) {
+////			System.out.println("ERROR -- " + e.toString());
+////		}
+////		return size;
+//
+//	}
+
 }

@@ -88,7 +88,6 @@ public class OptionSet {
 		return sb.toString();
 	}
 
-
 	//inner class
 	protected class Option {
 

@@ -2,6 +2,7 @@ package Driver;
 
 import Model.Automotive;
 import Model.OptionSet;
+import Utils.FileIO;
 
 import java.io.*;
 import java.nio.Buffer;
@@ -40,23 +41,35 @@ public class CarConfigApplication {
 		 * ____________
 		 *
 		 */
-		int i = 0;
-		try {
-			FileReader f = new FileReader("CarConfigs.txt");
-			BufferedReader b = new BufferedReader(f);
-			boolean eof = false;
-			while (!eof) {
-				String line = b.readLine();
-				if (line == null) {
-					eof = true;
-				} else {
-					i++;
-				}
-			}
-		} catch (IOException e) {
-			System.out.println("ERROR -- " + e.toString());
-		}
-		System.out.println(i);
+
+		FileIO io = new FileIO();
+		Automotive car = io.buildAutomotive("CarConfigs.txt", new Automotive());
+		car.setBasePrice(128500);
+		car.setName("Ford ZTW Wagon");
+		System.out.println(car.toString());
+//		try {
+////			BufferedReader br = new BufferedReader(new FileReader("CarConfigs.txt"));
+//
+//		} catch (IOException e) {
+//			System.out.println("Error -- " + e.toString());
+//		}
+//		int i = 0;
+//		try {
+//			FileReader f = new FileReader("CarConfigs.txt");
+//			BufferedReader b = new BufferedReader(f);
+//			boolean eof = false;
+//			while (!eof) {
+//				String line = b.readLine();
+//				if (line == null) {
+//					eof = true;
+//				} else {
+//					i++;
+//				}
+//			}
+//
+//		} catch (IOException e) {
+//			System.out.println("ERROR -- " + e.toString());
+//		}
 //		// we will build an automotive object using FileIO
 //		//------------------- GETTING OPTION SETS SIZE ----------------------
 //		Scanner in = new Scanner(new FileInputStream("CarConfigs.txt"), "UTF-8");

@@ -48,8 +48,34 @@ public class FileIO {
 //		}
 //	}
 
-//	public Automotive buildAutoObject(String filename, Automotive a1) {
+	public Automotive buildAutomotive(String filename, Automotive a1) {
+
+		int optionSetsSize = 0;
+
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(filename));
+			optionSetsSize = getLineCount(br, filename);
+		} catch (IOException e) {
+			System.out.println("Error -- " + e.toString());
+		}
+		a1 = new Automotive(optionSetsSize);
+		return a1;
+	}
+
+	public int getLineCount(BufferedReader b, String n) throws IOException {
+		int i = 0;
+		boolean eof = false;
+		while (!eof) {
+			String line = b.readLine();
+			if (line == null) {
+				eof = true;
+			} else {
+				i++;
+			}
+		}
+		return i;
+	}
+//	public OptionSet readData()
 //
-//	}
 
 }

@@ -26,7 +26,11 @@ public class Automotive {
 		}
 		// each instance of Automotive will have N number of empty instances of option set
 	}
+
 	//chain the constructors
+	public Automotive(int size) {
+		this("", size, -1);
+	}
 
 	public Automotive() {
 		setName("");
@@ -96,7 +100,6 @@ public class Automotive {
 
 	public void printOptionSetsData() {
 		//print vehicle name and base price
-		System.out.println(this.toString());
 		for (int i = 0; i < getOptionSetsSize(); i++) {
 			System.out.println(getOptionSet(i).toString());
 			for (int j = 0; j < getOptionSet(i).getOptionsSize(); j++) {
@@ -116,7 +119,8 @@ public class Automotive {
 	}
 
 	public String toString() {
-		StringBuffer sb = new StringBuffer("CAR NAME:" + getName() + " CAR BASE-PRICE: " + getBasePrice());
+		StringBuffer sb = new StringBuffer("CAR NAME:" + getName() + "\nCAR BASE-PRICE: " + getBasePrice());
+		printOptionSetsData();
 		return sb.toString();
 	}
 

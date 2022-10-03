@@ -1,12 +1,9 @@
 package Driver;
 
 import Model.Automotive;
-import Model.OptionSet;
 import Utils.FileIO;
 
 import java.io.*;
-import java.nio.Buffer;
-import java.util.Scanner;
 
 public class CarConfigApplication {
 
@@ -43,10 +40,17 @@ public class CarConfigApplication {
 		 */
 
 		FileIO io = new FileIO();
-		Automotive car = io.buildAutomotive("CarConfigs.txt", new Automotive());
-		car.setBasePrice(128500);
-		car.setName("Ford ZTW Wagon");
-		System.out.println(car.toString());
+		Automotive car = io.buildAutomotive("CarConfigs.txt");
+		car.printOptionSetsData();
+		for (int i = 0; i < car.getOptionSetsSize(); i++) {
+//			System.out.println(car.getOptionSetSize(i));
+			System.out.println(car.optionSetToString(i));
+		}
+
+
+//		System.out.println(car.toString());
+		//		car.setBasePrice(128500);
+//		car.setName("Ford ZTW Wagon");
 //		try {
 ////			BufferedReader br = new BufferedReader(new FileReader("CarConfigs.txt"));
 //

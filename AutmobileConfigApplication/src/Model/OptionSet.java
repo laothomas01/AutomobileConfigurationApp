@@ -2,43 +2,52 @@ package Model;
 
 import java.io.IOException;
 
-public class OptionSet {
+/**
+ * Handles CRUD of Option instances
+ * <p>
+ * OPTION SET = collection of options
+ */
+class OptionSet {
 
-	private Option options[];
+	private Option optionSet[];
 	private String name;
 
 
-	public OptionSet() {
-
-		setName("");
-		options = new Option[0];
-	}
-
 	/**
-	 * @param n = name of option set
-	 * @param s = number of options
+	 * @param n    = name of option set
+	 * @param size = number of options
 	 */
-	public OptionSet(String n, int s) {
+	public OptionSet(String n, int size) {
 		setName(n);
-		options = new Option[s];
-		//initialize array of options with new instances of options
-		for (int i = 0; i < s; i++) {
-			options[i] = new Option();
+		optionSet = new Option[size];
+		//initialize array of options with new instances of empty options
+		for (int i = 0; i < size; i++) {
+			optionSet[i] = new Option();
 		}
 	}
 
-	//if we want to create an option set instance without needing to specify its size of options
 	public OptionSet(String n) {
-		//initialize array of options with new instances of options
+		this(n, 0);
 	}
+
+	public OptionSet(int n) {
+		this("", n);
+	}
+
+	public OptionSet() {
+		setName("");
+		optionSet = new Option[0];
+	}
+
+	//if we want to create an option set instance without needing to specify its size of options
 
 
 	//access the collection of options
 	protected Option[] getOptions() {
-		return options;
+		return optionSet;
 	}
 
-	protected int getOptionsSize() {
+	protected int getOptionSetSize() {
 		if (getOptions().length == 0) {
 			return 0;
 		}
@@ -50,9 +59,8 @@ public class OptionSet {
 		return getOptions()[i];
 	}
 
-
 	protected Option getOption(String n) {
-		for (int i = 0; i < getOptionsSize(); i++) {
+		for (int i = 0; i < getOptionSetSize(); i++) {
 			if (getOption(i).getName().equals(n)) {
 				return getOption(i);
 			}
@@ -60,15 +68,6 @@ public class OptionSet {
 		return new Option("DOES NOT EXIST!", 0);
 	}
 
-	//if you want to update the list of options to a new set
-	protected void updateOptions(Option[] options) {
-		this.options = options;
-	}
-
-	//if you want to update an option, specify an index and a new option
-	protected void updateOption(int i, Option o) {
-		options[i] = o;
-	}
 
 	protected String getName() {
 		return name;
@@ -80,11 +79,30 @@ public class OptionSet {
 
 
 	protected void addOption(int i, Option o) {
+
+	}
+
+	protected void setOption(int i, Option o) {
 		getOptions()[i] = o;
 	}
 
+	//if you want to update the list of options to a new set
+	protected void updateOptions(Option[] options) {
+		this.optionSet = options;
+	}
+
+	//if you want to update an option, specify an index and a new option
+	protected void updateOption(int i, Option o) {
+		optionSet[i] = o;
+	}
+
+
+	// [X] printing info about option set and its options
 	public String toString() {
 		StringBuffer sb = new StringBuffer("OPTIONSET NAME:" + getName());
+		for (int i = 0; i < getOptionSetSize(); i++) {
+			sb.append("\n" + getOption(i).toString());
+		}
 		return sb.toString();
 	}
 
@@ -132,7 +150,7 @@ public class OptionSet {
 			setPrice(p);
 		}
 
-
+		//[X] printing information about option instance
 		public String toString() {
 			StringBuffer sb = new StringBuffer("                OPTION NAME: " + getName() + ",OPTION PRICE: " + getPrice());
 			return sb.toString();

@@ -157,12 +157,14 @@ public class Automotive {
 	}
 
 	public void setOption(int optionSetIndex, int optionIndex, OptionSet.Option o) {
-		getOptionSet(optionIndex).setOption(optionIndex, o);
+		getOptionSet(optionSetIndex).setOption(optionIndex, o);
 	}
 
 	public void addOption(int optionSetIndex, int optionIndex, String name, float price) {
 		OptionSet os = getOptionSet(optionSetIndex);
-		setOption(optionSetIndex, optionIndex, os.new Option(name, price));
+		OptionSet.Option opt = os.new Option(name, price);
+
+		setOption(optionSetIndex, optionIndex, opt);
 	}
 
 

@@ -75,23 +75,27 @@ public class FileIO {
 					a1.setName(carAttributes[0]);
 					a1.setBasePrice(Float.parseFloat(carAttributes[1]));
 				}
-				//start at the next line for car configurations
+				//start at the next line for reading car configurations
 				String line = br2.readLine();
 				String[] carConfigs = line.split("\\|");
 				String name = carConfigs[0];
 				String[] optionNames = carConfigs[1].split(",");
 				String[] optionPrices = carConfigs[2].split(",");
+
 				//replace the empty option set with a populated option set instance
 				//currently they are empty but will be populated
 				a1.addOptionSet(i, name, optionNames.length);
 
+				/**
+				 - option name[ ] length = option price [ ] length
+				 - 1 to 1 relationship: option name -> option price
+				 - option set size = # of option names = # of option prices
+				 - after initializing an option set, let's access the option set's options and populate those options with option data
+				 */
+				for (int j = 0; j < optionNames.length; j++) {
+					a1.addOption(i, j, optionNames[j], Float.parseFloat(optionPrices[j]));
+				}
 
-//				for (int j = 0; j < optionNames.length; j++) {
-//					System.out.println(optionNames[j] + ":" + optionPrices[j]);
-//				}
-
-				// option set size = # of option names = # of option prices
-				//after initializing an option set, let's access the option set options and populate the options with option data
 
 			}
 //				String line = br2.readLine();

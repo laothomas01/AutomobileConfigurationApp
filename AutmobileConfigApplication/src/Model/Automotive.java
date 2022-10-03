@@ -93,6 +93,7 @@ public class Automotive {
 
 	//------------------- HANDLING AN OPTION SET --------------------------
 	public OptionSet getOptionSet(int i) {
+		//alter the option set within OPTION SETS
 		return getOptionSets()[i];
 	}
 
@@ -117,13 +118,6 @@ public class Automotive {
 		return new OptionSet();
 	}
 
-	public void setOptionSet(int i, OptionSet o) {
-		getOptionSets()[i] = o;
-	}
-
-	public void deleteOptionSet(int i) {
-		setOptionSet(i, null);
-	}
 
 	public int getOptionSetSize(int i) {
 		return getOptionSet(i).getOptionSetSize();
@@ -133,9 +127,17 @@ public class Automotive {
 		return getOptionSet(i).toString();
 	}
 
+	public void deleteOptionSet(int i) {
+		setOptionSet(i, null);
+	}
+
+	public void setOptionSet(int i, OptionSet o) {
+		getOptionSets()[i] = o;
+	}
+
 	public void addOptionSet(int index, String n, int size) {
-		//		setOptionSet(index, new OptionSet(n, size));
-		optionSets[index] = new OptionSet(n, size);
+//		optionSets[index] = new OptionSet(n, size);
+		setOptionSet(index, new OptionSet(n, size));
 	}
 
 
@@ -145,12 +147,22 @@ public class Automotive {
 		return getOptionSet(optionIndex).getOption(optionIndex);
 	}
 
+
 	public String optionToString(int optionSetIndex, int optionIndex) {
 		return getOption(optionSetIndex, optionIndex).toString();
 	}
 
 	public String getOptionName(int optionSetIndex, int optionIndex) {
 		return getOption(optionSetIndex, optionIndex).getName();
+	}
+
+	public void setOption(int optionSetIndex, int optionIndex, OptionSet.Option o) {
+		getOptionSet(optionIndex).setOption(optionIndex, o);
+	}
+
+	public void addOption(int optionSetIndex, int optionIndex, String name, float price) {
+		OptionSet os = getOptionSet(optionSetIndex);
+		setOption(optionSetIndex, optionIndex, os.new Option(name, price));
 	}
 
 

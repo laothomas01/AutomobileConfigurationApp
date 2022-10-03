@@ -67,7 +67,7 @@ public class FileIO {
 
 			//looping through each option set index within the set of option sets
 			for (int i = 0; i < a1.getOptionSetsSize(); i++) {
-				//first index = name and price of car. not related to car configs
+				//0th index = name and price of car. not related to car configs
 				if (i == 0) {
 					//read a line for the car specs
 					String line = br2.readLine();
@@ -82,7 +82,9 @@ public class FileIO {
 				String[] optionNames = carConfigs[1].split(",");
 				String[] optionPrices = carConfigs[2].split(",");
 				//replace the empty option set with a populated option set instance
+				//currently they are empty but will be populated
 				a1.addOptionSet(i, name, optionNames.length);
+
 
 //				for (int j = 0; j < optionNames.length; j++) {
 //					System.out.println(optionNames[j] + ":" + optionPrices[j]);

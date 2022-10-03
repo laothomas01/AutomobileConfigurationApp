@@ -107,27 +107,44 @@ class OptionSet {
 	}
 
 	//inner class
-	protected class Option {
+	public class Option {
 
 
 		private String name;
 		private float price;
 
-
-		protected Option() {
-			setName("");
-			setPrice(-1);
-		}
-
-		protected Option(String n) {
-			name = n;
-			price = 0f;
-		}
-
 		protected Option(String n, float p) {
 			name = n;
 			price = p;
 		}
+
+		protected Option(String n) {
+			this(n, 0);
+		}
+
+		protected Option(float p) {
+			this("", p);
+		}
+
+		protected Option() {
+			setName("");
+			setPrice(0f);
+		}
+//		protected Option(String n, float p) {
+//			name = n;
+//			price = p;
+//		}
+//
+//		protected Option(String n) {
+//			name = n;
+//			price = 0f;
+//		}
+//
+//
+//		protected Option() {
+//			setName("");
+//			setPrice(-1);
+//		}
 
 		protected String getName() {
 			return name;

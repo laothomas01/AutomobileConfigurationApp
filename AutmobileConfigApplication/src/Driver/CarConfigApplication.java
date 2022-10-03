@@ -43,10 +43,9 @@ public class CarConfigApplication {
 		Automotive car = io.buildAutomotive("CarConfigs.txt");
 		car.printOptionSetsData();
 		for (int i = 0; i < car.getOptionSetsSize(); i++) {
-//			System.out.println(car.getOptionSetSize(i));
 			System.out.println(car.optionSetToString(i));
 		}
-
+//
 
 //		System.out.println(car.toString());
 		//		car.setBasePrice(128500);

@@ -14,8 +14,10 @@ class OptionSet {
 
 
 	/**
-	 * @param n    = name of option set
-	 * @param size = number of options
+	 * Chained Constructors
+	 *
+	 * @param n    = name
+	 * @param size = length of Option array
 	 */
 	public OptionSet(String n, int size) {
 		setName(n);
@@ -38,36 +40,11 @@ class OptionSet {
 		this("", 0);
 	}
 
-	//if we want to create an option set instance without needing to specify its size of options
-
-
-	//access the collection of options
-	protected Option[] getOptions() {
-		return options;
-	}
-
-	protected int getOptionsSize() {
-		if (getOptions().length == 0) {
-			return 0;
-		}
-		return getOptions().length;
-	}
-
-	//retrieve an option by index
-	protected Option getOption(int i) {
-		return getOptions()[i];
-	}
-
-	protected Option getOption(String n) {
-		for (int i = 0; i < getOptionsSize(); i++) {
-			if (getOption(i).getName().equals(n)) {
-				return getOption(i);
-			}
-		}
-		return new Option("DOES NOT EXIST!", 0);
-	}
-
-
+	/**
+	 * Accessors and Mutators
+	 *
+	 * @return
+	 */
 	protected String getName() {
 		return name;
 	}
@@ -76,33 +53,60 @@ class OptionSet {
 		this.name = name;
 	}
 
-
-	protected void addOption(int i, Option o) {
-
+	//retrieve Option array
+	protected Option[] getOptions() {
+		return options;
 	}
 
-	protected void setOption(int i, Option o) {
-		getOptions()[i] = o;
+	//retrieve Option array length
+	protected int getOptionsSize() {
+		if (getOptions().length == 0) {
+			return 0;
+		}
+		return getOptions().length;
 	}
 
-	//if you want to update the list of options to a new set
-	protected void updateOptions(Option[] options) {
-		this.options = options;
-	}
 
-	//if you want to update an option, specify an index and a new option
-	protected void updateOption(int i, Option o) {
-		options[i] = o;
+	//replace with new array of Option instances
+	protected void updateOptions(Option[] opts) {
+		this.options = opts;
 	}
-
 
 	// [X] printing info about option set and its options
 	public String toString() {
-
-		StringBuffer sb = new StringBuffer("NAME:" + getName() + "SIZE" + getOptionsSize());
-
+		StringBuffer sb = new StringBuffer("OPTION-SET|" + getName());
 		return sb.toString();
 	}
+
+	//retrieve an Option instance by index
+	protected Option getOption(int i) {
+		return getOptions()[i];
+	}
+
+	//retrieve option instance by name
+	protected Option getOption(String n) {
+		for (int i = 0; i < getOptionsSize(); i++) {
+			if (getOption(i).getName().equals(n)) {
+				return getOption(i);
+			}
+		}
+		return new Option();
+	}
+
+	protected void setOption(int i, String n, float p) {
+		updateOption(i, new Option(n, p));
+	}
+
+	//replace , by index , an input Option instance within Option array
+	protected void updateOption(int i, Option o) {
+		getOptions()[i] = o;
+	}
+
+	protected void deleteOption(int i) {
+		//change specified option at index i = new empty Option instance.
+		getOptions()[i] = new Option();
+	}
+
 
 	//inner class
 	public class Option {
@@ -147,7 +151,7 @@ class OptionSet {
 		//[X] printing information about option instance
 		public String toString() {
 
-			StringBuffer sb = new StringBuffer(getName() + "|" + getPrice());
+			StringBuffer sb = new StringBuffer("OPTION|" + getName() + "|" + getPrice());
 			return sb.toString();
 		}
 

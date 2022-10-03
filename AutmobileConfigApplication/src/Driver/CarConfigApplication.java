@@ -5,6 +5,16 @@ import Utils.FileIO;
 
 import java.io.*;
 
+/**
+ * @TODO LIST
+ * [] update functions for option set, option and in automotive
+ * [] serialization
+ * [] clean up class diagram
+ * [] create test cases
+ * [] write car data to file
+ * [] clean code up
+ * [] turn homework in
+ */
 public class CarConfigApplication {
 
 //	public static OptionSet readOptionSet(Scanner in) {
@@ -41,7 +51,11 @@ public class CarConfigApplication {
 
 		FileIO io = new FileIO();
 		Automotive car = io.buildAutomotive("CarConfigs.txt");
-		System.out.println(car.optionSetToString(0));
+		for (int i = 0; i < car.getOptionSetsSize(); i++) {
+			System.out.println("---------------------------------");
+			System.out.println(car.optionSetToString(i));
+		}
+//		System.out.println(car.optionSetToString(1));
 //		car.printOptionSetsData();
 //		for (int i = 0; i < car.getOptionSetsSize(); i++) {
 //			System.out.println(car.optionSetToString(i));

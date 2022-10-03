@@ -148,8 +148,17 @@ public class Automotive {
 	}
 
 
+	//  @TODO BUGGED.
+
+	/**
+	 * Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: Index 3 out of bounds for length 2
+	 * at Model.OptionSet.getOption(OptionSet.java:59)
+	 * at Model.Automotive.getOption(Automotive.java:147)
+	 * at Model.Automotive.optionToString(Automotive.java:153)
+	 * at Driver.CarConfigApplication.main(CarConfigApplication.java:48)
+	 */
 	public String optionToString(int optionSetIndex, int optionIndex) {
-		return getOption(optionSetIndex, optionIndex).toString();
+		return "";
 	}
 
 	public String getOptionName(int optionSetIndex, int optionIndex) {

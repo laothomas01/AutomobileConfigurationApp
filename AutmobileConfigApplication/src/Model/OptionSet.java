@@ -99,7 +99,11 @@ class OptionSet {
 
 	// [X] printing info about option set and its options
 	public String toString() {
+		//option set = array of options
+
+		//print option set name
 		StringBuffer sb = new StringBuffer("OPTIONSET NAME:" + getName());
+		//print options within array
 		for (int i = 0; i < getOptionSetSize(); i++) {
 			sb.append("\n" + getOption(i).toString());
 		}

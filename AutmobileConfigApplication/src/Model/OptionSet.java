@@ -74,7 +74,7 @@ class OptionSet {
 
 	// [X] printing info about option set and its options
 	public String toString() {
-		StringBuffer sb = new StringBuffer("OPTION-SET|" + getName());
+		StringBuffer sb = new StringBuffer(getName());
 		return sb.toString();
 	}
 
@@ -151,7 +151,7 @@ class OptionSet {
 		//[X] printing information about option instance
 		public String toString() {
 
-			StringBuffer sb = new StringBuffer("OPTION|" + getName() + "|" + getPrice());
+			StringBuffer sb = new StringBuffer(getName() + "|" + getPrice());
 			return sb.toString();
 		}
 

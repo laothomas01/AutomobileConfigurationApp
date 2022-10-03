@@ -34,12 +34,10 @@ public class Automotive {
 		this(n, 0f, size);
 	}
 
-	//
 	public Automotive(int size, float p) {
 		this("", p, size);
 	}
 
-	//
 	public Automotive(float p) {
 		this("", p, 0);
 	}
@@ -81,54 +79,98 @@ public class Automotive {
 	}
 
 
-	//-------------------- OPTION SETS MUTATOR AND ACCESSOR ---------------
+	//-------------------- OPTION SET ARRAY MUTATOR AND ACCESSOR ---------------
 
 
-	//retrieve Option Set instance from the array of Option Sets instances
+	//retrieve Option Set class instance from the array of Option Sets instances
+
+	//takes an index to retrieve current option set instance
 	public OptionSet getOptionSetInstance(int i) {
 		return getOptionSets()[i];
 	}
 
+	//update Option Set class instance
+	//replace, by index , a new instance of an Option Set
+	//set name and size
+	public void setOptionSetInstance(int i, String name, int size) {
+		getOptionSets()[i] = new OptionSet(name, size);
+	}
+
+	//retrieve set of Option Set class instances
 	public OptionSet[] getOptionSets() {
 		return optionSets;
 	}
 
 
-	//-------------------- OPTION SET MUTATORS AND ACCESSORS ---------------
+	//-------------------- (inside OptionSet class) OPTIONS ARRAY MUTATORS AND ACCESSORS ---------------
+
+	//retrieve set of Options
+
+	// takes single index = index of current option set instance and uses the instance to retrieve the array of Option class instances
 	public OptionSet.Option[] getOptions(int i) {
 		return getOptionSetInstance(i).getOptions();
 	}
 
+	//using Option Set class instance to retrieve an option get name based on a specified index
 	public String getOptionSetName(int i) {
 		return getOptionSetInstance(i).getName();
 	}
+
+	//using Option Set class instance to retrieve an option set name
 
 	public void setOptionSetName(int i, String n) {
 		getOptionSetInstance(i).setName(n);
 	}
 
+	//using Option Set class instance, set the class's Option array to a new array
+	public void setOptions(int i, OptionSet.Option[] opts) {
+		getOptionSetInstance(i).updateOptions(opts);
+	}
+
 
 	// --------------------- OPTION MUTATORS AND ACCESSORS -----------------
 
-	//retrieve an Option instance from the array of Option instances
-	public OptionSet.Option getOptionInstance(int i, int j) {
-		return getOptions(i)[j];
+	/**
+	 * Used to
+	 *
+	 * @param optSetIndex
+	 * @param optIndex
+	 * @return
+	 */
+	//retrieve Option class instance from array of OptionSet instances
+
+	//these instances will be to modify or retrieve Option class instances from an array
+
+	//will require a second index to map to each index within the Option class array
+	public OptionSet.Option getOptionInstance(int optSetIndex, int optIndex) {
+		return getOptionSetInstance(optSetIndex).getOption(optIndex);
 	}
 
-	public String getOptionName(int i, int j) {
-		return getOptionInstance(i, j).getName();
+	//use an indexed Option class instance from array of OptionSet instances to retrieve option name
+	public String getOptionName(int optSetIndex, int optIndex) {
+		return getOptionInstance(optSetIndex, optIndex).getName();
+	}
+	//use an indexed Option class instance from array of OptionSet instances to set option name
+
+	public void setOptionName(int optSetIndex, int optIndex, String name) {
+		getOptionInstance(optSetIndex, optIndex).setName(name);
+	}
+	//use an indexed Option class instance from array of OptionSet instances to retrieve option price
+
+	public float getOptionPrice(int optSetIndex, int optIndex) {
+		return getOptionInstance(optSetIndex, optIndex).getPrice();
 	}
 
-	public void setOptionName(int i, int j, String name) {
-		getOptionInstance(i, j).setName(name);
+	//use an indexed Option class instance from array of OptionSet instances to set option name
+	public void setOptionPrice(int optSetIndex, int optIndex, float price) {
+		getOptionInstance(optSetIndex, optIndex).setPrice(price);
 	}
 
-	public float getOptionPrice(int i, int j) {
-		return getOptionInstance(i, j).getPrice();
-	}
+	//uses Option Set class insrtance to set an Option instance to a new instance within Option array
 
-	public void setOptionPrice(int i, int j, float price) {
-		getOptionInstance(i, j).setPrice(price);
+	public void setOption(int i, int j, String n, float p) {
+		setOptionPrice(i, j, p);
+		setOptionName(i, j, n);
 	}
 
 
@@ -292,7 +334,7 @@ public class Automotive {
 //		for (int i = 0; i < getOptionSetsSize(); i++) {
 //			System.out.println(getOptionSet(i));
 ////			for (int j = 0; j < getOptionSetSize(i); i++) {
-////				System.out.println(getOption(i, j));
+////				System.out.println(getOption(optSet, opt));
 ////			}
 //		}
 	}
@@ -308,12 +350,11 @@ public class Automotive {
 //		return 0;
 //	}
 	public String toString() {
-//		StringBuffer sb = new StringBuffer(getName() + "|" + getBasePrice());
+		StringBuffer sb = new StringBuffer(getName() + "|" + getBasePrice());
 //		for (int i = 0; i < getOptionSetsSize(); i++) {
 //			System.out.println(getOptionSet(i));
 //		}
-//		return sb.toString();
-		return "";
+		return sb.toString();
 	}
 
 

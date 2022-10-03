@@ -131,20 +131,19 @@ public class FileIO {
 			String[] optionNames = carConfigs[1].split(" ");
 			String[] optionPrices = carConfigs[2].split(" ");
 
-			//replace the empty option set with a populated option set instance
-			//currently they are empty but will be populated
-//			a.addOptionSet(i, name, optionNames.length);
-
+			int optionsCount = optionNames.length;
+			//replace the empty option set with a new populated option set instance
+			a.setOptionSetInstance(i, name, optionsCount);
+			for (int j = 0; j < optionNames.length; j++) {
+				//parse the prices because they are read as strings
+				a.setOption(i, j, optionNames[j], Float.parseFloat(optionPrices[j]));
+			}
 			/**
 			 - option name[ ] length = option price [ ] length
 			 - 1 to 1 relationship: option name -> option price
 			 - option set size = # of option names = # of option prices
 			 - after initializing an option set, let's access the option set's options and populate those options with option data
 			 */
-//			for (int j = 0; j < optionNames.length; j++) {
-//				a.addOption(i, j, optionNames[j], Float.parseFloat(optionPrices[j]));
-//			}
-
 
 		}
 	}

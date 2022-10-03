@@ -20,38 +20,37 @@ public class Automotive {
 	 * @param size = number of option sets
 	 * @param p    = base price of automotive
 	 */
-
-	public Automotive(String n, int size, float p) {
+	//chain the constructors
+	public Automotive(String n, float p, int size) {
 		optionSets = new OptionSet[size];
 		setName(n);
 		setBasePrice(p);
 		for (int i = 0; i < optionSets.length; i++) {
 			optionSets[i] = new OptionSet();
 		}
-		// each instance of Automotive will have N number of empty instances of option set
 	}
 
 	public Automotive(String n, int size) {
-		this(n, size, -1);
+		this(n, 0f, size);
 	}
 
+	//
 	public Automotive(int size, float p) {
-		this("", size, p);
+		this("", p, size);
 	}
 
+	//
 	public Automotive(float p) {
-		this("", 0, p);
+		this("", p, 0);
 	}
 
-	//chain the constructors
 	public Automotive(int size) {
-		this("", size, -1);
+		this("", 0, size);
 	}
+
 
 	public Automotive() {
-		setName("");
-		setBasePrice(-1);
-		optionSets = new OptionSet[0];
+		this("", 0, 0);
 	}
 
 	/**
@@ -135,12 +134,12 @@ public class Automotive {
 
 	//---------------------- GET ARRAY SIZES -----------------------
 
-	// Length of set of option sets
+	// Size of array of Option Set instances
 	public int getOptionSetsSize() {
 		return getOptionSets().length;
 	}
 
-	// Lenght of set of options
+	// Size of array of Option instances
 	public int getOptionsSize(int i) {
 		return getOptions(i).length;
 	}

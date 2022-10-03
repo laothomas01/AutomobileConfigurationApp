@@ -35,8 +35,7 @@ class OptionSet {
 	}
 
 	public OptionSet() {
-		setName("");
-		options = new Option[0];
+		this("", 0);
 	}
 
 	//if we want to create an option set instance without needing to specify its size of options
@@ -100,12 +99,7 @@ class OptionSet {
 	// [X] printing info about option set and its options
 	public String toString() {
 
-		StringBuffer sb = new StringBuffer(
-				"NAME:" +
-				getName()
-				+
-				"SIZE" +
-				getOptionsSize());
+		StringBuffer sb = new StringBuffer("NAME:" + getName() + "SIZE" + getOptionsSize());
 
 		return sb.toString();
 	}
@@ -131,8 +125,7 @@ class OptionSet {
 		}
 
 		protected Option() {
-			setName("");
-			setPrice(0f);
+			this("", 0f);
 		}
 
 		protected String getName() {
@@ -149,11 +142,6 @@ class OptionSet {
 
 		protected void setPrice(float price) {
 			this.price = price;
-		}
-
-		protected void updateOption(String n, float p) {
-			setName(n);
-			setPrice(p);
 		}
 
 		//[X] printing information about option instance

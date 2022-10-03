@@ -1,6 +1,6 @@
 FordWagonZTW|128500
-Transmission|automatic,manual|0,-815
-Brakes|standard,abs,abs with advance trac|0,400,1625
-Colors|Fort Knox Gold Clearcoat Metallic,Liquid Grey Clearcoat Metallic,Infra-Red Clearcoat,Grabber Green Clearcoat Metallic,Sangria Red Clearcoat Metallic,French Blue Clearcoat Metallic,Twilight Blue Clearcoat Metallic,CD Silver Clearcoat Metallic,Pitch Black Clearcoat,Cloud 9 White Clearcoat|0,0,0,0,0,0,0,0,0,0
-AirBags|present,not present|0,350
-Power Moonroof|present,not present|0,595
+Transmission|automatic manual|0 -815
+Brakes|standard abs abs-with-advance-trac|0 400 1625
+Colors|Fort-Knox-Gold-Clearcoat-Metallic Liquid-Grey-Clearcoat-Metallic Infra-Red-Clearcoat Grabber-Green-Clearcoat-Metallic Sangria-RedClearcoat-Metallic French-Blue-Clearcoat-Metallic Twilight-Blue-Clearcoat-Metallic CD-Silver-Clearcoat-Metallic Pitch-Black-Clearcoat Cloud-9-White-Clearcoat|0 0 0 0 0 0 0 0 0 0
+AirBags|present not-present|0 350
+PowerMoonroof|present not-present|0 595

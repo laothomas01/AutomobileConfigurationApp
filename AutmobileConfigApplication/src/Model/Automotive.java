@@ -56,10 +56,15 @@ public class Automotive {
 
 	/**
 	 * Create a chaining of constructors
+	 * Things to notice(write this down into notes later)
+	 * - Make sure the backend class functions are properly working
+	 * - There is a hierarchy of class dependencies at work here
+	 * Automotive -> OptionSet -> Option
+	 * OptionSets [ Option Set [ Option ] ]
 	 *
 	 * @return
 	 */
-	//---------------------------- BASE FUNCTIONS FOR AUTOMOTIVE------------------
+	//---------------------------- AUTOMOTIVE MUTATOR AND ACCESSOR ------------------
 	public String getName() {
 		return name;
 	}
@@ -76,105 +81,154 @@ public class Automotive {
 		this.basePrice = basePrice;
 	}
 
-	//-----------------------------------------------------------------------------
-	//return array of option sets
+
+	//-------------------- OPTION SETS MUTATOR AND ACCESSOR ---------------
 
 
-	//----------------------------- HANDLING OPTION SETS ------------------------
+	//retrieve Option Set instance from the array of Option Sets instances
+	public OptionSet getOptionSetInstance(int i) {
+		return getOptionSets()[i];
+	}
+
 	public OptionSet[] getOptionSets() {
 		return optionSets;
 	}
 
+
+	//-------------------- OPTION SET MUTATORS AND ACCESSORS ---------------
+	public OptionSet.Option[] getOptions(int i) {
+		return getOptionSetInstance(i).getOptions();
+	}
+
+	public String getOptionSetName(int i) {
+		return getOptionSetInstance(i).getName();
+	}
+
+	public void setOptionSetName(int i, String n) {
+		getOptionSetInstance(i).setName(n);
+	}
+
+
+	// --------------------- OPTION MUTATORS AND ACCESSORS -----------------
+
+	//retrieve an Option instance from the array of Option instances
+	public OptionSet.Option getOptionInstance(int i, int j) {
+		return getOptions(i)[j];
+	}
+
+	public String getOptionName(int i, int j) {
+		return getOptionInstance(i, j).getName();
+	}
+
+	public void setOptionName(int i, int j, String name) {
+		getOptionInstance(i, j).setName(name);
+	}
+
+	public float getOptionPrice(int i, int j) {
+		return getOptionInstance(i, j).getPrice();
+	}
+
+	public void setOptionPrice(int i, int j, float price) {
+		getOptionInstance(i, j).setPrice(price);
+	}
+
+
+	//---------------------- GET ARRAY SIZES -----------------------
+
+	// Length of set of option sets
 	public int getOptionSetsSize() {
 		return getOptionSets().length;
 	}
 
-	//----------------------------------------------------------------------------
-
-	//------------------- HANDLING AN OPTION SET --------------------------
-	public OptionSet getOptionSet(int i) {
-		//alter the option set within OPTION SETS
-		return getOptionSets()[i];
-	}
-
-	public String getOptionSetName(int i) {
-		return getOptionSet(i).getName();
-	}
-
-	public void setOptionSetName(int i, String n) {
-		getOptionSet(i).setName(n);
-	}
-
-	public OptionSet getOptionSet(String n) {
-		for (int i = 0; i < getOptionSetsSize(); i++) {
-			if (getOptionSet(i) == null) {
-				return new OptionSet();
-			} else if (getOptionSet(i).getName().equals(n)) {
-				return getOptionSet(i);
-			} else {
-				return new OptionSet();
-			}
-		}
-		return new OptionSet();
+	// Lenght of set of options
+	public int getOptionsSize(int i) {
+		return getOptions(i).length;
 	}
 
 
-	public int getOptionSetSize(int i) {
-		return getOptionSet(i).getOptionSetSize();
-	}
-
-	public String optionSetToString(int i) {
-		return getOptionSet(i).toString();
-	}
-
-	public void deleteOptionSet(int i) {
-		setOptionSet(i, null);
-	}
-
-	public void setOptionSet(int i, OptionSet o) {
-		getOptionSets()[i] = o;
-	}
-
-	public void addOptionSet(int index, String n, int size) {
-//		optionSets[index] = new OptionSet(n, size);
-		setOptionSet(index, new OptionSet(n, size));
-	}
-
-
-	// --------------------- HANDLING AN OPTION ------------------
-
-	public OptionSet.Option getOption(int optionSetIndex, int optionIndex) {
-		return getOptionSet(optionIndex).getOption(optionIndex);
-	}
-
-
-	//  @TODO BUGGED.
-
-	/**
-	 * Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: Index 3 out of bounds for length 2
-	 * at Model.OptionSet.getOption(OptionSet.java:59)
-	 * at Model.Automotive.getOption(Automotive.java:147)
-	 * at Model.Automotive.optionToString(Automotive.java:153)
-	 * at Driver.CarConfigApplication.main(CarConfigApplication.java:48)
-	 */
-	public String optionToString(int optionSetIndex, int optionIndex) {
-		return "";
-	}
-
-	public String getOptionName(int optionSetIndex, int optionIndex) {
-		return getOption(optionSetIndex, optionIndex).getName();
-	}
-
-	public void setOption(int optionSetIndex, int optionIndex, OptionSet.Option o) {
-		getOptionSet(optionSetIndex).setOption(optionIndex, o);
-	}
-
-	public void addOption(int optionSetIndex, int optionIndex, String name, float price) {
-		OptionSet os = getOptionSet(optionSetIndex);
-		OptionSet.Option opt = os.new Option(name, price);
-
-		setOption(optionSetIndex, optionIndex, opt);
-	}
+//	public String getOptionSetName(int i) {
+//		return getOptionSet(i).getName();
+//	}
+//
+//	public void setOptionSetName(int i, String n) {
+//		getOptionSet(i).setName(n);
+//	}
+//
+//	public OptionSet getOptionSet(String n) {
+//		for (int i = 0; i < getOptionSetsSize(); i++) {
+//			if (getOptionSet(i) == null) {
+//				return new OptionSet();
+//			} else if (getOptionSet(i).getName().equals(n)) {
+//				return getOptionSet(i);
+//			} else {
+//				return new OptionSet();
+//			}
+//		}
+//		return new OptionSet();
+//	}
+//
+//
+//	public int getOptionSetSize(int i) {
+//		return getOptionSet(i).getOptionSetSize();
+//	}
+//
+//	public String optionSetToString(int i) {
+//		return getOptionSet(i).toString();
+//	}
+//
+//	public void deleteOptionSet(int i) {
+//		setOptionSet(i, null);
+//	}
+//
+//	public void setOptionSet(int i, OptionSet o) {
+//		getOptionSets()[i] = o;
+//	}
+//
+//	public void addOptionSet(int index, String n, int size) {
+////		optionSets[index] = new OptionSet(n, size);
+//		setOptionSet(index, new OptionSet(n, size));
+//	}
+//
+//
+//	// --------------------- HANDLING AN OPTION ------------------
+////	public OptionSet.Option getOption(int optionSetIndex, int optionIndex) {
+////		return getOptionSet(optionSetIndex).
+////	}
+////	public OptionSet.Option getOption(int optionSetIndex, int optionIndex) {
+////		return getOptionSet(optionIndex).getOption(optionIndex);
+////	}
+//
+//
+//	//  @TODO BUGGED.
+//
+//	/**
+//	 * Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: Index 3 out of bounds for length 2
+//	 * at Model.OptionSet.getOption(OptionSet.java:59)
+//	 * at Model.Automotive.getOption(Automotive.java:147)
+//	 * at Model.Automotive.optionToString(Automotive.java:153)
+//	 * at Driver.CarConfigApplication.main(CarConfigApplication.java:48)
+//	 */
+////	public String optionToString(int optionSetIndex, int optionIndex) {
+////		return "";
+////	}
+////
+////	public String getOptionName(int optionSetIndex, int optionIndex) {
+////		return getOption(optionSetIndex, optionIndex).getName();
+////	}
+////
+////	public float getOptionPrice(int optionSetIndex, int optionIndex) {
+////		return getOption(optionSetIndex, optionIndex).getPrice();
+////	}
+//	public void setOption(int optionSetIndex, int optionIndex, OptionSet.Option o) {
+//		getOptionSet(optionSetIndex).setOption(optionIndex, o);
+//	}
+//
+//	public void addOption(int optionSetIndex, int optionIndex, String name, float price) {
+//		OptionSet os = getOptionSet(optionSetIndex);
+//		OptionSet.Option opt = os.new Option(name, price);
+//
+//		setOption(optionSetIndex, optionIndex, opt);
+//	}
 
 
 	//------------------------------------------------------------
@@ -255,9 +309,12 @@ public class Automotive {
 //		return 0;
 //	}
 	public String toString() {
-		StringBuffer sb = new StringBuffer("CAR NAME:" + getName() + "\nCAR BASE-PRICE: " + getBasePrice());
-		printOptionSetsData();
-		return sb.toString();
+//		StringBuffer sb = new StringBuffer(getName() + "|" + getBasePrice());
+//		for (int i = 0; i < getOptionSetsSize(); i++) {
+//			System.out.println(getOptionSet(i));
+//		}
+//		return sb.toString();
+		return "";
 	}
 
 

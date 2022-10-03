@@ -51,10 +51,22 @@ public class CarConfigApplication {
 
 		FileIO io = new FileIO();
 		Automotive car = io.buildAutomotive("CarConfigs.txt");
-		for (int i = 0; i < car.getOptionSetsSize(); i++) {
-			System.out.println("---------------------------------");
-			System.out.println(car.optionSetToString(i));
-		}
+//			System.out.print(car.getOptionSetName(i));
+////			System.out.println(car.getOptionSetSize(i));
+//			for (int j = 0; j < car.getOptionSetSize(i); j++) {
+//				System.out.println(car.getOptionName(i,3));
+//			System.out.println();
+//
+////			System.out.println(car.getOptionName(i, 0));
+//		}
+		//		for (int i = 0; i < car.getOptionSetsSize(); i++) {
+//			System.out.println(car.getOptionSetName(i));
+//		}
+
+		//		for (int i = 0; i < car.getOptionSetsSize(); i++) {
+//			System.out.println("---------------------------------");
+//			System.out.println(car.optionSetToString(i));
+//		}
 //		System.out.println(car.optionSetToString(1));
 //		car.printOptionSetsData();
 //		for (int i = 0; i < car.getOptionSetsSize(); i++) {

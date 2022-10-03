@@ -9,7 +9,7 @@ import java.io.IOException;
  */
 class OptionSet {
 
-	private Option optionSet[];
+	private Option options[];
 	private String name;
 
 
@@ -19,10 +19,10 @@ class OptionSet {
 	 */
 	public OptionSet(String n, int size) {
 		setName(n);
-		optionSet = new Option[size];
+		options = new Option[size];
 		//initialize array of options with new instances of empty options
 		for (int i = 0; i < size; i++) {
-			optionSet[i] = new Option();
+			options[i] = new Option();
 		}
 	}
 
@@ -36,7 +36,7 @@ class OptionSet {
 
 	public OptionSet() {
 		setName("");
-		optionSet = new Option[0];
+		options = new Option[0];
 	}
 
 	//if we want to create an option set instance without needing to specify its size of options
@@ -44,10 +44,10 @@ class OptionSet {
 
 	//access the collection of options
 	protected Option[] getOptions() {
-		return optionSet;
+		return options;
 	}
 
-	protected int getOptionSetSize() {
+	protected int getOptionsSize() {
 		if (getOptions().length == 0) {
 			return 0;
 		}
@@ -60,7 +60,7 @@ class OptionSet {
 	}
 
 	protected Option getOption(String n) {
-		for (int i = 0; i < getOptionSetSize(); i++) {
+		for (int i = 0; i < getOptionsSize(); i++) {
 			if (getOption(i).getName().equals(n)) {
 				return getOption(i);
 			}
@@ -88,25 +88,25 @@ class OptionSet {
 
 	//if you want to update the list of options to a new set
 	protected void updateOptions(Option[] options) {
-		this.optionSet = options;
+		this.options = options;
 	}
 
 	//if you want to update an option, specify an index and a new option
 	protected void updateOption(int i, Option o) {
-		optionSet[i] = o;
+		options[i] = o;
 	}
 
 
 	// [X] printing info about option set and its options
 	public String toString() {
-		//option set = array of options
 
-		//print option set name
-		StringBuffer sb = new StringBuffer("OPTIONSET NAME:" + getName());
-		//print options within array
-		for (int i = 0; i < getOptionSetSize(); i++) {
-			sb.append("\n" + getOption(i).toString());
-		}
+		StringBuffer sb = new StringBuffer(
+				"NAME:" +
+				getName()
+				+
+				"SIZE" +
+				getOptionsSize());
+
 		return sb.toString();
 	}
 
@@ -134,21 +134,6 @@ class OptionSet {
 			setName("");
 			setPrice(0f);
 		}
-//		protected Option(String n, float p) {
-//			name = n;
-//			price = p;
-//		}
-//
-//		protected Option(String n) {
-//			name = n;
-//			price = 0f;
-//		}
-//
-//
-//		protected Option() {
-//			setName("");
-//			setPrice(-1);
-//		}
 
 		protected String getName() {
 			return name;
@@ -173,7 +158,8 @@ class OptionSet {
 
 		//[X] printing information about option instance
 		public String toString() {
-			StringBuffer sb = new StringBuffer("                OPTION NAME: " + getName() + ",OPTION PRICE: " + getPrice());
+
+			StringBuffer sb = new StringBuffer(getName() + "|" + getPrice());
 			return sb.toString();
 		}
 

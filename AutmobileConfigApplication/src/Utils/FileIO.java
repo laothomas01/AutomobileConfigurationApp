@@ -64,40 +64,9 @@ public class FileIO {
 			//for reading lines
 			BufferedReader br2 = new BufferedReader(new FileReader(filename));
 			//loop through array size of option sets
-
-			//looping through each option set index within the set of option sets
-			for (int i = 0; i < a1.getOptionSetsSize(); i++) {
-				//0th index = name and price of car. not related to car configs
-				if (i == 0) {
-					//read a line for the car specs
-					String line = br2.readLine();
-					String[] carAttributes = line.split("\\|");
-					a1.setName(carAttributes[0]);
-					a1.setBasePrice(Float.parseFloat(carAttributes[1]));
-				}
-				//start at the next line for reading car configurations
-				String line = br2.readLine();
-				String[] carConfigs = line.split("\\|");
-				String name = carConfigs[0];
-				String[] optionNames = carConfigs[1].split(",");
-				String[] optionPrices = carConfigs[2].split(",");
-
-				//replace the empty option set with a populated option set instance
-				//currently they are empty but will be populated
-				a1.addOptionSet(i, name, optionNames.length);
-
-				/**
-				 - option name[ ] length = option price [ ] length
-				 - 1 to 1 relationship: option name -> option price
-				 - option set size = # of option names = # of option prices
-				 - after initializing an option set, let's access the option set's options and populate those options with option data
-				 */
-				for (int j = 0; j < optionNames.length; j++) {
-					a1.addOption(i, j, optionNames[j], Float.parseFloat(optionPrices[j]));
-				}
+			readData(br2, a1);
 
 
-			}
 //				String line = br2.readLine();
 			//handle the basic attributes of the car
 //				if (i == 0) {
@@ -142,6 +111,42 @@ public class FileIO {
 
 	public void writeOptionSets() {
 
+	}
+
+	public void readData(BufferedReader br, Automotive a) throws IOException {
+		//looping through each option set index within the set of option sets
+		for (int i = 0; i < a.getOptionSetsSize(); i++) {
+			//0th index = name and price of car. not related to car configs
+			if (i == 0) {
+				//read a line for the car specs
+				String line = br.readLine();
+				String[] carAttributes = line.split("\\|");
+				a.setName(carAttributes[0]);
+				a.setBasePrice(Float.parseFloat(carAttributes[1]));
+			}
+			//start at the next line for reading car configurations
+			String line = br.readLine();
+			String[] carConfigs = line.split("\\|");
+			String name = carConfigs[0];
+			String[] optionNames = carConfigs[1].split(" ");
+			String[] optionPrices = carConfigs[2].split(" ");
+
+			//replace the empty option set with a populated option set instance
+			//currently they are empty but will be populated
+//			a.addOptionSet(i, name, optionNames.length);
+
+			/**
+			 - option name[ ] length = option price [ ] length
+			 - 1 to 1 relationship: option name -> option price
+			 - option set size = # of option names = # of option prices
+			 - after initializing an option set, let's access the option set's options and populate those options with option data
+			 */
+//			for (int j = 0; j < optionNames.length; j++) {
+//				a.addOption(i, j, optionNames[j], Float.parseFloat(optionPrices[j]));
+//			}
+
+
+		}
 	}
 
 

@@ -31,36 +31,31 @@ public class CarConfigApplication {
 //
 //	}
 
-	public static void main(String args[]) throws IOException {
+    public static void main(String args[]) throws IOException {
 
-		/**
-		 * Base reference model
-		 *
-		 * we will select configurations from this object to fit into out Focus Wagon ZTW
-		 * PSEUDO CODE
-		 * tokens[]
-		 * ____________
-		 * 0: name
-		 * 1: options[]
-		 * 2: prices[]
-		 * -> optionset{ option(name,price)... }
-		 *
-		 * ____________
-		 *
-		 */
+        /**
+         * Base reference model
+         *
+         * we will select configurations from this object to fit into out Focus Wagon ZTW
+         * PSEUDO CODE
+         * tokens[]
+         * ____________
+         * 0: name
+         * 1: options[]
+         * 2: prices[]
+         * -> optionset{ option(name,price)... }
+         *
+         * ____________
+         *
+         */
 
-		FileIO io = new FileIO();
-		Automotive car = io.buildAutomotive("CarConfigs.txt");
-		//number of option sets
-		for (int i = 0; i < car.getOptionSetsSize(); i++) {
-			System.out.println(car.getOptionSetInstance(i));
-		}
-
-
+        FileIO io = new FileIO();
+        Automotive car = io.buildAutomotive("CarConfigs.txt");
+        //number of option sets
 
 //		System.out.println(car.OptionToString(0, 1));
 
-	}
+    }
 
 //	public int getOptionSetsSize(BufferedReader br, String fileName) {
 //

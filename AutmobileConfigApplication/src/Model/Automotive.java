@@ -1,5 +1,7 @@
 package Model;
 
+import java.io.Serializable;
+
 /**
  * let's build a reference base object model with options the end user should be able to select from
  * to customize their vehicle
@@ -8,7 +10,7 @@ package Model;
  * <p>
  * OPTION SETS = collection of option sets
  */
-public class Automotive {
+public class Automotive implements Serializable {
 	/**
 	 * Note to self:
 	 * chaining methods can allow for resusability, less lines of code, and faster computation
@@ -204,7 +206,11 @@ public class Automotive {
 
 
 	public String toString() {
-		StringBuffer sb = new StringBuffer(getName() + "|" + getBasePrice());
+		StringBuffer sb = new StringBuffer();
+		sb.append("\n" + getName() + "|" + getBasePrice() + "\n");
+		for (int i = 0; i < getOptionSetsSize(); i++) {
+			sb.append(getOptionSetInstance(i) + "\n");
+		}
 		return sb.toString();
 	}
 

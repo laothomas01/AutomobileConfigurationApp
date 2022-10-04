@@ -3,10 +3,7 @@ package Utils;
 import Model.Automotive;
 
 import javax.swing.*;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.Scanner;
 
 /**
@@ -49,13 +46,32 @@ public class FileIO {
 			BufferedReader br2 = new BufferedReader(new FileReader(filename));
 			//loop through array size of option sets
 			readData(br2, a1);
+			br2.close();
 		} catch (IOException e) {
 			System.out.println("Error -- " + e.toString());
 		}
-		//initialize an autombile with a number of option sets
-
-		//return
 		return a1;
+	}
+
+	public Automotive deserializeAutomotive(String filename) {
+		Automotive car = null;
+		try {
+			//Reading the object from a file
+			FileInputStream file = new FileInputStream(filename);
+			ObjectInputStream in = new ObjectInputStream(file);
+			//Method for deserialization of object
+			car = (Automotive) in.readObject();
+			in.close();
+			file.close();
+			System.out.println("Object has been deserialized ");
+		} catch (IOException ex) {
+			System.out.println("IOException is caught");
+		} catch (ClassNotFoundException e) {
+			System.out.println("ClassNotFoundException is caught");
+			throw new RuntimeException(e);
+		}
+		return car;
+
 	}
 
 	public int getLineCount(BufferedReader b) throws IOException {
@@ -113,9 +129,23 @@ public class FileIO {
 		}
 	}
 
+	//for writing out to a file. for.... later uses
 	public void writeData(BufferedWriter bw, Automotive a) throws IOException {
 		for (int i = 0; i < a.getOptionSetsSize(); i++) {
 			bw.write(a.OptionSetToString(i));
+		}
+	}
+
+	public void serializeAutomotive(String fileName, Automotive a) {
+		try {
+			FileOutputStream file = new FileOutputStream(fileName);
+			ObjectOutputStream out = new ObjectOutputStream(file);
+			//Method for serialization of object
+			out.writeObject(a);
+			out.close();
+			System.out.println("Object has been serialized");
+		} catch (IOException ex) {
+			System.out.println("IOException is caught");
 		}
 	}
 

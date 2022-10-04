@@ -1,13 +1,14 @@
 package Model;
 
 import java.io.IOException;
+import java.io.Serializable;
 
 /**
  * Handles CRUD of Option instances
  * <p>
  * OPTION SET = collection of options
  */
-class OptionSet {
+class OptionSet implements Serializable {
 
 	private Option options[];
 	private String name;
@@ -125,7 +126,7 @@ class OptionSet {
 
 
 	//inner class
-	public class Option {
+	public class Option implements Serializable {
 
 
 		private String name;

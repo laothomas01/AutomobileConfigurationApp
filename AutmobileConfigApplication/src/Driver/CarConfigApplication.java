@@ -8,12 +8,14 @@ import java.io.*;
 /**
  * @TODO LIST
  * [] update functions for option set, option and in automotive
- * [] serialization
+ * [X] deserialization
+ * [X] serialization
  * [] clean up class diagram
- * [] create test cases
- * [] write car data to file
+ * [X] create test cases
+ * [X] write car data to file
  * [] clean code up
  * [] turn homework in
+ * [] provide extensibility for your methods
  */
 public class CarConfigApplication {
 
@@ -49,39 +51,17 @@ public class CarConfigApplication {
 		 *
 		 */
 
+
 		FileIO io = new FileIO();
+		String fileName = "Car.dat";
 		Automotive car = io.buildAutomotive("CarConfigs.txt");
-		//number of option sets
-		for (int i = 0; i < car.getOptionSetsSize(); i++) {
-			System.out.println(car.getOptionSetInstance(i));
-		}
-
-
-
-//		System.out.println(car.OptionToString(0, 1));
-
+		System.out.print("PRINTING BEFORE SERIALIZATION:\n" + car);
+		System.out.println();
+		io.serializeAutomotive(fileName, car);
+		System.out.println();
+		car = io.deserializeAutomotive(fileName);
+		System.out.println(car);
 	}
 
-//	public int getOptionSetsSize(BufferedReader br, String fileName) {
-//
-////		int size = 0;
-////		try {
-////			FileReader file = new FileReader(fileName);
-////			boolean eof = false;
-////			while (!eof) {
-////				String line = br.readLine();
-////				if (line == null) {
-////					eof = true;
-////				} else {
-////					size++;
-////					System.out.println(line);
-////				}
-////			}
-////		} catch (IOException e) {
-////			System.out.println("ERROR -- " + e.toString());
-////		}
-////		return size;
-//
-//	}
 
 }

@@ -75,9 +75,21 @@ class OptionSet {
 	// [X] printing info about option set and its options
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
+		sb.append(getName() + "|");
 		for (int i = 0; i < getOptionsSize(); i++) {
-			//append current name of option set and append all information about its options
-			sb.append(getName() + "|" + getOption(i).toString() + "\n");
+			if (i == getOptionsSize() - 1) {
+				sb.append(getOption(i).getName() + "");
+			} else {
+				sb.append(getOption(i).getName() + " ");
+			}
+		}
+		sb.append("|");
+		for (int i = 0; i < getOptionsSize(); i++) {
+			if (i == getOptionsSize() - 1) {
+				sb.append(getOption(i).getPrice() + "");
+			} else {
+				sb.append(getOption(i).getPrice() + " ");
+			}
 		}
 		return sb.toString();
 	}

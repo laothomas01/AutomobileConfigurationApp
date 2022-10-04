@@ -53,11 +53,12 @@ public class CarConfigApplication {
 		Automotive car = io.buildAutomotive("CarConfigs.txt");
 		//number of option sets
 		for (int i = 0; i < car.getOptionSetsSize(); i++) {
-			for (int j = 0; j < car.getOptionSetSize(i); j++) {
-				System.out.println(car.getOptionSetName(i) + ":" + car.getOptionInstance(i, j));
-			}
+			System.out.println(car.getOptionSetInstance(i));
 		}
 
+
+
+//		System.out.println(car.OptionToString(0, 1));
 
 	}
 

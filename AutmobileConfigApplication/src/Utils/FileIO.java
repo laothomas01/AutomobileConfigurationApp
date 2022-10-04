@@ -113,9 +113,9 @@ public class FileIO {
 		}
 	}
 
-	public void writeData(Automotive a) {
+	public void writeData(BufferedWriter bw, Automotive a) throws IOException {
 		for (int i = 0; i < a.getOptionSetsSize(); i++) {
-
+			bw.write(a.OptionSetToString(i));
 		}
 	}
 

@@ -108,6 +108,10 @@ public class Automotive {
 		return optionSets;
 	}
 
+	public String OptionSetToString(int i) {
+		return getOptionSetInstance(i).toString();
+	}
+
 
 	//-------------------- (inside OptionSet class) OPTIONS ARRAY MUTATORS AND ACCESSORS ---------------
 
@@ -179,6 +183,10 @@ public class Automotive {
 		//access the index of an option class instance for both i and j for setting price and name
 		setOptionPrice(i, j, p);
 		setOptionName(i, j, n);
+	}
+
+	public String OptionToString(int i, int j) {
+		return getOptionInstance(i, j).toString();
 	}
 
 

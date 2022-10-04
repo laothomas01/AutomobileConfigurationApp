@@ -1,5 +1,6 @@
 package Model;
 
+import java.io.IOException;
 import java.io.Serializable;
 
 /**
@@ -90,13 +91,49 @@ public class Automotive implements Serializable {
 
 	//-------------------- OPTION SET ARRAY MUTATOR AND ACCESSOR ---------------
 
+	public OptionSet createOptionSet(String name, int size) {
+		return new OptionSet(name, size);
+	}
+
+	public OptionSet createOptionSet(int size) {
+		return new OptionSet(size);
+	}
+
+	public OptionSet createOptionSet(String name) {
+		return new OptionSet(name);
+	}
+
+	public OptionSet createOptionSet() {
+		return new OptionSet();
+	}
+
+	//retrieve set of Option Set class instances
+	public OptionSet[] getOptionSets() {
+		return optionSets;
+	}
 
 	//retrieve Option Set class instance from the array of Option Sets instances
 
 	//takes an index to retrieve current option set instance
+
+	//[X]
 	public OptionSet getOptionSetInstance(int i) {
+		if (i < 0 || i >= getOptionSetsSize()) {
+			return null;
+		}
 		return getOptionSets()[i];
 	}
+
+	// [X]
+	public OptionSet getOptionSetInstance(String n) {
+		for (int i = 0; i < getOptionSetsSize(); i++) {
+			if (getOptionSets()[i].getName().equals(n)) {
+				return getOptionSets()[i];
+			}
+		}
+		return null;
+	}
+
 
 	//update Option Set class instance
 	//replace, by index , a new instance of an Option Set
@@ -105,13 +142,29 @@ public class Automotive implements Serializable {
 		getOptionSets()[i] = new OptionSet(name, size);
 	}
 
-	//retrieve set of Option Set class instances
-	public OptionSet[] getOptionSets() {
-		return optionSets;
+
+	public void setOptionSetInstance(int i, OptionSet os) throws IOException {
+		if (i < 0 || i >= getOptionSetsSize()) {
+			throw new IOException();
+		}
+		getOptionSets()[i] = os;
+
 	}
 
 	public String OptionSetToString(int i) {
+		if (i < 0 || i >= getOptionSetsSize()) {
+			return null;
+		}
 		return getOptionSetInstance(i).toString();
+	}
+
+	public String OptionSetToString(String n) {
+		for (int i = 0; i < getOptionSetsSize(); i++) {
+			if (getOptionSets()[i].getName().equals(n)) {
+				return getOptionSetInstance(i).toString();
+			}
+		}
+		return null;
 	}
 
 

@@ -1,6 +1,7 @@
 package Driver;
 
 import Model.Automotive;
+import Model.OptionSet;
 import Utils.FileIO;
 
 import java.io.*;
@@ -61,7 +62,8 @@ public class CarConfigApplication {
 		io.serializeAutomotive(fileName, car);
 		System.out.println();
 		car = io.deserializeAutomotive(fileName);
-		System.out.println(car);
+//		System.out.println(car);
+//		System.out.print("\n" + car.OptionSetToString(100));
 	}
 
 

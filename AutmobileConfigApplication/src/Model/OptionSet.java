@@ -20,7 +20,7 @@ class OptionSet implements Serializable {
 	 * @param n    = name
 	 * @param size = length of Option array
 	 */
-	public OptionSet(String n, int size) {
+	protected OptionSet(String n, int size) {
 		setName(n);
 		options = new Option[size];
 		//initialize array of options with new instances of empty options
@@ -29,15 +29,15 @@ class OptionSet implements Serializable {
 		}
 	}
 
-	public OptionSet(String n) {
+	protected OptionSet(String n) {
 		this(n, 0);
 	}
 
-	public OptionSet(int n) {
+	protected OptionSet(int n) {
 		this("", n);
 	}
 
-	public OptionSet() {
+	protected OptionSet() {
 		this("", 0);
 	}
 
@@ -126,7 +126,7 @@ class OptionSet implements Serializable {
 
 
 	//inner class
-	public class Option implements Serializable {
+	protected class Option implements Serializable {
 
 
 		private String name;
@@ -166,6 +166,9 @@ class OptionSet implements Serializable {
 		}
 
 		//[X] printing information about option instance
+
+		//by default, toString() is declared public. cannot be made protected.
+		//but protected can be made public
 		public String toString() {
 
 			StringBuffer sb = new StringBuffer(getName() + "|" + getPrice());

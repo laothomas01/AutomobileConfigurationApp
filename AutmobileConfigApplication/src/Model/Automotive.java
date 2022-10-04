@@ -207,9 +207,9 @@ public class Automotive implements Serializable {
 
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
-		sb.append("\n" + getName() + "|" + getBasePrice() + "\n");
+		sb.append(getName() + "|" + getBasePrice());
 		for (int i = 0; i < getOptionSetsSize(); i++) {
-			sb.append(getOptionSetInstance(i) + "\n");
+			sb.append("\n" + getOptionSetInstance(i));
 		}
 		return sb.toString();
 	}

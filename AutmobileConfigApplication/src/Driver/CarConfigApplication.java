@@ -55,6 +55,7 @@ public class CarConfigApplication {
 		FileIO io = new FileIO();
 		String fileName = "Car.dat";
 		Automotive car = io.buildAutomotive("CarConfigs.txt");
+//		System.out.println(car);
 		System.out.print("PRINTING BEFORE SERIALIZATION:\n" + car);
 		System.out.println();
 		io.serializeAutomotive(fileName, car);

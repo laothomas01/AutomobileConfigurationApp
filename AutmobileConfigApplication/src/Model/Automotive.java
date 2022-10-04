@@ -91,6 +91,8 @@ public class Automotive implements Serializable {
 
 	//-------------------- OPTION SET ARRAY MUTATOR AND ACCESSOR ---------------
 
+
+	//creates an instance of an OptionSet
 	public OptionSet createOptionSet(String name, int size) {
 		return new OptionSet(name, size);
 	}
@@ -117,21 +119,21 @@ public class Automotive implements Serializable {
 	//takes an index to retrieve current option set instance
 
 	//[X]
-	public OptionSet getOptionSetInstance(int i) {
+	public OptionSet getOptionSetInstance(int i) throws IOException {
 		if (i < 0 || i >= getOptionSetsSize()) {
-			return null;
+			throw new IOException();
 		}
 		return getOptionSets()[i];
 	}
 
 	// [X]
-	public OptionSet getOptionSetInstance(String n) {
+	public OptionSet getOptionSetInstance(String n) throws IOException {
 		for (int i = 0; i < getOptionSetsSize(); i++) {
 			if (getOptionSets()[i].getName().equals(n)) {
 				return getOptionSets()[i];
 			}
 		}
-		return null;
+		throw new IOException();
 	}
 
 
@@ -148,12 +150,11 @@ public class Automotive implements Serializable {
 			throw new IOException();
 		}
 		getOptionSets()[i] = os;
-
 	}
 
-	public String OptionSetToString(int i) {
+	public String OptionSetToString(int i) throws IOException {
 		if (i < 0 || i >= getOptionSetsSize()) {
-			return null;
+			throw new IOException();
 		}
 		return getOptionSetInstance(i).toString();
 	}

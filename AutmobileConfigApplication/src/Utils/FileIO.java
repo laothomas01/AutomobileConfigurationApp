@@ -4,6 +4,7 @@ import Model.Automotive;
 
 import javax.swing.*;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
@@ -31,23 +32,6 @@ public class FileIO {
 	}
 
 
-	//read file line by line and create an option set
-//	public OptionSet readOptionSet() {
-////		String line = in.nextLine();
-////		String[] tokens = line.split("\\|");
-////		String name = tokens[0];
-////		String optionNames[] = tokens[1].split(",");
-////		String optionPrices[] = tokens[2].split(",");
-//
-//	}
-//
-//
-//	public Automotive buildAutoObject(String filename) {
-//		try {
-//
-//		}
-//	}
-
 	public Automotive buildAutomotive(String filename) {
 		Automotive a1 = new Automotive();
 
@@ -65,26 +49,6 @@ public class FileIO {
 			BufferedReader br2 = new BufferedReader(new FileReader(filename));
 			//loop through array size of option sets
 			readData(br2, a1);
-
-
-//				String line = br2.readLine();
-			//handle the basic attributes of the car
-//				if (i == 0) {
-//					String[] carAttributes = line.split("\\|");
-//					a1.setName(carAttributes[0]);
-//					a1.setBasePrice(Float.parseFloat(carAttributes[1]));
-//				}
-
-			//let's read 1 line at a time, creation an option set and populate the automobile with it
-//				String[] tokens = line.split("\\|");
-//				String name = tokens[0];
-//				System.out.println(name);
-//				System.out.println(name);
-//				String[] optionNames = tokens[1].split(",");
-//				a1.addOptionSet(i, name, optionNames.length);
-//				String[] optionPrices = tokens[2].split(",");
-//			}
-			// populate automobile with a new option set per iteration
 		} catch (IOException e) {
 			System.out.println("Error -- " + e.toString());
 		}
@@ -133,35 +97,27 @@ public class FileIO {
 
 			int optionsCount = optionNames.length;
 			//replace the empty option set with a new populated option set instance
-			a.setOptionSetInstance(i, name, optionsCount);
-			for (int j = 0; j < optionNames.length; j++) {
-				//parse the prices because they are read as strings
-				a.setOption(i, j, optionNames[j], Float.parseFloat(optionPrices[j]));
-			}
 			/**
 			 - option name[ ] length = option price [ ] length
 			 - 1 to 1 relationship: option name -> option price
 			 - option set size = # of option names = # of option prices
 			 - after initializing an option set, let's access the option set's options and populate those options with option data
 			 */
+			a.setOptionSetInstance(i, name, optionsCount);
+			for (int j = 0; j < optionNames.length; j++) {
+				//parse the prices because they are read as strings
+				a.setOption(i, j, optionNames[j], Float.parseFloat(optionPrices[j]));
+			}
+
 
 		}
 	}
 
+	public void writeData(Automotive a) {
+		for (int i = 0; i < a.getOptionSetsSize(); i++) {
 
-	//
-//	public OptionSet loadOptionSets(BufferedReader br) throws IOException {
-////		String line = br.readLine();
-////		String[] tokens = line.split("\\|");
-////		String name = tokens[0];
-////		String[] optionNames = tokens[1].split(",");
-////		String[] optionPrices = tokens[2].split(",");
-////
-//	}
+		}
+	}
 
-
-	//let's read
-//	public OptionSet readData()
-//
 
 }

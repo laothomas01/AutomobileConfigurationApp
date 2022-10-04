@@ -9,7 +9,14 @@ package Model;
  * OPTION SETS = collection of option sets
  */
 public class Automotive {
-
+	/**
+	 * Note to self:
+	 * chaining methods can allow for resusability, less lines of code, and faster computation
+	 * ex: just look up 1 instance of an option set via using an index and print it. it will give you the option set data and
+	 * a data of each option set's options.
+	 * <p>
+	 * - reusing instances of a class that depends on a parent allows for access down a hierarchy of classes that relies only on the parent class method's input.
+	 */
 
 	private String name;
 	private float basePrice;
@@ -169,6 +176,7 @@ public class Automotive {
 	//uses Option Set class insrtance to set an Option instance to a new instance within Option array
 
 	public void setOption(int i, int j, String n, float p) {
+		//access the index of an option class instance for both i and j for setting price and name
 		setOptionPrice(i, j, p);
 		setOptionName(i, j, n);
 	}
@@ -181,179 +189,14 @@ public class Automotive {
 		return getOptionSets().length;
 	}
 
-	// Size of array of Option instances
-	public int getOptionsSize(int i) {
-		return getOptions(i).length;
+	//get an instance of the option set class and return the length of the class's array of Option instances
+	public int getOptionSetSize(int i) {
+		return getOptionSetInstance(i).getOptionsSize();
 	}
 
 
-//	public String getOptionSetName(int i) {
-//		return getOptionSet(i).getName();
-//	}
-//
-//	public void setOptionSetName(int i, String n) {
-//		getOptionSet(i).setName(n);
-//	}
-//
-//	public OptionSet getOptionSet(String n) {
-//		for (int i = 0; i < getOptionSetsSize(); i++) {
-//			if (getOptionSet(i) == null) {
-//				return new OptionSet();
-//			} else if (getOptionSet(i).getName().equals(n)) {
-//				return getOptionSet(i);
-//			} else {
-//				return new OptionSet();
-//			}
-//		}
-//		return new OptionSet();
-//	}
-//
-//
-//	public int getOptionSetSize(int i) {
-//		return getOptionSet(i).getOptionSetSize();
-//	}
-//
-//	public String optionSetToString(int i) {
-//		return getOptionSet(i).toString();
-//	}
-//
-//	public void deleteOptionSet(int i) {
-//		setOptionSet(i, null);
-//	}
-//
-//	public void setOptionSet(int i, OptionSet o) {
-//		getOptionSets()[i] = o;
-//	}
-//
-//	public void addOptionSet(int index, String n, int size) {
-////		optionSets[index] = new OptionSet(n, size);
-//		setOptionSet(index, new OptionSet(n, size));
-//	}
-//
-//
-//	// --------------------- HANDLING AN OPTION ------------------
-////	public OptionSet.Option getOption(int optionSetIndex, int optionIndex) {
-////		return getOptionSet(optionSetIndex).
-////	}
-////	public OptionSet.Option getOption(int optionSetIndex, int optionIndex) {
-////		return getOptionSet(optionIndex).getOption(optionIndex);
-////	}
-//
-//
-//	//  @TODO BUGGED.
-//
-//	/**
-//	 * Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: Index 3 out of bounds for length 2
-//	 * at Model.OptionSet.getOption(OptionSet.java:59)
-//	 * at Model.Automotive.getOption(Automotive.java:147)
-//	 * at Model.Automotive.optionToString(Automotive.java:153)
-//	 * at Driver.CarConfigApplication.main(CarConfigApplication.java:48)
-//	 */
-////	public String optionToString(int optionSetIndex, int optionIndex) {
-////		return "";
-////	}
-////
-////	public String getOptionName(int optionSetIndex, int optionIndex) {
-////		return getOption(optionSetIndex, optionIndex).getName();
-////	}
-////
-////	public float getOptionPrice(int optionSetIndex, int optionIndex) {
-////		return getOption(optionSetIndex, optionIndex).getPrice();
-////	}
-//	public void setOption(int optionSetIndex, int optionIndex, OptionSet.Option o) {
-//		getOptionSet(optionSetIndex).setOption(optionIndex, o);
-//	}
-//
-//	public void addOption(int optionSetIndex, int optionIndex, String name, float price) {
-//		OptionSet os = getOptionSet(optionSetIndex);
-//		OptionSet.Option opt = os.new Option(name, price);
-//
-//		setOption(optionSetIndex, optionIndex, opt);
-//	}
-
-
-	//------------------------------------------------------------
-
-
-//-----------------------------------
-
-	/**
-	 * Let's create public access through an Automotive instance to the protected OptionSet and Option functions
-	 *
-	 * @return
-	 */
-
-//	public OptionSet getOptionSet(int i) {
-//		return getOptionSets()[i];
-//	}
-//
-//	public String getOptionSetName(int i) {
-//		return getOptionSet(i).getName();
-//	}
-
-//
-//	//get an option set based on its index
-//	public OptionSet getOptionSet(int i) {
-//		return getOptionSets()[i];
-//	}
-//
-//	//get an option set based on name
-//	public OptionSet getOptionSet(String n) {
-//		for (int i = 0; i < getOptionSetsSize(); i++) {
-//			if (getOptionSet(i).getName().equals(n)) {
-//				return getOptionSet(i);
-//			}
-//		}
-//		return new OptionSet("DOES NOT EXIST!", 0);
-//	}
-
-	//-----------------------------------------------------------------------------
-
-	//--------------------------- HANDLING AN OPTION ------------------------------
-//	public OptionSet.Option getOption(int optSetIndex, int optIndex) {
-//		return getOptionSet(optSetIndex).getOption(optIndex);
-//	}
-//
-//	public OptionSet.Option getOption(int optSetIndex, String optionName) {
-//		return getOptionSet(optSetIndex).getOption(optionName);
-//	}
-
-
-	//
-//
-//	public void setOptionSets(OptionSet[] optionSets) {
-//		this.optionSets = optionSets;
-//	}
-//
-//
-	public void printOptionSetsData() {
-		//print vehicle name and base price
-//		for (int i = 0; i < getOptionSetSize(0); i++) {
-//			System.out.println(getOption(0, i));
-//		}
-//		for (int i = 0; i < getOptionSetsSize(); i++) {
-//			System.out.println(getOptionSet(i));
-////			for (int j = 0; j < getOptionSetSize(i); i++) {
-////				System.out.println(getOption(optSet, opt));
-////			}
-//		}
-	}
-
-	//
-//
-//	public void addOptionSet(int i, OptionSet os) {
-//		getOptionSets()[i] = os;
-//	}
-//
-//	//not finished
-//	public float calculateBasePrice() {
-//		return 0;
-//	}
 	public String toString() {
 		StringBuffer sb = new StringBuffer(getName() + "|" + getBasePrice());
-//		for (int i = 0; i < getOptionSetsSize(); i++) {
-//			System.out.println(getOptionSet(i));
-//		}
 		return sb.toString();
 	}
 

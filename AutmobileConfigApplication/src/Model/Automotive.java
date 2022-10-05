@@ -119,21 +119,21 @@ public class Automotive implements Serializable {
 	//takes an index to retrieve current option set instance
 
 	//[X]
-	public OptionSet getOptionSetInstance(int i) throws IOException {
+	public OptionSet getOptionSetInstance(int i) {
 		if (i < 0 || i >= getOptionSetsSize()) {
-			throw new IOException();
+			return null;
 		}
 		return getOptionSets()[i];
 	}
 
 	// [X]
-	public OptionSet getOptionSetInstance(String n) throws IOException {
+	public OptionSet getOptionSetInstance(String n) {
 		for (int i = 0; i < getOptionSetsSize(); i++) {
 			if (getOptionSets()[i].getName().equals(n)) {
 				return getOptionSets()[i];
 			}
 		}
-		throw new IOException();
+		return null;
 	}
 
 
@@ -152,14 +152,14 @@ public class Automotive implements Serializable {
 		getOptionSets()[i] = os;
 	}
 
-	public String OptionSetToString(int i) throws IOException {
+	public String OptionSetToString(int i) {
 		if (i < 0 || i >= getOptionSetsSize()) {
-			throw new IOException();
+			return null;
 		}
 		return getOptionSetInstance(i).toString();
 	}
 
-	public String OptionSetToString(String n) {
+	public String OptionSetToString(String n) throws IOException {
 		for (int i = 0; i < getOptionSetsSize(); i++) {
 			if (getOptionSets()[i].getName().equals(n)) {
 				return getOptionSetInstance(i).toString();
@@ -174,23 +174,23 @@ public class Automotive implements Serializable {
 	//retrieve set of Options
 
 	// takes single index = index of current option set instance and uses the instance to retrieve the array of Option class instances
-	public OptionSet.Option[] getOptions(int i) {
+	public OptionSet.Option[] getOptions(int i) throws IOException {
 		return getOptionSetInstance(i).getOptions();
 	}
 
 	//using Option Set class instance to retrieve an option get name based on a specified index
-	public String getOptionSetName(int i) {
+	public String getOptionSetName(int i) throws IOException {
 		return getOptionSetInstance(i).getName();
 	}
 
 	//using Option Set class instance to retrieve an option set name
 
-	public void setOptionSetName(int i, String n) {
+	public void setOptionSetName(int i, String n) throws IOException {
 		getOptionSetInstance(i).setName(n);
 	}
 
 	//using Option Set class instance, set the class's Option array to a new array
-	public void setOptions(int i, OptionSet.Option[] opts) {
+	public void setOptions(int i, OptionSet.Option[] opts) throws IOException {
 		getOptionSetInstance(i).updateOptions(opts);
 	}
 
@@ -209,39 +209,39 @@ public class Automotive implements Serializable {
 	//these instances will be to modify or retrieve Option class instances from an array
 
 	//will require a second index to map to each index within the Option class array
-	public OptionSet.Option getOptionInstance(int optSetIndex, int optIndex) {
+	public OptionSet.Option getOptionInstance(int optSetIndex, int optIndex) throws IOException {
 		return getOptionSetInstance(optSetIndex).getOption(optIndex);
 	}
 
 	//use an indexed Option class instance from array of OptionSet instances to retrieve option name
-	public String getOptionName(int optSetIndex, int optIndex) {
+	public String getOptionName(int optSetIndex, int optIndex) throws IOException {
 		return getOptionInstance(optSetIndex, optIndex).getName();
 	}
 	//use an indexed Option class instance from array of OptionSet instances to set option name
 
-	public void setOptionName(int optSetIndex, int optIndex, String name) {
+	public void setOptionName(int optSetIndex, int optIndex, String name) throws IOException {
 		getOptionInstance(optSetIndex, optIndex).setName(name);
 	}
 	//use an indexed Option class instance from array of OptionSet instances to retrieve option price
 
-	public float getOptionPrice(int optSetIndex, int optIndex) {
+	public float getOptionPrice(int optSetIndex, int optIndex) throws IOException {
 		return getOptionInstance(optSetIndex, optIndex).getPrice();
 	}
 
 	//use an indexed Option class instance from array of OptionSet instances to set option name
-	public void setOptionPrice(int optSetIndex, int optIndex, float price) {
+	public void setOptionPrice(int optSetIndex, int optIndex, float price) throws IOException {
 		getOptionInstance(optSetIndex, optIndex).setPrice(price);
 	}
 
 	//uses Option Set class insrtance to set an Option instance to a new instance within Option array
 
-	public void setOption(int i, int j, String n, float p) {
+	public void setOption(int i, int j, String n, float p) throws IOException {
 		//access the index of an option class instance for both i and j for setting price and name
 		setOptionPrice(i, j, p);
 		setOptionName(i, j, n);
 	}
 
-	public String OptionToString(int i, int j) {
+	public String OptionToString(int i, int j) throws IOException {
 		return getOptionInstance(i, j).toString();
 	}
 
@@ -254,7 +254,7 @@ public class Automotive implements Serializable {
 	}
 
 	//get an instance of the option set class and return the length of the class's array of Option instances
-	public int getOptionSetSize(int i) {
+	public int getOptionSetSize(int i) throws IOException {
 		return getOptionSetInstance(i).getOptionsSize();
 	}
 

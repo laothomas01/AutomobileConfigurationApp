@@ -13,7 +13,6 @@ class OptionSet implements Serializable {
 	private Option options[];
 	private String name;
 
-
 	/**
 	 * Chained Constructors
 	 *
@@ -46,12 +45,9 @@ class OptionSet implements Serializable {
 	 *
 	 * @return
 	 */
+	//---------------------- OPTION SET INSTANCE CRUD OPERATIONS ----------------
 	protected String getName() {
 		return name;
-	}
-
-	protected void setName(String name) {
-		this.name = name;
 	}
 
 	//retrieve Option array
@@ -67,16 +63,18 @@ class OptionSet implements Serializable {
 		return getOptions().length;
 	}
 
+	protected void setName(String name) {
+		this.name = name;
+	}
 
-	//replace with new array of Option instances
 	protected void updateOptions(Option[] opts) {
 		this.options = opts;
 	}
 
-	// [X] printing info about option set and its options
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
 		sb.append(getName() + "|");
+		// PRINT OUT OPTION SET INSTANCE DATA IN THE FORMAT OF DATA LOAD FROM TXT FILE
 		for (int i = 0; i < getOptionsSize(); i++) {
 			if (i == getOptionsSize() - 1) {
 				sb.append(getOption(i).getName() + "");
@@ -95,39 +93,67 @@ class OptionSet implements Serializable {
 		return sb.toString();
 	}
 
-	//retrieve an Option instance by index
+	//basic retrieve an Option instance by index
 	protected Option getOption(int i) {
+		if (i < 0 || i >= getOptionsSize() || getOptions()[i] == null) {
+			return null;
+		}
 		return getOptions()[i];
 	}
 
-	//retrieve option instance by name
+	//basic retrieve Option instance by name
 	protected Option getOption(String n) {
 		for (int i = 0; i < getOptionsSize(); i++) {
 			if (getOption(i).getName().equals(n)) {
 				return getOption(i);
 			}
 		}
-		return new Option();
+		return null;
 	}
 
-	protected void setOption(int i, String n, float p) {
-		updateOption(i, new Option(n, p));
-	}
-
-	//replace , by index , an input Option instance within Option array
-	protected void updateOption(int i, Option o) {
+	//basic  search by index and replace current Option instance with new Option instance
+	protected void setOption(int i, Option o) {
+		if (i < 0 || i >= getOptionsSize()) {
+			System.out.println("OPTION DOES NOT EXIST!");
+		}
 		getOptions()[i] = o;
 	}
 
+	//basic search by name and replace current Option instance with new Option instance
+	protected void setOption(String n, Option o) {
+		for (int i = 0; i < getOptionsSize(); i++) {
+			//will not trigger set option exception
+			if (getOption(i).getName().equals(n)) {
+				setOption(i, o);
+			}
+		}
+		System.out.println("OPTION DOES NOT EXIST!");
+	}
+
+	//search by index, input replacing name and price, and use those parameters to input into a new option class instance
+	protected void setOption(int searchIndex, String replaceName, float replaceOptionPrice) {
+		setOption(searchIndex, new Option(replaceName, replaceOptionPrice));
+	}
+
+	//search by name, input replacing name and price, and use those parameters to input into a new option class instance
+	protected void setOption(String searchOptionName, String replaceName, float replaceOptionPrice) {
+		setOption(searchOptionName, new Option(replaceName, replaceOptionPrice));
+	}
+
+	//search by index and update option instance to null
 	protected void deleteOption(int i) {
 		//change specified option at index i = new empty Option instance.
-		getOptions()[i] = new Option();
+		setOption(i, null);
+	}
+
+	//search by name and update option instance to null
+	protected void deleteOption(String name) {
+		setOption(name, null);
 	}
 
 
 	//inner class
 	protected class Option implements Serializable {
-
 
 		private String name;
 		private float price;

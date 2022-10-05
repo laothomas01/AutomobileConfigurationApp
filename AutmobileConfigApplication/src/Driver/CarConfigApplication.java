@@ -61,9 +61,6 @@ public class CarConfigApplication {
 		io.serializeAutomotive(fileName, car);
 		System.out.println();
 		car = io.deserializeAutomotive(fileName);
-		car.OptionSetToString(100);
-//		System.out.println(car);
-//		System.out.print("\n" + car.OptionSetToString(100));
 	}
 
 

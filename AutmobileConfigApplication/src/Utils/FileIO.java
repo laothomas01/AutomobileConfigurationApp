@@ -5,16 +5,9 @@ import Model.Automotive;
 import java.io.*;
 
 /**
- * I need to write to file in a format that I would be able to read, parse, and create POJOs
- * <p>
- * [] writing out to file
- * [] loading data
- * [] serializing data
- */
-
-/**
  * Note: file reader is based on this format of a text file
- * option set name | option name(s) | price(s)
+ * car name| car price // basic car attributes
+ * option set name | option name(s) | price(s) // car configurations
  * i.e
  * Transmission|automatic,manual|0,-815
  * Brakes|standard,abs,abs with advance trac|0,400,1625
@@ -32,17 +25,12 @@ public class FileIO {
 
 		int optionSetsSize;
 		try {
-			//count number of lines to get size of option set collection
 			BufferedReader br1 = new BufferedReader(new FileReader(filename));
 
-			//we dont want to count the first line as part of the size of car configs
-			//we want to maintain the indexing count of  0 -> 5(exclusive)
 			optionSetsSize = getLineCount(br1) - 1;
 			a1 = new Automotive(optionSetsSize);
 			br1.close();
-			//for reading lines
 			BufferedReader br2 = new BufferedReader(new FileReader(filename));
-			//loop through array size of option sets
 			readData(br2, a1);
 			br2.close();
 		} catch (IOException e) {
@@ -54,10 +42,8 @@ public class FileIO {
 	public Automotive deserializeAutomotive(String filename) {
 		Automotive car = null;
 		try {
-			//Reading the object from a file
 			FileInputStream file = new FileInputStream(filename);
 			ObjectInputStream in = new ObjectInputStream(file);
-			//Method for deserialization of object
 			car = (Automotive) in.readObject();
 			in.close();
 			file.close();
@@ -72,6 +58,13 @@ public class FileIO {
 
 	}
 
+	/**
+	 * file line count - 1
+	 *
+	 * @param b bufferedreader
+	 * @return total line count
+	 * @throws IOException
+	 */
 	public int getLineCount(BufferedReader b) throws IOException {
 		int i = 0;
 		boolean eof = false;
@@ -87,10 +80,13 @@ public class FileIO {
 	}
 
 
-	public void writeOptionSets() {
-
-	}
-
+	/**
+	 * read file again and load data into automobile instance
+	 *
+	 * @param br bufferedreader
+	 * @param a  automotive
+	 * @throws IOException
+	 */
 	public void readData(BufferedReader br, Automotive a) throws IOException {
 		//looping through each option set index within the set of option sets
 		for (int i = 0; i < a.getOptionSetsSize(); i++) {
@@ -102,7 +98,6 @@ public class FileIO {
 				a.setName(carAttributes[0]);
 				a.setBasePrice(Float.parseFloat(carAttributes[1]));
 			}
-			//start at the next line for reading car configurations
 			String line = br.readLine();
 			String[] carConfigs = line.split("\\|");
 			String name = carConfigs[0];
@@ -110,13 +105,13 @@ public class FileIO {
 			String[] optionPrices = carConfigs[2].split(" ");
 
 			int optionsCount = optionNames.length;
-			//replace the empty option set with a new populated option set instance
 			/**
 			 - option name[ ] length = option price [ ] length
 			 - 1 to 1 relationship: option name -> option price
 			 - option set size = # of option names = # of option prices
 			 - after initializing an option set, let's access the option set's options and populate those options with option data
 			 */
+			//replace the empty option set with a new populated option set instance
 			a.updateOptionSet(i, a.createOptionSetInstance(name, optionsCount));
 			for (int j = 0; j < optionNames.length; j++) {
 				//parse the prices because they are read as strings
@@ -126,13 +121,6 @@ public class FileIO {
 
 		}
 	}
-
-//	//for writing out to a file. for.... later uses
-//	public void writeData(BufferedWriter bw, Automotive a) throws IOException {
-//		for (int i = 0; i < a.getOptionSetsSize(); i++) {
-//			bw.write(a.optionSetToString(i));
-//		}
-//	}
 
 	public void serializeAutomotive(String fileName, Automotive a) {
 		try {

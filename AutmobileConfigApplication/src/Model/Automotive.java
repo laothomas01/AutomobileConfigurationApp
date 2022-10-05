@@ -2,32 +2,16 @@ package Model;
 
 import java.io.Serializable;
 
-/**
- * let's build a reference base object model with options the end user should be able to select from
- * to customize their vehicle
- * <p>
- * make public and handle CRUD for option set instances and option instances
- * <p>
- * OPTION SETS = collection of option sets
- */
 public class Automotive implements Serializable {
-	/**
-	 * Note to self:
-	 * chaining methods can allow for resusability, less lines of code, and faster computation
-	 * ex: just look up 1 instance of an option set via using an index and print it. it will give you the option set data and
-	 * a data of each option set's options.
-	 * <p>
-	 * - reusing instances of a class that depends on a parent allows for access down a hierarchy of classes that relies only on the parent class method's input.
-	 */
 
 	private String name;
 	private float basePrice;
 	private OptionSet[] optionSets;
 
 	/**
-	 * @param n    = automotive name
-	 * @param size = number of option sets
-	 * @param p    = base price of automotive
+	 * @param n    automotive name
+	 * @param size number of option sets
+	 * @param p    base price of automotive
 	 */
 	//chain the constructors
 	public Automotive(String n, float p, int size) {
@@ -60,17 +44,7 @@ public class Automotive implements Serializable {
 		this("", 0, 0);
 	}
 
-	/**
-	 * Create a chaining of constructors
-	 * Things to notice(write this down into notes later)
-	 * - Make sure the backend class functions are properly working
-	 * - There is a hierarchy of class dependencies at work here
-	 * Automotive -> OptionSet -> Option
-	 * OptionSets [ Option Set [ Option ] ]
-	 *
-	 * @return
-	 */
-	//---------------------------- AUTOMOTIVE MUTATOR AND ACCESSOR ------------------
+	//---------------------------- AUTOMOTIVE CLASS C.R.U.D OPERATIONS ------------------
 	public String getName() {
 		return name;
 	}
@@ -87,16 +61,19 @@ public class Automotive implements Serializable {
 		this.basePrice = basePrice;
 	}
 
-
-	//-------------------- OPTION SET ARRAY MUTATOR AND ACCESSOR ---------------
-
-
-	//return array of Option Set instances
+	//return array of Option Set class instances
 	public OptionSet[] getOptionSets() {
 		return optionSets;
 	}
 
-	//creates an instance of an OptionSet
+	//-------------------- OPTION SET CLASS C.R.U.D ---------------
+
+
+	//creates an instance of an OptionSet class instances
+
+	//CREATE
+
+	//CREATE OPTION SET INSTANCE -> CREATES OPTION INSTANCE
 	public OptionSet createOptionSetInstance(String name, int size) {
 		return new OptionSet(name, size);
 	}
@@ -109,11 +86,18 @@ public class Automotive implements Serializable {
 		return new OptionSet(name);
 	}
 
+	public OptionSet createOptionSetInstance() {
+		return new OptionSet();
+	}
+
+	//---------------------------------------------------------------------------
 
 	//retrieve Option Set class instance from the array of Option Sets instances
+
+	//READ
 	public OptionSet getOptionSetClassInstance(int i) {
-		if (getOptionSets()[i] == null || i < 0 || i >= getOptionSetsSize()) {
-			System.out.println("CANNOT FIND OPTION SET INSTANCE!");
+		if (i < 0 || i >= getOptionSetsSize() || getOptionSets()[i] == null) {
+			return new OptionSet();
 		}
 		return getOptionSets()[i];
 	}
@@ -125,29 +109,47 @@ public class Automotive implements Serializable {
 			}
 		}
 		System.out.println("CANNOT FIND OPTION SET INSTANCE!");
+		return new OptionSet();
+	}
 
-		return null;
+	//using Option Set class instance to retrieve an option get name based on a specified index
+
+	//READ
+	public String getOptionSetName(int i) {
+		return getOptionSetClassInstance(i).getName();
 	}
 
 
-	//update Option Set class instance
-	//replace, by index , a new instance of an Option Set
-	//set name and size
-
+	//UPDATE
 	public void updateOptionSet(int i, OptionSet os) {
-		if (i < 0 || i >= getOptionSetsSize() || getOptionSetClassInstance(i) == null) {
+		if (i < 0 || i >= getOptionSetsSize()) {
 			System.out.println("CANNOT FIND OPTION SET INSTANCE!");
 		}
+
 		getOptionSets()[i] = os;
 	}
 
-	public void updateOptionSet(int optionSetIndex, int optionIndex, int optionSetSize,
-	                            String optionSetName, String optionName, float optionPrice) {
+	/**
+	 * update instance of Option Set class and instance of Option class
+	 *
+	 * @param optionSetIndex look up an option set class instance
+	 * @param optionIndex    look up an option class instance
+	 * @param optionSetSize  set size of option set array
+	 * @param optionSetName  set name of option set
+	 * @param optionName     set name of option
+	 * @param optionPrice    set price of option
+	 */
+	public void updateOptionSet(int optionSetIndex, int optionSetSize, String optionSetName, int optionIndex, String optionName, float optionPrice) {
+
+
 		updateOptionSet(optionSetIndex, createOptionSetInstance(optionSetName, optionSetSize));
+
+
 		updateOptionClassInstance(optionSetIndex, optionIndex, optionName, optionPrice);
 	}
 
 
+	//replace current option set with new instance
 	public void updateOptionSet(String n, OptionSet os) {
 		for (int i = 0; i < getOptionSetsSize(); i++) {
 			if (getOptionSetClassInstance(i).getName().equals(n)) {
@@ -156,43 +158,8 @@ public class Automotive implements Serializable {
 		}
 		System.out.println("CANNOT FIND OPTION SET INSTANCE!");
 	}
-//
-//	public void updateOptionSetClassInstance(int searchIndex, String replacementName, int replacementSize) {
-//		updateOptionSetClassInstance(searchIndex, new OptionSet(replacementName, replacementSize));
-//	}
-//
-//	public void updateOptionSetClassInstance(String searchName, String replacementName, int replacementSize) {
-//		updateOptionSetClassInstance(searchName, new OptionSet(replacementName, replacementSize));
-//	}
 
-	public void deleteOptionSetInstance(int i) {
-		updateOptionSet(i, null);
-	}
-
-//	public void deleteOptionSetInstance(String n) {
-//		updateOptionSetClassInstance(n, null);
-//	}
-
-
-	//-------------------- (inside OptionSet class) OPTIONS ARRAY MUTATORS AND ACCESSORS ---------------
-
-	//retrieve set of Options
-
-
-	public OptionSet.Option[] getOptionsArray(int optionSetIndex) {
-		return getOptionSetClassInstance(optionSetIndex).getOptions();
-	}
-
-	public OptionSet.Option[] getOptionsArray(String optionSetName) {
-		return getOptionSetClassInstance(optionSetName).getOptions();
-	}
-
-
-	//using Option Set class instance to retrieve an option get name based on a specified index
-	public String getOptionSetName(int i) {
-		return getOptionSetClassInstance(i).getName();
-	}
-
+	//UPDATE
 	//using Option Set class instance to retrieve an option set name
 	public void updateOptionSetName(int i, String n) {
 		getOptionSetClassInstance(i).setName(n);
@@ -203,14 +170,58 @@ public class Automotive implements Serializable {
 			updateOptionSetName(i, replaceName);
 		}
 	}
-//
-//	//using Option Set class instance, set the class's Option array to a new array
-//	public void setOptionsArray(int i, OptionSet.Option[] opts) {
-//		getOptionsetInstance(i).updateOptions(opts);
-//	}
 
 
-	// --------------------- OPTION MUTATORS AND ACCESSORS -----------------
+	//DELETE
+
+	/**
+	 * set an option set instance to null
+	 *
+	 * @param i option set instance index
+	 */
+	public void deleteOptionSetInstance(int i) {
+		updateOptionSet(i, createOptionSetInstance());
+		System.out.println("OPTION SET HAS BEEN DELETED!");
+	}
+
+	/**
+	 * set an option set instance to null
+	 *
+	 * @param n option set instance name
+	 */
+	public void deleteOptionSetInstance(String n) {
+		for (int i = 0; i < getOptionSetsSize(); i++) {
+			if (getOptionSetName(i).equals(n)) {
+				deleteOptionSetInstance(i);
+			}
+		}
+		System.out.println("CANNOT FIND OPTION SET INSTANCE!");
+	}
+
+	/**
+	 * retrieve array of Option class instances by index
+	 *
+	 * @param optionSetIndex
+	 * @return
+	 */
+	public OptionSet.Option[] getOptionsArray(int optionSetIndex) {
+		return getOptionSetClassInstance(optionSetIndex).getOptions();
+	}
+
+	/**
+	 * retrieve array of Option class instances by name look up
+	 *
+	 * @param optionSetName
+	 * @return
+	 */
+	public OptionSet.Option[] getOptionsArray(String optionSetName) {
+		return getOptionSetClassInstance(optionSetName).getOptions();
+	}
+
+	//-------------------------------------------------------------------------------------------------
+
+
+	//--------------------------------------- OPTION INSTANCE CRUD ------------------------------------
 
 	/**
 	 * Used to
@@ -219,48 +230,55 @@ public class Automotive implements Serializable {
 	 * @param optIndex
 	 * @return
 	 */
-	//retrieve Option class instance from array of OptionSet instances
 
-	//these instances will be to modify or retrieve Option class instances from an array
 
-	//will require a second index to map to each index within the Option class array
+	//access an option set class instance and option class instance by index to gain access to CRUD operations for Option class
 	public OptionSet.Option getOptionClassInstance(int optSetIndex, int optIndex) {
 		return getOptionSetClassInstance(optSetIndex).getOption(optIndex);
 	}
+	//access an option set class instance and option class instance by name to gain access to CRUD operations for Option class
 
 	public OptionSet.Option getOptionClassInstance(String optionSetName, String optionName) {
 		return getOptionSetClassInstance(optionSetName).getOption(optionName);
 	}
 
-
-	//use an indexed Option class instance from array of OptionSet instances to retrieve option name
+	//access an option set class instance and option class instance by index to gain access to CRUD operations for Option class
 	public String getOptionName(int optSetIndex, int optIndex) {
 		return getOptionClassInstance(optSetIndex, optIndex).getName();
 	}
 
-	//use an indexed Option class instance from array of OptionSet instances to set option name
+	//access an option set class instance and option class instance by index to gain access to CRUD operations for Option class
 	public void updateOptionName(int optSetIndex, int optIndex, String name) {
 		getOptionClassInstance(optSetIndex, optIndex).setName(name);
 	}
+	//access an option set class instance and option class instance by index to gain access to CRUD operations for Option class
 
-	//use an indexed Option class instance from array of OptionSet instances to retrieve option price
 	public float getOptionPrice(int optSetIndex, int optIndex) {
 		return getOptionClassInstance(optSetIndex, optIndex).getPrice();
 	}
+	//access an option set class instance and option class instance by index to gain access to CRUD operations for Option class
 
-	//use an indexed Option class instance from array of OptionSet instances to set option name
 	public void updateOptionPrice(int optSetIndex, int optIndex, float price) {
 		getOptionClassInstance(optSetIndex, optIndex).setPrice(price);
 	}
+	//access an option set class instance and option class instance by index to gain access to CRUD operations for Option class
 
-	//uses Option Set class instance to set an Option instance to a new instance within Option array
 	public void updateOptionClassInstance(int i, int j, String n, float p) {
 		//access the index of an option class instance for both i and j for setting price and name
+
 		updateOptionPrice(i, j, p);
 		updateOptionName(i, j, n);
 	}
 
-	//---------------------- GET ARRAY SIZES -----------------------
+	public void deleteOptionClassInstance(int i, int j) {
+		getOptionSetClassInstance(i).setOption(j, getOptionSetClassInstance(i).createOption());
+	}
+
+
+	public void deleteOptionClassInstance(String optSetName, String optName) {
+		getOptionSetClassInstance(optSetName).setOption(optName, getOptionSetClassInstance(optSetName).createOption());
+	}
+
 
 	/**
 	 * @return length of array of option set instances

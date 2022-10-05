@@ -1,12 +1,8 @@
 package Model;
 
+import java.io.IOException;
 import java.io.Serializable;
 
-/**
- * Handles CRUD of Option instances
- * <p>
- * OPTION SET = collection of options
- */
 class OptionSet implements Serializable {
 
 	private Option options[];
@@ -39,11 +35,6 @@ class OptionSet implements Serializable {
 		this("", 0);
 	}
 
-	/**
-	 * Accessors and Mutators
-	 *
-	 * @return
-	 */
 	//---------------------- OPTION SET INSTANCE CRUD OPERATIONS ----------------
 	protected String getName() {
 		return name;
@@ -91,23 +82,23 @@ class OptionSet implements Serializable {
 		}
 		return sb.toString();
 	}
-//
-//	protected Option createOption(String name, float price) {
-//		return new Option(name, price);
-//	}
-//
-//	protected Option createOption(String name) {
-//		return new Option(name);
-//	}
-//
-//	protected Option createOption() {
-//		return new Option();
-//	}
+
+	protected Option createOption(String n, float p) {
+		return new Option(n, p);
+	}
+
+	protected Option createOption(String n) {
+		return new Option(n);
+	}
+
+	protected Option createOption() {
+		return new Option();
+	}
 
 	//basic retrieve an Option instance by index
 	protected Option getOption(int i) {
-		if (i < 0 || i >= getOptionsSize() || getOptions()[i] == null) {
-			return null;
+		if (getOptions()[i] == null || i < 0 || i >= getOptionsSize()) {
+			return new Option();
 		}
 		return getOptions()[i];
 	}
@@ -119,7 +110,7 @@ class OptionSet implements Serializable {
 				return getOption(i);
 			}
 		}
-		return null;
+		return new Option();
 	}
 
 	//basic  search by index and replace current Option instance with new Option instance
@@ -151,15 +142,15 @@ class OptionSet implements Serializable {
 		setOption(searchOptionName, new Option(replaceName, replaceOptionPrice));
 	}
 
-	//search by index and update option instance to null
+	//search by index and update option instance to new Option()
 	protected void deleteOption(int i) {
 		//change specified option at index i = new empty Option instance.
-		setOption(i, null);
+		setOption(i, new Option());
 	}
 
-	//search by name and update option instance to null
+	//search by name and update option instance to new Option()
 	protected void deleteOption(String name) {
-		setOption(name, null);
+		setOption(name, new Option());
 	}
 
 
@@ -202,10 +193,6 @@ class OptionSet implements Serializable {
 			this.price = price;
 		}
 
-		//[X] printing information about option instance
-
-		//by default, toString() is declared public. cannot be made protected.
-		//but protected can be made public
 		public String toString() {
 
 			StringBuffer sb = new StringBuffer(getName() + "|" + getPrice());

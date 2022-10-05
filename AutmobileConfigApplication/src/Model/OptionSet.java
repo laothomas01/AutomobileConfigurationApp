@@ -1,6 +1,5 @@
 package Model;
 
-import java.io.IOException;
 import java.io.Serializable;
 
 /**
@@ -92,6 +91,18 @@ class OptionSet implements Serializable {
 		}
 		return sb.toString();
 	}
+//
+//	protected Option createOption(String name, float price) {
+//		return new Option(name, price);
+//	}
+//
+//	protected Option createOption(String name) {
+//		return new Option(name);
+//	}
+//
+//	protected Option createOption() {
+//		return new Option();
+//	}
 
 	//basic retrieve an Option instance by index
 	protected Option getOption(int i) {
@@ -119,7 +130,7 @@ class OptionSet implements Serializable {
 		getOptions()[i] = o;
 	}
 
-	//basic search by name and replace current Option instance with new Option instance
+	//search by name and replace current Option instance with new Option instance
 	protected void setOption(String n, Option o) {
 		for (int i = 0; i < getOptionsSize(); i++) {
 			//will not trigger set option exception

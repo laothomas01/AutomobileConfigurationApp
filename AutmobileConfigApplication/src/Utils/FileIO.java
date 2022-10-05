@@ -2,9 +2,7 @@ package Utils;
 
 import Model.Automotive;
 
-import javax.swing.*;
 import java.io.*;
-import java.util.Scanner;
 
 /**
  * I need to write to file in a format that I would be able to read, parse, and create POJOs
@@ -119,22 +117,22 @@ public class FileIO {
 			 - option set size = # of option names = # of option prices
 			 - after initializing an option set, let's access the option set's options and populate those options with option data
 			 */
-			a.setOptionSetInstance(i, name, optionsCount);
+			a.updateOptionSet(i, a.createOptionSetInstance(name, optionsCount));
 			for (int j = 0; j < optionNames.length; j++) {
 				//parse the prices because they are read as strings
-				a.setOption(i, j, optionNames[j], Float.parseFloat(optionPrices[j]));
+				a.updateOptionClassInstance(i, j, optionNames[j], Float.parseFloat(optionPrices[j]));
 			}
 
 
 		}
 	}
 
-	//for writing out to a file. for.... later uses
-	public void writeData(BufferedWriter bw, Automotive a) throws IOException {
-		for (int i = 0; i < a.getOptionSetsSize(); i++) {
-			bw.write(a.OptionSetToString(i));
-		}
-	}
+//	//for writing out to a file. for.... later uses
+//	public void writeData(BufferedWriter bw, Automotive a) throws IOException {
+//		for (int i = 0; i < a.getOptionSetsSize(); i++) {
+//			bw.write(a.optionSetToString(i));
+//		}
+//	}
 
 	public void serializeAutomotive(String fileName, Automotive a) {
 		try {

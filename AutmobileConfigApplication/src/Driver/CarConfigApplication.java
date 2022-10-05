@@ -51,16 +51,33 @@ public class CarConfigApplication {
 		 *
 		 */
 
-
 		FileIO io = new FileIO();
-		String fileName = "Car.dat";
-		Automotive car = io.buildAutomotive("CarConfigs.txt");
-//		System.out.println(car);
+		String serializedFile = "Car.dat";
+		String configurationFile = "CarConfigs.txt";
+		Automotive car = io.buildAutomotive(configurationFile);
 		System.out.print("PRINTING BEFORE SERIALIZATION:\n" + car);
 		System.out.println();
-		io.serializeAutomotive(fileName, car);
+		io.serializeAutomotive(serializedFile, car);
 		System.out.println();
-		car = io.deserializeAutomotive(fileName);
+		car = io.deserializeAutomotive(serializedFile);
+		System.out.println("PRINTING AFTER DESERIALIZATION:");
+		car.deleteOptionSetInstance(0);
+		System.out.println("DELETED AN OPTION SET");
+		car.updateOptionSet(0, car.createOptionSetInstance("Transmission", 2));
+		car.updateOptionClassInstance(0, 0, "automatic", 0.0f);
+		car.updateOptionClassInstance(0, 1, "manual", -815.0f);
+		System.out.println("UPDATING OPTION SET");
+		System.out.println();
+		System.out.println(car);
+
+
+		//		car.updateOptionSet(0, 0, 2, "Transmission","automatic",0.0f );
+//		car.updateOptionSetClassInstance(0, car.createOptionSetInstance("Transmission", 2));
+//		car.updateOptionClassInstance(0, 0, "automatic", 0.0f);
+//		car.updateOptionClassInstance(0, 1, "manual", -815.0f);
+//
+//		System.out.println();
+//		System.out.println(car);
 	}
 
 

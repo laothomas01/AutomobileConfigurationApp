@@ -5,7 +5,18 @@ import Utils.FileIO;
 
 import java.io.*;
 
-
+/**
+ * @TODO LIST
+ * [] update functions for option set, option and in automotive
+ * [X] deserialization
+ * [X] serialization
+ * [] clean up class diagram
+ * [X] create test cases
+ * [X] write car data to file
+ * [] clean code up
+ * [] turn homework in
+ * [] provide extensibility for your methods
+ */
 public class CarConfigApplication {
 
 //	public static OptionSet readOptionSet(Scanner in) {

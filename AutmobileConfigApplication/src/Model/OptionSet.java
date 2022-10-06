@@ -1,6 +1,5 @@
 package Model;
 
-import java.io.IOException;
 import java.io.Serializable;
 
 class OptionSet implements Serializable {
@@ -57,14 +56,17 @@ class OptionSet implements Serializable {
 		this.name = name;
 	}
 
+	//replace current array of Option instances with new array
 	protected void updateOptions(Option[] opts) {
 		this.options = opts;
 	}
 
+
+	//we print out our option set data in the same format to CarConfigs.txt
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
 		sb.append(getName() + "|");
-		// PRINT OUT OPTION SET INSTANCE DATA IN THE FORMAT OF DATA LOAD FROM TXT FILE
+
 		for (int i = 0; i < getOptionsSize(); i++) {
 			if (i == getOptionsSize() - 1) {
 				sb.append(getOption(i).getName() + "");
@@ -95,7 +97,7 @@ class OptionSet implements Serializable {
 		return new Option();
 	}
 
-	//basic retrieve an Option instance by index
+	//retrieve Option class instance by index
 	protected Option getOption(int i) {
 		if (getOptions()[i] == null || i < 0 || i >= getOptionsSize()) {
 			return new Option();
@@ -113,7 +115,7 @@ class OptionSet implements Serializable {
 		return new Option();
 	}
 
-	//basic  search by index and replace current Option instance with new Option instance
+	//search by index and replace current Option instance with new Option instance
 	protected void setOption(int i, Option o) {
 		if (i < 0 || i >= getOptionsSize()) {
 			System.out.println("OPTION DOES NOT EXIST!");
@@ -132,23 +134,23 @@ class OptionSet implements Serializable {
 		System.out.println("OPTION DOES NOT EXIST!");
 	}
 
-	//search by index, input replacing name and price, and use those parameters to input into a new option class instance
+	//search by index, input replacing name and price, and use those parameters to input into a empty Option class instancee
 	protected void setOption(int searchIndex, String replaceName, float replaceOptionPrice) {
 		setOption(searchIndex, new Option(replaceName, replaceOptionPrice));
 	}
 
-	//search by name, input replacing name and price, and use those parameters to input into a new option class instance
+	//search by name, input replacing name and price, and use those parameters to input to empty Option class instance
 	protected void setOption(String searchOptionName, String replaceName, float replaceOptionPrice) {
 		setOption(searchOptionName, new Option(replaceName, replaceOptionPrice));
 	}
 
-	//search by index and update option instance to new Option()
+	//search by index and update option instance to empty Option class instance
 	protected void deleteOption(int i) {
-		//change specified option at index i = new empty Option instance.
+		//change specified option at index i = to empty Option class instance
 		setOption(i, new Option());
 	}
 
-	//search by name and update option instance to new Option()
+	//search by name and update option instance to to empty Option class instance
 	protected void deleteOption(String name) {
 		setOption(name, new Option());
 	}

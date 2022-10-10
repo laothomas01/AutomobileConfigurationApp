@@ -51,6 +51,7 @@ public class CarConfigApplication {
 
         FileIO io = new FileIO();
         Automotive car = io.buildAutomotive("CarConfigs.txt");
+        System.out.println(car);
         //number of option sets
 
 //		System.out.println(car.OptionToString(0, 1));

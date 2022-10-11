@@ -2,7 +2,7 @@ package Model;
 
 import java.io.Serializable;
 
-public class Automotive implements Serializable {
+public class Automobile implements Serializable {
 
 	private String name;
 	private float basePrice;
@@ -14,7 +14,7 @@ public class Automotive implements Serializable {
 	 * @param p    base price of automotive
 	 */
 	//chain the constructors
-	public Automotive(String n, float p, int size) {
+	public Automobile(String n, float p, int size) {
 		optionSets = new OptionSet[size];
 		setName(n);
 		setBasePrice(p);
@@ -23,24 +23,24 @@ public class Automotive implements Serializable {
 		}
 	}
 
-	public Automotive(String n, int size) {
+	public Automobile(String n, int size) {
 		this(n, 0f, size);
 	}
 
-	public Automotive(int size, float p) {
+	public Automobile(int size, float p) {
 		this("", p, size);
 	}
 
-	public Automotive(float p) {
+	public Automobile(float p) {
 		this("", p, 0);
 	}
 
-	public Automotive(int size) {
+	public Automobile(int size) {
 		this("", 0, size);
 	}
 
 
-	public Automotive() {
+	public Automobile() {
 		this("", 0, 0);
 	}
 

@@ -1,6 +1,6 @@
 package Driver;
 
-import Model.Automotive;
+import Model.Automobile;
 import Utils.FileIO;
 
 import java.io.*;
@@ -45,7 +45,7 @@ public class CarConfigApplication {
         FileIO io = new FileIO();
         String serializedFile = "Car.dat";
         String configurationFile = "CarConfigs.txt";
-        Automotive car = io.buildAutomotive(configurationFile);
+        Automobile car = io.loadAutomotive(configurationFile);
         System.out.print("PRINTING BEFORE SERIALIZATION:\n" + car);
         System.out.println();
         io.serializeAutomotive(serializedFile, car);

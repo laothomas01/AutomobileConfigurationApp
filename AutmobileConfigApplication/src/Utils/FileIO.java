@@ -1,6 +1,6 @@
 package Utils;
 
-import Model.Automotive;
+import Model.Automobile;
 
 import java.io.*;
 
@@ -19,16 +19,24 @@ public class FileIO {
 
 	}
 
+	/**
+	 * if we are going to make a build auto function,we will have to still return an instance inside using
+	 * Automotive and then print values.
+	 *
+	 * BuildAuto just serves to tell the user the automotive was built and data will be printed
+	 * @param filename
+	 * @return
+	 */
 
-	public Automotive buildAutomotive(String filename) {
-		Automotive a1 = new Automotive();
+	public Automobile loadAutomotive(String filename) {
+		Automobile a1 = new Automobile();
 
 		int optionSetsSize;
 		try {
 			BufferedReader br1 = new BufferedReader(new FileReader(filename));
 
 			optionSetsSize = getLineCount(br1) - 1;
-			a1 = new Automotive(optionSetsSize);
+			a1 = new Automobile(optionSetsSize);
 			br1.close();
 			BufferedReader br2 = new BufferedReader(new FileReader(filename));
 			readData(br2, a1);
@@ -39,12 +47,12 @@ public class FileIO {
 		return a1;
 	}
 
-	public Automotive deserializeAutomotive(String filename) {
-		Automotive car = null;
+	public Automobile deserializeAutomotive(String filename) {
+		Automobile car = null;
 		try {
 			FileInputStream file = new FileInputStream(filename);
 			ObjectInputStream in = new ObjectInputStream(file);
-			car = (Automotive) in.readObject();
+			car = (Automobile) in.readObject();
 			in.close();
 			file.close();
 			System.out.println("Object has been deserialized ");
@@ -87,7 +95,7 @@ public class FileIO {
 	 * @param a  automotive
 	 * @throws IOException
 	 */
-	public void readData(BufferedReader br, Automotive a) throws IOException {
+	public void readData(BufferedReader br, Automobile a) throws IOException {
 		//looping through each option set index within the set of option sets
 		for (int i = 0; i < a.getOptionSetsSize(); i++) {
 			//0th index = name and price of car. not related to car configs
@@ -122,7 +130,7 @@ public class FileIO {
 		}
 	}
 
-	public void serializeAutomotive(String fileName, Automotive a) {
+	public void serializeAutomotive(String fileName, Automobile a) {
 		try {
 			FileOutputStream file = new FileOutputStream(fileName);
 			ObjectOutputStream out = new ObjectOutputStream(file);

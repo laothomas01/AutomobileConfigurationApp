@@ -5,6 +5,14 @@ import Utils.FileIO;
 
 /**
  * let's box all CRUD operations into separate interfaces
+ * <p>
+ * i dont know if this TRULY works. i have to make everything protected in Automobile and test
+ * <p>
+ * i will need to refactor some of my automobile class to bring and create extensible methods to this class
+ * <p>
+ * Automobile class needs to create generalized methods of lower level classes
+ * <p>
+ * Problem here: now i have 2 public classes on my hands and this class did not really do much for my automobile class
  */
 //when new interface is added, just implement them here
 // also has access to methods in abbstract class proxyAutomible
@@ -38,7 +46,9 @@ public class BuildAuto extends proxyAutomobile implements CreateAuto, UpdateAuto
     }
 
     @Override
-    public void updateOptionPrice(String modelName, String OptionSetName, String OptioName, float newPrice) {
-
+    public void updateOptionPrice(String modelName, String OptionSetName, String OptionName, float newPrice) {
+        if (a1.getName().equals(modelName)) {
+            a1.updateOptionPrice(OptionSetName, OptionName, newPrice);
+        }
     }
 }

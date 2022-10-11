@@ -269,14 +269,20 @@ public class Automobile implements Serializable {
     public void updateOptionPrice(int optSetIndex, int optIndex, float price) {
         getOptionClassInstance(optSetIndex, optIndex).setPrice(price);
     }
+
+
+    //update an Option based on given option set name and option name
+    public void updateOptionPrice(String OptionSetName, String OptionName, float newPrice) {
+        getOptionClassInstance(OptionSetName, OptionName).setPrice(newPrice);
+    }
     //access an option set class instance and option class instance by index to gain access to CRUD operations for Option class
 
     public void updateOptionClassInstance(int i, int j, String n, float p) {
         //access the index of an option class instance for both i and j for setting price and name
-
         updateOptionPrice(i, j, p);
         updateOptionName(i, j, n);
     }
+
 
     public void deleteOptionClassInstance(int i, int j) {
         getOptionSetClassInstance(i).setOption(j, getOptionSetClassInstance(i).createOption());

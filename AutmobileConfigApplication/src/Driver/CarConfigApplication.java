@@ -21,8 +21,12 @@ import java.io.*;
 public class CarConfigApplication {
 
     public static void main(String args[]) throws IOException {
+
+        //.txt file to read from using FileIO instance
         String configurationFile = "CarConfigs.txt";
+        //instantiate BuildAuto
         BuildAuto auto = new BuildAuto();
+        //
         auto.buildAuto(configurationFile);
         auto.updateOptionSetName("FordWagonZTW", "Transmission", "Rear Window");
         auto.printAuto("FordWagonZTW");

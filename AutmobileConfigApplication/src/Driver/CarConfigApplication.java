@@ -1,5 +1,6 @@
 package Driver;
 
+import Adapter.BuildAuto;
 import Model.Automobile;
 import Utils.FileIO;
 
@@ -20,9 +21,12 @@ import java.io.*;
 public class CarConfigApplication {
 
     public static void main(String args[]) throws IOException {
+        String configurationFile = "CarConfigs.txt";
+        BuildAuto auto = new BuildAuto();
+        auto.buildAuto(configurationFile);
+        auto.updateOptionSetName("FordWagonZTW", "Transmission", "Rear Window");
+        auto.printAuto("FordWagonZTW");
 
-        CarConfigApplication run = new CarConfigApplication();
-        run.testAutomotive_CRUD();
     }
 
     public void testAutomotive_CRUD() {

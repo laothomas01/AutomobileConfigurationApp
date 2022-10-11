@@ -12,6 +12,6 @@ import Model.Automobile;
 //its a factory class????
 abstract public class proxyAutomobile {
 
-	//handling all operations on Automobile as needed by the interfaces
-	private Automobile a1;
+    //handling all operations on Automobile as needed by the interfaces
+    protected static Automobile a1;
 }

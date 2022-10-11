@@ -2,6 +2,9 @@ package Adapter;
 
 /**
  * Provides changes to the automotive instance via Update,Delete methods
+ *
+ * Why this????
+ *
  */
 public interface UpdateAuto {
 

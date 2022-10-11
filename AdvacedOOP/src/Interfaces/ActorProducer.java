@@ -1,4 +1,4 @@
 package Interfaces;
 
-public interface ActorProducer {
+public interface ActorProducer extends Actor,Producer{
 }

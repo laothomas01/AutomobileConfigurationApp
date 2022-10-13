@@ -1,5 +1,16 @@
 public class Bird extends Animal {
-    public Bird(String name) { super(name); }
-    public void sound() {
-        System.out.println("tweet tweet...");
-    }}
+
+    public Bird(String name, int lifeExpentency) {
+        super(name, lifeExpentency);
+    }
+
+    @Override
+    public void remember() {
+
+    }
+
+    @Override
+    public void protectOwner() {
+
+    }
+}

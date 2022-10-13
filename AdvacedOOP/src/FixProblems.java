@@ -2,70 +2,82 @@ import java.util.Arrays;
 
 /**
  * FINISH ADV JAVA HOMEWORK TONIGHT!
- *  [ ] adding custom exception and making a self-healing software
+ * [ ] adding custom exception and making a self-healing software
  * WORK ON VIDEO GAME PROJECT TONIGHT!
- *
+ * <p>
  * PRACTICE ORACLE SQL TONIGHT!
  * [ ] review table creation
  * [ ] review table insertion
  * [ ] review sql basic commands
  * [ ]
- *
- *
- *
  */
-//a custom exception
+
+
+//Custom Exception
 public class FixProblems extends Exception {
-    private int errorno;
-    private String errormsg;
 
-    public FixProblems() {
-        super();
-        printmyproblem();
-    }
+	//where the error is
+	private int errorno;
+	//what the error is
+	private String errormsg;
 
-    public FixProblems(String errormsg) {
-        super();
-        this.errormsg = errormsg;
-        printmyproblem();
-    }
 
-    public FixProblems(int errorno) {
-        super();
-        this.errorno = errorno;
-        printmyproblem();
-    }
+	public FixProblems() {
+		super();
+		printmyproblem();
+	}
 
-    public FixProblems(int errorno, String errormsg) {
-        super();
-        this.errorno = errorno;
-        this.errormsg = errormsg;
-        printmyproblem();
-    }
+	public FixProblems(String errormsg) {
+		super();
+		this.errormsg = errormsg;
+		printmyproblem();
+	}
 
-    public int getErrorno() {
-        return errorno;
-    }
+	public FixProblems(int errorno) {
+		super();
+		this.errorno = errorno;
+		printmyproblem();
+	}
 
-    public void setErrorno(int errorno) {
-        this.errorno = errorno;
-    }
+	public FixProblems(int errorno, String errormsg) {
+		super();
+		this.errorno = errorno;
+		this.errormsg = errormsg;
+		printmyproblem();
+	}
 
-    public String getErrormsg() {
-        return errormsg;
-    }
+	public int getErrorno() {
+		return errorno;
+	}
 
-    public void setErrormsg(String errormsg) {
-        this.errormsg = errormsg;
-    }
+	public void setErrorno(int errorno) {
+		this.errorno = errorno;
+	}
 
-    public void printmyproblem() {
-        System.out.println("FixProblems [errorno=" + errorno + ", errormsg=" + errormsg);
-    }
+	public String getErrormsg() {
+		return errormsg;
+	}
 
-    public String fixProblemReadFromConsole() {
-        String a = "Z:\\JavaPrograms\\SelfHealingSoftware\\bin\\abc.txt";
-        System.out.println("got here --> fixProblemReadFromConsole");
-        return a;
-    }
+	public void setErrormsg(String errormsg) {
+		this.errormsg = errormsg;
+	}
+
+	//print exception
+	public void printmyproblem() {
+		System.out.println("FixProblems [errorno=" + errorno + ", errormsg=" + errormsg);
+	}
+
+	//how is the problem "fixed"?
+
+	//not part of custom exception
+
+
+	public String fixProblemReadFromConsole() {
+		/**
+		 * can loop through a directory, but let's currently keep it simple
+		 */
+		String a = "asdasdsad.txt";
+		System.out.println("got here --> fixProblemReadFromConsole");
+		return a;
+	}
 }

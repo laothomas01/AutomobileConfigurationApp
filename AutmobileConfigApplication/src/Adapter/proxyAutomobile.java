@@ -10,8 +10,8 @@ import Model.Automobile;
  */
 abstract public class proxyAutomobile {
 
-    //handling all operations on Automobile as needed by the interfaces
+	//handling all operations on Automobile as needed by the interfaces
 
-    //variable must be static to be able to reference it in other classes
-    protected static Automobile a1;
+	//variable must be static to be able to reference it in other classes
+	protected static Automobile a1;
 }

@@ -22,8 +22,9 @@ public class FileIO {
 	/**
 	 * if we are going to make a build auto function,we will have to still return an instance inside using
 	 * Automotive and then print values.
-	 *
+	 * <p>
 	 * BuildAuto just serves to tell the user the automotive was built and data will be printed
+	 *
 	 * @param filename
 	 * @return
 	 */
@@ -33,7 +34,10 @@ public class FileIO {
 
 		int optionSetsSize;
 		try {
+
 			BufferedReader br1 = new BufferedReader(new FileReader(filename));
+			//if file exists, print it exists and continue with the program
+
 
 			optionSetsSize = getLineCount(br1) - 1;
 			a1 = new Automobile(optionSetsSize);
@@ -105,6 +109,11 @@ public class FileIO {
 				String[] carAttributes = line.split("\\|");
 				a.setName(carAttributes[0]);
 				a.setBasePrice(Float.parseFloat(carAttributes[1]));
+				/**
+				 * throw exception if carAttributes length < 2.
+				 * - check if text is missing car name
+				 * - check if text is missing car price
+				 */
 			}
 			String line = br.readLine();
 			String[] carConfigs = line.split("\\|");

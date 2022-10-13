@@ -1,2 +1,6 @@
-package Adapter;public interface FixAuto {
+package Adapter;
+
+public interface FixAuto {
+	void fix(int errNo);
+
 }

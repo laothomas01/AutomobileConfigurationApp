@@ -185,8 +185,16 @@ public class FileIO {
                 //read a line for the car specs
                 String line = br.readLine();
                 String[] carAttributes = line.split("\\|");
+
+
+                //there will be an error here when trying to access index 0
+
                 a.setName(carAttributes[0]);
+
+                //there will be an error here when trying to access index 1
                 a.setBasePrice(Float.parseFloat(carAttributes[1]));
+
+
                 /**
                  * throw exception if carAttributes length < 2.
                  * - check if text is missing car name

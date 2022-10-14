@@ -36,6 +36,10 @@ public class BuildAuto extends proxyAutomobile implements CreateAuto, UpdateAuto
 
     @Override
     public void fix(int errNo) {
+        /**
+         * Fix1to100 f1 = new Fix1to100()
+         *
+         */
 
     }
 }

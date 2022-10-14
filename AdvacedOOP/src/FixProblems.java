@@ -76,8 +76,9 @@ public class FixProblems extends Exception {
 		/**
 		 * can loop through a directory, but let's currently keep it simple
 		 */
-		String a = "asdasdsad.txt";
-		System.out.println("got here --> fixProblemReadFromConsole");
-		return a;
+
+//		String a = "asdasdsad.txt";
+//		System.out.println("got here --> fixProblemReadFromConsole");
+		return "";
 	}
 }

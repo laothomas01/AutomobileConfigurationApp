@@ -1,49 +1,86 @@
 package Exception;
 
+import java.io.File;
+
+/**
+ * [ ] Tracking Error No and Error Message
+ */
 public class AutoException extends Exception {
+    private int errorNo;
+    private String errorMsg;
+    public AutoException() {
+        super();
+    }
+    public AutoException(int errorNo) {
+        super();
+        this.errorNo = errorNo;
+    }
 
+    public AutoException(String errorMsg) {
+        super();
+        this.errorMsg = errorMsg;
+    }
 
-	private int errorNo;
-	private String errorMsg;
+    public AutoException(int errorNo, String errorMsg) {
+        super();
+        this.errorNo = errorNo;
+        this.errorMsg = errorMsg;
+    }
 
-	public AutoException() {
-		super();
-	}
+    public int getErrorNo() {
+        return errorNo;
+    }
 
-	public AutoException(int errorNo) {
-		super();
-		this.errorNo = errorNo;
-	}
+    public void setErrorNo(int errorNo) {
+        this.errorNo = errorNo;
+    }
 
-	public AutoException(String errorMsg) {
-		super();
-		this.errorMsg = errorMsg;
-	}
+    public String getErrorMsg() {
+        return errorMsg;
+    }
 
-	public AutoException(int errorNo, String errorMsg) {
-		super();
-		this.errorNo = errorNo;
-		this.errorMsg = errorMsg;
-	}
+    public void setErrorMsg(String errorMsg) {
+        this.errorMsg = errorMsg;
+    }
 
-	public int getErrorNo() {
-		return errorNo;
-	}
+    public void printmyproblem() {
+        System.out.println("FixProblems [errorno=" + errorNo + ", errormsg=" + errorMsg);
+    }
 
-	public void setErrorNo(int errorNo) {
-		this.errorNo = errorNo;
-	}
+    /**
+     * contain an enumeration of all possible errors and messages
+     */
 
-	public String getErrorMsg() {
-		return errorMsg;
-	}
+    /**
+     * Ability to log AutoException with timestamps into a log file
+     */
 
-	public void setErrorMsg(String errorMsg) {
-		this.errorMsg = errorMsg;
-	}
+    /**
+     * Write helper class to delegate fixes for each method.
+     *
+     * If exception number 1 to 100 is assigned to model packaage, might author class Fix1to100
+     * as helper class for AutoException for exceptions raised in model class
+     */
 
-	public void printmyproblem() {
-		System.out.println("FixProblems [errorno=" + errorNo + ", errormsg=" + errorMsg);
-	}
+    /**
+     * Functions delegated to handling errors:
+     */
+    public String findFile(String name, File file) {
+        File[] list = file.listFiles();
+        boolean foundFile = false;
+        if (list != null)
+            for (File fil : list) {
+                if (foundFile) {
+                    break;
+                }
+                if (fil.isDirectory()) {
+                    findFile(name, fil);
+                } else if (name.equalsIgnoreCase(fil.getName())) {
+                    System.out.println(fil.getName());
+                    return fil.getName();
+                }
+            }
+        return "";
+    }
 
 }

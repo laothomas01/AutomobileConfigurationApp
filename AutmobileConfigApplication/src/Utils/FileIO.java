@@ -353,17 +353,7 @@ public class FileIO {
 		logger.warning("warning message");
 	}
 
-	//File Writer function
 
-	/**
-	 * What does it do or what do you want it do do?
-	 * 1) allow user to look through lines of text in text file
-	 * 2) allow user input to write the correct line
-	 * 3) store correct lines into an array
-	 * 4) store the incorrect line index as "INCORRECT"
-	 * 5)
-	 */
 
-	//@TODO make sure you understand this
 
 }

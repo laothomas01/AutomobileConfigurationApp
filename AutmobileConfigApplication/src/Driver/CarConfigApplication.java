@@ -24,8 +24,7 @@ public class CarConfigApplication {
 		//1 problem is only fixed
 		auto.buildAuto(configurationFile);
 	}
-
-
+	
 //	public static void checkAndWriteToFile(String filename) throws IOException {
 //		BufferedReader br = new BufferedReader(new FileReader(filename));
 //

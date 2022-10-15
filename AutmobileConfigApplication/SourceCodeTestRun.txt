@@ -1,246 +1,37 @@
-// TEST RUN
-public static void main(String args[]) throws IOException {
+// My code only handles 1 issue right now: malformed autmobile price
+// Text File That Needs Fixing
+FordWagonZTW|123rsfsdfs
+Transmission|automatic manual|0 -815
+Brakes|standard abs abs-with-advance-trac|0 400 1625
+Colors|Fort-Knox-Gold-Clearcoat-Metallic Liquid-Grey-Clearcoat-Metallic Infra-Red-Clearcoat Grabber-Green-Clearcoat-Metallic Sangria-RedClearcoat-Metallic French-Blue-Clearcoat-Metallic Twilight-Blue-Clearcoat-Metallic CD-Silver-Clearcoat-Metallic Pitch-Black-Clearcoat Cloud-9-White-Clearcoat|0 0 0 0 0 0 0 0 0 0
+AirBags|present not-present|0 350
+PowerMoonroof|present not-present|0 595
 
-		CarConfigApplication run = new CarConfigApplication();
-		run.testAutomotive_CRUD();
-	}
+//Output:
+//new text file output
+FordWagonZTW|128500
+Transmission|automatic manual|0 -815
+Brakes|standard abs abs-with-advance-trac|0 400 1625
+Colors|Fort-Knox-Gold-Clearcoat-Metallic Liquid-Grey-Clearcoat-Metallic Infra-Red-Clearcoat Grabber-Green-Clearcoat-Metallic Sangria-RedClearcoat-Metallic French-Blue-Clearcoat-Metallic Twilight-Blue-Clearcoat-Metallic CD-Silver-Clearcoat-Metallic Pitch-Black-Clearcoat Cloud-9-White-Clearcoat|0 0 0 0 0 0 0 0 0 0
+AirBags|present not-present|0 350
+PowerMoonroof|present not-present|0 595
 
-	public void testAutomotive_CRUD() {
-		/**
-		 * Base reference model
-		 *
-		 * we will select configurations from this object to fit into out Focus Wagon ZTW
-		 * PSEUDO CODE
-		 * tokens[]
-		 * ____________
-		 * 0: name
-		 * 1: options[]
-		 * 2: prices[]
-		 * -> optionset{ option(name,price)... }
-		 *
-		 * ____________
-		 *
-		 */
-
-		FileIO io = new FileIO();
-		String serializedFile = "Car.dat";
-		String configurationFile = "CarConfigs.txt";
-		Automotive car = io.buildAutomotive(configurationFile);
-		System.out.print("PRINTING BEFORE SERIALIZATION:\n" + car);
-		System.out.println();
-		io.serializeAutomotive(serializedFile, car);
-		System.out.println();
+// also there is a handling for when the problem is fixed and there is nothing left to fix
 
 
-		car = io.deserializeAutomotive(serializedFile);
-		System.out.println("PRINTING AFTER DESERIALIZATION:");
-		System.out.println(car);
-		System.out.println();
 
+//Test on a non broken text file
+FordWagonZTW|128500
+Transmission|automatic manual|0 -815
+Brakes|standard abs abs-with-advance-trac|0 400 1625
+Colors|Fort-Knox-Gold-Clearcoat-Metallic Liquid-Grey-Clearcoat-Metallic Infra-Red-Clearcoat Grabber-Green-Clearcoat-Metallic Sangria-RedClearcoat-Metallic French-Blue-Clearcoat-Metallic Twilight-Blue-Clearcoat-Metallic CD-Silver-Clearcoat-Metallic Pitch-Black-Clearcoat Cloud-9-White-Clearcoat|0 0 0 0 0 0 0 0 0 0
+AirBags|present not-present|0 350
+PowerMoonroof|present not-present|0 595
 
-		System.out.println("PERFORMING OPTION SET READING!");
-		System.out.println(car.getOptionSetName(0));
-		System.out.println(car.getOptionSetClassInstance(0));
-		System.out.println("PERFORMING OPTION READING!");
-		System.out.println(car.getOptionName(0, 0));
-		System.out.println(car.getOptionName(0, 1));
-		System.out.println(car.getOptionPrice(0, 0));
-		System.out.println(car.getOptionPrice(0, 1));
-		System.out.println(car.getOptionClassInstance(0, 0));
-		System.out.println(car.getOptionClassInstance(0, 1));
-		System.out.println();
-
-		System.out.println("PERFORMING OPTION SET DELETION!");
-		car.deleteOptionSetInstance(0);
-		System.out.println("CONFIRMING DELETION!");
-		System.out.println("RESULT:");
-		System.out.println(car);
-		System.out.println();
-		System.out.println("PERFORMING OPTION SET UPDATE!");
-		car.updateOptionSet(0, car.createOptionSetInstance("Transmission", 2));
-		System.out.println(car);
-		System.out.println();
-		System.out.println("UPDATING OPTION SET OPTIONS!");
-		car.updateOptionClassInstance(0, 0, "automatic", 0.0f);
-		car.updateOptionClassInstance(0, 1, "manual", -715.0f);
-		System.out.println(car);
-		car.deleteOptionSetInstance(0);
-		car.updateOptionSet(0, car.createOptionSetInstance("Transmission", 2));
-		System.out.println(car);
-		System.out.println("UPDATING OPTION SET OPTIONS!");
-		car.updateOptionClassInstance(0, 0, "automatic", 0.0f);
-		car.updateOptionClassInstance(0, 1, "manual", -715.0f);
-		System.out.println();
-		System.out.println(car);
-
-
-		System.out.println("PERFORMING OPTION DELETION!");
-		car.deleteOptionClassInstance(0, 0);
-		System.out.println();
-		System.out.println(car);
-		car.updateOptionClassInstance(0, 0, "automatic", 0.0f);
-		System.out.println();
-		System.out.println(car);
-		car.deleteOptionClassInstance(0, 1);
-		car.updateOptionClassInstance(0, 1, "manual", -815.0f);
-		System.out.println();
-		System.out.println(car);
-
-		car.deleteOptionClassInstance(0, 0);
-		car.deleteOptionClassInstance(0, 1);
-		System.out.println();
-		System.out.println(car);
-
-		car.updateOptionClassInstance(0, 0, "automatic", 0.0f);
-		car.updateOptionClassInstance(0, 1, "manual", -815.0f);
-
-		System.out.println();
-		System.out.println(car);
-
-		System.out.println("TESTING DELETION OF ALL OPTIONS");
-		for (int i = 0; i < car.getOptionSetsSize(); i++) {
-			for (int j = 0; j < car.getOptionsArraySize(i); j++) {
-				car.deleteOptionClassInstance(i, j);
-			}
-		}
-		System.out.println();
-		System.out.println(car);
-		System.out.println();
-
-
-		for (int i = 0; i < car.getOptionSetsSize(); i++) {
-			for (int j = 0; j < car.getOptionsArraySize(i); j++) {
-				car.updateOptionClassInstance(i, j, "helloworld", 1);
-			}
-		}
-		System.out.println(car);
-		System.out.println();
-	}
-	//TEST OUTPUT
-
-	/usr/lib/jvm/java-1.11.0-openjdk-amd64/bin/java -javaagent:/snap/intellij-idea-ultimate/383/lib/idea_rt.jar=36743:/snap/intellij-idea-ultimate/383/bin -Dfile.encoding=UTF-8 -classpath /home/thomas/AutomobileConfigurationApp/AutmobileConfigApplication/out/production/AutmobileConfigApplication Driver.CarConfigApplication
-    PRINTING BEFORE SERIALIZATION:
-    FordWagonZTW|128500.0
-    Transmission|automatic manual|0.0 -815.0
-    Brakes|standard abs abs-with-advance-trac|0.0 400.0 1625.0
-    Colors|Fort-Knox-Gold-Clearcoat-Metallic Liquid-Grey-Clearcoat-Metallic Infra-Red-Clearcoat Grabber-Green-Clearcoat-Metallic Sangria-RedClearcoat-Metallic French-Blue-Clearcoat-Metallic Twilight-Blue-Clearcoat-Metallic CD-Silver-Clearcoat-Metallic Pitch-Black-Clearcoat Cloud-9-White-Clearcoat|0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
-    AirBags|present not-present|0.0 350.0
-    PowerMoonroof|present not-present|0.0 595.0
-    Object has been serialized
-
-    Object has been deserialized
-    PRINTING AFTER DESERIALIZATION:
-    FordWagonZTW|128500.0
-    Transmission|automatic manual|0.0 -815.0
-    Brakes|standard abs abs-with-advance-trac|0.0 400.0 1625.0
-    Colors|Fort-Knox-Gold-Clearcoat-Metallic Liquid-Grey-Clearcoat-Metallic Infra-Red-Clearcoat Grabber-Green-Clearcoat-Metallic Sangria-RedClearcoat-Metallic French-Blue-Clearcoat-Metallic Twilight-Blue-Clearcoat-Metallic CD-Silver-Clearcoat-Metallic Pitch-Black-Clearcoat Cloud-9-White-Clearcoat|0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
-    AirBags|present not-present|0.0 350.0
-    PowerMoonroof|present not-present|0.0 595.0
-
-    PERFORMING OPTION SET READING!
-    Transmission
-    Transmission|automatic manual|0.0 -815.0
-    PERFORMING OPTION READING!
-    automatic
-    manual
-    0.0
-    -815.0
-    automatic|0.0
-    manual|-815.0
-
-    PERFORMING OPTION SET DELETION!
-    OPTION SET HAS BEEN DELETED!
-    CONFIRMING DELETION!
-    RESULT:
-    FordWagonZTW|128500.0
-    ||
-    Brakes|standard abs abs-with-advance-trac|0.0 400.0 1625.0
-    Colors|Fort-Knox-Gold-Clearcoat-Metallic Liquid-Grey-Clearcoat-Metallic Infra-Red-Clearcoat Grabber-Green-Clearcoat-Metallic Sangria-RedClearcoat-Metallic French-Blue-Clearcoat-Metallic Twilight-Blue-Clearcoat-Metallic CD-Silver-Clearcoat-Metallic Pitch-Black-Clearcoat Cloud-9-White-Clearcoat|0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
-    AirBags|present not-present|0.0 350.0
-    PowerMoonroof|present not-present|0.0 595.0
-
-    PERFORMING OPTION SET UPDATE!
-    FordWagonZTW|128500.0
-    Transmission| |0.0 0.0
-    Brakes|standard abs abs-with-advance-trac|0.0 400.0 1625.0
-    Colors|Fort-Knox-Gold-Clearcoat-Metallic Liquid-Grey-Clearcoat-Metallic Infra-Red-Clearcoat Grabber-Green-Clearcoat-Metallic Sangria-RedClearcoat-Metallic French-Blue-Clearcoat-Metallic Twilight-Blue-Clearcoat-Metallic CD-Silver-Clearcoat-Metallic Pitch-Black-Clearcoat Cloud-9-White-Clearcoat|0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
-    AirBags|present not-present|0.0 350.0
-    PowerMoonroof|present not-present|0.0 595.0
-
-    UPDATING OPTION SET OPTIONS!
-    FordWagonZTW|128500.0
-    Transmission|automatic manual|0.0 -715.0
-    Brakes|standard abs abs-with-advance-trac|0.0 400.0 1625.0
-    Colors|Fort-Knox-Gold-Clearcoat-Metallic Liquid-Grey-Clearcoat-Metallic Infra-Red-Clearcoat Grabber-Green-Clearcoat-Metallic Sangria-RedClearcoat-Metallic French-Blue-Clearcoat-Metallic Twilight-Blue-Clearcoat-Metallic CD-Silver-Clearcoat-Metallic Pitch-Black-Clearcoat Cloud-9-White-Clearcoat|0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
-    AirBags|present not-present|0.0 350.0
-    PowerMoonroof|present not-present|0.0 595.0
-    OPTION SET HAS BEEN DELETED!
-    FordWagonZTW|128500.0
-    Transmission| |0.0 0.0
-    Brakes|standard abs abs-with-advance-trac|0.0 400.0 1625.0
-    Colors|Fort-Knox-Gold-Clearcoat-Metallic Liquid-Grey-Clearcoat-Metallic Infra-Red-Clearcoat Grabber-Green-Clearcoat-Metallic Sangria-RedClearcoat-Metallic French-Blue-Clearcoat-Metallic Twilight-Blue-Clearcoat-Metallic CD-Silver-Clearcoat-Metallic Pitch-Black-Clearcoat Cloud-9-White-Clearcoat|0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
-    AirBags|present not-present|0.0 350.0
-    PowerMoonroof|present not-present|0.0 595.0
-    UPDATING OPTION SET OPTIONS!
-
-    FordWagonZTW|128500.0
-    Transmission|automatic manual|0.0 -715.0
-    Brakes|standard abs abs-with-advance-trac|0.0 400.0 1625.0
-    Colors|Fort-Knox-Gold-Clearcoat-Metallic Liquid-Grey-Clearcoat-Metallic Infra-Red-Clearcoat Grabber-Green-Clearcoat-Metallic Sangria-RedClearcoat-Metallic French-Blue-Clearcoat-Metallic Twilight-Blue-Clearcoat-Metallic CD-Silver-Clearcoat-Metallic Pitch-Black-Clearcoat Cloud-9-White-Clearcoat|0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
-    AirBags|present not-present|0.0 350.0
-    PowerMoonroof|present not-present|0.0 595.0
-    PERFORMING OPTION DELETION!
-
-    FordWagonZTW|128500.0
-    Transmission| manual|0.0 -715.0
-    Brakes|standard abs abs-with-advance-trac|0.0 400.0 1625.0
-    Colors|Fort-Knox-Gold-Clearcoat-Metallic Liquid-Grey-Clearcoat-Metallic Infra-Red-Clearcoat Grabber-Green-Clearcoat-Metallic Sangria-RedClearcoat-Metallic French-Blue-Clearcoat-Metallic Twilight-Blue-Clearcoat-Metallic CD-Silver-Clearcoat-Metallic Pitch-Black-Clearcoat Cloud-9-White-Clearcoat|0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
-    AirBags|present not-present|0.0 350.0
-    PowerMoonroof|present not-present|0.0 595.0
-
-    FordWagonZTW|128500.0
-    Transmission|automatic manual|0.0 -715.0
-    Brakes|standard abs abs-with-advance-trac|0.0 400.0 1625.0
-    Colors|Fort-Knox-Gold-Clearcoat-Metallic Liquid-Grey-Clearcoat-Metallic Infra-Red-Clearcoat Grabber-Green-Clearcoat-Metallic Sangria-RedClearcoat-Metallic French-Blue-Clearcoat-Metallic Twilight-Blue-Clearcoat-Metallic CD-Silver-Clearcoat-Metallic Pitch-Black-Clearcoat Cloud-9-White-Clearcoat|0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
-    AirBags|present not-present|0.0 350.0
-    PowerMoonroof|present not-present|0.0 595.0
-
-    FordWagonZTW|128500.0
-    Transmission|automatic manual|0.0 -815.0
-    Brakes|standard abs abs-with-advance-trac|0.0 400.0 1625.0
-    Colors|Fort-Knox-Gold-Clearcoat-Metallic Liquid-Grey-Clearcoat-Metallic Infra-Red-Clearcoat Grabber-Green-Clearcoat-Metallic Sangria-RedClearcoat-Metallic French-Blue-Clearcoat-Metallic Twilight-Blue-Clearcoat-Metallic CD-Silver-Clearcoat-Metallic Pitch-Black-Clearcoat Cloud-9-White-Clearcoat|0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
-    AirBags|present not-present|0.0 350.0
-    PowerMoonroof|present not-present|0.0 595.0
-
-    FordWagonZTW|128500.0
-    Transmission| |0.0 0.0
-    Brakes|standard abs abs-with-advance-trac|0.0 400.0 1625.0
-    Colors|Fort-Knox-Gold-Clearcoat-Metallic Liquid-Grey-Clearcoat-Metallic Infra-Red-Clearcoat Grabber-Green-Clearcoat-Metallic Sangria-RedClearcoat-Metallic French-Blue-Clearcoat-Metallic Twilight-Blue-Clearcoat-Metallic CD-Silver-Clearcoat-Metallic Pitch-Black-Clearcoat Cloud-9-White-Clearcoat|0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
-    AirBags|present not-present|0.0 350.0
-    PowerMoonroof|present not-present|0.0 595.0
-
-    FordWagonZTW|128500.0
-    Transmission|automatic manual|0.0 -815.0
-    Brakes|standard abs abs-with-advance-trac|0.0 400.0 1625.0
-    Colors|Fort-Knox-Gold-Clearcoat-Metallic Liquid-Grey-Clearcoat-Metallic Infra-Red-Clearcoat Grabber-Green-Clearcoat-Metallic Sangria-RedClearcoat-Metallic French-Blue-Clearcoat-Metallic Twilight-Blue-Clearcoat-Metallic CD-Silver-Clearcoat-Metallic Pitch-Black-Clearcoat Cloud-9-White-Clearcoat|0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
-    AirBags|present not-present|0.0 350.0
-    PowerMoonroof|present not-present|0.0 595.0
-    TESTING DELETION OF ALL OPTIONS
-
-    FordWagonZTW|128500.0
-    Transmission| |0.0 0.0
-    Brakes|  |0.0 0.0 0.0
-    Colors|         |0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
-    AirBags| |0.0 0.0
-    PowerMoonroof| |0.0 0.0
-
-    FordWagonZTW|128500.0
-    Transmission|helloworld helloworld|1.0 1.0
-    Brakes|helloworld helloworld helloworld|1.0 1.0 1.0
-    Colors|helloworld helloworld helloworld helloworld helloworld helloworld helloworld helloworld helloworld helloworld|1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0
-    AirBags|helloworld helloworld|1.0 1.0
-    PowerMoonroof|helloworld helloworld|1.0 1.0
-
-
-    Process finished with exit code 0
-
+//Output Clean Text File
+FordWagonZTW|128500
+Transmission|automatic manual|0 -815
+Brakes|standard abs abs-with-advance-trac|0 400 1625
+Colors|Fort-Knox-Gold-Clearcoat-Metallic Liquid-Grey-Clearcoat-Metallic Infra-Red-Clearcoat Grabber-Green-Clearcoat-Metallic Sangria-RedClearcoat-Metallic French-Blue-Clearcoat-Metallic Twilight-Blue-Clearcoat-Metallic CD-Silver-Clearcoat-Metallic Pitch-Black-Clearcoat Cloud-9-White-Clearcoat|0 0 0 0 0 0 0 0 0 0
+AirBags|present not-present|0 350
+PowerMoonroof|present not-present|0 595

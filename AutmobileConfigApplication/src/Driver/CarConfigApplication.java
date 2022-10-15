@@ -76,21 +76,7 @@ public class CarConfigApplication {
 
 
 	public void testAutomotive_CRUD() {
-		/**
-		 * Base reference model
-		 *
-		 * we will select configurations from this object to fit into out Focus Wagon ZTW
-		 * PSEUDO CODE
-		 * tokens[]
-		 * ____________
-		 * 0: name
-		 * 1: options[]
-		 * 2: prices[]
-		 * -> optionset{ option(name,price)... }
-		 *
-		 * ____________
-		 *
-		 */
+
 		String configurationFile = "CarConfigs.txt";
 		FileIO io = new FileIO(configurationFile);
 		String serializedFile = "Car.dat";

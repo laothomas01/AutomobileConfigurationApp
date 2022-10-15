@@ -69,7 +69,3 @@ public class BuildAuto extends proxyAutomobile implements CreateAuto, UpdateAuto
 
 	}
 }
-
-//how does a .txt file, an instance of fix1to100, and auto exception connect?
-
-// fileio.readData throws AutoException -> exceptionNo, exceptionMsg

@@ -4,8 +4,11 @@ import Model.Automobile;
 
 import java.io.*;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.TimeZone;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
 
 import Exception.AutoException;
 
@@ -115,7 +118,7 @@ public class FileIO {
 			}
 			//if file cannot be read, throw exception
 		} catch (AutoException ae) {
-			//@TODO: search for and correct the name of input file to open
+			//@TODO:search for and correct the name of input file to open
 		} catch (FileNotFoundException e) {
 			throw new RuntimeException(e);
 		} catch (IOException e) {
@@ -207,6 +210,7 @@ public class FileIO {
 	//break this code up into two separate functions: reading a text file and updating the automobile
 	public void readData(BufferedReader br, Automobile a) throws IOException, AutoException {
 		//looping through each option set index within the set of option sets
+		int errorNo = 0;
 		for (int i = 0; i < a.getOptionSetsSize(); i++) {
 			//0th index = name and price of car. not related to car configs
 			if (i == 0) {
@@ -227,43 +231,14 @@ public class FileIO {
 					 * set error number and message
 					 * print error
 					 */
-					e.setErrorNo(0);
-					e.setErrorMsg("Missing Automobile Price!");
+					//@TODO fix this hard coding of the text files
+					e.setErrorNo(errorNo);
+					e.setErrorMsg("MissingAutomobilePrice!");
 					e.printMyProblem();
-					writeToFile("listOfErrors.txt", e.getErrorNo() + "|" + e.getErrorMsg());
-					//@TODO fix this hard coding of the text file
+					String exception = e.getErrorNo() + "|" + e.getErrorMsg();
+					writeToFile("listOfErrors.txt", exception);
+					writeToLogFile(exception);
 				}
-//				System.out.println(getPrimitiveDataTypeForNumberString(""));
-//				System.out.println("0:" + carAttributes[0]);
-//				System.out.println("1:" + carAttributes[1]);
-//				System.out.println(carAttributes.length);
-//				try {
-//					if (carAttributes[0] != "FordWagonZTW") {
-//
-//					}
-//				} catch (AutoException e) {
-//
-//				}
-//
-//				float price = Float.parseFloat(carAttributes[1]);
-//				System.out.println(price);
-				//				FileWriter fw = new FileWriter(fileName);
-//				String[] carAttributes = new String[2];
-//				carAttributes = line.split("\\|");
-//				System.out.println(carAttributes[0]);
-//				System.out.println(carAttributes[1]);
-//				System.out.println(carAttributes.length);
-//				System.out.println(Float.parseFloat(carAttributes[0]));
-//				a.setName(carAttributes[0]);
-//				a.setBasePrice(Float.parseFloat(carAttributes[1]));
-
-
-//				//there will be an error here when trying to access index 0
-//
-//				a.setName(carAttributes[0]);
-//
-//				//there will be an error here when trying to access index 1
-//				a.setBasePrice(Float.parseFloat(carAttributes[1]));
 
 
 				/**
@@ -272,29 +247,7 @@ public class FileIO {
 				 * - check if text is missing car price
 				 */
 			}
-//			try {
-//				if (i == 0) {
-//					//read a line for the car specs
-//					String line = br.readLine();
-//					String[] carAttributes = line.split("\\|");
-//					if(carAttributes.length < 2)
-//					{
-//
-//					}
-//					a.setName(carAttributes[0]);
-//					a.setBasePrice(Float.parseFloat(carAttributes[1]));
-//					/**
-//					 * throw exception if carAttributes length < 2.
-//					 * - check if text is missing car name
-//					 * - check if text is missing car price
-//					 */
-//				}
-//			}
-//			catch (AutoException ae) {
-//
-//			} catch (IOException e) {
-//
-//			}
+
 			String line = br.readLine();
 			String[] carConfigs = line.split("\\|");
 			String name = carConfigs[0];
@@ -318,20 +271,64 @@ public class FileIO {
 		}
 	}
 
-	public void writeToFile(String fileName, String message) throws IOException {
-		File file = new File("listOfErrors.txt");
-		BufferedWriter bw = null;
-		if (file.length() == 0) {
-			bw = new BufferedWriter(new FileWriter(file, false));
-			// if empty file, do not append
-			bw.write(message);
-			bw.close();
-		} else {
-			bw = new BufferedWriter(new FileWriter(file, true));
-			bw.newLine();
-			bw.write(message);
-			bw.close();
+	public int[] readArrayOfErrors(String fileName) throws IOException {
+		BufferedReader br1 = new BufferedReader(new FileReader(fileName));
+		BufferedReader br2 = new BufferedReader(new FileReader(fileName));
+		int fileSize = getLineCount(br1);
+		int[] errorNums = new int[fileSize];
+		for (int i = 0; i < fileSize; i++) {
+			String line = br2.readLine();
+			String[] error = line.split("\\|");
+			errorNums[0] = Integer.parseInt(error[0]);
 		}
+		return errorNums;
+
+	}
+
+
+	/**
+	 * Lines of data are written by row
+	 *
+	 * @param fileName
+	 * @param newLines list of lines used to write over the current text file
+	 * @throws IOException
+	 */
+	public void writeToFile(String fileName, ArrayList<String> newLines) throws IOException {
+		/**
+		 * this does not handle repeated strings being written to file
+		 */
+		//erases the entire text file
+		BufferedWriter bw = new BufferedWriter(new FileWriter(fileName));
+		//append first line of text
+		bw.append(newLines.get(0));
+		bw.newLine();
+		for (int i = 1; i < newLines.size(); i++) {
+			bw.append(newLines.get(i));
+			bw.newLine();
+		}
+		bw.close();
+	}
+
+	/**
+	 * @param fileName
+	 * @param line
+	 * @throws IOException
+	 */
+	public void writeToFile(String fileName, String line) throws IOException {
+		/**
+		 * this does not handle repeated strings being written to file
+		 */
+		File file = new File(fileName);
+		BufferedWriter bw = null;
+		if (file.length() > 0) {
+			bw = new BufferedWriter(new FileWriter(file, true));
+			bw.append(line);
+
+		} else {
+			bw = new BufferedWriter(new FileWriter(file));
+			bw.append(line);
+		}
+		bw.close();
 	}
 
 	public void serializeAutomotive(String fileName, Automobile a) {
@@ -347,6 +344,14 @@ public class FileIO {
 		}
 	}
 
+
+	public static void writeToLogFile(String message) throws IOException {
+		boolean append = true;
+		FileHandler handler = new FileHandler("exception.log", append);
+		Logger logger = Logger.getLogger(message);
+		logger.addHandler(handler);
+		logger.warning("warning message");
+	}
 
 	//File Writer function
 

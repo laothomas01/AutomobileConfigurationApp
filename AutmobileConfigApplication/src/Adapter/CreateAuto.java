@@ -1,5 +1,8 @@
 package Adapter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 /**
  * Creates and Reads automotive methods.
  *
@@ -8,7 +11,7 @@ package Adapter;
  * Why this???
  */
 public interface CreateAuto {
-	void buildAuto(String fileName);
+	void buildAuto(String fileName) throws IOException;
 
 	void printAuto(String modelName);
 }

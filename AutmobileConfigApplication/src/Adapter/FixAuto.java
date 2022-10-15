@@ -1,6 +1,9 @@
 package Adapter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 public interface FixAuto {
-	void fix(int errNo);
+	boolean fix(int errNo) throws IOException;
 
 }

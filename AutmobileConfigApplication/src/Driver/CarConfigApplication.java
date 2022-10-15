@@ -6,31 +6,25 @@ import Utils.FileIO;
 
 import java.io.*;
 import java.util.Scanner;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
 
 import Exception.AutoException;
+import Utils.MiscUtil;
+import Exception.Fix1to100;
 
-/**
- * @TODO LIST
- * [] update functions for option set, option and in automotive
- * [X] deserialization
- * [X] serialization
- * [] clean up class diagram
- * [X] create test cases
- * [X] write car data to file
- * [] clean code up
- * [] turn homework in
- * [] provide extensibility for your methods
- */
+
 public class CarConfigApplication {
 
 	public static void main(String args[]) throws IOException, AutoException {
 		//.txt file to read from using FileIO instance
 		String configurationFile = "CarConfigs.txt";
 		//instantiate BuildAuto
-		boolean problemFixed = false;
 		BuildAuto auto = new BuildAuto();
+		//1 problem is only fixed
 		auto.buildAuto(configurationFile);
 	}
+
 
 //	public static void checkAndWriteToFile(String filename) throws IOException {
 //		BufferedReader br = new BufferedReader(new FileReader(filename));

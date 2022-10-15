@@ -3,10 +3,7 @@ package Utils;
 import Model.Automobile;
 
 import java.io.*;
-import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.TimeZone;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 
@@ -261,7 +258,7 @@ public class FileIO {
 			 - after initializing an option set, let's access the option set's options and populate those options with option data
 			 */
 			//replace the empty option set with a new populated option set instance
-			a.updateOptionSet(i, a.createOptionSetInstance(name, optionsCount));
+			a.updateOptionSetInstance(i, a.createOptionSetInstance(name, optionsCount));
 			for (int j = 0; j < optionNames.length; j++) {
 				//parse the prices because they are read as strings
 				a.updateOptionClassInstance(i, j, optionNames[j], Float.parseFloat(optionPrices[j]));

@@ -49,7 +49,7 @@ public class Automobile implements Serializable {
 		return name;
 	}
 
-	public void setName(String name)  {
+	public void setName(String name) {
 		this.name = name;
 	}
 
@@ -66,14 +66,9 @@ public class Automobile implements Serializable {
 		return optionSets;
 	}
 
-	//-------------------- OPTION SET CLASS C.R.U.D ---------------
+	//-------------------- OPTION SET CLASS INSTANCE C.R.U.D ---------------
 
-
-	//creates an instance of an OptionSet class instances
-
-	//CREATE
-
-	//CREATE OPTION SET INSTANCE -> CREATES OPTION INSTANCE
+	//create option set instance
 	public OptionSet createOptionSetInstance(String name, int size) {
 		return new OptionSet(name, size);
 	}
@@ -90,11 +85,7 @@ public class Automobile implements Serializable {
 		return new OptionSet();
 	}
 
-	//---------------------------------------------------------------------------
-
-	//retrieve Option Set class instance from the array of Option Sets instances
-
-	//READ
+	//retrieve an option set by index
 	public OptionSet getOptionSetClassInstance(int i) {
 		if (i < 0 || i >= getOptionSetsSize() || getOptionSets()[i] == null) {
 			return new OptionSet();
@@ -102,9 +93,10 @@ public class Automobile implements Serializable {
 		return getOptionSets()[i];
 	}
 
-	public OptionSet getOptionSetClassInstance(String n) {
+	//retrieve an option set by string
+	public OptionSet getOptionSetClassInstance(String optionSetName) {
 		for (int i = 0; i < getOptionSetsSize(); i++) {
-			if (getOptionSetClassInstance(i).getName().equals(n)) {
+			if (getOptionSetClassInstance(i).getName().equals(optionSetName)) {
 				return getOptionSetClassInstance(i);
 			}
 		}
@@ -112,21 +104,33 @@ public class Automobile implements Serializable {
 		return new OptionSet();
 	}
 
-	//using Option Set class instance to retrieve an option get name based on a specified index
+	//-------------------------------------------------------------------------
 
-	//READ
 	public String getOptionSetName(int i) {
 		return getOptionSetClassInstance(i).getName();
 	}
 
+	public String getOptionSetName(String optionSetName) {
+		return getOptionSetClassInstance(optionSetName).getName();
+	}
 
-	//UPDATE
-	public void updateOptionSet(int i, OptionSet os) {
+
+	public void updateOptionSetInstance(int i, OptionSet os) {
 		if (i < 0 || i >= getOptionSetsSize()) {
+			//throw custom exception
 			System.out.println("CANNOT FIND OPTION SET INSTANCE!");
 		}
-
 		getOptionSets()[i] = os;
+	}
+
+	public void updateOptionSetInstance(String optionSetName, OptionSet os) {
+		for (int i = 0; i < getOptionSetsSize(); i++) {
+			if (getOptionSetClassInstance(i).getName().equals(optionSetName)) {
+				updateOptionSetInstance(i, os);
+			}
+		}
+		//throw custom exception
+		System.out.println("CANNOT FIND OPTION SET INSTANCE!");
 	}
 
 	/**
@@ -139,25 +143,15 @@ public class Automobile implements Serializable {
 	 * @param optionName     set name of option
 	 * @param optionPrice    set price of option
 	 */
-	public void updateOptionSet(int optionSetIndex, int optionSetSize, String optionSetName, int optionIndex, String optionName, float optionPrice) {
+	public void updateOptionSetInstance(int optionSetIndex, int optionSetSize, String optionSetName, int optionIndex, String optionName, float optionPrice) {
 
 
-		updateOptionSet(optionSetIndex, createOptionSetInstance(optionSetName, optionSetSize));
+		updateOptionSetInstance(optionSetIndex, createOptionSetInstance(optionSetName, optionSetSize));
 
 
 		updateOptionClassInstance(optionSetIndex, optionIndex, optionName, optionPrice);
 	}
 
-
-	//replace current option set with new instance
-	public void updateOptionSet(String n, OptionSet os) {
-		for (int i = 0; i < getOptionSetsSize(); i++) {
-			if (getOptionSetClassInstance(i).getName().equals(n)) {
-				updateOptionSet(i, os);
-			}
-		}
-		System.out.println("CANNOT FIND OPTION SET INSTANCE!");
-	}
 
 	//UPDATE
 	//using Option Set class instance to retrieve an option set name
@@ -188,7 +182,7 @@ public class Automobile implements Serializable {
 	 * @param i option set instance index
 	 */
 	public void deleteOptionSetInstance(int i) {
-		updateOptionSet(i, createOptionSetInstance());
+		updateOptionSetInstance(i, createOptionSetInstance());
 		System.out.println("OPTION SET HAS BEEN DELETED!");
 	}
 

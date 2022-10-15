@@ -5,13 +5,8 @@ import Model.Automobile;
 import Utils.FileIO;
 
 import java.io.*;
-import java.util.Scanner;
-import java.util.logging.FileHandler;
-import java.util.logging.Logger;
 
 import Exception.AutoException;
-import Utils.MiscUtil;
-import Exception.Fix1to100;
 
 
 public class CarConfigApplication {
@@ -25,28 +20,7 @@ public class CarConfigApplication {
 		auto.buildAuto(configurationFile);
 	}
 	
-//	public static void checkAndWriteToFile(String filename) throws IOException {
-//		BufferedReader br = new BufferedReader(new FileReader(filename));
-//
-//		//let's get the length of the file first!
-//
-//
-//		boolean eof = false;
-//		String line = "";
-//		Scanner scan = new Scanner(System.in);
-//		while (!eof) {
-//			System.out.println("Enter something!");
-//			System.out.println(scan.nextLine());
-//			if (br.readLine() == null) {
-//				System.out.println("DONE!");
-//				eof = true;
-//			} else {
-//				System.out.println(br.readLine());
-//			}
-//
-//
-//		}
-//	}
+
 
 	////        //file reading error checking
 ////        do {
@@ -111,7 +85,7 @@ public class CarConfigApplication {
 		System.out.println(car);
 		System.out.println();
 		System.out.println("PERFORMING OPTION SET UPDATE!");
-		car.updateOptionSet(0, car.createOptionSetInstance("Transmission", 2));
+		car.updateOptionSetInstance(0, car.createOptionSetInstance("Transmission", 2));
 		System.out.println(car);
 		System.out.println();
 		System.out.println("UPDATING OPTION SET OPTIONS!");
@@ -119,7 +93,7 @@ public class CarConfigApplication {
 		car.updateOptionClassInstance(0, 1, "manual", -715.0f);
 		System.out.println(car);
 		car.deleteOptionSetInstance(0);
-		car.updateOptionSet(0, car.createOptionSetInstance("Transmission", 2));
+		car.updateOptionSetInstance(0, car.createOptionSetInstance("Transmission", 2));
 		System.out.println(car);
 		System.out.println("UPDATING OPTION SET OPTIONS!");
 		car.updateOptionClassInstance(0, 0, "automatic", 0.0f);

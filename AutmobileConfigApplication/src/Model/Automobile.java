@@ -19,7 +19,7 @@ public class Automobile implements Serializable {
 		setName(n);
 		setBasePrice(p);
 		for (int i = 0; i < optionSets.length; i++) {
-			optionSets[i] = new OptionSet();
+			optionSets[i] = new OptionSet("EMPTY:" + i);
 		}
 	}
 
@@ -271,10 +271,10 @@ public class Automobile implements Serializable {
 	}
 	//access an option set class instance and option class instance by index to gain access to CRUD operations for Option class
 
-	public void updateOptionClassInstance(int i, int j, String n, float p) {
+	public void updateOptionClassInstance(int i, int j, String optionName, float optionPrice) {
 		//access the index of an option class instance for both i and j for setting price and name
-		updateOptionPrice(i, j, p);
-		updateOptionName(i, j, n);
+		updateOptionPrice(i, j, optionPrice);
+		updateOptionName(i, j, optionName);
 	}
 
 
@@ -319,10 +319,6 @@ public class Automobile implements Serializable {
 	 */
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
-		sb.append(getName() + "|" + getBasePrice());
-		for (int i = 0; i < getOptionSetsSize(); i++) {
-			sb.append("\n" + getOptionSetClassInstance(i));
-		}
 		return sb.toString();
 	}
 

@@ -19,7 +19,6 @@ public class CarConfigApplication {
 		//1 problem is only fixed
 		auto.buildAuto(configurationFile);
 	}
-	
 
 
 	////        //file reading error checking
@@ -48,7 +47,7 @@ public class CarConfigApplication {
 //}
 
 
-	public void testAutomotive_CRUD() {
+	public void testAutomotive_CRUD() throws IOException {
 
 		String configurationFile = "CarConfigs.txt";
 		FileIO io = new FileIO(configurationFile);

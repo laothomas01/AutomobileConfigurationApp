@@ -99,6 +99,7 @@ class OptionSet implements Serializable {
 
 	//retrieve Option class instance by index
 	protected Option getOption(int i) {
+
 		if (getOptions()[i] == null || i < 0 || i >= getOptionsSize()) {
 			return new Option();
 		}

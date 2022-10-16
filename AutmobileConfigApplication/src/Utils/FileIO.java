@@ -58,44 +58,96 @@ public class FileIO {
 		return flag;
 	}
 
-	//if file can be opened, proceed with data population
-	public Automobile loadAutomotive() {
+	//if file can be opened, proceed with attempt to populate automobile instance with read text data
+	public Automobile loadAutomotive() throws IOException {
 		//intialize as empty automobile
 		Automobile a1 = new Automobile();
 		int optionSetsSize;
-		try {
-			//if configuration file can be read
-			if (openFile()) {
-				BufferedReader br1 = new BufferedReader(new FileReader(fileName));
-				optionSetsSize = getLineCount(br1) - 1;
-				//populate with number of option sets
-				a1 = new Automobile(optionSetsSize);
-				br1.close();
-				BufferedReader br2 = new BufferedReader(new FileReader(fileName));
-				readData(br2, a1);
-				br2.close();
-			}
-			//if file cannot be read, throw exception
-		} catch (AutoException ae) {
-			//@TODO:search for and correct the name of input file to open
-		} catch (FileNotFoundException e) {
-			throw new RuntimeException(e);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-//        try {
+//		try {
+//			//if configuration file can be read
+//			if (openFile()) {
+		BufferedReader br1 = new BufferedReader(new FileReader(fileName));
+		optionSetsSize = getLineCount(br1) - 1;
+//				//populate with number of option sets
+		a1 = new Automobile(optionSetsSize);
+		br1.close();
+		BufferedReader br2 = new BufferedReader(new FileReader(fileName));
+////				readData(br2, a1);
+//				br2.close();
+//			}
+//			//if file cannot be read, throw exception
+//		} catch (AutoException ae) {
+//			//@TODO:search for and correct the name of input file to open
+//		} catch (FileNotFoundException e) {
+//			throw new RuntimeException(e);
+//		} catch (IOException e) {
+//			throw new RuntimeException(e);
+//		}
+		/**
+		 * ADDING NEW CHANGES TO THIS SECTION
+		 */
+
+//		String line = br2.readLine();
+//		line = br2.readLine();
+
+		/**
+		 * ADDING NEW CHANGES TO THIS SECTION
+		 */
 //
-////            BufferedReader br1 = new BufferedReader(new FileReader(filename));
-////            //if file exists, print it exists and continue with the program
-////            optionSetsSize = getLineCount(br1) - 1;
-////            a1 = new Automobile(optionSetsSize);
-////            br1.close();
-////            BufferedReader br2 = new BufferedReader(new FileReader(filename));
-////            readData(br2, a1);
-////            br2.close();
-//        } catch (IOException e) {
-////            System.out.println("Error -- " + e.toString());
-//        }
+//		//begin reading carconfigs.txt file lines
+//		BufferedReader br3 = new BufferedReader(new FileReader(fileName));
+//
+		for (int optionSetCount = 0; optionSetCount < a1.getOptionSetsSize(); optionSetCount++) {
+			String line = "";
+
+//			//check first row of text
+//			String line = "";
+			if (optionSetCount == 0) {
+				line = br2.readLine();
+				System.out.println("AUTOMOBILE: " + line);
+//				line = br3.readLine();
+////				System.out.println("BASIC ATTRIBUTES:" + line);
+//				String[] carAttributes = line.split("\\|");
+//				String name = carAttributes[0];
+//				float price = Float.parseFloat(carAttributes[1]);
+//				a1.setName(name);
+//				a1.setBasePrice(price);
+			} else {
+				line = br2.readLine();
+				System.out.println("OPTION SET:" + line);
+			}
+//			else {
+//				line = br3.readLine();
+////				System.out.println("OPTION SETS:" + line);
+//				String[] optionSet = line.split("\\|");
+//				String optionSetName = optionSet[0];
+//				String[] optionNames = optionSet[1].split(" ");
+//				int numOfOptions = optionNames.length;
+////				System.out.println("NUM OPTIONS:" + numOfOptions);
+//				System.out.println("----------------------------");
+//				for (String n : optionNames) {
+//					System.out.println(n);
+//				}
+//				String[] prices = optionSet[2].split(" ");
+//				for (String p : prices) {
+//					System.out.println(p);
+//				}
+//				System.out.println("----------------------------");
+//				a1.createOptionSetInstance(optionSetName, numOfOptions);
+////				a1.updateOptionClassInstance(optionSetCount,0,"",2.0f);
+//				//# option names = # option prices
+//				for (int optionCount = 0; optionCount < optionNames.length; optionCount++) {
+//////				System.out.println(optionSetCount + ":" + optionCount + ":" + options[optionCount] + ":" + prices[optionCount]);
+////					a1.updateOptionClassInstance(optionSetCount, optionCount, "abc123", 1);
+//					System.out.println("OPTION:" + optionNames[optionCount] + ":" + prices[optionCount]);
+//
+//				}
+//			}
+		}
+		br2.close();
+//
+//		br3.close();
+
 		return a1;
 	}
 
@@ -140,96 +192,142 @@ public class FileIO {
 	}
 
 
-	/**
-	 * case of Exception: automobile name is missing or automobile price is missing
-	 * <p>
-	 * Check the length of the parsed array:
-	 * if length 0:
-	 * |
-	 * if length == 1:
-	 * <p>
-	 * //lets focus on this one first
-	 * if length == 2:
-	 * txt file format:
-	 * ''|abc123
-	 * car[0] == '' <- not a car name
-	 * car[1] == abc123 <- cannot parse into float
-	 *
-	 * @param br
-	 * @param a
-	 * @throws IOException
-	 * @throws AutoException
-	 */
 	//when file can be opened and read, check for text file errors such as missing data
 
 	//@TODO make this code more modular for basic file reading
 
 	//break this code up into two separate functions: reading a text file and updating the automobile
-	public void readData(BufferedReader br, Automobile a) throws IOException, AutoException {
+//	public void readData(BufferedReader br, Automobile a) throws IOException, AutoException {
+//
+//		int errorNo = 0;
+//		//looping through each option set index within the set of option sets
+//
+//		for (int i = 0; i < a.getOptionSetsSize(); i++) {
+//			//0th index = name and price of car. not related to car configs
+//			if (i == 0) {
+//				//read a line for the car specs
+//				String line = br.readLine();
+//				String[] carAttributes = line.split("\\|");
+//				try {
+//					/**
+//					 * let's handle more exceptions later
+//					 */
+//					//case of missing or number format exception of car price
+//					if (MiscUtil.getPrimitiveDataTypeForNumberString(carAttributes[1]) == "Unknown") {
+//						throw new AutoException();
+//					}
+//
+//				} catch (AutoException e) {
+//					/**
+//					 * set error number and message
+//					 * print error
+//					 */
+//					//@TODO fix this hard coding of the text files
+//					e.setErrorNo(errorNo);
+//					e.setErrorMsg("MissingAutomobilePrice!");
+//					e.printMyProblem();
+//					String exception = e.getErrorNo() + "|" + e.getErrorMsg();
+//					writeToFile("listOfErrors.txt", exception);
+//					writeToLogFile(exception);
+//				}
+//
+//
+//				/**
+//				 * throw exception if carAttributes length < 2.
+//				 * - check if text is missing car name
+//				 * - check if text is missing car price
+//				 */+
+//			}
+//
+//			String line = br.readLine();
+//			String[] carConfigs = line.split("\\|");
+//			String name = carConfigs[0];
+//			String[] optionNames = carConfigs[1].split(" ");
+//			String[] optionPrices = carConfigs[2].split(" ");
+//			int optionsCount = optionNames.length;
+//			/**
+//			 - option name[ ] length = option price [ ] length
+//			 - 1 to 1 relationship: option name -> option price
+//			 - option set size = # of option names = # of option prices
+//			 - after initializing an option set, let's access the option set's options and populate those options with option data
+//			 */
+//			//replace the empty option set with a new populated option set instance
+//			a.updateOptionSetInstance(i, a.createOptionSetInstance(name, optionsCount));
+//			for (int j = 0; j < optionNames.length; j++) {
+//				//parse the prices because they are read as strings
+//				a.updateOptionClassInstance(i, j, optionNames[j], Float.parseFloat(optionPrices[j]));
+//			}
+//
+//
+//		}
+//	}
+//	public readData(BufferedReader br) throws IOException {
+//		String line = br.readLine();
+//		String[] carAttributes = line.split("\\|");
 
-		int errorNo = 0;
-		//looping through each option set index within the set of option sets
-
-		for (int i = 0; i < a.getOptionSetsSize(); i++) {
-			//0th index = name and price of car. not related to car configs
-			if (i == 0) {
-				//read a line for the car specs
-				String line = br.readLine();
-				String[] carAttributes = line.split("\\|");
-				try {
-					/**
-					 * let's handle more exceptions later
-					 */
-					//case of missing or number format exception of car price
-					if (MiscUtil.getPrimitiveDataTypeForNumberString(carAttributes[1]) == "Unknown") {
-						throw new AutoException();
-					}
-
-				} catch (AutoException e) {
-					/**
-					 * set error number and message
-					 * print error
-					 */
-					//@TODO fix this hard coding of the text files
-					e.setErrorNo(errorNo);
-					e.setErrorMsg("MissingAutomobilePrice!");
-					e.printMyProblem();
-					String exception = e.getErrorNo() + "|" + e.getErrorMsg();
-					writeToFile("listOfErrors.txt", exception);
-					writeToLogFile(exception);
-				}
-
-
-				/**
-				 * throw exception if carAttributes length < 2.
-				 * - check if text is missing car name
-				 * - check if text is missing car price
-				 */
-			}
-
-			String line = br.readLine();
-			String[] carConfigs = line.split("\\|");
-			String name = carConfigs[0];
-			String[] optionNames = carConfigs[1].split(" ");
-			String[] optionPrices = carConfigs[2].split(" ");
-			int optionsCount = optionNames.length;
-			/**
-			 - option name[ ] length = option price [ ] length
-			 - 1 to 1 relationship: option name -> option price
-			 - option set size = # of option names = # of option prices
-			 - after initializing an option set, let's access the option set's options and populate those options with option data
-			 */
-			//replace the empty option set with a new populated option set instance
-			a.updateOptionSetInstance(i, a.createOptionSetInstance(name, optionsCount));
-			for (int j = 0; j < optionNames.length; j++) {
-				//parse the prices because they are read as strings
-				a.updateOptionClassInstance(i, j, optionNames[j], Float.parseFloat(optionPrices[j]));
-			}
-
-
-		}
-	}
-
+	//		int errorNo = 0;
+//		//looping through each option set index within the set of option sets
+//
+	//number of lines to read from .txt file
+//		for (int i = 0; i < a.getOptionSetsSize(); i++) {
+//			//0th index = name and price of car. not related to car configs
+//			if (i == 0) {
+//				//read a line for the car specs
+//				String line = br.readLine();
+//				String[] carAttributes = line.split("\\|");
+//				try {
+//					/**
+//					 * let's handle more exceptions later
+//					 */
+//					//case of missing or number format exception of car price
+//					if (MiscUtil.getPrimitiveDataTypeForNumberString(carAttributes[1]) == "Unknown") {
+//						throw new AutoException();
+//					}
+//
+//				} catch (AutoException e) {
+//					/**
+//					 * set error number and message
+//					 * print error
+//					 */
+//					//@TODO fix this hard coding of the text files
+//					e.setErrorNo(errorNo);
+//					e.setErrorMsg("MissingAutomobilePrice!");
+//					e.printMyProblem();
+//					String exception = e.getErrorNo() + "|" + e.getErrorMsg();
+//					writeToFile("listOfErrors.txt", exception);
+//					writeToLogFile(exception);
+//				}
+//
+//
+//				/**
+//				 * throw exception if carAttributes length < 2.
+//				 * - check if text is missing car name
+//				 * - check if text is missing car price
+//				 */
+//			}
+//
+//			String line = br.readLine();
+//			String[] carConfigs = line.split("\\|");
+//			String name = carConfigs[0];
+//			String[] optionNames = carConfigs[1].split(" ");
+//			String[] optionPrices = carConfigs[2].split(" ");
+//			int optionsCount = optionNames.length;
+//			/**
+//			 - option name[ ] length = option price [ ] length
+//			 - 1 to 1 relationship: option name -> option price
+//			 - option set size = # of option names = # of option prices
+//			 - after initializing an option set, let's access the option set's options and populate those options with option data
+//			 */
+//			//replace the empty option set with a new populated option set instance
+//			a.updateOptionSetInstance(i, a.createOptionSetInstance(name, optionsCount));
+//			for (int j = 0; j < optionNames.length; j++) {
+//				//parse the prices because they are read as strings
+//				a.updateOptionClassInstance(i, j, optionNames[j], Float.parseFloat(optionPrices[j]));
+//			}
+//
+//
+//		}
+//	}
 	public int[] readArrayOfErrors(String fileName) throws IOException {
 		BufferedReader br1 = new BufferedReader(new FileReader(fileName));
 		BufferedReader br2 = new BufferedReader(new FileReader(fileName));

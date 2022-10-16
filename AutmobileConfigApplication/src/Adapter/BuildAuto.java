@@ -18,16 +18,16 @@ public class BuildAuto extends ProxyAutomobile implements CreateAuto, UpdateAuto
 		a1 = io.loadAutomotive();
 
 
-		int[] errNums = io.readArrayOfErrors("listOfErrors.txt");
-
-		//@TODO: convert a while-loop
-		if (!problemFixed) {
-			for (int n : errNums) {
-				fix(n);
-			}
-			//update problemFixed when no more problems are left
-			problemFixed = fix(-1);
-		}
+//		int[] errNums = io.readArrayOfErrors("listOfErrors.txt");
+//
+//		//@TODO: convert a while-loop
+//		if (!problemFixed) {
+//			for (int n : errNums) {
+//				fix(n);
+//			}
+//			//update problemFixed when no more problems are left
+//			problemFixed = fix(-1);
+//		}
 		System.out.println(a1);
 	}
 

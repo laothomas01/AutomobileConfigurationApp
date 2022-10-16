@@ -107,14 +107,23 @@ public class FileIO {
 				System.out.println("AUTOMOBILE: " + line);
 //				line = br3.readLine();
 ////				System.out.println("BASIC ATTRIBUTES:" + line);
-//				String[] carAttributes = line.split("\\|");
-//				String name = carAttributes[0];
-//				float price = Float.parseFloat(carAttributes[1]);
-//				a1.setName(name);
-//				a1.setBasePrice(price);
+				String[] carAttributes = line.split("\\|");
+				String name = carAttributes[0];
+				float price = Float.parseFloat(carAttributes[1]);
+				a1.setName(name);
+				a1.setBasePrice(price);
 			} else {
 				line = br2.readLine();
 				System.out.println("OPTION SET:" + line);
+				String[] optSet = line.split("\\|");
+				String optSetName = optSet[0];
+				String[] optNames = optSet[1].split("\\|");
+				String[] optPrices = optSet[2].split("\\|");
+				for (String n : optNames) {
+					for (String p : optPrices) {
+
+					}
+				}
 			}
 //			else {
 //				line = br3.readLine();

@@ -319,6 +319,7 @@ public class Automobile implements Serializable {
 	 */
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
+		sb.append(this.getName() + "|" + this.getBasePrice());
 		return sb.toString();
 	}
 

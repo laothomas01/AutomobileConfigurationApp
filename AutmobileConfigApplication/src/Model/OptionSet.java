@@ -13,25 +13,25 @@ class OptionSet implements Serializable {
 	 * @param n    = name
 	 * @param size = length of Option array
 	 */
-	protected OptionSet(String n, int size) {
-		setName(n);
+	protected OptionSet(String name, int size) {
+		setName(name);
 		options = new Option[size];
 		//initialize array of options with new instances of empty options
 		for (int i = 0; i < size; i++) {
-			options[i] = new Option("BLANK", 0);
+			options[i] = new Option("BLANK OPTIONSET", 0);
 		}
 	}
 
-	protected OptionSet(String n) {
-		this(n, 0);
+	protected OptionSet(String name) {
+		this(name, 0);
 	}
 
-	protected OptionSet(int n) {
-		this("", n);
+	protected OptionSet(int size) {
+		this("BLANK OPTION", size);
 	}
 
 	protected OptionSet() {
-		this("BLANK OPTION SET", 0);
+		this("BLANK OPTION", 0);
 	}
 
 	//---------------------- OPTION SET INSTANCE CRUD OPERATIONS ----------------

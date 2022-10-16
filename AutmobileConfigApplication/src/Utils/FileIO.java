@@ -58,44 +58,6 @@ public class FileIO {
 		return flag;
 	}
 
-
-//    public boolean openFile() throws AutoException {
-//        BufferedReader br = null;
-//        boolean flag = false;
-//        try {
-//            br = new BufferedReader(new FileReader(fileName));
-//            flag = true;
-//        } catch (FileNotFoundException e) {
-//            throw new AutoException();
-//        } finally {
-//
-//        }
-//        return flag;
-//
-//
-//    }
-
-	//    public Automobile loadAutomotive(String filename) {
-//        Automobile a1 = new Automobile();
-//        int optionSetsSize;
-//        try {
-//
-//            BufferedReader br1 = new BufferedReader(new FileReader(filename));
-//            //if file exists, print it exists and continue with the program
-//
-//
-//            optionSetsSize = getLineCount(br1) - 1;
-//            a1 = new Automobile(optionSetsSize);
-//            br1.close();
-//            BufferedReader br2 = new BufferedReader(new FileReader(filename));
-//            readData(br2, a1);
-//            br2.close();
-//        } catch (IOException e) {
-//            System.out.println("Error -- " + e.toString());
-//        }
-//        return a1;
-//    }
-
 	//if file can be opened, proceed with data population
 	public Automobile loadAutomotive() {
 		//intialize as empty automobile
@@ -125,8 +87,6 @@ public class FileIO {
 //
 ////            BufferedReader br1 = new BufferedReader(new FileReader(filename));
 ////            //if file exists, print it exists and continue with the program
-////
-////
 ////            optionSetsSize = getLineCount(br1) - 1;
 ////            a1 = new Automobile(optionSetsSize);
 ////            br1.close();
@@ -206,8 +166,10 @@ public class FileIO {
 
 	//break this code up into two separate functions: reading a text file and updating the automobile
 	public void readData(BufferedReader br, Automobile a) throws IOException, AutoException {
-		//looping through each option set index within the set of option sets
+
 		int errorNo = 0;
+		//looping through each option set index within the set of option sets
+
 		for (int i = 0; i < a.getOptionSetsSize(); i++) {
 			//0th index = name and price of car. not related to car configs
 			if (i == 0) {
@@ -349,8 +311,6 @@ public class FileIO {
 		logger.addHandler(handler);
 		logger.warning("warning message");
 	}
-
-
 
 
 }

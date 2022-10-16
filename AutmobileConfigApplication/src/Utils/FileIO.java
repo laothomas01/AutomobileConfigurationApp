@@ -67,9 +67,11 @@ public class FileIO {
 //			//if configuration file can be read
 //			if (openFile()) {
 		BufferedReader br1 = new BufferedReader(new FileReader(fileName));
+		//we do not count the first line as part of option sets size
 		optionSetsSize = getLineCount(br1) - 1;
-//				//populate with number of option sets
+
 		a1 = new Automobile(optionSetsSize);
+
 		br1.close();
 		BufferedReader br2 = new BufferedReader(new FileReader(fileName));
 ////				readData(br2, a1);
@@ -83,48 +85,43 @@ public class FileIO {
 //		} catch (IOException e) {
 //			throw new RuntimeException(e);
 //		}
-		/**
-		 * ADDING NEW CHANGES TO THIS SECTION
-		 */
 
-//		String line = br2.readLine();
-//		line = br2.readLine();
+		//read first line for car name and price
+		String line = br2.readLine();
+		a1.updateOptionSetInstance(0,a1.createOptionSetInstance("Hello World",5));
+//		for (int optSetCount = 0; optSetCount < 1; optSetCount++) {
+//			//read next lines for car option sets
+//			line = br2.readLine();
+//			System.out.println(optSetCount + ":" + line);
 
-		/**
-		 * ADDING NEW CHANGES TO THIS SECTION
-		 */
-//
-//		//begin reading carconfigs.txt file lines
-//		BufferedReader br3 = new BufferedReader(new FileReader(fileName));
-//
-		for (int optionSetCount = 0; optionSetCount < a1.getOptionSetsSize(); optionSetCount++) {
-			String line = "";
-
-//			//check first row of text
 //			String line = "";
-			if (optionSetCount == 0) {
-				line = br2.readLine();
-				System.out.println("AUTOMOBILE: " + line);
-//				line = br3.readLine();
-////				System.out.println("BASIC ATTRIBUTES:" + line);
-				String[] carAttributes = line.split("\\|");
-				String name = carAttributes[0];
-				float price = Float.parseFloat(carAttributes[1]);
-				a1.setName(name);
-				a1.setBasePrice(price);
-			} else {
-				line = br2.readLine();
-				System.out.println("OPTION SET:" + line);
-				String[] optSet = line.split("\\|");
-				String optSetName = optSet[0];
-				String[] optNames = optSet[1].split("\\|");
-				String[] optPrices = optSet[2].split("\\|");
-				for (String n : optNames) {
-					for (String p : optPrices) {
+//
+////			//check first row of text
+////			String line = "";
+//			if (optSetCount == 0) {
+//				line = br2.readLine();
+//				System.out.println("AUTOMOBILE: " + line);
+////				line = br3.readLine();
+//////				System.out.println("BASIC ATTRIBUTES:" + line);
+//				String[] carAttributes = line.split("\\|");
+//				String name = carAttributes[0];
+//				float price = Float.parseFloat(carAttributes[1]);
+//				a1.setName(name);
+//				a1.setBasePrice(price);
+//			} else {
+//				line = br2.readLine();
+//				System.out.println("OPTION SET:" + line);
 
-					}
-				}
-			}
+
+//			String[] optSet = line.split("\\|");
+//			String optSetName = optSet[0];
+//			String[] optNames = optSet[1].split(" ");
+//			String[] optPrices = optSet[2].split(" ");
+
+//			for (int optCnt = 0; optCnt < optNames.length; optCnt++) {
+//				a1.updateOptionClassInstance(optSetCount, optCnt, optNames[optCnt], Float.parseFloat(optPrices[optCnt]));
+//			}
+//			}
 //			else {
 //				line = br3.readLine();
 ////				System.out.println("OPTION SETS:" + line);
@@ -150,9 +147,9 @@ public class FileIO {
 ////					a1.updateOptionClassInstance(optionSetCount, optionCount, "abc123", 1);
 //					System.out.println("OPTION:" + optionNames[optionCount] + ":" + prices[optionCount]);
 //
-//				}
-//			}
-		}
+//	}
+//}
+//		}
 		br2.close();
 //
 //		br3.close();
@@ -201,11 +198,11 @@ public class FileIO {
 	}
 
 
-	//when file can be opened and read, check for text file errors such as missing data
+//when file can be opened and read, check for text file errors such as missing data
 
-	//@TODO make this code more modular for basic file reading
+//@TODO make this code more modular for basic file reading
 
-	//break this code up into two separate functions: reading a text file and updating the automobile
+//break this code up into two separate functions: reading a text file and updating the automobile
 //	public void readData(BufferedReader br, Automobile a) throws IOException, AutoException {
 //
 //		int errorNo = 0;
@@ -277,7 +274,7 @@ public class FileIO {
 	//		int errorNo = 0;
 //		//looping through each option set index within the set of option sets
 //
-	//number of lines to read from .txt file
+//number of lines to read from .txt file
 //		for (int i = 0; i < a.getOptionSetsSize(); i++) {
 //			//0th index = name and price of car. not related to car configs
 //			if (i == 0) {

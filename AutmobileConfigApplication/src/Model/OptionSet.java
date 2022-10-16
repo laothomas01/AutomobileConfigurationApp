@@ -18,7 +18,7 @@ class OptionSet implements Serializable {
 		options = new Option[size];
 		//initialize array of options with new instances of empty options
 		for (int i = 0; i < size; i++) {
-			options[i] = new Option();
+			options[i] = new Option("BLANK", 0);
 		}
 	}
 
@@ -31,7 +31,7 @@ class OptionSet implements Serializable {
 	}
 
 	protected OptionSet() {
-		this("", 0);
+		this("BLANK OPTION SET", 0);
 	}
 
 	//---------------------- OPTION SET INSTANCE CRUD OPERATIONS ----------------
@@ -65,23 +65,25 @@ class OptionSet implements Serializable {
 	//we print out our option set data in the same format to CarConfigs.txt
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
-		sb.append(getName() + "|");
-
-		for (int i = 0; i < getOptionsSize(); i++) {
-			if (i == getOptionsSize() - 1) {
-				sb.append(getOption(i).getName() + "");
-			} else {
-				sb.append(getOption(i).getName() + " ");
-			}
-		}
-		sb.append("|");
-		for (int i = 0; i < getOptionsSize(); i++) {
-			if (i == getOptionsSize() - 1) {
-				sb.append(getOption(i).getPrice() + "");
-			} else {
-				sb.append(getOption(i).getPrice() + " ");
-			}
-		}
+		sb.append(name);
+//		sb.append(getOption(0).getName() + " " + getOption(0).getPrice());
+//		sb.append(getName() + "|");
+//
+//		for (int i = 0; i < getOptionsSize(); i++) {
+//			if (i == getOptionsSize() - 1) {
+//				sb.append(getOption(i).getName() + "");
+//			} else {
+//				sb.append(getOption(i).getName() + " ");
+//			}
+//		}
+//		sb.append("|");
+//		for (int i = 0; i < getOptionsSize(); i++) {
+//			if (i == getOptionsSize() - 1) {
+//				sb.append(getOption(i).getPrice() + "");
+//			} else {
+//				sb.append(getOption(i).getPrice() + " ");
+//			}
+//		}
 		return sb.toString();
 	}
 
@@ -100,10 +102,11 @@ class OptionSet implements Serializable {
 	//retrieve Option class instance by index
 	protected Option getOption(int i) {
 
-		if (getOptions()[i] == null || i < 0 || i >= getOptionsSize()) {
-			return new Option();
-		}
 		return getOptions()[i];
+//		if (getOptions()[i] == null || i < 0 || i >= getOptionsSize()) {
+//			return new Option();
+//		}
+//		return getOptions()[i];
 	}
 
 	//basic retrieve Option instance by name
@@ -173,11 +176,11 @@ class OptionSet implements Serializable {
 		}
 
 		protected Option(float p) {
-			this("", p);
+			this("BLANK OPTION", p);
 		}
 
 		protected Option() {
-			this("", 0f);
+			this("BLANK OPTION", 0f);
 		}
 
 		protected String getName() {

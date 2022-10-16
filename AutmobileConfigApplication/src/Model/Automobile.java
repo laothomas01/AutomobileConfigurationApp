@@ -19,7 +19,7 @@ public class Automobile implements Serializable {
 		setName(n);
 		setBasePrice(p);
 		for (int i = 0; i < optionSets.length; i++) {
-			optionSets[i] = new OptionSet("EMPTY:" + i);
+			optionSets[i] = new OptionSet("BLANK");
 		}
 	}
 
@@ -28,15 +28,15 @@ public class Automobile implements Serializable {
 	}
 
 	public Automobile(int size, float p) {
-		this("", p, size);
+		this("BLANK", p, size);
 	}
 
 	public Automobile(float p) {
-		this("", p, 0);
+		this("BLANK", p, 0);
 	}
 
 	public Automobile(int size) {
-		this("", 0, size);
+		this("BLANK", 0, size);
 	}
 
 
@@ -104,6 +104,13 @@ public class Automobile implements Serializable {
 		return new OptionSet();
 	}
 
+	public void printAllOptionSetInstances()
+	{
+		for(int i = 0; i < getOptionSetsSize(); i++)
+		{
+			System.out.println(getOptionSetClassInstance(i).toString());
+		}
+	}
 	//-------------------------------------------------------------------------
 
 	public String getOptionSetName(int i) {
@@ -271,10 +278,10 @@ public class Automobile implements Serializable {
 	}
 	//access an option set class instance and option class instance by index to gain access to CRUD operations for Option class
 
-	public void updateOptionClassInstance(int i, int j, String optionName, float optionPrice) {
+	public void updateOptionClassInstance(int optSetIndex, int optIndex, String optionName, float optionPrice) {
 		//access the index of an option class instance for both i and j for setting price and name
-		updateOptionPrice(i, j, optionPrice);
-		updateOptionName(i, j, optionName);
+		updateOptionPrice(optSetIndex, optIndex, optionPrice);
+		updateOptionName(optSetIndex, optIndex, optionName);
 	}
 
 
@@ -320,6 +327,7 @@ public class Automobile implements Serializable {
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
 		sb.append(this.getName() + "|" + this.getBasePrice());
+		printAllOptionSetInstances();
 		return sb.toString();
 	}
 

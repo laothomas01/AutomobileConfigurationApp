@@ -14,19 +14,20 @@ import java.io.Serializable;
  * U - [O]
  * D - [O]
  */
+
+/**
+ * Handling Array Index out of Bounds Exception:
+ */
 public class Automobile implements Serializable {
 
     private String name;
     private float basePrice;
+    //array of Option Set instances
     private OptionSet[] optionSets;
 
-    /**
-     * @param n    automotive name
-     * @param size number of option sets
-     * @param p    base price of automotive
-     */
-    //chain the constructors
+
     public Automobile(String n, float p, int size) {
+        // initialize the array of Option Set instances with empty Option Set instances
         optionSets = new OptionSet[size];
         setName(n);
         setBasePrice(p);
@@ -53,7 +54,7 @@ public class Automobile implements Serializable {
 
 
     public Automobile() {
-        this("", 0, 0);
+        this("BLANK", 0, 0);
     }
 
     //---------------------------- AUTOMOTIVE CLASS C.R.U.D OPERATIONS ------------------
@@ -78,6 +79,7 @@ public class Automobile implements Serializable {
         return optionSets;
     }
 
+    //change auto motible data
     public void updateAutomobile(String name, float price) {
         setName(name);
         setBasePrice(price);
@@ -260,42 +262,92 @@ public class Automobile implements Serializable {
     //--------------------------------------- OPTION INSTANCE CRUD ------------------------------------
 
 
-    //access an option set class instance and option class instance by index to gain access to CRUD operations for Option class
+    /**
+     * //access an option set class instance and option class instance by index to gain access to CRUD operations for Option class
+     *
+     * @param optSetIndex
+     * @param optIndex
+     * @return
+     */
     public OptionSet.Option getOptionClassInstance(int optSetIndex, int optIndex) {
         return getOptionSetClassInstance(optSetIndex).getOption(optIndex);
     }
-    //access an option set class instance and option class instance by name to gain access to CRUD operations for Option class
 
+    /**
+     * //access an option set class instance and option class instance by name to gain access to CRUD operations for Option class
+     *
+     * @param optionSetName
+     * @param optionName
+     * @return
+     */
     public OptionSet.Option getOptionClassInstance(String optionSetName, String optionName) {
         return getOptionSetClassInstance(optionSetName).getOption(optionName);
     }
 
-    //access an option set class instance and option class instance by index to gain access to CRUD operations for Option class
+    /**
+     * //access an option set class instance and option class instance by index to gain access to CRUD operations for Option class
+     *
+     * @param optSetIndex
+     * @param optIndex
+     * @return
+     */
     public String getOptionName(int optSetIndex, int optIndex) {
         return getOptionClassInstance(optSetIndex, optIndex).getName();
     }
 
-    //access an option set class instance and option class instance by index to gain access to CRUD operations for Option class
+    /**
+     * //access an option set class instance and option class instance by index to gain access to CRUD operations for Option class
+     *
+     * @param optSetIndex
+     * @param optIndex
+     * @param name
+     */
     public void updateOptionName(int optSetIndex, int optIndex, String name) {
         getOptionClassInstance(optSetIndex, optIndex).setName(name);
     }
-    //access an option set class instance and option class instance by index to gain access to CRUD operations for Option class
+
+    /**
+     * access an option set class instance and option class instance by index to gain access to CRUD operations for Option class
+     *
+     * @param optSetIndex
+     * @param optIndex
+     * @return
+     */
 
     public float getOptionPrice(int optSetIndex, int optIndex) {
         return getOptionClassInstance(optSetIndex, optIndex).getPrice();
     }
-    //access an option set class instance and option class instance by index to gain access to CRUD operations for Option class
 
+    /**
+     * access an option set class instance and option class instance by index to gain access to CRUD operations for Option class
+     *
+     * @param optSetIndex
+     * @param optIndex
+     * @param price
+     */
     public void updateOptionPrice(int optSetIndex, int optIndex, float price) {
         getOptionClassInstance(optSetIndex, optIndex).setPrice(price);
     }
 
-    //update an Option based on given option set name and option name
+    /**
+     * access an option set class instance and option class instance by index to gain access to CRUD operations for Option class
+     *
+     * @param OptionSetName
+     * @param OptionName
+     * @param newPrice
+     */
     public void updateOptionPrice(String OptionSetName, String OptionName, float newPrice) {
         getOptionClassInstance(OptionSetName, OptionName).setPrice(newPrice);
     }
-    //access an option set class instance and option class instance by index to gain access to CRUD operations for Option class
 
+    /**
+     * access an option set class instance and option class instance by index to gain access to CRUD operations for Option class
+     *
+     * @param optSetIndex
+     * @param optIndex
+     * @param optionName
+     * @param optionPrice
+     */
     //[O]
     public void updateOptionClassInstance(int optSetIndex, int optIndex, String optionName, float optionPrice) {
         //access the index of an option class instance for both i and j for setting price and name
@@ -303,14 +355,24 @@ public class Automobile implements Serializable {
         updateOptionName(optSetIndex, optIndex, optionName);
     }
 
-    //search by optset index and opt index. replace with empty option instance
+    /**
+     * search by optset index and opt index. replace with empty option instance
+     *
+     * @param optSetIndex
+     * @param optIndex
+     */
 
     //[O]
     public void deleteOptionClassInstance(int optSetIndex, int optIndex) {
         getOptionSetClassInstance(optSetIndex).setOption(optIndex, getOptionSetClassInstance(optIndex).createOption());
     }
 
-    //search by optset name and opt name. replace with empty option instance
+    /**
+     * search by optset name and opt name. replace with empty option instance
+     *
+     * @param optSetName
+     * @param optName
+     */
     public void deleteOptionClassInstance(String optSetName, String optName) {
         getOptionSetClassInstance(optSetName).setOption(optName, getOptionSetClassInstance(optSetName).createOption());
     }

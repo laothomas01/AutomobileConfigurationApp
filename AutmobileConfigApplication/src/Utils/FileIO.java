@@ -26,6 +26,7 @@ import Exception.AutoException;
  */
 public class FileIO {
     String fileName;
+    int errorNo = 0;
 
     public FileIO(String fileName) {
         this.fileName = fileName;
@@ -63,40 +64,61 @@ public class FileIO {
         //intialize as empty automobile
         Automobile a1 = new Automobile();
         int optionSetsSize;
-//		try {
-//			//if configuration file can be read
-//			if (openFile()) {
         BufferedReader br1 = new BufferedReader(new FileReader(fileName));
         //we do not count the first line as part of option sets size
         optionSetsSize = getLineCount(br1) - 1;
 
         //populate automobile with empty option set instances
+
+        //automobile gets 5 option set instances
         a1 = new Automobile(optionSetsSize);
 
         br1.close();
         BufferedReader br2 = new BufferedReader(new FileReader(fileName));
-////				readData(br2, a1);
-//				br2.close();
-//			}
-//			//if file cannot be read, throw exception
-//		} catch (AutoException ae) {
-//			//@TODO:search for and correct the name of input file to open
-//		} catch (FileNotFoundException e) {
-//			throw new RuntimeException(e);
-//		} catch (IOException e) {
-//			throw new RuntimeException(e);
-//		}
 
         //read first line from carconfigs.txt
         String line = br2.readLine();
         String[] carNameAndPrice = line.split("\\|");
-        a1.updateAutomobile(carNameAndPrice[0], Float.parseFloat(carNameAndPrice[1]));
+        /**
+         *
+         *  - try to parse malformed CarConfigs.txt file
+         *  - if parsed data is improper, i.e malformed automobile name or price, throw custom exception
+         *  - catch thrown custom exception
+         *      - proceed to update exception instance
+         *      - record current error into text file
+         *          - record error no.
+         *          - record error message
+         *      - record exception in log file
+         *
+         *
+         *
+         */
+        try {
+
+            //check if the automobile attributes are malformed
+            //must look through list of available vehicle names to check for a malformed car name
+            if (MiscUtil.getPrimitiveDataTypeForNumberString(carNameAndPrice[1]) == "Unknown") {
+                throw new AutoException();
+            }
+            a1.updateAutomobile(carNameAndPrice[0], Float.parseFloat(carNameAndPrice[1]));
+
+        } catch (AutoException e) {
+            e.setErrorNo(errorNo += 1);
+            e.setErrorMsg("Missing Automobile Price!");
+            e.printMyProblem();
+            String exception = e.getErrorNo() + "|" + e.getErrorMsg();
+            writeToFile("listOfErrors.txt", exception);
+            writeToLogFile(exception);
+        }
+        //loop 5 times, each iteration =  a text file line (excluding the first line)
         for (int i = 0; i < a1.getOptionSetsSize(); i++) {
             line = br2.readLine();
             String[] optionSet = line.split("\\|");
             String optionSetName = optionSet[0];
             String[] optionNames = optionSet[1].split(" ");
             String[] optionPrices = optionSet[2].split(" ");
+
+            //populate
             for (int j = 0; j < optionNames.length; j++) {
                 //throw auto exception here if option set text file data is improper
                 a1.updateOptionSetInstance(i, a1.createOptionSetInstance(optionSetName, optionNames.length));

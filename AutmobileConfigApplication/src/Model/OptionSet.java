@@ -8,14 +8,17 @@ import java.io.Serializable;
  */
 class OptionSet implements Serializable {
 
+    //array of Option instances
     private Option options[];
+    //Option Set instance name
     private String name;
 
-    //[O]
+
     protected OptionSet(String name, int size) {
         setName(name);
+        //initialize Option instance array with blank Option instances
+
         options = new Option[size];
-        //initialize array of options with new instances of empty options
         for (int i = 0; i < size; i++) {
             options[i] = new Option("BLANK OPTION", 0);
         }
@@ -62,15 +65,6 @@ class OptionSet implements Serializable {
         this.name = name;
     }
 
-    //we print out our option set data in the same format to CarConfigs.txt
-    protected Option createOption(String n, float p) {
-        return new Option(n, p);
-    }
-
-    protected Option createOption(String n) {
-        return new Option(n);
-    }
-
     protected Option createOption() {
         return new Option();
     }
@@ -113,16 +107,6 @@ class OptionSet implements Serializable {
         System.out.println("OPTION DOES NOT EXIST!");
     }
 
-    //search by index, input replacing name and price, and use those parameters to input into a empty Option class instancee
-    protected void setOption(int searchIndex, String replaceName, float replaceOptionPrice) {
-        setOption(searchIndex, new Option(replaceName, replaceOptionPrice));
-    }
-
-    //search by name, input replacing name and price, and use those parameters to input to empty Option class instance
-    protected void setOption(String searchOptionName, String replaceName, float replaceOptionPrice) {
-        setOption(searchOptionName, new Option(replaceName, replaceOptionPrice));
-    }
-
     //search by index and update option instance to empty Option class instance
     protected void deleteOption(int i) {
         //change specified option at index i = to empty Option class instance
@@ -130,7 +114,6 @@ class OptionSet implements Serializable {
     }
 
     //search by name and replace option instance with empty Option class instance
-
     protected void deleteOption(String name) {
         setOption(name, new Option());
     }

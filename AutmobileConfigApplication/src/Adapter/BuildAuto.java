@@ -16,17 +16,17 @@ public class BuildAuto extends ProxyAutomobile implements CreateAuto, UpdateAuto
         FileIO io = new FileIO(fileName);
         //attempt to populate the automobile instance with data read from the text file
         a1 = io.loadAutomotive();
-//		int[] errNums = io.readArrayOfErrors("listOfErrors.txt");
+        int[] errNums = io.readArrayOfErrors("listOfErrors.txt");
 //
 //		//@TODO: convert a while-loop
-//		if (!problemFixed) {
-//			for (int n : errNums) {
-//				fix(n);
-//			}
-//			//update problemFixed when no more problems are left
-//			problemFixed = fix(-1);
-//		}
-//		System.out.println(a1);
+        if (!problemFixed) {
+            for (int n : errNums) {
+                fix(n);
+            }
+            //update problemFixed when no more problems are left
+            problemFixed = fix(-1);
+        }
+        System.out.println(a1);
 
 
     }

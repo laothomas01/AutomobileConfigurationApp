@@ -66,6 +66,11 @@ public class Automobile implements Serializable {
 		return optionSets;
 	}
 
+	public void updateAutomobile(String name, float price) {
+		setName(name);
+		setBasePrice(price);
+	}
+
 	//-------------------- OPTION SET CLASS INSTANCE C.R.U.D ---------------
 
 	//create option set instance
@@ -104,10 +109,8 @@ public class Automobile implements Serializable {
 		return new OptionSet();
 	}
 
-	public void printAllOptionSetInstances()
-	{
-		for(int i = 0; i < getOptionSetsSize(); i++)
-		{
+	public void printAllOptionSetInstances() {
+		for (int i = 0; i < getOptionSetsSize(); i++) {
 			System.out.println(getOptionSetClassInstance(i).toString());
 		}
 	}
@@ -150,12 +153,12 @@ public class Automobile implements Serializable {
 	 * @param optionName     set name of option
 	 * @param optionPrice    set price of option
 	 */
+
+	//[] WORKS
 	public void updateOptionSetInstance(int optionSetIndex, int optionSetSize, String optionSetName, int optionIndex, String optionName, float optionPrice) {
 
 
 		updateOptionSetInstance(optionSetIndex, createOptionSetInstance(optionSetName, optionSetSize));
-
-
 		updateOptionClassInstance(optionSetIndex, optionIndex, optionName, optionPrice);
 	}
 
@@ -278,6 +281,7 @@ public class Automobile implements Serializable {
 	}
 	//access an option set class instance and option class instance by index to gain access to CRUD operations for Option class
 
+	//[X] WORKS
 	public void updateOptionClassInstance(int optSetIndex, int optIndex, String optionName, float optionPrice) {
 		//access the index of an option class instance for both i and j for setting price and name
 		updateOptionPrice(optSetIndex, optIndex, optionPrice);

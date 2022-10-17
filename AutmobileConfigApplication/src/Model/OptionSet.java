@@ -7,18 +7,12 @@ class OptionSet implements Serializable {
 	private Option options[];
 	private String name;
 
-	/**
-	 * Chained Constructors
-	 *
-	 * @param n    = name
-	 * @param size = length of Option array
-	 */
 	protected OptionSet(String name, int size) {
 		setName(name);
 		options = new Option[size];
 		//initialize array of options with new instances of empty options
 		for (int i = 0; i < size; i++) {
-			options[i] = new Option("BLANK OPTIONSET", 0);
+			options[i] = new Option("BLANK OPTION", 0);
 		}
 	}
 
@@ -63,29 +57,7 @@ class OptionSet implements Serializable {
 
 
 	//we print out our option set data in the same format to CarConfigs.txt
-	public String toString() {
-		StringBuffer sb = new StringBuffer();
-		sb.append(name);
-//		sb.append(getOption(0).getName() + " " + getOption(0).getPrice());
-//		sb.append(getName() + "|");
-//
-//		for (int i = 0; i < getOptionsSize(); i++) {
-//			if (i == getOptionsSize() - 1) {
-//				sb.append(getOption(i).getName() + "");
-//			} else {
-//				sb.append(getOption(i).getName() + " ");
-//			}
-//		}
-//		sb.append("|");
-//		for (int i = 0; i < getOptionsSize(); i++) {
-//			if (i == getOptionsSize() - 1) {
-//				sb.append(getOption(i).getPrice() + "");
-//			} else {
-//				sb.append(getOption(i).getPrice() + " ");
-//			}
-//		}
-		return sb.toString();
-	}
+
 
 	protected Option createOption(String n, float p) {
 		return new Option(n, p);
@@ -102,11 +74,11 @@ class OptionSet implements Serializable {
 	//retrieve Option class instance by index
 	protected Option getOption(int i) {
 
-		return getOptions()[i];
-//		if (getOptions()[i] == null || i < 0 || i >= getOptionsSize()) {
-//			return new Option();
-//		}
 //		return getOptions()[i];
+		if (getOptions()[i] == null || i < 0 || i >= getOptionsSize()) {
+			return new Option();
+		}
+		return getOptions()[i];
 	}
 
 	//basic retrieve Option instance by name
@@ -130,7 +102,6 @@ class OptionSet implements Serializable {
 	//search by name and replace current Option instance with new Option instance
 	protected void setOption(String n, Option o) {
 		for (int i = 0; i < getOptionsSize(); i++) {
-			//will not trigger set option exception
 			if (getOption(i).getName().equals(n)) {
 				setOption(i, o);
 			}
@@ -159,6 +130,32 @@ class OptionSet implements Serializable {
 		setOption(name, new Option());
 	}
 
+	public String toString() {
+		StringBuffer sb = new StringBuffer();
+//		sb.append(getName());
+//		sb.append(getOption(0).getName() + " " + getOption(0).getPrice());
+//		sb.append(getName() + "|");
+		for (int i = 0; i < getOptionsSize(); i++) {
+			sb.append(getOption(i).toString());
+		}
+//
+		for (int i = 0; i < getOptionsSize(); i++) {
+			if (i == getOptionsSize() - 1) {
+				sb.append(getOption(i).getName() + "");
+			} else {
+				sb.append(getOption(i).getName() + " ");
+			}
+		}
+		sb.append("|");
+		for (int i = 0; i < getOptionsSize(); i++) {
+			if (i == getOptionsSize() - 1) {
+				sb.append(getOption(i).getPrice() + "");
+			} else {
+				sb.append(getOption(i).getPrice() + " ");
+			}
+		}
+		return sb.toString();
+	}
 
 	//inner class
 	protected class Option implements Serializable {
@@ -200,8 +197,7 @@ class OptionSet implements Serializable {
 		}
 
 		public String toString() {
-
-			StringBuffer sb = new StringBuffer(getName() + "|" + getPrice());
+			StringBuffer sb = new StringBuffer(getName() + " " + getPrice() + "|");
 			return sb.toString();
 		}
 

@@ -70,6 +70,7 @@ public class FileIO {
 		//we do not count the first line as part of option sets size
 		optionSetsSize = getLineCount(br1) - 1;
 
+		//populate automobile with empty option set instances
 		a1 = new Automobile(optionSetsSize);
 
 		br1.close();
@@ -86,9 +87,29 @@ public class FileIO {
 //			throw new RuntimeException(e);
 //		}
 
-		//read first line for car name and price
+		//read first line from carconfigs.txt
 		String line = br2.readLine();
-		a1.updateOptionSetInstance(0,a1.createOptionSetInstance("Hello World",5));
+		String[] carNameAndPrice = line.split("\\|");
+		a1.updateAutomobile(carNameAndPrice[0], Float.parseFloat(carNameAndPrice[1]));
+		for (int i = 0; i < a1.getOptionSetsSize(); i++) {
+			line = br2.readLine();
+			String[] optionSet = line.split("\\|");
+			String optionSetName = optionSet[0];
+			String[] optionNames = optionSet[1].split(" ");
+			String[] optionPrices = optionSet[2].split(" ");
+			for (int j = 0; j < optionNames.length; j++) {
+				//throw auto exception here if option set text file data is improper
+				a1.updateOptionSetInstance(i, a1.createOptionSetInstance(optionSetName, optionNames.length));
+			}
+			for (int j = 0; j < optionNames.length; j++) {
+				//throw auto exception here if option text file data is improper
+				a1.updateOptionClassInstance(i, j, optionNames[j], Float.parseFloat(optionPrices[j]));
+			}
+
+
+		}
+//		a1.updateOptionSetInstance(0,a1.createOptionSetInstance("Hello World",5));
+
 //		for (int optSetCount = 0; optSetCount < 1; optSetCount++) {
 //			//read next lines for car option sets
 //			line = br2.readLine();

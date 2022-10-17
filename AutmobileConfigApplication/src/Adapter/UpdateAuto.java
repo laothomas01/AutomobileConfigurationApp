@@ -12,5 +12,5 @@ public interface UpdateAuto {
 	void updateOptionSetName(String modelName,String OptionSetName, String newName);
 
 	//search model name,search OptionSetname, search Option , update with NewName
-	void updateOptionPrice(String modelName,String OptionSetName,String OptioName, float newPrice);
+	void updateOptionPrice(String modelName,String OptionSetName,String OptionName, float newPrice);
 }

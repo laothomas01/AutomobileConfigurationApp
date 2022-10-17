@@ -441,3 +441,19 @@
   <message>warning message</message>
 </record>
 </log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2022-10-17T19:41:10.699087Z</date>
+  <millis>1666035670699</millis>
+  <nanos>87000</nanos>
+  <sequence>0</sequence>
+  <logger>0|MissingAutomobilePrice!</logger>
+  <level>WARNING</level>
+  <class>Utils.FileIO</class>
+  <method>writeToLogFile</method>
+  <thread>1</thread>
+  <message>warning message</message>
+</record>
+</log>

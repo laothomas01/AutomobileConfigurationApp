@@ -27,14 +27,17 @@ public class BuildAuto extends ProxyAutomobile implements CreateAuto, UpdateAuto
 //			problemFixed = fix(-1);
 //		}
 //		System.out.println(a1);
+
+
+    }
+
+    public void testAutomotiveFunctions() {
         System.out.println(a1.getOptionClassInstance(0, 0));
         System.out.println("BEFORE DELETING OPTION SET:" + a1);
         a1.deleteOptionSetInstance(0);
         System.out.println("AFTER DELETING OPTION SET BY INDEX:" + a1);
-
         a1.deleteOptionSetInstance("Brakes");
         System.out.println("AFTER DELETING OPTION SET BY NAME:" + a1);
-
     }
 
 

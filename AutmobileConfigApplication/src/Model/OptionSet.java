@@ -32,12 +32,10 @@ class OptionSet implements Serializable {
 	protected String getName() {
 		return name;
 	}
-
 	//retrieve Option array
 	protected Option[] getOptions() {
 		return options;
 	}
-
 	//retrieve Option array length
 	protected int getOptionsSize() {
 		if (getOptions().length == 0) {
@@ -49,16 +47,11 @@ class OptionSet implements Serializable {
 	protected void setName(String name) {
 		this.name = name;
 	}
-
 	//replace current array of Option instances with new array
 	protected void updateOptions(Option[] opts) {
 		this.options = opts;
 	}
-
-
 	//we print out our option set data in the same format to CarConfigs.txt
-
-
 	protected Option createOption(String n, float p) {
 		return new Option(n, p);
 	}

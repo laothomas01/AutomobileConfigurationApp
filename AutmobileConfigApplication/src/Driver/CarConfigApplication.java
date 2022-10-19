@@ -12,41 +12,11 @@ import Exception.AutoException;
 public class CarConfigApplication {
 
 	public static void main(String args[]) throws IOException, AutoException {
-		testAutomotiveLab2();
+		Lab3Test();
 	}
 
 
-	////        //file reading error checking
-////        do {
-////            try {
-////
-////            } catch (AutoException e) {
-////
-////            }
-////        }
-////        while (problemFixed == false);
-//
-//
-//////        auto.buildAuto(configurationFile);
-////        do {
-////            try {
-//////                    auto.buildAuto(configurationFile);
-////            } catch (AutoException a) {
-////                a.findFile("dsadsa", new File("sadsadsa"));
-////            }
-////
-////        }
-//
-////        auto.updateOptionSetName("FordWagonZTW", "Transmission", "Rear Window");
-////        auto.printAuto("FordWagonZTW");
-//}
-
-	/**
-	 * Make sure to malform the carconfigs.txt's price and see the change
-	 *
-	 * @throws IOException
-	 */
-	public static void testAutomotiveLab2() throws IOException {
+	public static void Lab3Test() throws IOException {
 		//.txt file to read from using FileIO instance
 		String configurationFile = "CarConfigs.txt";
 		//instantiate BuildAuto
@@ -55,7 +25,21 @@ public class CarConfigApplication {
 		auto.buildAuto(configurationFile);
 	}
 
-	public void testAutomotiveLab1() throws IOException {
+	/**
+	 * Make sure to malform the carconfigs.txt's price and see the change
+	 *
+	 * @throws IOException
+	 */
+	public static void Lab2Test() throws IOException {
+		//.txt file to read from using FileIO instance
+		String configurationFile = "CarConfigs.txt";
+		//instantiate BuildAuto
+		BuildAuto auto = new BuildAuto();
+		//1 problem is only fixed
+		auto.buildAuto(configurationFile);
+	}
+
+	public void Lab1Test() throws IOException {
 
 		String configurationFile = "CarConfigs.txt";
 		FileIO io = new FileIO(configurationFile);

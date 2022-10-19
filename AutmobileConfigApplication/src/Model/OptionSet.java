@@ -2,10 +2,6 @@ package Model;
 
 import java.io.Serializable;
 
-/**
- * [O] = works
- * [X] = broken
- */
 class OptionSet implements Serializable {
 
     //array of Option instances
@@ -124,25 +120,7 @@ class OptionSet implements Serializable {
             sb.append(getName() + "|" + getOption(i) + "\n");
         }
 
-//		sb.append(getName());
-//		sb.append(getOption(0).getName() + " " + getOption(0).getPrice());
-//		sb.append(getName() + "|");
-//
-//        for (int i = 0; i < getOptionsSize(); i++) {
-//            if (i == getOptionsSize() - 1) {
-//                sb.append(getOption(i).getName() + "");
-//            } else {
-//                sb.append(getOption(i).getName() + " ");
-//            }
-//        }
-//        sb.append("|");
-//        for (int i = 0; i < getOptionsSize(); i++) {
-//            if (i == getOptionsSize() - 1) {
-//                sb.append(getOption(i).getPrice() + "");
-//            } else {
-//                sb.append(getOption(i).getPrice() + " ");
-//            }
-//        }
+
         return sb.toString();
     }
 

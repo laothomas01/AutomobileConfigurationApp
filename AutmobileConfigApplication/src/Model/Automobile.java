@@ -13,9 +13,9 @@ public class Automobile implements Serializable {
     //stores all possible configurations for an automobile
     private OptionSet[] optionSets;
     //stores all possible configurations for an automobile
-    private ArrayList<OptionSet> optSets;
+    private ArrayList<OptionSet> optSetList;
     //used to store a chosen option set
-    private ArrayList<OptionSet> choice;
+    private ArrayList<OptionSet> optSetChoices;
 
     /**
      * @param n    automobile name
@@ -32,10 +32,10 @@ public class Automobile implements Serializable {
         }
 
         //initialize array list of option sets
-        optSets = new ArrayList<>();
+        optSetList = new ArrayList<>();
 
         for (int i = 0; i < size; i++) {
-            optSets.add(new OptionSet("BLANK"));
+            optSetList.add(new OptionSet("BLANK"));
         }
 
     }
@@ -102,6 +102,10 @@ public class Automobile implements Serializable {
     //return array of Option Set class instances
     public OptionSet[] getOptionSets() {
         return optionSets;
+    }
+
+    public ArrayList<OptionSet> getOptionSetList() {
+        return optSetList;
     }
 
     // do  not delete. these are old CRUD functions utilizing the array of Option Sets
@@ -414,6 +418,10 @@ public class Automobile implements Serializable {
      */
     public int getOptionSetsSize() {
         return getOptionSets().length;
+    }
+
+    public int getOptionSetsListSize() {
+        return getOptionSetList().size();
     }
 
 

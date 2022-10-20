@@ -27,7 +27,6 @@ public class BuildAuto extends ProxyAutomobile implements CacheAuto, CreateAuto,
         cacheAutos = new LinkedHashMap<>();
         FileIO io = new FileIO(fileName);
         //populate a1 with all its car configurations(we do not have more configurations for more cars. lets just hardcode this)
-//        a1 = io.loadAutomotive();
 
         String[] testCarNames = {"Abarth", "Alfa Romeo", "Aston Martin", "Audi", "Bentley", "BMW", "Bugatti", "Cadillac", "Chevrolet", "Chrysler", "Citroën", "Dacia", "Daewoo", "Daihatsu", "Dodge", "Donkervoort", "DS", "Ferrari", "Fiat", "Fisker", "Ford", "Honda", "Hummer", "Hyundai", "Infiniti", "Iveco", "Jaguar", "Jeep", "Kia", "KTM", "Lada", "Lamborghini", "Lancia", "Land Rover", "Landwind", "Lexus", "Lotus", "Maserati", "Maybach", "Mazda", "McLaren", "Mercedes-Benz", "MG", "Mini", "Mitsubishi", "Morgan", "Nissan", "Opel", "Peugeot", "Porsche", "Renault", "Rolls-Royce", "Rover", "Saab", "Seat", "Skoda", "Smart", "SsangYong", "Subaru", "Suzuki", "Tesla", "Toyota", "Volkswagen", "Volvo"};
 
@@ -112,32 +111,24 @@ public class BuildAuto extends ProxyAutomobile implements CacheAuto, CreateAuto,
 
 
     // CRUD for automobile instances
-//	public LinkedHashMap<String, Automobile> getAutomobiles() {
-//		return automobiles;
-//	}
-//
-//	public Automobile getAutomobile(String automobileName) {
-//		return getAutomobiles().get(automobileName);
-//	}
-//
-//	public void addAutomobile(Automobile a1) {
-//		getAutomobiles().put(a1.getName(), a1);
-//	}
-//
-//	public void removeAutomobile(String automobileName) {
-//		getAutomobiles().remove(automobileName);
-//	}
-//
-//	@Override
-//	public void printAuto(String modelName) {
-//		System.out.println(getAutomobile(modelName));
-//	}
-//
-//	public void printAutos() {
-//		for (String key : getAutomobiles().keySet()) {
-//			System.out.println(getAutomobile(key).getName());
-//		}
-//	}
+    public LinkedHashMap<String, Automobile> getCacheAutos() {
+        return cacheAutos;
+    }
+
+    public Automobile getAutomobile(String name) {
+        return getCacheAutos().get(name);
+    }
+
+    public void removeAutomobile(String name) {
+        getCacheAutos().remove(name);
+    }
+
+    public void printAutos() {
+        for (String key : getCacheAutos().keySet()) {
+            System.out.println(getAutomobile(key));
+        }
+    }
+
 
     @Override
     public void updateOptionSetName(String modelName, String OptionSetName, String newName) {

@@ -1,11 +1,14 @@
 package Model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 class OptionSet implements Serializable {
 
     //array of Option instances
     private Option options[];
+    //array list of Option instances
+    private ArrayList<Option> optionList;
     //Option Set instance name
     private String name;
 
@@ -17,6 +20,10 @@ class OptionSet implements Serializable {
         options = new Option[size];
         for (int i = 0; i < size; i++) {
             options[i] = new Option("BLANK OPTION", 0);
+        }
+        optionList = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            optionList.add(new Option("BLANK OPTION", 0));
         }
     }
 
@@ -54,6 +61,29 @@ class OptionSet implements Serializable {
             return 0;
         }
         return getOptions().length;
+    }
+
+    protected ArrayList<Option> getOptionList() {
+        return optionList;
+    }
+
+    protected int getOptionsListSize() {
+        return optionList.size();
+    }
+
+    protected void addtoOptionList(Option o) {
+        getOptionList().add(o);
+    }
+
+    protected void deleteFromOptionList(int i) {
+        getOptionList().remove(i);
+    }
+    protected void deleteFromOptionList(String n)
+    {
+        for(int i = 0; i < getOptionsListSize(); i++)
+        {
+
+        }
     }
 
     //[O]

@@ -6,42 +6,77 @@ import Exception.Fix1to100;
 
 import java.io.IOException;
 import java.util.LinkedHashMap;
+import java.util.Scanner;
 
-/**
- * for constructing 1 instance of an automobile
- *
- *
- * What about multiple?
- */
-public class BuildAuto extends ProxyAutomobile implements CreateAuto, UpdateAuto, FixAuto {
+//what is the purpose of this class???
+public class BuildAuto extends ProxyAutomobile implements CacheAuto,CreateAuto, UpdateAuto, FixAuto {
 
 	//used to keep an on-going loop until all recorded exceptions are fixed
 	boolean problemFixed = false;
-	//building multiple automobiles
-//	LinkedHashMap<String, Automobile> automobiles;
+	boolean finishedBuilding = false;
 
+
+	private LinkedHashMap<String, Automobile> cacheAutos = new LinkedHashMap<>();
+
+
+	//for building 1 auto
+
+	// OR we can leveraged this method to loop through a list of fileNames and build an automobile for each
 	@Override
 	public void buildAuto(String fileName) throws IOException {
-//		automobiles = new LinkedHashMap<>();
+
 		FileIO io = new FileIO(fileName);
 		//attempt to populate the automobile instance with data read from the text file
 		a1 = io.loadAutomotive();
-//		a2 = new Automobile("Batmobile", 100000, 5);
 
-		int[] errNums = io.readArrayOfErrors("listOfErrors.txt");
-		//@TODO: convert a while-loop
-		if (!problemFixed) {
-			for (int n : errNums) {
-				fix(n);
+
+		/**
+		 * BUILDING CAR INSTANCES WORKFLOW
+		 *    - user enters the menu
+		 *    - loop menu until user exits
+		 *    - have text file with an array of names, prices, a number of option sets, and each option set line containing
+		 *    an array of option data(this does not account for specific cars with specific parts. its pure customizable)
+		 *    - when user wants to build auto, load car config data into the automobile(we only have configs for 1 right now).
+		 - user will have access to that automobile instance's data
+		 - when customizing, automobile instance will have a list of user's choice( we will do something with this later)
+		 - when user finishes cache the automobile into a linked hashmap
+
+
+		 here we will make dummy instances for now
+		 */
+		String choice = null;
+		Scanner sc = new Scanner(System.in);
+		do {
+			System.out.println("Press [Y/N]");
+			choice = sc.nextLine();
+			if (choice.equalsIgnoreCase("y")) {
+				System.out.println("BUILDING");
+
+			} else if (choice.equalsIgnoreCase("N")) {
+				System.out.println("BYE");
+				finishedBuilding = true;
+			} else {
+				System.out.println("INVALID INPUT!");
 			}
-			//update problemFixed when no more problems are left
-			problemFixed = fix(-1);
 		}
+		while (finishedBuilding == false);
+////		a2 = new Automobile("Batmobile", 100000, 5);
+//
+//		int[] errNums = io.readArrayOfErrors("listOfErrors.txt");
+//		//@TODO: convert a while-loop
+//		if (!problemFixed) {
+//			for (int n : errNums) {
+//				fix(n);
+//			}
+//			//update problemFixed when no more problems are left
+//			problemFixed = fix(-1);
+//		}
 //		addAutomobile(a1);
 
 
-
 	}
+	//for building multiple autos
+
 
 	@Override
 	public void printAuto(String modelName) {
@@ -111,6 +146,16 @@ public class BuildAuto extends ProxyAutomobile implements CreateAuto, UpdateAuto
 				break;
 		}
 		return true;
+
+	}
+
+	@Override
+	public void storeAuto(Automobile a) {
+
+	}
+
+	@Override
+	public void storeAuto(String name) {
 
 	}
 }

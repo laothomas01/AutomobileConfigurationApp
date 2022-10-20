@@ -3,5 +3,6 @@ package Adapter;
 import Model.Automobile;
 
 public interface CacheAuto {
-	void addAutomobile(Automobile a);
+	void storeAuto(Automobile a);
+	void storeAuto(String name);
 }

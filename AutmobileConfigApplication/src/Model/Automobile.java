@@ -20,7 +20,7 @@ public class Automobile implements Serializable {
 	//stores all possible configurations for an automobile
 	private OptionSet[] optionSets;
 	//stores all possible configurations for an automobile
-	private ArrayList<OptionSet> optSets;
+	private ArrayList<OptionSet> optnSets;
 	//used to store a chosen automobile option
 	private ArrayList<OptionSet.Option> choice;
 
@@ -34,15 +34,18 @@ public class Automobile implements Serializable {
 		optionSets = new OptionSet[size];
 		setName(n);
 		setBasePrice(p);
+
+		//OLD CODE
 		for (int i = 0; i < optionSets.length; i++) {
 			optionSets[i] = new OptionSet("BLANK");
 		}
 
+
 		//initialize array list of option sets
-		optSets = new ArrayList<>();
+		optnSets = new ArrayList<>();
 
 		for (int i = 0; i < size; i++) {
-			optSets.add(new OptionSet("BLANK"));
+			optnSets.add(new OptionSet("BLANK"));
 		}
 		choice = new ArrayList<>();
 
@@ -90,6 +93,7 @@ public class Automobile implements Serializable {
 		this("BLANK", 0, 0);
 	}
 
+
 	//---------------------------- AUTOMOTIVE CLASS C.R.U.D OPERATIONS ------------------
 	public String getName() {
 		return name;
@@ -107,15 +111,6 @@ public class Automobile implements Serializable {
 		this.basePrice = basePrice;
 	}
 
-	//return array of Option Set class instances
-	public OptionSet[] getOptionSets() {
-		return optionSets;
-	}
-
-	public ArrayList<OptionSet> getOptionSetList() {
-		return optSets;
-	}
-
 	// do  not delete. these are old CRUD functions utilizing the array of Option Sets
 	//change auto motible data
 	public void updateAutomobile(String name, float price) {
@@ -123,7 +118,16 @@ public class Automobile implements Serializable {
 		setBasePrice(price);
 	}
 
-	//-------------------- OPTION SET CLASS INSTANCE C.R.U.D ---------------
+
+	//--------------------------------------------- OLD CODE USING BASIC ARRAY -----------------------------------------
+
+	//return array of Option Set class instances
+	public OptionSet[] getOptionSets() {
+		return optionSets;
+	}
+
+
+	//------------------------------------------- OPTION SET CLASS INSTANCE C.R.U.D ------------------------------------
 
 	//create option set instance
 	//[O]
@@ -445,18 +449,57 @@ public class Automobile implements Serializable {
 		return getOptionSetClassInstance(n).getOptionsSize();
 	}
 
-	public ArrayList<OptionSet> getOptSets() {
-		return optSets;
+	//------------------------------------------- OPTION SET CLASS INSTANCE C.R.U.D ------------------------------------
+
+	//--------------------------------------------- OLD CODE USING BASIC ARRAY -----------------------------------------
+
+
+	//--------------------------------------------- NEW CODE USING ARRAY-LIST -----------------------------------------
+
+
+	protected ArrayList<OptionSet> getOptnSets() {
+		return optnSets;
 	}
 
-	public int optnSetsListSize() {
-		return getOptSets().size();
+	protected int OptnSetsSize() {
+		return getOptnSets().size();
 	}
 
-	public OptionSet getOptnSetOption(int i) {
-		return getOptSets().get(i);
+
+	protected OptionSet getOptnset(int i) {
+		return getOptnSets().get(i);
 	}
 
+	protected void addtoOptnset(OptionSet os) {
+		getOptnSets().add(os);
+	}
+
+	protected void setOptnsetName(int i, String name) {
+		getOptnset(i).setName(name);
+	}
+
+	protected void setOptnSet(int i, String name) {
+		getOptnset(i).setName(name);
+	}
+
+
+	protected void addtoOptnset(String name, float price) {
+		addtoOptnList(createOption(name, price));
+	}
+
+	protected void deleteOptnset(int i) {
+		getOptns().remove(i);
+	}
+
+	protected void deleteOptnset(String name) {
+		for (int i = 0; i < getOptnsListSize(); i++) {
+			if (getOptnset(i).getName().equals(name)) {
+				deleteFromOptnList(i);
+			}
+		}
+	}
+
+	//--------------------------------------------- NEW CODE USING ARRAY-LIST -----------------------------------------
 
 	public float getTotalPrice() {
 		//@TODO: calculate the total price of purchases

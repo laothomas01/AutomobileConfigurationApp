@@ -1,2 +1,5 @@
-package Adapter;public interface ReadAuto {
+package Adapter;
+
+public interface ReadAuto {
+
 }

@@ -1,3 +1,5 @@
+package Generics;
+
 //--------------------------------------------------
 class Stats<T extends Number> {   
   T[] nums; // array of Number or subclass  

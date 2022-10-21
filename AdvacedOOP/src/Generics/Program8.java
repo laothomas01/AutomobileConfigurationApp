@@ -1,4 +1,4 @@
-//HashSet, TreeSet and LinkedHashSet
+package Generics;//HashSet, TreeSet and LinkedHashSet
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.LinkedHashSet;

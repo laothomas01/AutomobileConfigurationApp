@@ -1,4 +1,4 @@
-
+package Generics;
 
 //--------------------------------------------------
 // In this version of Stats, the type argument for 

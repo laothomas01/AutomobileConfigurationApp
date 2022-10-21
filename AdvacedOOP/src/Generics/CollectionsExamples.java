@@ -1,2 +1,6 @@
-package Generics;public class CollectionsExamples {
+package Generics;
+
+public class CollectionsExamples {
+
 }
+

@@ -8,8 +8,9 @@ class OptionSet implements Serializable {
     //array of Option instances
     private Option options[];
     //array list of Option instances
-    private ArrayList<Option> optionList;
+    private ArrayList<Option> optns;
     //Option Set instance name
+    private ArrayList<Option> optnChoices;
     private String name;
 
 
@@ -21,9 +22,9 @@ class OptionSet implements Serializable {
         for (int i = 0; i < size; i++) {
             options[i] = new Option("BLANK OPTION", 0);
         }
-        optionList = new ArrayList<>();
+        optns = new ArrayList<>();
         for (int i = 0; i < size; i++) {
-            optionList.add(new Option("BLANK OPTION", 0));
+            optns.add(new Option("BLANK OPTION", 0));
         }
     }
 
@@ -63,20 +64,20 @@ class OptionSet implements Serializable {
         return getOptions().length;
     }
 
-    protected ArrayList<Option> getOptionList() {
-        return optionList;
+    protected ArrayList<Option> getOptns() {
+        return optns;
     }
 
     protected int getOptionsListSize() {
-        return optionList.size();
+        return optns.size();
     }
 
     protected void addtoOptionList(Option o) {
-        getOptionList().add(o);
+        getOptns().add(o);
     }
 
     protected void deleteFromOptionList(int i) {
-        getOptionList().remove(i);
+        getOptns().remove(i);
     }
     protected void deleteFromOptionList(String n)
     {

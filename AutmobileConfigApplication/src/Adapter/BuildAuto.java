@@ -17,13 +17,16 @@ public class BuildAuto extends ProxyAutomobile implements CreateAuto {
 	public void buildAuto(String fileName) throws IOException {
 		FileIO io = new FileIO(fileName);
 		lhm = new LHMAuto<>();
-		a1 = io.loadAutomotive();
+		a1 = new Automobile("FordWagonZTW",100000,5);
+
+//		a1 = io.loadAutomotive();
 		lhm.addAuto(a1);
 	}
 
 	@Override
 	public void printAuto(String modelName) {
 		System.out.println(lhm.getAuto(modelName));
+		System.out.println(lhm.getAuto(modelName).getOptn(0,0));
 	}
 
 //	//used to keep an on-going loop until all recorded exceptions are fixed

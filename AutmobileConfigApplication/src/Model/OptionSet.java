@@ -24,7 +24,7 @@ class OptionSet implements Serializable {
 		}
 		optns = new ArrayList<>();
 		for (int i = 0; i < size; i++) {
-			optns.add(createOption("BLANK", 0));
+			optns.add(new Option("BLANK", 0));
 		}
 	}
 
@@ -184,9 +184,11 @@ class OptionSet implements Serializable {
 
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
-		for (int i = 0; i < getOptionsSize(); i++) {
-			sb.append(getName() + "|" + getOption(i) + "\n");
-		}
+		sb.append(getName());
+
+//		for (int i = 0; i < getOptionsSize(); i++) {
+//			sb.append(getName() + "|" + getOption(i) + "\n");
+//		}
 
 
 		return sb.toString();

@@ -37,7 +37,7 @@ public class Automobile implements Serializable {
 
 		//OLD CODE
 		for (int i = 0; i < optionSets.length; i++) {
-			optionSets[i] = new OptionSet("BLANK");
+			optionSets[i] = new OptionSet("BLANK", size);
 		}
 
 
@@ -45,7 +45,7 @@ public class Automobile implements Serializable {
 		optnSets = new ArrayList<>();
 
 		for (int i = 0; i < size; i++) {
-			optnSets.add(new OptionSet("BLANK"));
+			optnSets.add(new OptionSet("BLANK", size));
 		}
 		choice = new ArrayList<>();
 
@@ -566,6 +566,10 @@ public class Automobile implements Serializable {
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
 		sb.append("\n" + this.getName() + "|" + this.getBasePrice());
+//		sb.append(this.getOptnSet(0).toString());
+		for (int i = 0; i < getOptnSetsSize(); i++) {
+			sb.append("\n" + this.getOptnSet(i).toString());
+		}
 //		for (int i = 0; i < getOptionSetsSize(); i++) {
 //			sb.append("\n" + this.getOptionSetClassInstance(i).toString());
 //		}

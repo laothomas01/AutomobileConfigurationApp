@@ -60,7 +60,7 @@ public class FileIO {
 	//if file can be opened, proceed with attempt to populate automobile instance with read text data
 	public Automobile loadAutomotive() throws IOException {
 		//intialize as empty automobile
-		Automobile a1 = new Automobile();
+		Automobile a1;
 		int optionSetsSize;
 		BufferedReader br1 = new BufferedReader(new FileReader(fileName));
 		//we do not count the first line as part of option sets size

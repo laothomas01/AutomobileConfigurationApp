@@ -5,39 +5,39 @@ import java.util.ArrayList;
 
 public class Automobile implements Serializable {
 
-    //	private String name;
-    private float basePrice;
-    //automobile manufacturer
-    private String maker;
+	//	private String name;
+	private float basePrice;
+	//automobile manufacturer
+	private String maker;
 
 
-    //automobile year
-    private int year;
-    //
-    private String model;
+	//automobile year
+	private int year;
+	//
+	private String model;
 
 
-    //array of Option Set instances
+	//array of Option Set instances
 
-    //stores all possible configurations for an automobile
-    private OptionSet[] optionSets;
-    //stores all possible configurations for an automobile
-    private ArrayList<OptionSet> optnSets;
-    //used to store a chosen automobile option
-    private ArrayList<OptionSet.Option> choice;
+	//stores all possible configurations for an automobile
+	private OptionSet[] optionSets;
+	//stores all possible configurations for an automobile
+	private ArrayList<OptionSet> optnSets;
+	//used to store a chosen automobile option
+	private ArrayList<OptionSet.Option> choice;
 
-    /**
-     * @param n    automobile name
-     * @param p    automobile price
-     * @param size number of option sets
-     */
+	/**
+	 * @param n    automobile name
+	 * @param p    automobile price
+	 * @param size number of option sets
+	 */
 
-    //automobile has SIZE amount of option sets
-    public Automobile(String n, float p, int size) {
-        // initialize the array of Option Set instances with empty Option Set instances
-        optionSets = new OptionSet[size];
-        setModel(n);
-        setBasePrice(p);
+	//automobile has SIZE amount of option sets
+	public Automobile(String n, float p, int size) {
+		// initialize the array of Option Set instances with empty Option Set instances
+		optionSets = new OptionSet[size];
+		setModel(n);
+		setBasePrice(p);
 
 //		//OLD CODE
 //		for (int i = 0; i < optionSets.length; i++) {
@@ -45,92 +45,92 @@ public class Automobile implements Serializable {
 //		}
 
 
-        //initialize array list of option sets
-        optnSets = new ArrayList<>();
+		//initialize array list of option sets
+		optnSets = new ArrayList<>();
 
-        for (int i = 0; i < size; i++) {
-            //each option set should have 0 option instances until updated
-            optnSets.add(createOptnSet("BLANK", 0));
-        }
-        choice = new ArrayList<>();
+		for (int i = 0; i < size; i++) {
+			//each option set should have 0 option instances until updated
+			optnSets.add(createOptnSet("BLANK", 0));
+		}
+		choice = new ArrayList<>();
 
-        maker = "";
-        year = 0;
-    }
-
-
-    public Automobile(String n, int size) {
-        this(n, 0f, size);
-    }
-
-    /**
-     * @param size
-     * @param p
-     */
-    public Automobile(int size, float p) {
-        this("BLANK", p, size);
-    }
-
-    /**
-     * @param p
-     */
-    public Automobile(float p) {
-        this("BLANK", p, 0);
-    }
-
-    /**
-     * @param size
-     */
-    public Automobile(int size) {
-        this("BLANK", 0, size);
-    }
-
-    public Automobile() {
-        this("BLANK", 0, 0);
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public void setModel(String name) {
-        this.model = name;
-    }
-
-    public float getBasePrice() {
-        return basePrice;
-    }
-
-    public void setBasePrice(float basePrice) {
-        this.basePrice = basePrice;
-    }
-
-    public String getMaker() {
-        return maker;
-    }
-
-    public void setMaker(String maker) {
-        this.maker = maker;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
-    }
-
-    public void updateAutomobile(String name, float price) {
-        setModel(name);
-        setBasePrice(price);
-    }
-
-    // do  not delete. these are old CRUD functions utilizing the array of Option Sets
-    //change automobile data
+		maker = "";
+		year = 0;
+	}
 
 
-    //--------------------------------------------- OLD CODE USING BASIC ARRAY -----------------------------------------
+	public Automobile(String n, int size) {
+		this(n, 0f, size);
+	}
+
+	/**
+	 * @param size
+	 * @param p
+	 */
+	public Automobile(int size, float p) {
+		this("BLANK", p, size);
+	}
+
+	/**
+	 * @param p
+	 */
+	public Automobile(float p) {
+		this("BLANK", p, 0);
+	}
+
+	/**
+	 * @param size
+	 */
+	public Automobile(int size) {
+		this("BLANK", 0, size);
+	}
+
+	public Automobile() {
+		this("BLANK", 0, 0);
+	}
+
+	public String getModel() {
+		return model;
+	}
+
+	public void setModel(String name) {
+		this.model = name;
+	}
+
+	public float getBasePrice() {
+		return basePrice;
+	}
+
+	public void setBasePrice(float basePrice) {
+		this.basePrice = basePrice;
+	}
+
+	public String getMaker() {
+		return maker;
+	}
+
+	public void setMaker(String maker) {
+		this.maker = maker;
+	}
+
+	public int getYear() {
+		return year;
+	}
+
+	public void setYear(int year) {
+		this.year = year;
+	}
+
+	public void updateAutomobile(String name, float price) {
+		setModel(name);
+		setBasePrice(price);
+	}
+
+	// do  not delete. these are old CRUD functions utilizing the array of Option Sets
+	//change automobile data
+
+
+	//--------------------------------------------- OLD CODE USING BASIC ARRAY -----------------------------------------
 
 //	//return array of Option Set class instances
 //	public OptionSet[] getOptionSets() {
@@ -460,207 +460,208 @@ public class Automobile implements Serializable {
 //		return getOptionSetClassInstance(n).getOptionsSize();
 //	}
 
-    //------------------------------------------- OPTION SET CLASS INSTANCE C.R.U.D ------------------------------------
+	//------------------------------------------- OPTION SET CLASS INSTANCE C.R.U.D ------------------------------------
 
-    //--------------------------------------------- OLD CODE USING BASIC ARRAY -----------------------------------------
-
-
-    //--------------------------------------------- NEW CODE USING ARRAY-LIST -----------------------------------------
-
-    //OPTION SETS C.R.U.D
-    public OptionSet getOptnSet(int i) {
-        return getOptnSets().get(i);
-    }
-
-    public ArrayList<OptionSet> getOptnSets() {
-        return optnSets;
-    }
-
-    public int getOptnSetsSize() {
-        return getOptnSets().size();
-    }
-
-    public void addOptnSet(OptionSet os) {
-        getOptnSets().add(os);
-    }
-
-    //creating an option set with SIZE amount of options
-    public void addOptnSet(String name, int size) {
-        getOptnSets().add(createOptnSet(name, size));
-    }
-
-    public void setOptnSetName(int i, String name) {
-        getOptnSet(i).setName(name);
-    }
-
-    public void deleteOptnSet(int i) {
-        getOptnSets().remove(i);
-    }
+	//--------------------------------------------- OLD CODE USING BASIC ARRAY -----------------------------------------
 
 
-    public void deleteOptnSet(String name) {
-        for (int i = 0; i < getOptnSetsSize(); i++) {
-            if (getOptnSet(i).getName().equals(name)) {
-                deleteOptnSet(i);
-            }
-        }
-    }
+	//--------------------------------------------- NEW CODE USING ARRAY-LIST -----------------------------------------
 
-    //OPTION SET C.R.U.D
+	//OPTION SETS C.R.U.D
+	public OptionSet getOptnSet(int i) {
+		return getOptnSets().get(i);
+	}
 
-    public OptionSet createOptnSet(String name, int size) {
-        return new OptionSet(name, size);
-    }
+	public ArrayList<OptionSet> getOptnSets() {
+		return optnSets;
+	}
 
-    public void setOptnSet(int i, OptionSet os) {
-        getOptnSets().set(i, os);
-    }
+	public int getOptnSetsSize() {
+		return getOptnSets().size();
+	}
 
-    public void setOptnSet(int i, String name, int size) {
-        setOptnSet(i, createOptnSet(name, size));
-    }
+	public void addOptnSet(OptionSet os) {
+		getOptnSets().add(os);
+	}
 
-    public int getOptnSetSize(int i) {
-        return getOptnSet(i).getOptionsSize();
-    }
+	//creating an option set with SIZE amount of options
+	public void addOptnSet(String name, int size) {
+		getOptnSets().add(createOptnSet(name, size));
+	}
 
-    public String getOptnSetName(int i) {
-        return getOptnSet(i).getName();
-    }
+	public void setOptnSetName(int i, String name) {
+		getOptnSet(i).setName(name);
+	}
 
-    public ArrayList<OptionSet.Option> getOptns(int i) {
-        return getOptnSet(i).getOptns();
-    }
+	public void deleteOptnSet(int i) {
+		getOptnSets().remove(i);
+	}
 
 
-    public int getOptnListSize(int i) {
-        return getOptnSet(i).getOptnsListSize();
-    }
+	public void deleteOptnSet(String name) {
+		for (int i = 0; i < getOptnSetsSize(); i++) {
+			if (getOptnSet(i).getName().equals(name)) {
+				deleteOptnSet(i);
+			}
+		}
+	}
+
+	//OPTION SET C.R.U.D
+
+	public OptionSet createOptnSet(String name, int size) {
+		return new OptionSet(name, size);
+	}
+
+	public void setOptnSet(int i, OptionSet os) {
+		getOptnSets().set(i, os);
+	}
+
+	public void setOptnSet(int i, String name, int size) {
+		setOptnSet(i, createOptnSet(name, size));
+	}
+
+	public int getOptnSetSize(int i) {
+		return getOptnSet(i).getOptnsListSize();
+	}
+
+	public String getOptnSetName(int i) {
+		return getOptnSet(i).getName();
+	}
+
+	public ArrayList<OptionSet.Option> getOptns(int i) {
+		return getOptnSet(i).getOptns();
+	}
 
 
-    //OPTION C.R.U.D
-    public OptionSet.Option getOptn(int i, int j) {
-        return getOptnSet(i).getOptn(j);
-    }
+	public int getOptnListSize(int i) {
+		return getOptnSet(i).getOptnsListSize();
+	}
 
 
-    //@TODO: (WIP)
+	//OPTION C.R.U.D
+//	public OptionSet.Option getOptn(int i, int j) {
+//		return getOptnSet(i).getOptn(j);
+//	}
+
+
+	//@TODO: (WIP)
 //	public OptionSet.Option getOptn(String optSetName, String optionName) {
 //
 //	}
 
-    public String getOptnName(int i, int j) {
-        return getOptn(i, j).getName();
-    }
+//	public String getOptnName(int i, int j) {
+//		return getOptn(i, j).getName();
+//	}
+//
+//	public float getOptnPrice(int i, int j) {
+//		return getOptn(i, j).getPrice();
+//	}
+//
+//	public void setOptnName(int i, int j, String name) {
+//		getOptn(i, j).setName(name);
+//	}
+//
+//	public void setOptnPrice(int i, int j, float p) {
+//		getOptn(i, j).setPrice(p);
+//	}
 
-    public float getOptnPrice(int i, int j) {
-        return getOptn(i, j).getPrice();
-    }
+	public void setOptn(int i, int j, OptionSet.Option o) {
+		getOptnSet(i).getOptns().set(j, o);
+	}
 
-    public void setOptnName(int i, int j, String name) {
-        getOptn(i, j).setName(name);
-    }
-
-    public void setOptnPrice(int i, int j, float p) {
-        getOptn(i, j).setPrice(p);
-    }
-
-    public void setOptn(int i, int j, OptionSet.Option o) {
-        getOptnSet(i).getOptns().set(j, o);
-    }
-
-    public void setOptn(int i, int j, String n, float p) {
-        getOptnSet(i).getOption(j).setName(n);
-        getOptnSet(i).getOption(j).setPrice(p);
-
-    }
-
-
-    /**
-     * Option Set:
-     * set option choice(i) : choice(i) -> retrieved option(i)
-     * getOptnChoice: return choice
-     * <p>
-     * Automobile:
-     * setOptnChoice(i,j): access option set -> set up option choice
-     * <p>
-     * retrieving option choice:
-     * - get option choice name
-     * - get option choice price
-     * - get the option choice
-     */
+	public void setOptn(int i, int j, String n, float p) {
+//		getOptnSet(i).getOption(j).setName(n);
+//		getOptnSet(i).getOption(j).setPrice(p);
+		getOptnSet(i).getOptn(j).setName(n);
+		getOptnSet(i).getOptn(j).setPrice(p);
+	}
 
 
-    //access an option set
-    //access an option
-    //set the option choice to the
-
-    // 1) set the option choice
-    //acess option set and update option choice
-
-    //MUST BE CALLED FIRST!
-    public void setOptnChoice(int i, int j) {
-        getOptnSet(i).setOptnChoice(j);
-    }
-
-
-    // 2) retrieve the option choice instance you just set the option choice
-    // by accessing an option set instance
-    public OptionSet.Option getOptnChoice(int i) {
-        return getOptnSet(i).getOptnChoice();
-    }
-
-    // 3) get option choice name
-    public String getOptnChoiceName(int i) {
-        return getOptnSet(i).getOptnChoice().getName();
-    }
-
-    // 4) get option choice price
-    public float getOptnChoicePrice(int i) {
-        return getOptnSet(i).getOptnChoice().getPrice();
-    }
-
-    // 5) add the option choice
-
-    // after setting the option choice, you can add it to the array list
-    public void addOptionChoice(int i, int j) {
-        //1) set the option choice
-        setOptnChoice(i, j);
-        //2) add the option choice
-        choice.add(getOptnChoice(i));
-    }
-
-    public void removeOptionChoice(int i) {
-        choice.remove(i);
-    }
-
-    //--------------------------------------------- NEW CODE USING ARRAY-LIST -----------------------------------------
-
-    public float getTotalPrice() {
-        //@TODO: calculate the total price of purchases
-        float total = 0f;
-        for (OptionSet.Option o : choice) {
-            total += getBasePrice() + o.getPrice();
-        }
-        return total;
-    }
+	/**
+	 * Option Set:
+	 * set option choice(i) : choice(i) -> retrieved option(i)
+	 * getOptnChoice: return choice
+	 * <p>
+	 * Automobile:
+	 * setOptnChoice(i,j): access option set -> set up option choice
+	 * <p>
+	 * retrieving option choice:
+	 * - get option choice name
+	 * - get option choice price
+	 * - get the option choice
+	 */
 
 
-    public String toString() {
-        StringBuffer sb = new StringBuffer();
-        sb.append("\n" + getMaker() + "-" + this.getModel() + "-" + getYear() + "|" + this.getBasePrice());
-        // new implementation using an array list
-        for (int i = 0; i < getOptnSetsSize(); i++) {
-            sb.append("\n" + this.getOptnSet(i));
-        }
+	//access an option set
+	//access an option
+	//set the option choice to the
 
-        //OLD CODE
+	// 1) set the option choice
+	//acess option set and update option choice
+
+	//MUST BE CALLED FIRST!
+	public void setOptnChoice(int i, int j) {
+		getOptnSet(i).setOptnChoice(j);
+	}
+
+
+	// 2) retrieve the option choice instance you just set the option choice
+	// by accessing an option set instance
+	public OptionSet.Option getOptnChoice(int i) {
+		return getOptnSet(i).getOptnChoice();
+	}
+
+	// 3) get option choice name
+	public String getOptnChoiceName(int i) {
+		return getOptnSet(i).getOptnChoice().getName();
+	}
+
+	// 4) get option choice price
+	public float getOptnChoicePrice(int i) {
+		return getOptnSet(i).getOptnChoice().getPrice();
+	}
+
+	// 5) add the option choice
+
+	// after setting the option choice, you can add it to the array list
+	public void addOptionChoice(int i, int j) {
+////        //1) set the option choice
+		setOptnChoice(i, j);
+////        //2) add the option choice
+		choice.add(getOptnChoice(i));
+	}
+
+	public void removeOptionChoice(int i) {
+		choice.remove(i);
+	}
+
+	//--------------------------------------------- NEW CODE USING ARRAY-LIST -----------------------------------------
+
+	public float getTotalPrice() {
+		//@TODO: calculate the total price of purchases
+		float total = 0f;
+		for (OptionSet.Option o : choice) {
+			total += getBasePrice() + o.getPrice();
+		}
+		return total;
+	}
+
+
+	public String toString() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("\n" + getMaker() + "-" + this.getModel() + "-" + getYear() + "|" + this.getBasePrice());
+		// new implementation using an array list
+		for (int i = 0; i < getOptnSetsSize(); i++) {
+			sb.append("\n" + this.getOptnSet(i));
+		}
+
+		//OLD CODE
 
 //		for (int i = 0; i < getOptionSetsSize(); i++) {
 //			sb.append("\n" + this.getOptionSetClassInstance(i).toString());
 //		}
-        return sb.toString();
-    }
+		return sb.toString();
+	}
 
 
 }

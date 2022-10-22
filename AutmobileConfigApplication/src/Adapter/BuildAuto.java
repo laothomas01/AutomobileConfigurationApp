@@ -19,16 +19,16 @@ import java.io.IOException;
 
 public class BuildAuto extends ProxyAutomobile implements CreateAuto, UpdateAuto, ReadAuto {
 
-    @Override
-    public void buildAuto(String fileName) throws IOException {
-        FileIO io = new FileIO(fileName);
-        lhm = new LHMAuto<>();
-        a1 = io.loadAutomotive();
-        a1.setMaker("Ford");
-        a1.setYear(2000);
-        a1.addOptionChoice(0, 0);
-        
-        // "transmission","auto"
+	@Override
+	public void buildAuto(String fileName) throws IOException {
+		FileIO io = new FileIO(fileName);
+		lhm = new LHMAuto<>();
+		a1 = io.loadAutomotive();
+		a1.setMaker("Ford");
+		a1.setYear(2000);
+		a1.addOptionChoice(0, 0);
+
+		// "transmission","auto"
 
 
 //		a1 = new Automobile("FordWagonZTW", 100000, 5);
@@ -42,69 +42,71 @@ public class BuildAuto extends ProxyAutomobile implements CreateAuto, UpdateAuto
 //
 ////		a1.setOptn(0, 0, "Auto", 100);
 ////		a1.setOptn(0, 1, "Manual", 0);
-        lhm.addAuto(a1);
-    }
+		lhm.addAuto(a1);
+	}
 
-    @Override
-    public void printAuto(String modelName) {
-        System.out.println(lhm.getAuto(modelName));
+	@Override
+	public void printAuto(String modelName) {
+		System.out.println(lhm.getAuto(modelName).getOptnChoiceName(0));
+		System.out.println(lhm.getAuto(modelName).getOptnChoicePrice(0));
+		System.out.println("TOTAL PRICE: " + lhm.getAuto(modelName).getTotalPrice());
 
 //		System.out.println(lhm.getAuto(modelName).getOptnSet(0));
 //		System.out.println(lhm.getAuto(modelName).getOptn(0, 0));
 //		System.out.println(lhm.getAuto(modelName).getOptn(0, 1));
 //		System.out.println(lhm.getAuto(modelName).getOptnPrice(0, 1));
 
-    }
+	}
 
 
-    @Override
-    public void updateOptnSetName(String modelName, String OptionSetName, String newName) {
+	@Override
+	public void updateOptnSetName(String modelName, String OptionSetName, String newName) {
 
-    }
+	}
 
-    @Override
-    public void updateOptnPrice(String modelName, String OptionSetName, String OptionName, float newPrice) {
+	@Override
+	public void updateOptnPrice(String modelName, String OptionSetName, String OptionName, float newPrice) {
 
-    }
+	}
 
-    @Override
-    public float getTotalPrice() {
-        return a1.getTotalPrice();
-    }
-
-
-    @Override
-    public void addOptnChoice(String optSetName, String optionName) {
-
-    }
-
-    @Override
-    public void addOptnChoice(int i, int j) {
-        a1.addOptionChoice(i, j);
-    }
+	@Override
+	public float getTotalPrice() {
+		return a1.getTotalPrice();
+	}
 
 
-    @Override
-    public void removeOptnChoice(int i) {
-        a1.removeOptionChoice(i);
-    }
+	@Override
+	public void addOptnChoice(String optSetName, String optionName) {
 
-    //1) set option choice
-    @Override
-    public void setOptnChoice(int i, int j) {
-        a1.setOptnChoice(i, j);
-    }
+	}
 
-    //1) set option choice
-    @Override
-    public void setOptnChoice(String optSetName, String optionName) {
+	@Override
+	public void addOptnChoice(int i, int j) {
+		a1.addOptionChoice(i, j);
+	}
 
-    }
 
-    @Override
-    public void printOptionChoices() {
+	@Override
+	public void removeOptnChoice(int i) {
+		a1.removeOptionChoice(i);
+	}
 
-    }
+	//1) set option choice
+	@Override
+	public void setOptnChoice(int i, int j) {
+		a1.setOptnChoice(i, j);
+	}
+
+	//1) set option choice
+	@Override
+	public void setOptnChoice(String optSetName, String optionName) {
+
+	}
+
+	@Override
+	public void printOptionChoices() {
+		System.out.println(a1.getOptnChoice(0));
+	}
 
 
 //	//used to keep an on-going loop until all recorded exceptions are fixed

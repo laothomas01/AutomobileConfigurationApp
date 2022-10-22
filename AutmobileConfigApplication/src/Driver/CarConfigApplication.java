@@ -39,6 +39,8 @@ public class CarConfigApplication {
 		auto.buildAuto(configurationFile);
 		auto.printAuto("FordWagonZTW");
 
+
+
 //		auto.addOptionChoice(0, 0);
 //		auto.addOptionChoice(0, 0);
 //		auto.printAuto("FordWagonZTW");

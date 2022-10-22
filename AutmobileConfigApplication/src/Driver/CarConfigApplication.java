@@ -40,7 +40,6 @@ public class CarConfigApplication {
 		auto.printAuto("FordWagonZTW");
 
 
-
 //		auto.addOptionChoice(0, 0);
 //		auto.addOptionChoice(0, 0);
 //		auto.printAuto("FordWagonZTW");

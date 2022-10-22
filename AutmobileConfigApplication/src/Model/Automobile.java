@@ -24,7 +24,7 @@ public class Automobile implements Serializable {
 	//stores all possible configurations for an automobile
 	private ArrayList<OptionSet> optnSets;
 	//used to store a chosen automobile option
-	private ArrayList<OptionSet.Option> choice;
+	private ArrayList<OptionSet.Option> optnChoice;
 
 	/**
 	 * @param n    automobile name
@@ -52,7 +52,7 @@ public class Automobile implements Serializable {
 			//each option set should have 0 option instances until updated
 			optnSets.add(createOptnSet("BLANK", 0));
 		}
-		choice = new ArrayList<>();
+		optnChoice = new ArrayList<>();
 
 		maker = "";
 		year = 0;
@@ -628,21 +628,26 @@ public class Automobile implements Serializable {
 ////        //1) set the option choice
 		setOptnChoice(i, j);
 ////        //2) add the option choice
-		choice.add(getOptnChoice(i));
+		optnChoice.add(getOptnChoice(i));
 	}
 
 	public void removeOptionChoice(int i) {
-		choice.remove(i);
+		optnChoice.remove(i);
+	}
+
+	public ArrayList<OptionSet.Option> getOptnChoice() {
+		return optnChoice;
 	}
 
 	//--------------------------------------------- NEW CODE USING ARRAY-LIST -----------------------------------------
 
 	public float getTotalPrice() {
 		//@TODO: calculate the total price of purchases
-		float total = 0f;
-		for (OptionSet.Option o : choice) {
-			total += getBasePrice() + o.getPrice();
+		float total = 0;
+		for (OptionSet.Option o : optnChoice) {
+			total += o.getPrice();
 		}
+		total += getBasePrice();
 		return total;
 	}
 

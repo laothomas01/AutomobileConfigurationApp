@@ -27,6 +27,9 @@ public class BuildAuto extends ProxyAutomobile implements CreateAuto, UpdateAuto
 		a1.setMaker("Ford");
 		a1.setYear(2000);
 		a1.addOptionChoice(0, 0);
+		a1.addOptionChoice(1, 0);
+		a1.addOptionChoice(1, 0);
+		a1.addOptionChoice(3, 1);
 
 		// "transmission","auto"
 
@@ -49,19 +52,14 @@ public class BuildAuto extends ProxyAutomobile implements CreateAuto, UpdateAuto
 	public void printAuto(String modelName) {
 		System.out.println(lhm.getAuto(modelName).getOptnChoiceName(0));
 		System.out.println(lhm.getAuto(modelName).getOptnChoicePrice(0));
+		printOptionChoices();
 		System.out.println("TOTAL PRICE: " + lhm.getAuto(modelName).getTotalPrice());
-
-//		System.out.println(lhm.getAuto(modelName).getOptnSet(0));
-//		System.out.println(lhm.getAuto(modelName).getOptn(0, 0));
-//		System.out.println(lhm.getAuto(modelName).getOptn(0, 1));
-//		System.out.println(lhm.getAuto(modelName).getOptnPrice(0, 1));
 
 	}
 
 
 	@Override
 	public void updateOptnSetName(String modelName, String OptionSetName, String newName) {
-
 	}
 
 	@Override
@@ -105,7 +103,7 @@ public class BuildAuto extends ProxyAutomobile implements CreateAuto, UpdateAuto
 
 	@Override
 	public void printOptionChoices() {
-		System.out.println(a1.getOptnChoice(0));
+		System.out.println(a1.getOptnChoice().toString());
 	}
 
 

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 class OptionSet implements Serializable {
 
 	//array of Option instances
-	private Option options[];
+//	private Option options[];
 	//array list of Option instances
 	private ArrayList<Option> optns;
 	//Option Set instance name
@@ -22,10 +22,10 @@ class OptionSet implements Serializable {
 
 		//initialize Option instance array with blank Option instances
 
-		options = new Option[size];
-		for (int i = 0; i < size; i++) {
-			options[i] = new Option("BLANK OPTION", 0);
-		}
+//		options = new Option[size];
+//		for (int i = 0; i < size; i++) {
+//			options[i] = new Option("BLANK OPTION", 0);
+//		}
 		optns = new ArrayList<>();
 		//based on size of option set, add N option instances to arraylist
 		for (int i = 0; i < size; i++) {
@@ -50,10 +50,6 @@ class OptionSet implements Serializable {
 		this("BLANK OPTION", 0);
 	}
 
-	//--------------------------------------------- OLD CODE USING BASIC ARRAY -------------------------------------
-//
-//	//---------------------- OPTION SET INSTANCE CRUD OPERATIONS ----------------------------------------------------
-//	//[O]
 	protected String getName() {
 		return name;
 	}
@@ -61,6 +57,11 @@ class OptionSet implements Serializable {
 	protected void setName(String name) {
 		this.name = name;
 	}
+	//--------------------------------------------- OLD CODE USING BASIC ARRAY -------------------------------------
+//
+//	//---------------------- OPTION SET INSTANCE CRUD OPERATIONS ----------------------------------------------------
+//	//[O]
+
 //	//retrieve Option array
 //	//[O]
 //	protected Option[] getOptions() {

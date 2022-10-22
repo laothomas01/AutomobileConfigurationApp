@@ -157,6 +157,15 @@ class OptionSet implements Serializable {
 		return getOptns().get(i);
 	}
 
+	protected Option getOptn(String n) {
+		for (int i = 0; i < getOptnsListSize(); i++) {
+			if (getOptn(i).getName().equals(n)) {
+				return getOptn(i);
+			}
+		}
+		return null;
+	}
+
 	protected String getOptnName(int i) {
 		return getOptn(i).getName();
 	}

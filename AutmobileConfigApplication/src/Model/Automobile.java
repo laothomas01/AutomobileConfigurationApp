@@ -39,11 +39,6 @@ public class Automobile implements Serializable {
 		setModel(n);
 		setBasePrice(p);
 
-//		//OLD CODE
-//		for (int i = 0; i < optionSets.length; i++) {
-//			optionSets[i] = new OptionSet("BLANK", 0);
-//		}
-
 
 		//initialize array list of option sets
 		optnSets = new ArrayList<>();

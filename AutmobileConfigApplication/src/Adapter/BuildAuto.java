@@ -1,6 +1,5 @@
 package Adapter;
 
-import Model.Automobile;
 import Model.LHMAuto;
 import Utils.FileIO;
 import Exception.Fix1to100;
@@ -20,7 +19,6 @@ import java.io.IOException;
 
 public class BuildAuto extends ProxyAutomobile implements CreateAuto, UpdateAuto, ReadAuto, FixAuto {
 
-	boolean problemFixed = false;
 
 	@Override
 	public void buildAuto(String fileName) throws IOException {
@@ -28,34 +26,80 @@ public class BuildAuto extends ProxyAutomobile implements CreateAuto, UpdateAuto
 		lhm = new LHMAuto<>();
 		a1 = io.loadAutomotive();
 		int[] errNums = io.readArrayOfErrors("listOfErrors.txt");
-		do {
-			for (int n : errNums) {
-				fix(n);
-			}
-			problemFixed = fix(-1);
-		} while (!problemFixed);
+		boolean problemFixed = false;
+		System.out.println("PROBLEM(S) FIXED = " + problemFixed);
+		for (int i = 0; i < errNums.length; i++) {
+			System.out.println("FIXING PROBLEMS.......");
+			//fix my problems
+			fix(errNums[i]);
+		}
+		//reload the automobile after all problems are fixed
+		a1 = io.loadAutomotive();
+		System.out.println("DONE!");
+		//set the fixed flag to true
+		problemFixed = fix(-1);
+		System.out.println("PROBLEM(S) FIXED = " + problemFixed);
 
-		a1.setMaker("Ford");
-		a1.setYear(2000);
+		if (problemFixed == true) {
+			System.out.println("DO SOMETHING!");
+			a1.setMaker("Ford");
+			a1.setYear(2000);
+			a1.addOptionChoice(0, 0);
+			a1.addOptionChoice(1, 0);
+			a1.addOptionChoice(1, 0);
+			a1.addOptionChoice(3, 1);
+			System.out.println(problemFixed);
+			lhm.addAuto(a1);
+			printAuto("FordWagonZTW");
+		}
+		//do other stuff
+//		if (problemFixed) {
+//			a1.setMaker("Ford");
+//			a1.setYear(2000);
+//			a1.addOptionChoice(0, 0);
+//			a1.addOptionChoice(1, 0);
+//			a1.addOptionChoice(1, 0);
+//			a1.addOptionChoice(3, 1);
+//			System.out.println(problemFixed);
+//			lhm.addAuto(a1);
+//			printAuto("FordWagonZTW");
+//		}
 
-		a1.addOptionChoice(0, 0);
-		a1.addOptionChoice(1, 0);
-		a1.addOptionChoice(1, 0);
-		a1.addOptionChoice(3, 1);
-		lhm.addAuto(a1);
 
-		printAuto("FordWagonZTW");
+//		for (int i = 0; i < errNums.length; i++) {
+//			if (i >= errNums.length) {
+//				problemFixed = true;
+//			}
+//			fix(errNums[i]);
+//		}
 
+//		while (!problemFixed) {
+//			if (problemFixed) {
+//				break;
+//			}
+//			for (int n : errNums) {
+//				fix(n);
+//			}
+//			problemFixed = true;
+//		}
+//
+//		if (problemFixed == true) {
+//			a1.setMaker("Ford");
+//			a1.setYear(2000);
+//			a1.addOptionChoice(0, 0);
+//			a1.addOptionChoice(1, 0);
+//			a1.addOptionChoice(1, 0);
+//			a1.addOptionChoice(3, 1);
+//			System.out.println(problemFixed);
+//			lhm.addAuto(a1);
+//			printAuto("FordWagonZTW");
+//		}
 
 	}
 
 	@Override
 	public void printAuto(String modelName) {
-//		System.out.println(lhm.getAuto(modelName).getOptnChoiceName(0));
-//		System.out.println(lhm.getAuto(modelName).getOptnChoicePrice(0));
-//		printOptionChoices();
-//		System.out.println("TOTAL PRICE: " + getTotalPrice());
-
+		System.out.println(lhm.getAuto(modelName));
 	}
 
 

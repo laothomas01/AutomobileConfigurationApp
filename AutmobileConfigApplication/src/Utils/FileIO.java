@@ -111,24 +111,26 @@ public class FileIO {
 			String exception = e.getErrorNo() + "|" + e.getErrorMsg();
 			writeToFile("listOfErrors.txt", exception);
 			writeToLogFile(exception);
+		} finally {
+			//if no error, continue parsing
+			for (int i = 0; i < a1.getOptnSetsSize(); i++) {
+				line = br2.readLine();
+				String[] optnSet = line.split("\\|");
+				String optnSetName = optnSet[0];
+				String[] optnNames = optnSet[1].split(" ");
+				String[] optnPrices = optnSet[2].split(" ");
+				//needs to finish populating the option sets with empty options
+				for (int j = 0; j < optnNames.length; j++) {
+					a1.setOptnSet(i, optnSetName, optnNames.length);
+				}
+				//populate empty options with new data
+				for (int j = 0; j < optnNames.length; j++) {
+					a1.setOptn(i, j, optnNames[j], Float.parseFloat(optnPrices[j]));
+				}
+			}
 		}
 
-		//if no error, continue parsing
-		for (int i = 0; i < a1.getOptnSetsSize(); i++) {
-			line = br2.readLine();
-			String[] optnSet = line.split("\\|");
-			String optnSetName = optnSet[0];
-			String[] optnNames = optnSet[1].split(" ");
-			String[] optnPrices = optnSet[2].split(" ");
-			//needs to finish populating the option sets with empty options
-			for (int j = 0; j < optnNames.length; j++) {
-				a1.setOptnSet(i, optnSetName, optnNames.length);
-			}
-			//populate empty options with new data
-			for (int j = 0; j < optnNames.length; j++) {
-				a1.setOptn(i, j, optnNames[j], Float.parseFloat(optnPrices[j]));
-			}
-		}
+
 //		/**
 //		 *
 //		 *  - try to parse malformed CarConfigs.txt file
@@ -256,6 +258,7 @@ public class FileIO {
 
 		for (int j = 0; j < optionNames.length; j++) {
 //					//throw auto exception here if option set text file data is improper
+
 			a1.setOptnSetName(j, optionSetName);
 
 			//OLD CODE: SETTING OPTION SET INSTANCE NAME
@@ -501,11 +504,11 @@ public class FileIO {
 		BufferedWriter bw = null;
 		if (file.length() > 0) {
 			bw = new BufferedWriter(new FileWriter(file, true));
-			bw.append(line);
-
+			bw.newLine();
+			bw.write(line);
 		} else {
 			bw = new BufferedWriter(new FileWriter(file));
-			bw.append(line);
+			bw.write(line);
 		}
 		bw.close();
 	}

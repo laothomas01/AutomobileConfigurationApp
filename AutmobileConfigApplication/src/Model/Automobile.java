@@ -569,10 +569,6 @@ public class Automobile implements Serializable {
 		getOptn(i, j).setPrice(p);
 	}
 
-	public OptionSet.Option createOption(String name,float price)
-	{
-		return getOptnSet(0).createOption();
-	}
 	public void setOptn(int i, int j, OptionSet.Option o) {
 		getOptnSet(i).getOptns().set(j, o);
 	}

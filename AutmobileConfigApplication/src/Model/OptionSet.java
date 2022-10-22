@@ -143,7 +143,6 @@ class OptionSet implements Serializable {
 		return new Option(name, price);
 	}
 
-
 	protected Option getOptn(int i) {
 		return getOptns().get(i);
 	}
@@ -161,13 +160,14 @@ class OptionSet implements Serializable {
 		setOptnPrice(i, price);
 	}
 
-	protected void addtoOptnList(Option o) {
+	protected void addOptn(Option o) {
 		getOptns().add(o);
 	}
 
-	protected void addtoOptnList(String name, float price) {
-		addtoOptnList(createOption(name, price));
+	protected void addOptn(String name, float price) {
+		addOptn(createOption(name, price));
 	}
+
 
 	protected void deleteFromOptnList(int i) {
 		getOptns().remove(i);

@@ -105,25 +105,49 @@ public class FileIO {
 			e.setErrorMsg("Missing Automobile Price!");
 			e.printMyProblem();
 			String exception = e.getErrorNo() + "|" + e.getErrorMsg();
-			writeToFile("listOfErrors.txt", exception);
-//			writeToLogFile(exception);
-		}
-		//loop 5 times, each iteration =  a text file line (excluding the first line)
-		for (int i = 0; i < a1.getOptionSetsSize(); i++) {
-			line = br2.readLine();
-			String[] optionSet = line.split("\\|");
-			String optionSetName = optionSet[0];
-			String[] optionNames = optionSet[1].split(" ");
-			String[] optionPrices = optionSet[2].split(" ");
+//			writeToFile("listOfErrors.txt", exception);
+			//loop 5 times, each iteration =  a text file line (excluding the first line)
 
-			//populate
-			for (int j = 0; j < optionNames.length; j++) {
-				//throw auto exception here if option set text file data is improper
-				a1.updateOptionSetInstance(i, a1.createOptionSetInstance(optionSetName, optionNames.length));
-			}
-			for (int j = 0; j < optionNames.length; j++) {
-				//throw auto exception here if option text file data is improper
-				a1.updateOptionClassInstance(i, j, optionNames[j], Float.parseFloat(optionPrices[j]));
+
+			//OLD CODE: LOOPING THROUGH OPTION SET SIZES AND PARSING DATA
+//			for (int i = 0; i < a1.getOptionSetsSize(); i++) {
+//				line = br2.readLine();
+//				String[] optionSet = line.split("\\|");
+//				String optionSetName = optionSet[0];
+//				String[] optionNames = optionSet[1].split(" ");
+//				String[] optionPrices = optionSet[2].split(" ");
+//
+//				//populate
+//				for (int j = 0; j < optionNames.length; j++) {
+//					//throw auto exception here if option set text file data is improper
+//					a1.updateOptionSetInstance(i, a1.createOptionSetInstance(optionSetName, optionNames.length));
+//				}
+//				for (int j = 0; j < optionNames.length; j++) {
+//					//throw auto exception here if option text file data is improper
+//					a1.updateOptionClassInstance(i, j, optionNames[j], Float.parseFloat(optionPrices[j]));
+//				}
+//			}
+			for (int i = 0; i < a1.getOptnSetsSize(); i++) {
+				line = br2.readLine();
+				String[] optionSet = line.split("\\|");
+				String optionSetName = optionSet[0];
+				String[] optionNames = optionSet[1].split(" ");
+				String[] optionPrices = optionSet[2].split(" ");
+
+				//populate
+				for (int j = 0; j < optionNames.length; j++) {
+//					//throw auto exception here if option set text file data is improper
+					a1.setOptnSetName(i, optionSetName);
+
+					//OLD CODE: SETTING OPTION SET INSTANCE NAME
+//					a1.updateOptionSetInstance(i, a1.createOptionSetInstance(optionSetName, optionNames.length))
+				}
+				for (int j = 0; j < optionNames.length; j++) {
+//					//throw auto exception here if option text file data is improper
+					//		OLD CODE: SETTING OPTION INSTANCE PRICES
+//					a1.updateOptionClassInstance(i, j, optionNames[j], Float.parseFloat(optionPrices[j]));
+					a1.setOptn(i, j, optionNames[j], Float.parseFloat(optionPrices[j]));
+				}
 			}
 		}
 
@@ -131,6 +155,7 @@ public class FileIO {
 		br2.close();
 		return a1;
 	}
+
 
 	public Automobile loadAutomobileOptionSets() throws IOException {
 		//intialize as empty automobile
@@ -149,23 +174,46 @@ public class FileIO {
 
 		//read first line from carconfigs.txt
 		String line = br2.readLine();
-		//loop 5 times, each iteration =  a text file line (excluding the first line)
-		for (int i = 0; i < a1.getOptionSetsSize(); i++) {
-			line = br2.readLine();
-			String[] optionSet = line.split("\\|");
-			String optionSetName = optionSet[0];
-			String[] optionNames = optionSet[1].split(" ");
-			String[] optionPrices = optionSet[2].split(" ");
 
-			//populate
-			for (int j = 0; j < optionNames.length; j++) {
-				//throw auto exception here if option set text file data is improper
-				a1.updateOptionSetInstance(i, a1.createOptionSetInstance(optionSetName, optionNames.length));
-			}
-			for (int j = 0; j < optionNames.length; j++) {
-				//throw auto exception here if option text file data is improper
-				a1.updateOptionClassInstance(i, j, optionNames[j], Float.parseFloat(optionPrices[j]));
-			}
+
+		//CO//loop 5 times, each iteration =  a text file line (excluding the first line)
+
+//		for (int i = 0; i < a1.getOptionSetsSize(); i++) {
+//			line = br2.readLine();
+//			String[] optionSet = line.split("\\|");
+//			String optionSetName = optionSet[0];
+//			String[] optionNames = optionSet[1].split(" ");
+//			String[] optionPrices = optionSet[2].split(" ");
+//
+//			//populate
+//			for (int j = 0; j < optionNames.length; j++) {
+//				//throw auto exception here if option set text file data is improper
+//				a1.updateOptionSetInstance(i, a1.createOptionSetInstance(optionSetName, optionNames.length));
+//			}
+//			for (int j = 0; j < optionNames.length; j++) {
+//				//throw auto exception here if option text file data is improper
+//				a1.updateOptionClassInstance(i, j, optionNames[j], Float.parseFloat(optionPrices[j]));
+//			}
+//		}for (int i = 0; i < a1.getOptionSetsSize(); i++) {
+// OLD CODE
+		line = br2.readLine();
+		String[] optionSet = line.split("\\|");
+		String optionSetName = optionSet[0];
+		String[] optionNames = optionSet[1].split(" ");
+		String[] optionPrices = optionSet[2].split(" ");
+
+		for (int j = 0; j < optionNames.length; j++) {
+//					//throw auto exception here if option set text file data is improper
+			a1.setOptnSetName(j, optionSetName);
+
+			//OLD CODE: SETTING OPTION SET INSTANCE NAME
+//					a1.updateOptionSetInstance(i, a1.createOptionSetInstance(optionSetName, optionNames.length))
+		}
+		for (int j = 0; j < optionNames.length; j++) {
+//					//throw auto exception here if option text file data is improper
+			//		OLD CODE: SETTING OPTION INSTANCE PRICES
+//					a1.updateOptionClassInstance(i, j, optionNames[j], Float.parseFloat(optionPrices[j]));
+			a1.setOptn(j, j, optionNames[j], Float.parseFloat(optionPrices[j]));
 		}
 
 

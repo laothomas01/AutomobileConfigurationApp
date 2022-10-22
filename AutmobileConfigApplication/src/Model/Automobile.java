@@ -121,333 +121,333 @@ public class Automobile implements Serializable {
 
 	//--------------------------------------------- OLD CODE USING BASIC ARRAY -----------------------------------------
 
-	//return array of Option Set class instances
-	public OptionSet[] getOptionSets() {
-		return optionSets;
-	}
-
-
-	//------------------------------------------- OPTION SET CLASS INSTANCE C.R.U.D ------------------------------------
-
-	//create option set instance
-	//[O]
-	public OptionSet createOptionSetInstance(String name, int size) {
-		return new OptionSet(name, size);
-	}
-
-	public OptionSet createOptionSetInstance(int size) {
-		return new OptionSet(size);
-	}
-
-	public OptionSet createOptionSetInstance(String name) {
-		return new OptionSet(name);
-	}
-
-	//[O]
-	public OptionSet createOptionSetInstance() {
-		return new OptionSet();
-	}
-
-	//retrieve an option set by index
-	//[O]
-	public OptionSet getOptionSetClassInstance(int i) {
-		if (i < 0 || i >= getOptionSetsSize() || getOptionSets()[i] == null) {
-			return new OptionSet();
-		}
-		return getOptionSets()[i];
-	}
-
-	//retrieve an option set by string
-	//[O]
-	public OptionSet getOptionSetClassInstance(String optionSetName) {
-		for (int i = 0; i < getOptionSetsSize(); i++) {
-			if (getOptionSetClassInstance(i).getName().equals(optionSetName)) {
-				return getOptionSetClassInstance(i);
-			}
-		}
-		System.out.println("CANNOT FIND OPTION SET INSTANCE!");
-		return new OptionSet();
-	}
-
-	public void printAllOptionSetInstances() {
-		for (int i = 0; i < getOptionSetsSize(); i++) {
-			System.out.println(getOptionSetClassInstance(i).toString());
-		}
-	}
-	//-------------------------------------------------------------------------
-
-
-	//[O]
-	public String getOptionSetName(int i) {
-		return getOptionSetClassInstance(i).getName();
-	}
-
-	public String getOptionSetName(String optionSetName) {
-		return getOptionSetClassInstance(optionSetName).getName();
-	}
-
-
-	//[O]
-	public void updateOptionSetInstance(int i, OptionSet os) {
-		if (i < 0 || i >= getOptionSetsSize()) {
-			//throw custom exception
-			System.out.println("CANNOT FIND OPTION SET INSTANCE!");
-		}
-		getOptionSets()[i] = os;
-	}
-
-	public void updateOptionSetInstance(String optionSetName, OptionSet os) {
-		for (int i = 0; i < getOptionSetsSize(); i++) {
-			if (getOptionSetClassInstance(i).getName().equals(optionSetName)) {
-				updateOptionSetInstance(i, os);
-			}
-		}
-		//throw custom exception
-		System.out.println("CANNOT FIND OPTION SET INSTANCE!");
-	}
-
-	/**
-	 * update instance of Option Set class and instance of Option class
-	 *
-	 * @param optionSetIndex look up an option set class instance
-	 * @param optionIndex    look up an option class instance
-	 * @param optionSetSize  set size of option set array
-	 * @param optionSetName  set name of option set
-	 * @param optionName     set name of option
-	 * @param optionPrice    set price of option
-	 */
-
-
-	public void updateOptionSetInstance(int optionSetIndex, int optionSetSize, String optionSetName, int optionIndex, String optionName, float optionPrice) {
-
-
-		updateOptionSetInstance(optionSetIndex, createOptionSetInstance(optionSetName, optionSetSize));
-		updateOptionClassInstance(optionSetIndex, optionIndex, optionName, optionPrice);
-	}
-
-
-	//UPDATE
-	//using Option Set class instance to retrieve an option set name
-
-	//[O]
-	public void updateOptionSetName(int i, String n) {
-		getOptionSetClassInstance(i).setName(n);
-	}
-
-	public void updateOptionSetName(String replaceName) {
-		for (int i = 0; i < getOptionSetsSize(); i++) {
-			updateOptionSetName(i, replaceName);
-		}
-	}
-
-	//[O]
-	public void updateOptionSetName(String OptionSetName, String newName) {
-		for (int i = 0; i < getOptionSetsSize(); i++) {
-			if (getOptionSetClassInstance(i).getName().equals(OptionSetName)) {
-				getOptionSetClassInstance(i).setName(newName);
-			}
-		}
-	}
-
-
-	//DELETE
-
-	/**
-	 * set an option set instance to null
-	 *
-	 * @param i option set instance index
-	 */
-	//[O]
-	public void deleteOptionSetInstance(int i) {
-		updateOptionSetInstance(i, createOptionSetInstance());
-		System.out.println("OPTION SET HAS BEEN DELETED!");
-	}
-
-	/**
-	 * set an option set instance to null
-	 *
-	 * @param n option set instance name
-	 */
-	//[O]
-	public void deleteOptionSetInstance(String n) {
-		for (int i = 0; i < getOptionSetsSize(); i++) {
-			if (getOptionSetName(i).equals(n)) {
-				deleteOptionSetInstance(i);
-			}
-		}
-		System.out.println("CANNOT FIND OPTION SET INSTANCE!");
-	}
-
-	/**
-	 * retrieve array of Option class instances by index
-	 *
-	 * @param optionSetIndex
-	 * @return
-	 */
-	public OptionSet.Option[] getOptionsArray(int optionSetIndex) {
-		return getOptionSetClassInstance(optionSetIndex).getOptions();
-	}
-
-	/**
-	 * retrieve array of Option class instances by name look up
-	 *
-	 * @param optionSetName
-	 * @return
-	 */
-	public OptionSet.Option[] getOptionsArray(String optionSetName) {
-		return getOptionSetClassInstance(optionSetName).getOptions();
-	}
-
-	//-------------------------------------------------------------------------------------------------
-
-
-	//--------------------------------------- OPTION INSTANCE CRUD ------------------------------------
-
-
-	/**
-	 * //access an option set class instance and option class instance by index to gain access to CRUD operations for Option class
-	 *
-	 * @param optSetIndex
-	 * @param optIndex
-	 * @return
-	 */
-	public OptionSet.Option getOptionClassInstance(int optSetIndex, int optIndex) {
-		return getOptionSetClassInstance(optSetIndex).getOption(optIndex);
-	}
-
-	/**
-	 * //access an option set class instance and option class instance by name to gain access to CRUD operations for Option class
-	 *
-	 * @param optionSetName
-	 * @param optionName
-	 * @return
-	 */
-	public OptionSet.Option getOptionClassInstance(String optionSetName, String optionName) {
-		return getOptionSetClassInstance(optionSetName).getOption(optionName);
-	}
-
-	/**
-	 * //access an option set class instance and option class instance by index to gain access to CRUD operations for Option class
-	 *
-	 * @param optSetIndex
-	 * @param optIndex
-	 * @return
-	 */
-	public String getOptionName(int optSetIndex, int optIndex) {
-		return getOptionClassInstance(optSetIndex, optIndex).getName();
-	}
-
-	public String getOptionName(String optSetName, String optName) {
-		return getOptionClassInstance(optSetName, optName).getName();
-	}
-
-	/**
-	 * //access an option set class instance and option class instance by index to gain access to CRUD operations for Option class
-	 *
-	 * @param optSetIndex
-	 * @param optIndex
-	 * @param name
-	 */
-	public void updateOptionName(int optSetIndex, int optIndex, String name) {
-		getOptionClassInstance(optSetIndex, optIndex).setName(name);
-	}
-
-	/**
-	 * access an option set class instance and option class instance by index to gain access to CRUD operations for Option class
-	 *
-	 * @param optSetIndex
-	 * @param optIndex
-	 * @return
-	 */
-
-	public float getOptionPrice(int optSetIndex, int optIndex) {
-		return getOptionClassInstance(optSetIndex, optIndex).getPrice();
-	}
-
-	/**
-	 * access an option set class instance and option class instance by index to gain access to CRUD operations for Option class
-	 *
-	 * @param optSetIndex
-	 * @param optIndex
-	 * @param price
-	 */
-	public void updateOptionPrice(int optSetIndex, int optIndex, float price) {
-		getOptionClassInstance(optSetIndex, optIndex).setPrice(price);
-	}
-
-	/**
-	 * access an option set class instance and option class instance by index to gain access to CRUD operations for Option class
-	 *
-	 * @param OptionSetName
-	 * @param OptionName
-	 * @param newPrice
-	 */
-	public void updateOptionPrice(String OptionSetName, String OptionName, float newPrice) {
-		getOptionClassInstance(OptionSetName, OptionName).setPrice(newPrice);
-	}
-
-	/**
-	 * access an option set class instance and option class instance by index to gain access to CRUD operations for Option class
-	 *
-	 * @param optSetIndex
-	 * @param optIndex
-	 * @param optionName
-	 * @param optionPrice
-	 */
-	//[O]
-	public void updateOptionClassInstance(int optSetIndex, int optIndex, String optionName, float optionPrice) {
-		//access the index of an option class instance for both i and j for setting price and name
-		updateOptionPrice(optSetIndex, optIndex, optionPrice);
-		updateOptionName(optSetIndex, optIndex, optionName);
-	}
-
-	/**
-	 * search by optset index and opt index. replace with empty option instance
-	 *
-	 * @param optSetIndex
-	 * @param optIndex
-	 */
-
-	//[O]
-	public void deleteOptionClassInstance(int optSetIndex, int optIndex) {
-		getOptionSetClassInstance(optSetIndex).setOption(optIndex, getOptionSetClassInstance(optIndex).createOption());
-	}
-
-	/**
-	 * search by optset name and opt name. replace with empty option instance
-	 *
-	 * @param optSetName
-	 * @param optName
-	 */
-	public void deleteOptionClassInstance(String optSetName, String optName) {
-		getOptionSetClassInstance(optSetName).setOption(optName, getOptionSetClassInstance(optSetName).createOption());
-	}
-
-
-	/**
-	 * @return length of array of option set instances
-	 */
-	public int getOptionSetsSize() {
-		return getOptionSets().length;
-	}
-
-
-	/**
-	 * @param i option set index
-	 * @return length of array containing option instances
-	 */
-	public int getOptionsArraySize(int i) {
-		return getOptionSetClassInstance(i).getOptionsSize();
-	}
-
-	/**
-	 * length of array containing option instances
-	 *
-	 * @param n option set name
-	 */
-	public int getOptionsArraySize(String n) {
-		return getOptionSetClassInstance(n).getOptionsSize();
-	}
+//	//return array of Option Set class instances
+//	public OptionSet[] getOptionSets() {
+//		return optionSets;
+//	}
+//
+//
+//	//------------------------------------------- OPTION SET CLASS INSTANCE C.R.U.D ------------------------------------
+//
+//	//create option set instance
+//	//[O]
+//	public OptionSet createOptionSetInstance(String name, int size) {
+//		return new OptionSet(name, size);
+//	}
+//
+//	public OptionSet createOptionSetInstance(int size) {
+//		return new OptionSet(size);
+//	}
+//
+//	public OptionSet createOptionSetInstance(String name) {
+//		return new OptionSet(name);
+//	}
+//
+//	//[O]
+//	public OptionSet createOptionSetInstance() {
+//		return new OptionSet();
+//	}
+//
+//	//retrieve an option set by index
+//	//[O]
+//	public OptionSet getOptionSetClassInstance(int i) {
+//		if (i < 0 || i >= getOptionSetsSize() || getOptionSets()[i] == null) {
+//			return new OptionSet();
+//		}
+//		return getOptionSets()[i];
+//	}
+//
+//	//retrieve an option set by string
+//	//[O]
+//	public OptionSet getOptionSetClassInstance(String optionSetName) {
+//		for (int i = 0; i < getOptionSetsSize(); i++) {
+//			if (getOptionSetClassInstance(i).getName().equals(optionSetName)) {
+//				return getOptionSetClassInstance(i);
+//			}
+//		}
+//		System.out.println("CANNOT FIND OPTION SET INSTANCE!");
+//		return new OptionSet();
+//	}
+//
+//	public void printAllOptionSetInstances() {
+//		for (int i = 0; i < getOptionSetsSize(); i++) {
+//			System.out.println(getOptionSetClassInstance(i).toString());
+//		}
+//	}
+//	//-------------------------------------------------------------------------
+//
+//
+//	//[O]
+//	public String getOptionSetName(int i) {
+//		return getOptionSetClassInstance(i).getName();
+//	}
+//
+//	public String getOptionSetName(String optionSetName) {
+//		return getOptionSetClassInstance(optionSetName).getName();
+//	}
+//
+//
+//	//[O]
+//	public void updateOptionSetInstance(int i, OptionSet os) {
+//		if (i < 0 || i >= getOptionSetsSize()) {
+//			//throw custom exception
+//			System.out.println("CANNOT FIND OPTION SET INSTANCE!");
+//		}
+//		getOptionSets()[i] = os;
+//	}
+//
+//	public void updateOptionSetInstance(String optionSetName, OptionSet os) {
+//		for (int i = 0; i < getOptionSetsSize(); i++) {
+//			if (getOptionSetClassInstance(i).getName().equals(optionSetName)) {
+//				updateOptionSetInstance(i, os);
+//			}
+//		}
+//		//throw custom exception
+//		System.out.println("CANNOT FIND OPTION SET INSTANCE!");
+//	}
+//
+//	/**
+//	 * update instance of Option Set class and instance of Option class
+//	 *
+//	 * @param optionSetIndex look up an option set class instance
+//	 * @param optionIndex    look up an option class instance
+//	 * @param optionSetSize  set size of option set array
+//	 * @param optionSetName  set name of option set
+//	 * @param optionName     set name of option
+//	 * @param optionPrice    set price of option
+//	 */
+//
+//
+//	public void updateOptionSetInstance(int optionSetIndex, int optionSetSize, String optionSetName, int optionIndex, String optionName, float optionPrice) {
+//
+//
+//		updateOptionSetInstance(optionSetIndex, createOptionSetInstance(optionSetName, optionSetSize));
+//		updateOptionClassInstance(optionSetIndex, optionIndex, optionName, optionPrice);
+//	}
+//
+//
+//	//UPDATE
+//	//using Option Set class instance to retrieve an option set name
+//
+//	//[O]
+//	public void updateOptionSetName(int i, String n) {
+//		getOptionSetClassInstance(i).setName(n);
+//	}
+//
+//	public void updateOptionSetName(String replaceName) {
+//		for (int i = 0; i < getOptionSetsSize(); i++) {
+//			updateOptionSetName(i, replaceName);
+//		}
+//	}
+//
+//	//[O]
+//	public void updateOptionSetName(String OptionSetName, String newName) {
+//		for (int i = 0; i < getOptionSetsSize(); i++) {
+//			if (getOptionSetClassInstance(i).getName().equals(OptionSetName)) {
+//				getOptionSetClassInstance(i).setName(newName);
+//			}
+//		}
+//	}
+//
+//
+//	//DELETE
+//
+//	/**
+//	 * set an option set instance to null
+//	 *
+//	 * @param i option set instance index
+//	 */
+//	//[O]
+//	public void deleteOptionSetInstance(int i) {
+//		updateOptionSetInstance(i, createOptionSetInstance());
+//		System.out.println("OPTION SET HAS BEEN DELETED!");
+//	}
+//
+//	/**
+//	 * set an option set instance to null
+//	 *
+//	 * @param n option set instance name
+//	 */
+//	//[O]
+//	public void deleteOptionSetInstance(String n) {
+//		for (int i = 0; i < getOptionSetsSize(); i++) {
+//			if (getOptionSetName(i).equals(n)) {
+//				deleteOptionSetInstance(i);
+//			}
+//		}
+//		System.out.println("CANNOT FIND OPTION SET INSTANCE!");
+//	}
+//
+//	/**
+//	 * retrieve array of Option class instances by index
+//	 *
+//	 * @param optionSetIndex
+//	 * @return
+//	 */
+//	public OptionSet.Option[] getOptionsArray(int optionSetIndex) {
+//		return getOptionSetClassInstance(optionSetIndex).getOptions();
+//	}
+//
+//	/**
+//	 * retrieve array of Option class instances by name look up
+//	 *
+//	 * @param optionSetName
+//	 * @return
+//	 */
+//	public OptionSet.Option[] getOptionsArray(String optionSetName) {
+//		return getOptionSetClassInstance(optionSetName).getOptions();
+//	}
+//
+//	//-------------------------------------------------------------------------------------------------
+//
+//
+//	//--------------------------------------- OPTION INSTANCE CRUD ------------------------------------
+//
+//
+//	/**
+//	 * //access an option set class instance and option class instance by index to gain access to CRUD operations for Option class
+//	 *
+//	 * @param optSetIndex
+//	 * @param optIndex
+//	 * @return
+//	 */
+//	public OptionSet.Option getOptionClassInstance(int optSetIndex, int optIndex) {
+//		return getOptionSetClassInstance(optSetIndex).getOption(optIndex);
+//	}
+//
+//	/**
+//	 * //access an option set class instance and option class instance by name to gain access to CRUD operations for Option class
+//	 *
+//	 * @param optionSetName
+//	 * @param optionName
+//	 * @return
+//	 */
+//	public OptionSet.Option getOptionClassInstance(String optionSetName, String optionName) {
+//		return getOptionSetClassInstance(optionSetName).getOption(optionName);
+//	}
+//
+//	/**
+//	 * //access an option set class instance and option class instance by index to gain access to CRUD operations for Option class
+//	 *
+//	 * @param optSetIndex
+//	 * @param optIndex
+//	 * @return
+//	 */
+//	public String getOptionName(int optSetIndex, int optIndex) {
+//		return getOptionClassInstance(optSetIndex, optIndex).getName();
+//	}
+//
+//	public String getOptionName(String optSetName, String optName) {
+//		return getOptionClassInstance(optSetName, optName).getName();
+//	}
+//
+//	/**
+//	 * //access an option set class instance and option class instance by index to gain access to CRUD operations for Option class
+//	 *
+//	 * @param optSetIndex
+//	 * @param optIndex
+//	 * @param name
+//	 */
+//	public void updateOptionName(int optSetIndex, int optIndex, String name) {
+//		getOptionClassInstance(optSetIndex, optIndex).setName(name);
+//	}
+//
+//	/**
+//	 * access an option set class instance and option class instance by index to gain access to CRUD operations for Option class
+//	 *
+//	 * @param optSetIndex
+//	 * @param optIndex
+//	 * @return
+//	 */
+//
+//	public float getOptionPrice(int optSetIndex, int optIndex) {
+//		return getOptionClassInstance(optSetIndex, optIndex).getPrice();
+//	}
+//
+//	/**
+//	 * access an option set class instance and option class instance by index to gain access to CRUD operations for Option class
+//	 *
+//	 * @param optSetIndex
+//	 * @param optIndex
+//	 * @param price
+//	 */
+//	public void updateOptionPrice(int optSetIndex, int optIndex, float price) {
+//		getOptionClassInstance(optSetIndex, optIndex).setPrice(price);
+//	}
+//
+//	/**
+//	 * access an option set class instance and option class instance by index to gain access to CRUD operations for Option class
+//	 *
+//	 * @param OptionSetName
+//	 * @param OptionName
+//	 * @param newPrice
+//	 */
+//	public void updateOptionPrice(String OptionSetName, String OptionName, float newPrice) {
+//		getOptionClassInstance(OptionSetName, OptionName).setPrice(newPrice);
+//	}
+//
+//	/**
+//	 * access an option set class instance and option class instance by index to gain access to CRUD operations for Option class
+//	 *
+//	 * @param optSetIndex
+//	 * @param optIndex
+//	 * @param optionName
+//	 * @param optionPrice
+//	 */
+//	//[O]
+//	public void updateOptionClassInstance(int optSetIndex, int optIndex, String optionName, float optionPrice) {
+//		//access the index of an option class instance for both i and j for setting price and name
+//		updateOptionPrice(optSetIndex, optIndex, optionPrice);
+//		updateOptionName(optSetIndex, optIndex, optionName);
+//	}
+//
+//	/**
+//	 * search by optset index and opt index. replace with empty option instance
+//	 *
+//	 * @param optSetIndex
+//	 * @param optIndex
+//	 */
+//
+//	//[O]
+//	public void deleteOptionClassInstance(int optSetIndex, int optIndex) {
+//		getOptionSetClassInstance(optSetIndex).setOption(optIndex, getOptionSetClassInstance(optIndex).createOption());
+//	}
+//
+//	/**
+//	 * search by optset name and opt name. replace with empty option instance
+//	 *
+//	 * @param optSetName
+//	 * @param optName
+//	 */
+//	public void deleteOptionClassInstance(String optSetName, String optName) {
+//		getOptionSetClassInstance(optSetName).setOption(optName, getOptionSetClassInstance(optSetName).createOption());
+//	}
+//
+//
+//	/**
+//	 * @return length of array of option set instances
+//	 */
+//	public int getOptionSetsSize() {
+//		return getOptionSets().length;
+//	}
+//
+//
+//	/**
+//	 * @param i option set index
+//	 * @return length of array containing option instances
+//	 */
+//	public int getOptionsArraySize(int i) {
+//		return getOptionSetClassInstance(i).getOptionsSize();
+//	}
+//
+//	/**
+//	 * length of array containing option instances
+//	 *
+//	 * @param n option set name
+//	 */
+//	public int getOptionsArraySize(String n) {
+//		return getOptionSetClassInstance(n).getOptionsSize();
+//	}
 
 	//------------------------------------------- OPTION SET CLASS INSTANCE C.R.U.D ------------------------------------
 
@@ -456,48 +456,98 @@ public class Automobile implements Serializable {
 
 	//--------------------------------------------- NEW CODE USING ARRAY-LIST -----------------------------------------
 
-
-	protected ArrayList<OptionSet> getOptnSets() {
-		return optnSets;
-	}
-
-	protected int OptnSetsSize() {
-		return getOptnSets().size();
-	}
-
-
-	protected OptionSet getOptnset(int i) {
+	//OPTION SETS C.R.U.D
+	public OptionSet getOptnSet(int i) {
 		return getOptnSets().get(i);
 	}
 
-	protected void addtoOptnset(OptionSet os) {
+	public OptionSet createOptnSet(String name, int size) {
+		return new OptionSet(name, size);
+	}
+
+	public OptionSet createOptnSet(String name) {
+		return new OptionSet(name);
+	}
+
+	public ArrayList<OptionSet> getOptnSets() {
+		return optnSets;
+	}
+
+	public int getOptnSetsSize() {
+		return getOptnSets().size();
+	}
+
+	public void addOptnSet(OptionSet os) {
 		getOptnSets().add(os);
 	}
 
-	protected void setOptnsetName(int i, String name) {
-		getOptnset(i).setName(name);
+	public void addOptnSet(String name) {
+		addOptnSet(createOptnSet(name));
 	}
 
-	protected void setOptnSet(int i, String name) {
-		getOptnset(i).setName(name);
+	public void setOptnSetName(int i, String name) {
+		getOptnSet(i).setName(name);
+	}
+
+	public void deleteOptnSet(int i) {
+		getOptnSets().remove(i);
 	}
 
 
-	protected void addtoOptnset(String name, float price) {
-		addtoOptnList(createOption(name, price));
-	}
-
-	protected void deleteOptnset(int i) {
-		getOptns().remove(i);
-	}
-
-	protected void deleteOptnset(String name) {
-		for (int i = 0; i < getOptnsListSize(); i++) {
-			if (getOptnset(i).getName().equals(name)) {
-				deleteFromOptnList(i);
+	public void deleteOptnSet(String name) {
+		for (int i = 0; i < getOptnSetsSize(); i++) {
+			if (getOptnSet(i).getName().equals(name)) {
+				deleteOptnSet(i);
 			}
 		}
 	}
+
+	//OPTION SET C.R.U.D
+
+	public int getOptnSetSize(int i) {
+		return getOptnSet(i).getOptionsSize();
+	}
+
+	public String getOptnSetName(int i) {
+		return getOptnSet(i).getName();
+	}
+
+	public ArrayList<OptionSet.Option> getOptns(int i) {
+		return getOptnSet(i).getOptns();
+	}
+
+
+	public int getOptnListSize(int i) {
+		return getOptnSet(i).getOptnsListSize();
+	}
+
+
+	//OPTION C.R.U.D
+	public OptionSet.Option getOptn(int i, int j) {
+		return getOptnSet(i).getOptn(j);
+	}
+
+	public String getOptnName(int i, int j) {
+		return getOptn(i, j).getName();
+	}
+
+	public float getOptnPrice(int i, int j) {
+		return getOptn(i, j).getPrice();
+	}
+
+	public void setOptnName(int i, int j, String name) {
+		getOptn(i, j).setName(name);
+	}
+
+	public void setOptnPrice(int i, int j, float p) {
+		getOptn(i, j).setPrice(p);
+	}
+
+
+	public void setOptn(int i, int j, String n, float p) {
+		getOptnSet(i).setOptn(j, n, p);
+	}
+
 
 	//--------------------------------------------- NEW CODE USING ARRAY-LIST -----------------------------------------
 
@@ -511,13 +561,14 @@ public class Automobile implements Serializable {
 	}
 
 
+	//OLD CODE
 	// new implementation using an array list
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
 		sb.append("\n" + this.getName() + "|" + this.getBasePrice());
-		for (int i = 0; i < getOptionSetsSize(); i++) {
-			sb.append("\n" + this.getOptionSetClassInstance(i).toString());
-		}
+//		for (int i = 0; i < getOptionSetsSize(); i++) {
+//			sb.append("\n" + this.getOptionSetClassInstance(i).toString());
+//		}
 		return sb.toString();
 	}
 

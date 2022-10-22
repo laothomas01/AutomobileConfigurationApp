@@ -3,12 +3,8 @@ package Adapter;
 import Model.Automobile;
 import Model.LHMAuto;
 import Utils.FileIO;
-import Exception.Fix1to100;
 
 import java.io.IOException;
-import java.util.LinkedHashMap;
-import java.util.Random;
-import java.util.Scanner;
 
 /**
  * API for our car configuration app
@@ -27,17 +23,32 @@ public class BuildAuto extends ProxyAutomobile implements CreateAuto, UpdateAuto
 	public void buildAuto(String fileName) throws IOException {
 		FileIO io = new FileIO(fileName);
 		lhm = new LHMAuto<>();
-		a1 = new Automobile("FordWagonZTW", 100000, 5);
+		a1 = io.loadAutomotive();
 		a1.setMaker("Ford");
 		a1.setYear(2000);
-//		a1 = io.loadAutomotive();
+
+//		a1 = new Automobile("FordWagonZTW", 100000, 5);
+//		a1.setMaker("Ford");
+//		a1.setYear(2000);
+////		a1 = io.loadAutomotive();
+////		a1.setOptnSetName(0, "Transmission");
+//		a1.setOptnSet(0, "Transmission", 2);
+//		a1.setOptn(0, 0, "Auto", 0);
+//		a1.setOptn(0, 1, "Manual", 100);
+//
+////		a1.setOptn(0, 0, "Auto", 100);
+////		a1.setOptn(0, 1, "Manual", 0);
 		lhm.addAuto(a1);
 	}
 
 	@Override
 	public void printAuto(String modelName) {
 		System.out.println(lhm.getAuto(modelName));
-		System.out.println(lhm.getAuto(modelName).getOptn(0, 0));
+//		System.out.println(lhm.getAuto(modelName).getOptnSet(0));
+//		System.out.println(lhm.getAuto(modelName).getOptn(0, 0));
+//		System.out.println(lhm.getAuto(modelName).getOptn(0, 1));
+//		System.out.println(lhm.getAuto(modelName).getOptnPrice(0, 1));
+
 	}
 
 	@Override

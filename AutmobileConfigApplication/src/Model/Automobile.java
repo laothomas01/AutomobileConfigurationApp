@@ -31,23 +31,26 @@ public class Automobile implements Serializable {
 	 * @param p    automobile price
 	 * @param size number of option sets
 	 */
+
+	//automobile has SIZE amount of option sets
 	public Automobile(String n, float p, int size) {
 		// initialize the array of Option Set instances with empty Option Set instances
 		optionSets = new OptionSet[size];
 		setModel(n);
 		setBasePrice(p);
 
-		//OLD CODE
-		for (int i = 0; i < optionSets.length; i++) {
-			optionSets[i] = new OptionSet("BLANK", size);
-		}
+//		//OLD CODE
+//		for (int i = 0; i < optionSets.length; i++) {
+//			optionSets[i] = new OptionSet("BLANK", 0);
+//		}
 
 
 		//initialize array list of option sets
 		optnSets = new ArrayList<>();
 
 		for (int i = 0; i < size; i++) {
-			optnSets.add(new OptionSet("BLANK", size));
+			//each option set should have 0 option instances until updated
+			optnSets.add(createOptnSet("BLANK", 0));
 		}
 		choice = new ArrayList<>();
 
@@ -473,14 +476,6 @@ public class Automobile implements Serializable {
 		return getOptnSets().get(i);
 	}
 
-	public OptionSet createOptnSet(String name, int size) {
-		return new OptionSet(name, size);
-	}
-
-	public OptionSet createOptnSet(String name) {
-		return new OptionSet(name);
-	}
-
 	public ArrayList<OptionSet> getOptnSets() {
 		return optnSets;
 	}
@@ -493,8 +488,9 @@ public class Automobile implements Serializable {
 		getOptnSets().add(os);
 	}
 
-	public void addOptnSet(String name) {
-		addOptnSet(createOptnSet(name));
+	//creating an option set with SIZE amount of options
+	public void addOptnSet(String name, int size) {
+		getOptnSets().add(createOptnSet(name, size));
 	}
 
 	public void setOptnSetName(int i, String name) {
@@ -515,6 +511,18 @@ public class Automobile implements Serializable {
 	}
 
 	//OPTION SET C.R.U.D
+
+	public OptionSet createOptnSet(String name, int size) {
+		return new OptionSet(name, size);
+	}
+
+	public void setOptnSet(int i, OptionSet os) {
+		getOptnSets().set(i, os);
+	}
+
+	public void setOptnSet(int i, String name, int size) {
+		setOptnSet(i, createOptnSet(name, size));
+	}
 
 	public int getOptnSetSize(int i) {
 		return getOptnSet(i).getOptionsSize();
@@ -539,6 +547,7 @@ public class Automobile implements Serializable {
 		return getOptnSet(i).getOptn(j);
 	}
 
+
 	//@TODO: (WIP)
 //	public OptionSet.Option getOptn(String optSetName, String optionName) {
 //
@@ -560,9 +569,18 @@ public class Automobile implements Serializable {
 		getOptn(i, j).setPrice(p);
 	}
 
+	public OptionSet.Option createOption(String name,float price)
+	{
+		return getOptnSet(0).createOption();
+	}
+	public void setOptn(int i, int j, OptionSet.Option o) {
+		getOptnSet(i).getOptns().set(j, o);
+	}
 
 	public void setOptn(int i, int j, String n, float p) {
-		getOptnSet(i).setOptn(j, n, p);
+		getOptnSet(i).getOption(j).setName(n);
+		getOptnSet(i).getOption(j).setPrice(p);
+
 	}
 
 	public ArrayList<OptionSet.Option> getOptionChoiceList() {
@@ -595,10 +613,9 @@ public class Automobile implements Serializable {
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
 		sb.append("\n" + getMaker() + "-" + this.getModel() + "-" + getYear() + "|" + this.getBasePrice());
-
 		// new implementation using an array list
 		for (int i = 0; i < getOptnSetsSize(); i++) {
-			sb.append("\n" + this.getOptnSet(i).toString());
+			sb.append("\n" + this.getOptnSet(i));
 		}
 
 		//OLD CODE

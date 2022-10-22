@@ -14,6 +14,8 @@ class OptionSet implements Serializable {
 	private String name;
 
 
+	//option set has SIZE amount of options
+	//these number of options are based on the the data of each option set
 	protected OptionSet(String name, int size) {
 		setName(name);
 		//initialize Option instance array with blank Option instances
@@ -23,8 +25,9 @@ class OptionSet implements Serializable {
 			options[i] = new Option("BLANK OPTION", 0);
 		}
 		optns = new ArrayList<>();
+		//based on size of option set, add N option instances to arraylist
 		for (int i = 0; i < size; i++) {
-			optns.add(new Option("BLANK", 0));
+			optns.add(new Option("BLANK OPTION", 0));
 		}
 	}
 
@@ -184,11 +187,11 @@ class OptionSet implements Serializable {
 
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
-		sb.append(getName());
+//		System.out.println(getOptn(0));
 
-//		for (int i = 0; i < getOptionsSize(); i++) {
-//			sb.append(getName() + "|" + getOption(i) + "\n");
-//		}
+		for (int i = 0; i < getOptionsSize(); i++) {
+			sb.append(getName() + "|" + getOption(i) + "\n");
+		}
 
 
 		return sb.toString();

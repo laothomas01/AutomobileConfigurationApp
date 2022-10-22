@@ -1,5 +1,6 @@
 package Adapter;
 
+
 /**
  * Provides changes to the automotive instance via Update,Delete methods
  * <p>
@@ -7,18 +8,22 @@ package Adapter;
  */
 public interface UpdateAuto {
 
-	//search model name, search OptionSetname, update with newName
-	void updateOptionSetName(String modelName, String OptionSetName, String newName);
+    //search model name, search OptionSetname, update with newName
+    void updateOptnSetName(String modelName, String OptionSetName, String newName);
 
-	//search model name,search OptionSetname, search Option , update with NewName
-	void updateOptionPrice(String modelName, String OptionSetName, String OptionName, float newPrice);
+    //search model name,search OptionSetname, search Option , update with NewName
+    void updateOptnPrice(String modelName, String OptionSetName, String OptionName, float newPrice);
 
-	float getTotalPrice();
+    float getTotalPrice();
 
-	void addOptionChoice(String optSetName, String option);
+    void addOptnChoice(String optSetName, String optionName);
 
-	void addOptionChoice(int i, int j);
+    void addOptnChoice(int i,int j);
 
-	void removeOptionChoice(int i);
+    void removeOptnChoice(int i);
+
+    void setOptnChoice(int i, int j);
+
+    void setOptnChoice(String optSetName, String optionName);
 
 }

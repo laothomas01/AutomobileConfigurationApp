@@ -1,6 +1,8 @@
 package Adapter;
 
 public interface ReadAuto {
-	public int getTotalPrice();
+	public float getTotalPrice();
+
+	public void printOptionChoices();
 
 }

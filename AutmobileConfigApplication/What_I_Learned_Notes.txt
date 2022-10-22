@@ -27,3 +27,11 @@ Lab 3:
         Type flexibility:
     Abstract Classes = locks down a class to a specific type. also used to expose methods from other classes, but they have
     to be defined carefully compared to an Interface because you can only extend 1 abstract class but can implement multiple interfaces.
+
+Overall Picture of what I am learning:
+(So far)
+Backend development:
+- understanding what composes an API
+- what is an API
+- how to make an API
+- UML Diagramming before any coding

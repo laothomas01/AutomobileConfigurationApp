@@ -10,15 +10,26 @@ import java.util.LinkedHashMap;
 import java.util.Random;
 import java.util.Scanner;
 
+/**
+ * API for our car configuration app
+ * Methods we want to expose to users.
+ * Requirements:
+ * 1) CRUD for automobile
+ * total price
+ * option choices
+ * 2) CRUD for automobile option sets
+ * 3) CRUD for automobile options
+ */
 
-public class BuildAuto extends ProxyAutomobile implements CreateAuto {
+public class BuildAuto extends ProxyAutomobile implements CreateAuto, UpdateAuto, ReadAuto {
 
 	@Override
 	public void buildAuto(String fileName) throws IOException {
 		FileIO io = new FileIO(fileName);
 		lhm = new LHMAuto<>();
-		a1 = new Automobile("FordWagonZTW",100000,5);
-
+		a1 = new Automobile("FordWagonZTW", 100000, 5);
+		a1.setMaker("Ford");
+		a1.setYear(2000);
 //		a1 = io.loadAutomotive();
 		lhm.addAuto(a1);
 	}
@@ -26,8 +37,46 @@ public class BuildAuto extends ProxyAutomobile implements CreateAuto {
 	@Override
 	public void printAuto(String modelName) {
 		System.out.println(lhm.getAuto(modelName));
-		System.out.println(lhm.getAuto(modelName).getOptn(0,0));
+		System.out.println(lhm.getAuto(modelName).getOptn(0, 0));
 	}
+
+	@Override
+	public void updateOptionSetName(String modelName, String OptionSetName, String newName) {
+
+	}
+
+	@Override
+	public void updateOptionPrice(String modelName, String OptionSetName, String OptionName, float newPrice) {
+
+	}
+
+	@Override
+	public void addOptionChoice(String optSetName, String option) {
+
+	}
+
+
+	//@TODO: provide exception handling
+	public void addOptionChoice(int i, int j) {
+		a1.addOptionChoice(a1.getOptn(i, j));
+	}
+
+	@Override
+	public void removeOptionChoice(int i) {
+		a1.removeOptionChoce(i);
+	}
+
+
+	@Override
+	public float getTotalPrice() {
+		return a1.getTotalPrice();
+	}
+
+	@Override
+	public void printOptionChoices() {
+		System.out.println(a1.getOptionChoiceList().toString());
+	}
+
 
 //	//used to keep an on-going loop until all recorded exceptions are fixed
 //	//used to cache any built automobile by the user

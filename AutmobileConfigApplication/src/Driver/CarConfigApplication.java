@@ -35,8 +35,12 @@ public class CarConfigApplication {
 		String configurationFile = "CarConfigs.txt";
 		//instantiate BuildAuto
 		BuildAuto auto = new BuildAuto();
+
 		auto.buildAuto(configurationFile);
+//		auto.printAuto("FordWagonZTW");
+		auto.addOptionChoice(0, 0);
 		auto.printAuto("FordWagonZTW");
+//		auto.printOptionChoices();
 		//1 problem is only fixed
 //		auto.buildAuto(configurationFile);
 		//TAKING USER INPUT

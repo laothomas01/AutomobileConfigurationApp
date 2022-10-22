@@ -5,10 +5,12 @@ import java.util.ArrayList;
 
 public class Automobile implements Serializable {
 
-	private String name;
+	//	private String name;
 	private float basePrice;
 	//automobile manufacturer
-	private String make;
+	private String maker;
+
+
 	//automobile year
 	private int year;
 	//
@@ -32,7 +34,7 @@ public class Automobile implements Serializable {
 	public Automobile(String n, float p, int size) {
 		// initialize the array of Option Set instances with empty Option Set instances
 		optionSets = new OptionSet[size];
-		setName(n);
+		setModel(n);
 		setBasePrice(p);
 
 		//OLD CODE
@@ -49,16 +51,11 @@ public class Automobile implements Serializable {
 		}
 		choice = new ArrayList<>();
 
+		maker = "";
+		year = 0;
 	}
 
-	public Automobile(String n, float p) {
-		this(n, p, 0);
-	}
 
-	/**
-	 * @param n
-	 * @param size
-	 */
 	public Automobile(String n, int size) {
 		this(n, 0f, size);
 	}
@@ -93,14 +90,12 @@ public class Automobile implements Serializable {
 		this("BLANK", 0, 0);
 	}
 
-
-	//---------------------------- AUTOMOTIVE CLASS C.R.U.D OPERATIONS ------------------
-	public String getName() {
-		return name;
+	public String getModel() {
+		return model;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setModel(String name) {
+		this.model = name;
 	}
 
 	public float getBasePrice() {
@@ -111,12 +106,29 @@ public class Automobile implements Serializable {
 		this.basePrice = basePrice;
 	}
 
-	// do  not delete. these are old CRUD functions utilizing the array of Option Sets
-	//change auto motible data
+	public String getMaker() {
+		return maker;
+	}
+
+	public void setMaker(String maker) {
+		this.maker = maker;
+	}
+
+	public int getYear() {
+		return year;
+	}
+
+	public void setYear(int year) {
+		this.year = year;
+	}
+
 	public void updateAutomobile(String name, float price) {
-		setName(name);
+		setModel(name);
 		setBasePrice(price);
 	}
+
+	// do  not delete. these are old CRUD functions utilizing the array of Option Sets
+	//change automobile data
 
 
 	//--------------------------------------------- OLD CODE USING BASIC ARRAY -----------------------------------------
@@ -527,6 +539,11 @@ public class Automobile implements Serializable {
 		return getOptnSet(i).getOptn(j);
 	}
 
+	//@TODO: (WIP)
+//	public OptionSet.Option getOptn(String optSetName, String optionName) {
+//
+//	}
+
 	public String getOptnName(int i, int j) {
 		return getOptn(i, j).getName();
 	}
@@ -548,6 +565,20 @@ public class Automobile implements Serializable {
 		getOptnSet(i).setOptn(j, n, p);
 	}
 
+	public ArrayList<OptionSet.Option> getOptionChoiceList() {
+		return choice;
+	}
+
+	//@TODO add String look up
+	public void addOptionChoice(OptionSet.Option o) {
+		choice.add(o);
+	}
+
+
+	public void removeOptionChoce(int i) {
+		choice.remove(i);
+	}
+
 
 	//--------------------------------------------- NEW CODE USING ARRAY-LIST -----------------------------------------
 
@@ -561,15 +592,17 @@ public class Automobile implements Serializable {
 	}
 
 
-	//OLD CODE
-	// new implementation using an array list
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
-		sb.append("\n" + this.getName() + "|" + this.getBasePrice());
-//		sb.append(this.getOptnSet(0).toString());
+		sb.append("\n" + getMaker() + "-" + this.getModel() + "-" + getYear() + "|" + this.getBasePrice());
+
+		// new implementation using an array list
 		for (int i = 0; i < getOptnSetsSize(); i++) {
 			sb.append("\n" + this.getOptnSet(i).toString());
 		}
+
+		//OLD CODE
+
 //		for (int i = 0; i < getOptionSetsSize(); i++) {
 //			sb.append("\n" + this.getOptionSetClassInstance(i).toString());
 //		}

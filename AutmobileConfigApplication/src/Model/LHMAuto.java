@@ -30,7 +30,7 @@ public class LHMAuto<T extends Automobile> {
 	}
 
 	public void addAuto(T a) {
-		getCacheAuto().put(a.getName(), a);
+		getCacheAuto().put(a.getModel(), a);
 	}
 
 	public void removeAuto(String name) {

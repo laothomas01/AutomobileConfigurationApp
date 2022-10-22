@@ -7,6 +7,10 @@ import java.util.ArrayList;
 
 import Exception.AutoException;
 
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
+
+
 /**
  * Note: file reader is based on this format of a text file
  * car name| car price // basic car attributes
@@ -23,8 +27,8 @@ import Exception.AutoException;
  * - this code is not module enough for basic file reading and writing
  */
 public class FileIO {
-	String fileName;
-	int errorNo = 0;
+	private String fileName;
+	private int errorNo = 0;
 
 	public FileIO(String fileName) {
 		this.fileName = fileName;
@@ -77,7 +81,39 @@ public class FileIO {
 //		//read first line from carconfigs.txt
 		String line = br2.readLine();
 		String[] carNameAndPrice = line.split("\\|");
-		a1 = new Automobile(carNameAndPrice[0], Float.parseFloat(carNameAndPrice[1]), optionSetsSize);
+//		for (int i = 0; i < a1.getOptnSetsSize(); i++) {
+//			line = br2.readLine();
+//			String[] optnSet = line.split("\\|");
+//			String optnSetName = optnSet[0];
+//			String[] optnNames = optnSet[1].split(" ");
+//			String[] optnPrices = optnSet[2].split(" ");
+//			//needs to finish populating the option sets with empty options
+//			for (int j = 0; j < optnNames.length; j++) {
+//				a1.setOptnSet(i, optnSetName, optnNames.length);
+//			}
+//			//populate empty options with new data
+//			for (int j = 0; j < optnNames.length; j++) {
+//				a1.setOptn(i, j, optnNames[j], Float.parseFloat(optnPrices[j]));
+//			}
+//		}
+
+		//handling malformation of text file
+		try {
+			//handling malformed pricing of automobile in text file
+			if (MiscUtils.getPrimitiveDataTypeForNumberString(carNameAndPrice[1]) == "Unknown") {
+				throw new AutoException();
+			}
+			a1 = new Automobile(carNameAndPrice[0], Float.parseFloat(carNameAndPrice[1]), optionSetsSize);
+		} catch (AutoException e) {
+			e.setErrorNo(errorNo += 1);
+			e.setErrorMsg("Missing Automobile Price!");
+			e.printMyProblem();
+			String exception = e.getErrorNo() + "|" + e.getErrorMsg();
+			writeToFile("listOfErrors.txt", exception);
+			writeToLogFile(exception);
+		}
+
+		//if no error, continue parsing
 		for (int i = 0; i < a1.getOptnSetsSize(); i++) {
 			line = br2.readLine();
 			String[] optnSet = line.split("\\|");
@@ -488,13 +524,13 @@ public class FileIO {
 	}
 
 
-//	public static void writeToLogFile(String message) throws IOException {
-//		boolean append = true;
-//		FileHandler handler = new FileHandler("exception.log", append);
-//		Logger logger = Logger.getLogger(message);
-//		logger.addHandler(handler);
-//		logger.warning("warning message");
-//	}
+	public static void writeToLogFile(String message) throws IOException {
+		boolean append = true;
+		FileHandler handler = new FileHandler("exception.log", append);
+		Logger logger = Logger.getLogger(message);
+		logger.addHandler(handler);
+		logger.warning("warning message");
+	}
 
 
 }

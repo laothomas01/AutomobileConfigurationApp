@@ -20,7 +20,7 @@ public class Automobile implements Serializable {
 	//array of Option Set instances
 
 	//stores all possible configurations for an automobile
-	private OptionSet[] optionSets;
+//	private OptionSet[] optionSets;
 	//stores all possible configurations for an automobile
 	private ArrayList<OptionSet> optnSets;
 	//used to store a chosen automobile option
@@ -35,7 +35,7 @@ public class Automobile implements Serializable {
 	//automobile has SIZE amount of option sets
 	public Automobile(String n, float p, int size) {
 		// initialize the array of Option Set instances with empty Option Set instances
-		optionSets = new OptionSet[size];
+//		optionSets = new OptionSet[size];
 		setModel(n);
 		setBasePrice(p);
 

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2022-10-22T21:17:36.499230Z</date>
+  <millis>1666473456499</millis>
+  <nanos>230000</nanos>
+  <sequence>0</sequence>
+  <logger>1|Missing Automobile Price!</logger>
+  <level>WARNING</level>
+  <class>Utils.FileIO</class>
+  <method>writeToLogFile</method>
+  <thread>1</thread>
+  <message>warning message</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2022-10-22T21:18:02.919429Z</date>
+  <millis>1666473482919</millis>
+  <nanos>429000</nanos>
+  <sequence>0</sequence>
+  <logger>1|Missing Automobile Price!</logger>
+  <level>WARNING</level>
+  <class>Utils.FileIO</class>
+  <method>writeToLogFile</method>
+  <thread>1</thread>
+  <message>warning message</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2022-10-22T21:19:56.631499Z</date>
+  <millis>1666473596631</millis>
+  <nanos>499000</nanos>
+  <sequence>0</sequence>
+  <logger>1|Missing Automobile Price!</logger>
+  <level>WARNING</level>
+  <class>Utils.FileIO</class>
+  <method>writeToLogFile</method>
+  <thread>1</thread>
+  <message>warning message</message>
+</record>
+</log>

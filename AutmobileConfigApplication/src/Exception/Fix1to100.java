@@ -25,7 +25,6 @@ public class Fix1to100 {
 		FileIO io = new FileIO("CarConfigs.txt");
 		BufferedReader br = new BufferedReader(new FileReader("CarConfigs.txt"));
 		ArrayList<String> lines = new ArrayList<>();
-
 		//@TODO take user input instead but force a rule on users that they must follow the format: <car name> "|" <car price>
 		String fixedLine = "FordWagonZTW|128500";
 		lines.add(fixedLine);

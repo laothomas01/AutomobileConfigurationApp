@@ -3,6 +3,7 @@ package Adapter;
 import Model.Automobile;
 import Model.LHMAuto;
 import Utils.FileIO;
+import Exception.Fix1to100;
 
 import java.io.IOException;
 
@@ -17,43 +18,43 @@ import java.io.IOException;
  * 3) CRUD for automobile options
  */
 
-public class BuildAuto extends ProxyAutomobile implements CreateAuto, UpdateAuto, ReadAuto {
+public class BuildAuto extends ProxyAutomobile implements CreateAuto, UpdateAuto, ReadAuto, FixAuto {
+
+	boolean problemFixed = false;
 
 	@Override
 	public void buildAuto(String fileName) throws IOException {
 		FileIO io = new FileIO(fileName);
 		lhm = new LHMAuto<>();
 		a1 = io.loadAutomotive();
+		int[] errNums = io.readArrayOfErrors("listOfErrors.txt");
+		do {
+			for (int n : errNums) {
+				fix(n);
+			}
+			problemFixed = fix(-1);
+		} while (!problemFixed);
+
 		a1.setMaker("Ford");
 		a1.setYear(2000);
+
 		a1.addOptionChoice(0, 0);
 		a1.addOptionChoice(1, 0);
 		a1.addOptionChoice(1, 0);
 		a1.addOptionChoice(3, 1);
-
-		// "transmission","auto"
-
-
-//		a1 = new Automobile("FordWagonZTW", 100000, 5);
-//		a1.setMaker("Ford");
-//		a1.setYear(2000);
-////		a1 = io.loadAutomotive();
-////		a1.setOptnSetName(0, "Transmission");
-//		a1.setOptnSet(0, "Transmission", 2);
-//		a1.setOptn(0, 0, "Auto", 0);
-//		a1.setOptn(0, 1, "Manual", 100);
-//
-////		a1.setOptn(0, 0, "Auto", 100);
-////		a1.setOptn(0, 1, "Manual", 0);
 		lhm.addAuto(a1);
+
+		printAuto("FordWagonZTW");
+
+
 	}
 
 	@Override
 	public void printAuto(String modelName) {
-		System.out.println(lhm.getAuto(modelName).getOptnChoiceName(0));
-		System.out.println(lhm.getAuto(modelName).getOptnChoicePrice(0));
-		printOptionChoices();
-		System.out.println("TOTAL PRICE: " + lhm.getAuto(modelName).getTotalPrice());
+//		System.out.println(lhm.getAuto(modelName).getOptnChoiceName(0));
+//		System.out.println(lhm.getAuto(modelName).getOptnChoicePrice(0));
+//		printOptionChoices();
+//		System.out.println("TOTAL PRICE: " + getTotalPrice());
 
 	}
 
@@ -104,6 +105,26 @@ public class BuildAuto extends ProxyAutomobile implements CreateAuto, UpdateAuto
 	@Override
 	public void printOptionChoices() {
 		System.out.println(a1.getOptnChoice().toString());
+	}
+
+	/**
+	 * catch 5 errors, fix 1
+	 *
+	 * @param errNo logged error number
+	 * @return
+	 * @throws IOException
+	 */
+	@Override
+	public boolean fix(int errNo) throws IOException {
+		Fix1to100 f1 = new Fix1to100();
+		switch (errNo) {
+			case 1:
+				f1.fixMissingPriceFromTextFile();
+				break;
+			default:
+				break;
+		}
+		return true;
 	}
 
 

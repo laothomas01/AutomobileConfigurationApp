@@ -446,3 +446,83 @@
   <message>warning message</message>
 </record>
 </log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2022-10-22T23:51:12.251880Z</date>
+  <millis>1666482672251</millis>
+  <nanos>880000</nanos>
+  <sequence>0</sequence>
+  <logger>1|Missing Automobile Price!</logger>
+  <level>WARNING</level>
+  <class>Utils.FileIO</class>
+  <method>writeToLogFile</method>
+  <thread>1</thread>
+  <message>warning message</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2022-10-22T23:51:31.904446Z</date>
+  <millis>1666482691904</millis>
+  <nanos>446000</nanos>
+  <sequence>0</sequence>
+  <logger>1|Missing Automobile Price!</logger>
+  <level>WARNING</level>
+  <class>Utils.FileIO</class>
+  <method>writeToLogFile</method>
+  <thread>1</thread>
+  <message>warning message</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2022-10-23T00:05:55.822299Z</date>
+  <millis>1666483555822</millis>
+  <nanos>299000</nanos>
+  <sequence>0</sequence>
+  <logger>1|Missing Automobile Price!</logger>
+  <level>WARNING</level>
+  <class>Utils.FileIO</class>
+  <method>writeToLogFile</method>
+  <thread>1</thread>
+  <message>warning message</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2022-10-23T00:23:34.020353Z</date>
+  <millis>1666484614020</millis>
+  <nanos>353000</nanos>
+  <sequence>0</sequence>
+  <logger>1|Missing Automobile Price!</logger>
+  <level>WARNING</level>
+  <class>Utils.FileIO</class>
+  <method>writeToLogFile</method>
+  <thread>1</thread>
+  <message>warning message</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2022-10-23T00:28:35.166396Z</date>
+  <millis>1666484915166</millis>
+  <nanos>396000</nanos>
+  <sequence>0</sequence>
+  <logger>1|Missing Automobile Price!</logger>
+  <level>WARNING</level>
+  <class>Utils.FileIO</class>
+  <method>writeToLogFile</method>
+  <thread>1</thread>
+  <message>warning message</message>
+</record>
+</log>

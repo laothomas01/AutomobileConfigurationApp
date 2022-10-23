@@ -1,7 +1,11 @@
 package Model;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+
+import Exception.AutoException;
+import Utils.FileIO;
 
 class OptionSet implements Serializable {
 
@@ -153,11 +157,26 @@ class OptionSet implements Serializable {
 		return new Option(name, price);
 	}
 
-	protected Option getOptn(int i) {
+	protected Option getOptn(int i) throws IOException {
+		try {
+			if (getOptns().get(i) == null) {
+				throw new AutoException(3);
+			}
+		} catch (AutoException e) {
+			e.setErrorMsg("Missing Option!");
+			e.printMyProblem();
+			String exception = e.getErrorNo() + "|" + e.getErrorMsg();
+			FileIO.writeToFile("listOfErrors.txt", exception);
+			try {
+				FileIO.writeToLogFile(exception);
+			} catch (IOException ex) {
+				throw new RuntimeException(ex);
+			}
+		}
 		return getOptns().get(i);
 	}
 
-	protected Option getOptn(String n) {
+	protected Option getOptn(String n) throws IOException {
 		for (int i = 0; i < getOptnsListSize(); i++) {
 			if (getOptn(i).getName().equals(n)) {
 				return getOptn(i);
@@ -166,19 +185,30 @@ class OptionSet implements Serializable {
 		return null;
 	}
 
-	protected String getOptnName(int i) {
+	protected String getOptnName(int i) throws IOException {
+		try {
+			if (getOptn(i).getName() == null) {
+				throw new AutoException(4);
+			}
+		} catch (AutoException e) {
+			e.setErrorMsg("Missing Option Name!");
+			e.printMyProblem();
+			String exception = e.getErrorNo() + "|" + e.getErrorMsg();
+			FileIO.writeToFile("listOfErrors.txt", exception);
+			FileIO.writeToLogFile(exception);
+		}
 		return getOptn(i).getName();
 	}
 
-	protected void setOptnName(int i, String name) {
+	protected void setOptnName(int i, String name) throws IOException {
 		getOptn(i).setName(name);
 	}
 
-	protected void setOptnPrice(int i, float price) {
+	protected void setOptnPrice(int i, float price) throws IOException {
 		getOptn(i).setPrice(price);
 	}
 
-	protected void setOptn(int i, String name, float price) {
+	protected void setOptn(int i, String name, float price) throws IOException {
 		setOptnName(i, name);
 		setOptnPrice(i, price);
 	}
@@ -195,7 +225,7 @@ class OptionSet implements Serializable {
 		getOptns().remove(i);
 	}
 
-	protected void deleteFromOptnList(String name) {
+	protected void deleteFromOptnList(String name) throws IOException {
 		for (int i = 0; i < getOptnsListSize(); i++) {
 			if (getOptn(i).getName().equals(name)) {
 				deleteFromOptnList(i);
@@ -208,7 +238,7 @@ class OptionSet implements Serializable {
 	//inputs passed into setOptionChoice will determine Option choice to return
 
 	//1) set the option choice first
-	protected void setOptnChoice(int i) {
+	protected void setOptnChoice(int i) throws IOException {
 		choice = getOptn(i);
 	}
 
@@ -222,7 +252,11 @@ class OptionSet implements Serializable {
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
 		for (int i = 0; i < getOptnsListSize(); i++) {
-			sb.append("\n" + getOptn(i));
+			try {
+				sb.append("\n" + getOptn(i));
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
 		}
 		return sb.toString();
 	}

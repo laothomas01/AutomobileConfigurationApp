@@ -1,6 +1,8 @@
 package Adapter;
 
 
+import java.io.IOException;
+
 /**
  * Provides changes to the automotive instance via Update,Delete methods
  * <p>
@@ -18,11 +20,11 @@ public interface UpdateAuto {
 
 	void addOptnChoice(String optSetName, String optionName);
 
-	void addOptnChoice(int i, int j);
+	void addOptnChoice(int i, int j) throws IOException;
 
 	void removeOptnChoice(int i);
 
-	void setOptnChoice(int i, int j);
+	void setOptnChoice(int i, int j) throws IOException;
 
 	void setOptnChoice(String optSetName, String optionName);
 

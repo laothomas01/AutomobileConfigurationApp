@@ -51,6 +51,8 @@ public class BuildAuto extends ProxyAutomobile implements CreateAuto, UpdateAuto
 			System.out.println(problemFixed);
 			lhm.addAuto(a1);
 			printAuto("FordWagonZTW");
+			printOptionChoices();
+			System.out.println(getTotalPrice());
 		}
 		//do other stuff
 //		if (problemFixed) {
@@ -124,7 +126,7 @@ public class BuildAuto extends ProxyAutomobile implements CreateAuto, UpdateAuto
 	}
 
 	@Override
-	public void addOptnChoice(int i, int j) {
+	public void addOptnChoice(int i, int j) throws IOException {
 		a1.addOptionChoice(i, j);
 	}
 
@@ -136,7 +138,7 @@ public class BuildAuto extends ProxyAutomobile implements CreateAuto, UpdateAuto
 
 	//1) set option choice
 	@Override
-	public void setOptnChoice(int i, int j) {
+	public void setOptnChoice(int i, int j) throws IOException {
 		a1.setOptnChoice(i, j);
 	}
 
@@ -162,9 +164,18 @@ public class BuildAuto extends ProxyAutomobile implements CreateAuto, UpdateAuto
 	public boolean fix(int errNo) throws IOException {
 		Fix1to100 f1 = new Fix1to100();
 		switch (errNo) {
+			case 0:
+				break;
 			case 1:
 				f1.fixMissingPriceFromTextFile();
 				break;
+			case 2:
+				break;
+			case 3:
+				break;
+			case 4:
+				break;
+
 			default:
 				break;
 		}

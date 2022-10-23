@@ -1,7 +1,11 @@
 package Model;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+
+import Exception.AutoException;
+import Utils.FileIO;
 
 public class Automobile implements Serializable {
 
@@ -463,7 +467,18 @@ public class Automobile implements Serializable {
 	//--------------------------------------------- NEW CODE USING ARRAY-LIST -----------------------------------------
 
 	//OPTION SETS C.R.U.D
-	public OptionSet getOptnSet(int i) {
+	public OptionSet getOptnSet(int i) throws IOException {
+		try {
+			if (getOptnSets().get(i) == null) {
+				throw new AutoException(3);
+			}
+		} catch (AutoException e) {
+			e.setErrorMsg("Cannot Find File Name!");
+			e.printMyProblem();
+			String exception = e.getErrorNo() + "|" + e.getErrorMsg();
+			FileIO.writeToFile("listOfErrors.txt", exception);
+			FileIO.writeToLogFile(exception);
+		}
 		return getOptnSets().get(i);
 	}
 
@@ -484,7 +499,7 @@ public class Automobile implements Serializable {
 		getOptnSets().add(createOptnSet(name, size));
 	}
 
-	public void setOptnSetName(int i, String name) {
+	public void setOptnSetName(int i, String name) throws IOException {
 		getOptnSet(i).setName(name);
 	}
 
@@ -493,7 +508,7 @@ public class Automobile implements Serializable {
 	}
 
 
-	public void deleteOptnSet(String name) {
+	public void deleteOptnSet(String name) throws IOException {
 		for (int i = 0; i < getOptnSetsSize(); i++) {
 			if (getOptnSet(i).getName().equals(name)) {
 				deleteOptnSet(i);
@@ -515,20 +530,20 @@ public class Automobile implements Serializable {
 		setOptnSet(i, createOptnSet(name, size));
 	}
 
-	public int getOptnSetSize(int i) {
+	public int getOptnSetSize(int i) throws IOException {
 		return getOptnSet(i).getOptnsListSize();
 	}
 
-	public String getOptnSetName(int i) {
+	public String getOptnSetName(int i) throws IOException {
 		return getOptnSet(i).getName();
 	}
 
-	public ArrayList<OptionSet.Option> getOptns(int i) {
+	public ArrayList<OptionSet.Option> getOptns(int i) throws IOException {
 		return getOptnSet(i).getOptns();
 	}
 
 
-	public int getOptnListSize(int i) {
+	public int getOptnListSize(int i) throws IOException {
 		return getOptnSet(i).getOptnsListSize();
 	}
 
@@ -560,11 +575,11 @@ public class Automobile implements Serializable {
 //		getOptn(i, j).setPrice(p);
 //	}
 
-	public void setOptn(int i, int j, OptionSet.Option o) {
+	public void setOptn(int i, int j, OptionSet.Option o) throws IOException {
 		getOptnSet(i).getOptns().set(j, o);
 	}
 
-	public void setOptn(int i, int j, String n, float p) {
+	public void setOptn(int i, int j, String n, float p) throws IOException {
 //		getOptnSet(i).getOption(j).setName(n);
 //		getOptnSet(i).getOption(j).setPrice(p);
 		getOptnSet(i).getOptn(j).setName(n);
@@ -595,31 +610,31 @@ public class Automobile implements Serializable {
 	//acess option set and update option choice
 
 	//MUST BE CALLED FIRST!
-	public void setOptnChoice(int i, int j) {
+	public void setOptnChoice(int i, int j) throws IOException {
 		getOptnSet(i).setOptnChoice(j);
 	}
 
 
 	// 2) retrieve the option choice instance you just set the option choice
 	// by accessing an option set instance
-	public OptionSet.Option getOptnChoice(int i) {
+	public OptionSet.Option getOptnChoice(int i) throws IOException {
 		return getOptnSet(i).getOptnChoice();
 	}
 
 	// 3) get option choice name
-	public String getOptnChoiceName(int i) {
+	public String getOptnChoiceName(int i) throws IOException {
 		return getOptnSet(i).getOptnChoice().getName();
 	}
 
 	// 4) get option choice price
-	public float getOptnChoicePrice(int i) {
+	public float getOptnChoicePrice(int i) throws IOException {
 		return getOptnSet(i).getOptnChoice().getPrice();
 	}
 
 	// 5) add the option choice
 
 	// after setting the option choice, you can add it to the array list
-	public void addOptionChoice(int i, int j) {
+	public void addOptionChoice(int i, int j) throws IOException {
 ////        //1) set the option choice
 		setOptnChoice(i, j);
 ////        //2) add the option choice
@@ -652,7 +667,11 @@ public class Automobile implements Serializable {
 		sb.append("\n" + getMaker() + "-" + this.getModel() + "-" + getYear() + "|" + this.getBasePrice());
 		// new implementation using an array list
 		for (int i = 0; i < getOptnSetsSize(); i++) {
-			sb.append("\n" + this.getOptnSet(i));
+			try {
+				sb.append("\n" + this.getOptnSet(i));
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
 		}
 
 		//OLD CODE

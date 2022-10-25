@@ -1,0 +1,39 @@
+Lab 1:
+Lab 2:
+    Custom Exception Handling:
+
+Lab 3:
+    BuildAuto = our API used to perform CRUD on the automobile and it's associating classes. this is the class developers will be using
+     to interact with the backend of our app.
+         e.g
+                using an interface:
+                    - we exposed methods from the automobile class and the exception class.
+                    - we do not need to expose methods from the LHMAuto class because linked hashmap is internally built with an interface
+                already.
+
+                datatype flexibility:
+                    - let's take the Queue class(built into JAVA API) for example.
+                    What is Queue? it is an interface
+                    What implements Queue? ArrayList, LinkedList,
+                    e.g
+                        Queue arraylist = new ArrayList<K,V>();
+                    But Arraylist also implements Collections interface(the root interface of these classes).
+
+                    What if ArrayList or LinkedList just extended Queue and Queue was an Abstract class?
+                        - depends on the situation. if this is just a throw away extension, we just lost
+                        an opportunity for ArrayList to be a subclass to a more useful parent class.
+                        - ArrayList can only extend one regular or abstract class but can implement multiple interfaces
+                        - you can create as many interfaces as you want to create an API and expose the backend methods.
+                        - abstract class methods therefore have a more stricter policy on what should be defined and implemented
+    Interfaces = creates type flexibility, used to expose methods from other classes.
+        Type flexibility:
+    Abstract Classes = locks down a class to a specific type. also used to expose methods from other classes, but they have
+    to be defined carefully compared to an Interface because you can only extend 1 abstract class but can implement multiple interfaces.
+
+Overall Picture of what I am learning:
+(So far)
+Backend development:
+- understanding what composes an API
+- what is an API
+- how to make an API
+- UML Diagramming before any coding

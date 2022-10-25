@@ -4,7 +4,7 @@ import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.TimeZone;
 
-public class MiscUtil {
+public class MiscUtils {
 
 	public static String currentTImeStamp() {
 		Calendar c = Calendar.getInstance(TimeZone.getTimeZone("UTC"));

@@ -1,17 +1,20 @@
 package Adapter;
 
+import Model.Automobile;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.LinkedHashMap;
+
 
 /**
- * Creates and Reads automotive methods.
- *
- * How would I describe what this interface is? what is its functionality and purpose????
- *
- * Why this???
+ * Why use an interface????
+	 * unrelated classes implement the interfaces
+	 * specify behavior of a particular data type(not concerned who implements)
+	 *
  */
 public interface CreateAuto {
 	void buildAuto(String fileName) throws IOException;
-
 	void printAuto(String modelName);
+
 }

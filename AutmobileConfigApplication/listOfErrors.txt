@@ -1,1 +1,3 @@
-0|MissingAutomobilePrice!0|MissingAutomobilePrice!1|Missing Automobile Price!1|Missing Automobile Price!
+1|Missing Automobile Price!
+1|Missing Automobile Price!
+1|Missing Automobile Price!

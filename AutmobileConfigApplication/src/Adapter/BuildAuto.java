@@ -27,7 +27,7 @@ public class BuildAuto extends ProxyAutomobile implements CreateAuto, UpdateAuto
         a1.setMaker("Ford");
         a1.setYear(2000);
         a1.addOptionChoice(0, 0);
-        
+
         // "transmission","auto"
 
 

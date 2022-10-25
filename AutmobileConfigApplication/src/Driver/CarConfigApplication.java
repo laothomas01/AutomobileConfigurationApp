@@ -24,7 +24,8 @@ public class CarConfigApplication {
 		 * - create custom template for linked hashmap
 		 * -
 		 */
-		Lab3Test();
+		System.out.println("Hello World");
+//		Lab3Test();
 	}
 
 

@@ -7,6 +7,10 @@ import java.util.ArrayList;
 
 import Exception.AutoException;
 
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
+
+
 /**
  * Note: file reader is based on this format of a text file
  * car name| car price // basic car attributes
@@ -23,8 +27,8 @@ import Exception.AutoException;
  * - this code is not module enough for basic file reading and writing
  */
 public class FileIO {
-	String fileName;
-	int errorNo = 0;
+	private String fileName;
+
 
 	public FileIO(String fileName) {
 		this.fileName = fileName;
@@ -40,15 +44,25 @@ public class FileIO {
 	 */
 
 	//checking if file can be opened
-	public boolean openFile() throws AutoException {
+	public boolean openFile() throws IOException {
 		BufferedReader br = null;
 		boolean flag = false;
 		try {
-			br = new BufferedReader(new FileReader(fileName));
+			File f = new File(fileName);
+			if (!f.exists()) {
+				throw new AutoException(0);
+			}
+			br = new BufferedReader(new FileReader(f));
 			flag = true;
 			br.close();
 		} catch (FileNotFoundException e) {
-			throw new AutoException();
+
+		} catch (AutoException e) {
+			e.setErrorMsg("Cannot Find File Name!");
+			e.printMyProblem();
+			String exception = e.getErrorNo() + "|" + e.getErrorMsg();
+			writeToFile("listOfErrors.txt", exception);
+			writeToLogFile(exception);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		} finally {
@@ -61,38 +75,71 @@ public class FileIO {
 	public Automobile loadAutomotive() throws IOException {
 		//intialize as empty automobile
 		Automobile a1 = new Automobile();
-		int optionSetsSize;
-		BufferedReader br1 = new BufferedReader(new FileReader(fileName));
-		//we do not count the first line as part of option sets size
-		optionSetsSize = getLineCount(br1) - 1;
-
+		if (openFile()) {
+			int optionSetsSize;
+			BufferedReader br1 = new BufferedReader(new FileReader(fileName));
+			//we do not count the first line as part of option sets size
+			optionSetsSize = getLineCount(br1) - 1;
 //		//populate automobile with empty option set instances
 //
 //		//automobile gets 5 option set instances
 //		a1 = new Automobile(optionSetsSize);
 //
-		br1.close();
-		BufferedReader br2 = new BufferedReader(new FileReader(fileName));
+			br1.close();
+			BufferedReader br2 = new BufferedReader(new FileReader(fileName));
 //
 //		//read first line from carconfigs.txt
-		String line = br2.readLine();
-		String[] carNameAndPrice = line.split("\\|");
-		a1 = new Automobile(carNameAndPrice[0], Float.parseFloat(carNameAndPrice[1]), optionSetsSize);
-		for (int i = 0; i < a1.getOptnSetsSize(); i++) {
-			line = br2.readLine();
-			String[] optnSet = line.split("\\|");
-			String optnSetName = optnSet[0];
-			String[] optnNames = optnSet[1].split(" ");
-			String[] optnPrices = optnSet[2].split(" ");
-			//needs to finish populating the option sets with empty options
-			for (int j = 0; j < optnNames.length; j++) {
-				a1.setOptnSet(i, optnSetName, optnNames.length);
+			String line = br2.readLine();
+			String[] carNameAndPrice = line.split("\\|");
+//		for (int i = 0; i < a1.getOptnSetsSize(); i++) {
+//			line = br2.readLine();
+//			String[] optnSet = line.split("\\|");
+//			String optnSetName = optnSet[0];
+//			String[] optnNames = optnSet[1].split(" ");
+//			String[] optnPrices = optnSet[2].split(" ");
+//			//needs to finish populating the option sets with empty options
+//			for (int j = 0; j < optnNames.length; j++) {
+//				a1.setOptnSet(i, optnSetName, optnNames.length);
+//			}
+//			//populate empty options with new data
+//			for (int j = 0; j < optnNames.length; j++) {
+//				a1.setOptn(i, j, optnNames[j], Float.parseFloat(optnPrices[j]));
+//			}
+//		}
+
+			//handling malformation of text file
+			try {
+				//handling malformed pricing of automobile in text file
+				if (MiscUtils.getPrimitiveDataTypeForNumberString(carNameAndPrice[1]) == "Unknown") {
+					throw new AutoException(1);
+				}
+				a1 = new Automobile(carNameAndPrice[0], Float.parseFloat(carNameAndPrice[1]), optionSetsSize);
+			} catch (AutoException e) {
+				e.setErrorMsg("Missing Automobile Price!");
+				e.printMyProblem();
+				String exception = e.getErrorNo() + "|" + e.getErrorMsg();
+				writeToFile("listOfErrors.txt", exception);
+				writeToLogFile(exception);
+			} finally {
+				//if no error, continue parsing
+				for (int i = 0; i < a1.getOptnSetsSize(); i++) {
+					line = br2.readLine();
+					String[] optnSet = line.split("\\|");
+					String optnSetName = optnSet[0];
+					String[] optnNames = optnSet[1].split(" ");
+					String[] optnPrices = optnSet[2].split(" ");
+					//needs to finish populating the option sets with empty options
+					for (int j = 0; j < optnNames.length; j++) {
+						a1.setOptnSet(i, optnSetName, optnNames.length);
+					}
+					//populate empty options with new data
+					for (int j = 0; j < optnNames.length; j++) {
+						a1.setOptn(i, j, optnNames[j], Float.parseFloat(optnPrices[j]));
+					}
+				}
 			}
-			//populate empty options with new data
-			for (int j = 0; j < optnNames.length; j++) {
-				a1.setOptn(i, j, optnNames[j], Float.parseFloat(optnPrices[j]));
-			}
-		}
+
+
 //		/**
 //		 *
 //		 *  - try to parse malformed CarConfigs.txt file
@@ -168,7 +215,8 @@ public class FileIO {
 //		}
 //
 //
-		br2.close();
+			br2.close();
+		}
 		return a1;
 	}
 
@@ -220,6 +268,7 @@ public class FileIO {
 
 		for (int j = 0; j < optionNames.length; j++) {
 //					//throw auto exception here if option set text file data is improper
+
 			a1.setOptnSetName(j, optionSetName);
 
 			//OLD CODE: SETTING OPTION SET INSTANCE NAME
@@ -436,7 +485,7 @@ public class FileIO {
 	 * @param newLines list of lines used to write over the current text file
 	 * @throws IOException
 	 */
-	public void writeToFile(String fileName, ArrayList<String> newLines) throws IOException {
+	public static void writeToFile(String fileName, ArrayList<String> newLines) throws IOException {
 		/**
 		 * this does not handle repeated strings being written to file
 		 */
@@ -457,7 +506,7 @@ public class FileIO {
 	 * @param line
 	 * @throws IOException
 	 */
-	public void writeToFile(String fileName, String line) throws IOException {
+	public static void writeToFile(String fileName, String line) throws IOException {
 		/**
 		 * this does not handle repeated strings being written to file
 		 */
@@ -465,11 +514,11 @@ public class FileIO {
 		BufferedWriter bw = null;
 		if (file.length() > 0) {
 			bw = new BufferedWriter(new FileWriter(file, true));
-			bw.append(line);
-
+			bw.newLine();
+			bw.write(line);
 		} else {
 			bw = new BufferedWriter(new FileWriter(file));
-			bw.append(line);
+			bw.write(line);
 		}
 		bw.close();
 	}
@@ -488,13 +537,13 @@ public class FileIO {
 	}
 
 
-//	public static void writeToLogFile(String message) throws IOException {
-//		boolean append = true;
-//		FileHandler handler = new FileHandler("exception.log", append);
-//		Logger logger = Logger.getLogger(message);
-//		logger.addHandler(handler);
-//		logger.warning("warning message");
-//	}
+	public static void writeToLogFile(String message) throws IOException {
+		boolean append = true;
+		FileHandler handler = new FileHandler("exception.log", append);
+		Logger logger = Logger.getLogger(message);
+		logger.addHandler(handler);
+		logger.warning("warning message");
+	}
 
 
 }

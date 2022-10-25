@@ -1,8 +1,8 @@
 package Adapter;
 
-import Model.Automobile;
 import Model.LHMAuto;
 import Utils.FileIO;
+import Exception.Fix1to100;
 
 import java.io.IOException;
 
@@ -17,8 +17,9 @@ import java.io.IOException;
  * 3) CRUD for automobile options
  */
 
-public class BuildAuto extends ProxyAutomobile implements CreateAuto, UpdateAuto, ReadAuto {
+public class BuildAuto extends ProxyAutomobile implements CreateAuto, UpdateAuto, ReadAuto, FixAuto {
 
+<<<<<<< HEAD
     @Override
     public void buildAuto(String fileName) throws IOException {
         FileIO io = new FileIO(fileName);
@@ -29,82 +30,170 @@ public class BuildAuto extends ProxyAutomobile implements CreateAuto, UpdateAuto
         a1.addOptionChoice(0, 0);
 
         // "transmission","auto"
+=======
+>>>>>>> 27350eb07aa54a8ea928b9fa23afaf1508a7d584
+
+	@Override
+	public void buildAuto(String fileName) throws IOException {
+		FileIO io = new FileIO(fileName);
+		lhm = new LHMAuto<>();
+		a1 = io.loadAutomotive();
+		int[] errNums = io.readArrayOfErrors("listOfErrors.txt");
+		boolean problemFixed = false;
+		System.out.println("PROBLEM(S) FIXED = " + problemFixed);
+		for (int i = 0; i < errNums.length; i++) {
+			System.out.println("FIXING PROBLEMS.......");
+			//fix my problems
+			fix(errNums[i]);
+		}
+		//reload the automobile after all problems are fixed
+		a1 = io.loadAutomotive();
+		System.out.println("DONE!");
+		//set the fixed flag to true
+		problemFixed = fix(-1);
+		System.out.println("PROBLEM(S) FIXED = " + problemFixed);
+
+		if (problemFixed == true) {
+			System.out.println("DO SOMETHING!");
+			a1.setMaker("Ford");
+			a1.setYear(2000);
+			a1.addOptionChoice(0, 0);
+			a1.addOptionChoice(1, 0);
+			a1.addOptionChoice(1, 0);
+			a1.addOptionChoice(3, 1);
+			System.out.println(problemFixed);
+			lhm.addAuto(a1);
+			printAuto("FordWagonZTW");
+			printOptionChoices();
+			System.out.println(getTotalPrice());
+		}
+		//do other stuff
+//		if (problemFixed) {
+//			a1.setMaker("Ford");
+//			a1.setYear(2000);
+//			a1.addOptionChoice(0, 0);
+//			a1.addOptionChoice(1, 0);
+//			a1.addOptionChoice(1, 0);
+//			a1.addOptionChoice(3, 1);
+//			System.out.println(problemFixed);
+//			lhm.addAuto(a1);
+//			printAuto("FordWagonZTW");
+//		}
 
 
-//		a1 = new Automobile("FordWagonZTW", 100000, 5);
-//		a1.setMaker("Ford");
-//		a1.setYear(2000);
-////		a1 = io.loadAutomotive();
-////		a1.setOptnSetName(0, "Transmission");
-//		a1.setOptnSet(0, "Transmission", 2);
-//		a1.setOptn(0, 0, "Auto", 0);
-//		a1.setOptn(0, 1, "Manual", 100);
+//		for (int i = 0; i < errNums.length; i++) {
+//			if (i >= errNums.length) {
+//				problemFixed = true;
+//			}
+//			fix(errNums[i]);
+//		}
+
+//		while (!problemFixed) {
+//			if (problemFixed) {
+//				break;
+//			}
+//			for (int n : errNums) {
+//				fix(n);
+//			}
+//			problemFixed = true;
+//		}
 //
-////		a1.setOptn(0, 0, "Auto", 100);
-////		a1.setOptn(0, 1, "Manual", 0);
-        lhm.addAuto(a1);
-    }
+//		if (problemFixed == true) {
+//			a1.setMaker("Ford");
+//			a1.setYear(2000);
+//			a1.addOptionChoice(0, 0);
+//			a1.addOptionChoice(1, 0);
+//			a1.addOptionChoice(1, 0);
+//			a1.addOptionChoice(3, 1);
+//			System.out.println(problemFixed);
+//			lhm.addAuto(a1);
+//			printAuto("FordWagonZTW");
+//		}
 
-    @Override
-    public void printAuto(String modelName) {
-        System.out.println(lhm.getAuto(modelName));
+	}
 
-//		System.out.println(lhm.getAuto(modelName).getOptnSet(0));
-//		System.out.println(lhm.getAuto(modelName).getOptn(0, 0));
-//		System.out.println(lhm.getAuto(modelName).getOptn(0, 1));
-//		System.out.println(lhm.getAuto(modelName).getOptnPrice(0, 1));
-
-    }
-
-
-    @Override
-    public void updateOptnSetName(String modelName, String OptionSetName, String newName) {
-
-    }
-
-    @Override
-    public void updateOptnPrice(String modelName, String OptionSetName, String OptionName, float newPrice) {
-
-    }
-
-    @Override
-    public float getTotalPrice() {
-        return a1.getTotalPrice();
-    }
+	@Override
+	public void printAuto(String modelName) {
+		System.out.println(lhm.getAuto(modelName));
+	}
 
 
-    @Override
-    public void addOptnChoice(String optSetName, String optionName) {
+	@Override
+	public void updateOptnSetName(String modelName, String OptionSetName, String newName) {
+	}
 
-    }
+	@Override
+	public void updateOptnPrice(String modelName, String OptionSetName, String OptionName, float newPrice) {
 
-    @Override
-    public void addOptnChoice(int i, int j) {
-        a1.addOptionChoice(i, j);
-    }
+	}
+
+	@Override
+	public float getTotalPrice() {
+		return a1.getTotalPrice();
+	}
 
 
-    @Override
-    public void removeOptnChoice(int i) {
-        a1.removeOptionChoice(i);
-    }
+	@Override
+	public void addOptnChoice(String optSetName, String optionName) {
 
-    //1) set option choice
-    @Override
-    public void setOptnChoice(int i, int j) {
-        a1.setOptnChoice(i, j);
-    }
+	}
 
-    //1) set option choice
-    @Override
-    public void setOptnChoice(String optSetName, String optionName) {
+	@Override
+	public void addOptnChoice(int i, int j) throws IOException {
+		a1.addOptionChoice(i, j);
+	}
 
-    }
 
-    @Override
-    public void printOptionChoices() {
+	@Override
+	public void removeOptnChoice(int i) {
+		a1.removeOptionChoice(i);
+	}
 
-    }
+	//1) set option choice
+	@Override
+	public void setOptnChoice(int i, int j) throws IOException {
+		a1.setOptnChoice(i, j);
+	}
+
+	//1) set option choice
+	@Override
+	public void setOptnChoice(String optSetName, String optionName) {
+
+	}
+
+	@Override
+	public void printOptionChoices() {
+		System.out.println(a1.getOptnChoice().toString());
+	}
+
+	/**
+	 * catch 5 errors, fix 1
+	 *
+	 * @param errNo logged error number
+	 * @return
+	 * @throws IOException
+	 */
+	@Override
+	public boolean fix(int errNo) throws IOException {
+		Fix1to100 f1 = new Fix1to100();
+		switch (errNo) {
+			case 0:
+				break;
+			case 1:
+				f1.fixMissingPriceFromTextFile();
+				break;
+			case 2:
+				break;
+			case 3:
+				break;
+			case 4:
+				break;
+
+			default:
+				break;
+		}
+		return true;
+	}
 
 
 //	//used to keep an on-going loop until all recorded exceptions are fixed

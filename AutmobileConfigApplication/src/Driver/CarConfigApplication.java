@@ -37,7 +37,8 @@ public class CarConfigApplication {
 		BuildAuto auto = new BuildAuto();
 
 		auto.buildAuto(configurationFile);
-		auto.printAuto("FordWagonZTW");
+//		auto.printAuto("FordWagonZTW");
+
 
 //		auto.addOptionChoice(0, 0);
 //		auto.addOptionChoice(0, 0);

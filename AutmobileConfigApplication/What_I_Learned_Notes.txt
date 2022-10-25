@@ -1,5 +1,7 @@
 Lab 1:
 Lab 2:
+    Custom Exception Handling:
+
 Lab 3:
     BuildAuto = our API used to perform CRUD on the automobile and it's associating classes. this is the class developers will be using
      to interact with the backend of our app.

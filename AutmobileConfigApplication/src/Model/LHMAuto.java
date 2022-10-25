@@ -19,13 +19,13 @@ public class LHMAuto<T extends Automobile> {
 	/**
 	 * @TODO CRUD operations for LHM using LinkedHashMap API
 	 */
-	LinkedHashMap<String, T> cacheAuto;
+	private LinkedHashMap<String, T> cacheAuto;
 
 	public LHMAuto() {
 		cacheAuto = new LinkedHashMap<>();
 	}
 
-	public LinkedHashMap<String, T> getCacheAuto() {
+	private LinkedHashMap<String, T> getCacheAuto() {
 		return cacheAuto;
 	}
 

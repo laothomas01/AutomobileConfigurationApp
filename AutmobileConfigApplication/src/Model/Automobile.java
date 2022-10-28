@@ -56,12 +56,9 @@ public class Automobile implements Serializable {
 		maker = "";
 		year = 0;
 	}
-
-
 	public Automobile(String n, int size) {
 		this(n, 0f, size);
 	}
-
 	/**
 	 * @param size
 	 * @param p
@@ -69,25 +66,21 @@ public class Automobile implements Serializable {
 	public Automobile(int size, float p) {
 		this("BLANK", p, size);
 	}
-
 	/**
 	 * @param p
 	 */
 	public Automobile(float p) {
 		this("BLANK", p, 0);
 	}
-
 	/**
 	 * @param size
 	 */
 	public Automobile(int size) {
 		this("BLANK", 0, size);
 	}
-
 	public Automobile() {
 		this("BLANK", 0, 0);
 	}
-
 	public String getModel() {
 		return model;
 	}
@@ -481,7 +474,9 @@ public class Automobile implements Serializable {
 		}
 		return getOptnSets().get(i);
 	}
-
+	public void setOptnSetName(int i, String name) throws IOException {
+		getOptnSet(i).setName(name);
+	}
 	public ArrayList<OptionSet> getOptnSets() {
 		return optnSets;
 	}
@@ -499,9 +494,7 @@ public class Automobile implements Serializable {
 		getOptnSets().add(createOptnSet(name, size));
 	}
 
-	public void setOptnSetName(int i, String name) throws IOException {
-		getOptnSet(i).setName(name);
-	}
+
 
 	public void deleteOptnSet(int i) {
 		getOptnSets().remove(i);

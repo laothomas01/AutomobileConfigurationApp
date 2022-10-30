@@ -1,5 +1,6 @@
 package Adapter;
 
+import Model.Automobile;
 import Model.LHMAuto;
 import Utils.FileIO;
 import Exception.Fix1to100;
@@ -23,37 +24,37 @@ public class BuildAuto extends ProxyAutomobile implements CreateAuto, UpdateAuto
 	@Override
 	public void buildAuto(String fileName) throws IOException {
 		FileIO io = new FileIO(fileName);
-		lhm = new LHMAuto<>();
+		autos = new LHMAuto<>();
 		a1 = io.loadAutomotive();
-		int[] errNums = io.readArrayOfErrors("listOfErrors.txt");
-		boolean problemFixed = false;
-		System.out.println("PROBLEM(S) FIXED = " + problemFixed);
-		for (int i = 0; i < errNums.length; i++) {
-			System.out.println("FIXING PROBLEMS.......");
-			//fix my problems
-			fix(errNums[i]);
-		}
-		//reload the automobile after all problems are fixed
-		a1 = io.loadAutomotive();
-		System.out.println("DONE!");
-		//set the fixed flag to true
-		problemFixed = fix(-1);
-		System.out.println("PROBLEM(S) FIXED = " + problemFixed);
+//		int[] errNums = io.readArrayOfErrors("listOfErrors.txt");
+//		boolean problemFixed = false;
+//		System.out.println("PROBLEM(S) FIXED = " + problemFixed);
+//		for (int i = 0; i < errNums.length; i++) {
+//			System.out.println("FIXING PROBLEMS.......");
+//			//fix my problems
+//			fix(errNums[i]);
+//		}
+//		//reload the automobile after all problems are fixed
+//		a1 = io.loadAutomotive();
+//		System.out.println("DONE!");
+//		//set the fixed flag to true
+//		problemFixed = fix(-1);
+//		System.out.println("PROBLEM(S) FIXED = " + problemFixed);
+//
+//		if (problemFixed == true) {
+		System.out.println("DO SOMETHING!");
+		a1.setMaker("Ford");
+		a1.setYear(2000);
+		a1.addOptionChoice(0, 0);
+		a1.addOptionChoice(1, 0);
+		a1.addOptionChoice(1, 0);
+		a1.addOptionChoice(3, 1);
+		autos.addAuto(a1);
+		printAuto("FordWagonZTW");
+		printOptionChoices();
+		System.out.println(getTotalPrice());
+//		}
 
-		if (problemFixed == true) {
-			System.out.println("DO SOMETHING!");
-			a1.setMaker("Ford");
-			a1.setYear(2000);
-			a1.addOptionChoice(0, 0);
-			a1.addOptionChoice(1, 0);
-			a1.addOptionChoice(1, 0);
-			a1.addOptionChoice(3, 1);
-			System.out.println(problemFixed);
-			lhm.addAuto(a1);
-			printAuto("FordWagonZTW");
-			printOptionChoices();
-			System.out.println(getTotalPrice());
-		}
 		//do other stuff
 //		if (problemFixed) {
 //			a1.setMaker("Ford");
@@ -99,9 +100,20 @@ public class BuildAuto extends ProxyAutomobile implements CreateAuto, UpdateAuto
 
 	}
 
+	//return lhmAuto instance
+	public LHMAuto<Automobile> getAutoLHM() {
+		return autos;
+	}
+
+	//pass in LHMAuto instance and set to return autoLHM
+	//defining a way to access the proxyAuto LHM instance through APIs
+//	public void setAutoLHM(LHMAuto<Automobile> lhm) {
+//		lhm = getAutoLHM();
+//	}
+
 	@Override
 	public void printAuto(String modelName) {
-		System.out.println(lhm.getAuto(modelName));
+		System.out.println(autos.getAuto(modelName));
 	}
 
 

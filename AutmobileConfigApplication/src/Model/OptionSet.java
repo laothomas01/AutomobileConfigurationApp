@@ -14,6 +14,7 @@ class OptionSet implements Serializable {
 	private ArrayList<Option> optns;
 	private String name;
 	private Option choice;
+
 	//option set has SIZE amount of options
 	//these number of options are based on the the data of each option set
 	protected OptionSet(String name, int size) {
@@ -32,18 +33,23 @@ class OptionSet implements Serializable {
 		}
 		choice = new Option("", 0);
 	}
+
 	protected OptionSet(String name) {
 		this(name, 0);
 	}
+
 	protected OptionSet(int size) {
 		this("BLANK OPTION", size);
 	}
+
 	protected OptionSet() {
 		this("BLANK OPTION", 0);
 	}
+
 	protected String getName() {
 		return name;
 	}
+
 	protected void setName(String name) {
 		this.name = name;
 	}
@@ -131,12 +137,15 @@ class OptionSet implements Serializable {
 	protected ArrayList<Option> getOptns() {
 		return optns;
 	}
+
 	protected int getOptnsListSize() {
 		return optns.size();
 	}
+
 	protected Option createOption(String name, float price) {
 		return new Option(name, price);
 	}
+
 	protected Option getOptn(int i) throws IOException {
 		try {
 			if (getOptns().get(i) == null) {
@@ -155,6 +164,7 @@ class OptionSet implements Serializable {
 		}
 		return getOptns().get(i);
 	}
+
 	protected Option getOptn(String n) throws IOException {
 		for (int i = 0; i < getOptnsListSize(); i++) {
 			if (getOptn(i).getName().equals(n)) {
@@ -163,6 +173,7 @@ class OptionSet implements Serializable {
 		}
 		return null;
 	}
+
 	protected String getOptnName(int i) throws IOException {
 		try {
 			if (getOptn(i).getName() == null) {
@@ -177,9 +188,11 @@ class OptionSet implements Serializable {
 		}
 		return getOptn(i).getName();
 	}
+
 	protected void setOptnName(int i, String name) throws IOException {
 		getOptn(i).setName(name);
 	}
+
 	protected void setOptnPrice(int i, float price) throws IOException {
 		getOptn(i).setPrice(price);
 	}
@@ -234,6 +247,7 @@ class OptionSet implements Serializable {
 		}
 		return sb.toString();
 	}
+
 	protected class Option {
 
 		private String name;

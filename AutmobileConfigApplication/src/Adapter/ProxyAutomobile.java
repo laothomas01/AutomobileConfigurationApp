@@ -13,5 +13,5 @@ abstract public class ProxyAutomobile {
 
 	//variable must be static to be able to reference it in other classes
 	protected static Automobile a1;
-	protected static LHMAuto<Automobile> lhm;
+	protected static LHMAuto<Automobile> autos;
 }

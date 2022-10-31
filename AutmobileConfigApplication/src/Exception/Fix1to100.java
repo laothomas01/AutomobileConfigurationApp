@@ -5,19 +5,12 @@ import Utils.FileIO;
 import java.io.*;
 import java.util.ArrayList;
 
-/**
- * plan of attack:
- * trigger error in file io's read data
- * throw autoexception which will be caught and the exception number and message will be stored
- * read text file containing exception number, funnel that parsed number into the fix function from build auto
- * create instance of fix1to100 where each method in fix1to100 will be dedicated to a particular fix in the software
- */
+
 public class Fix1to100 {
 	public Fix1to100() {
 
 	}
 
-	//for fixing missing price from text file
 	public void fixMissingPriceFromTextFile() throws IOException {
 		FileIO io = new FileIO("CarConfigs.txt");
 		BufferedReader br = new BufferedReader(new FileReader("CarConfigs.txt"));

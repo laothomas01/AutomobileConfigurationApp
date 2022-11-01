@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import Exception.AutoException;
 import Utils.FileIO;
 
+/**
+ * Synchronize these methods
+ */
 public class Automobile implements Serializable {
 	//	private String name;
 	private float basePrice;

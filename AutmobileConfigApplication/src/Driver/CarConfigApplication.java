@@ -1,6 +1,7 @@
 package Driver;
 
 import Adapter.BuildAuto;
+import Adapter.EditOptions;
 import Model.Automobile;
 import Utils.FileIO;
 
@@ -19,13 +20,9 @@ public class CarConfigApplication {
 
 
 	public static void Lab3Test() throws IOException {
-
-
 		String configurationFile = "CarConfigs.txt";
 		BuildAuto auto = new BuildAuto();
-
 		auto.buildAuto(configurationFile);
-		boolean finishedBuilding = false;
 	}
 
 	public static void Lab2Test() throws IOException {

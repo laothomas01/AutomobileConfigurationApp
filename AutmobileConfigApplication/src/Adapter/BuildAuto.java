@@ -7,29 +7,31 @@ import Exception.Fix1to100;
 
 import java.io.IOException;
 
-/**
- * API for our car configuration app
- * Methods we want to expose to users.
- * Requirements:
- * 1) CRUD for automobile
- * total price
- * option choices
- * 2) CRUD for automobile option sets
- * 3) CRUD for automobile options
- */
 
 public class BuildAuto extends ProxyAutomobile implements CreateAuto, UpdateAuto, ReadAuto, FixAuto {
 
 
 	@Override
 	public void buildAuto(String fileName) throws IOException {
-		autos = new LHMAuto<>();
-		autos.addAuto(a1);
+		FileIO io = new FileIO(fileName);
+		a1 = io.loadAutomotive();
+		setAutoLHM(new LHMAuto<>());
 	}
 
+	//an Automobile linked hashmap
 	public LHMAuto<Automobile> getAutoLHM() {
 		return autos;
 	}
+
+	//get an Automobile
+	public Automobile getAuto() {
+		return a1;
+	}
+
+	public void setAutoLHM(LHMAuto lhm) {
+		autos = lhm;
+	}
+
 
 	@Override
 	public void printAuto(String modelName) {

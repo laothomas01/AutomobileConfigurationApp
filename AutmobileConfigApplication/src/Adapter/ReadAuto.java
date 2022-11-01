@@ -1,8 +1,11 @@
 package Adapter;
 
-public interface ReadAuto {
-	public float getTotalPrice();
+import Model.Automobile;
+import Model.LHMAuto;
 
-	public void printOptionChoices();
+public interface ReadAuto {
+	 float getTotalPrice();
+
+	 void printOptionChoices();
 
 }

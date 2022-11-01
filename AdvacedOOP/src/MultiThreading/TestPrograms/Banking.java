@@ -4,7 +4,7 @@ public class Banking extends Thread {
 	/**
 	 * The test method for the class
 	 *
-	 * @param args Time in seconds for which
+	 * @param args Other.Time in seconds for which
 	 *             this banking process should run
 	 */
 	public static void main(String[] args) {

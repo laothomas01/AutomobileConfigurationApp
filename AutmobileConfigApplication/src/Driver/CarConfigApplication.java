@@ -1,6 +1,7 @@
 package Driver;
 
 import Adapter.BuildAuto;
+import Adapter.CreateAuto;
 import Adapter.EditOptions;
 import Model.Automobile;
 import Utils.FileIO;
@@ -23,6 +24,8 @@ public class CarConfigApplication {
 		String configurationFile = "CarConfigs.txt";
 		BuildAuto auto = new BuildAuto();
 		auto.buildAuto(configurationFile);
+		EditOptions eo = new EditOptions(auto);
+
 	}
 
 	public static void Lab2Test() throws IOException {

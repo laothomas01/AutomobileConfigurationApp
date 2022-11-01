@@ -3,10 +3,12 @@ package Adapter;
 import Model.Automobile;
 import Model.LHMAuto;
 
-public class EditOptions extends ProxyBuildAuto implements BuildableAuto {
+public class EditOptions implements BuildableAuto {
 
-	{
-		ba = new BuildAuto();
+	BuildAuto ba;
+
+	public EditOptions(BuildAuto ba) {
+		this.ba = ba;
 	}
 
 	@Override

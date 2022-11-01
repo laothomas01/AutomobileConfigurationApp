@@ -8,7 +8,14 @@ import Exception.Fix1to100;
 import java.io.IOException;
 
 
-public class BuildAuto extends ProxyAutomobile implements CreateAuto, UpdateAuto, ReadAuto, FixAuto {
+public class BuildAuto
+		extends
+		ProxyAutomobile
+		implements
+		CreateAuto,
+		UpdateAuto,
+		ReadAuto,
+		FixAuto {
 
 
 	@Override
@@ -16,6 +23,7 @@ public class BuildAuto extends ProxyAutomobile implements CreateAuto, UpdateAuto
 		FileIO io = new FileIO(fileName);
 		a1 = io.loadAutomotive();
 		setAutoLHM(new LHMAuto<>());
+
 	}
 
 	//an Automobile linked hashmap
@@ -35,7 +43,7 @@ public class BuildAuto extends ProxyAutomobile implements CreateAuto, UpdateAuto
 
 	@Override
 	public void printAuto(String modelName) {
-		System.out.println(autos.getAuto(modelName));
+		System.out.println(a1);
 	}
 
 

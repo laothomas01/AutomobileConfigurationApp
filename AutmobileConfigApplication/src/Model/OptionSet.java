@@ -43,6 +43,7 @@ class OptionSet implements Serializable {
 	protected void setName(String name) {
 		this.name = name;
 	}
+
 	protected ArrayList<Option> getOptns() {
 		return optns;
 	}
@@ -130,7 +131,6 @@ class OptionSet implements Serializable {
 			}
 		}
 	}
-
 
 
 	protected void setOptnChoice(int i) throws IOException {

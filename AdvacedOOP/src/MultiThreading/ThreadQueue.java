@@ -12,6 +12,7 @@ class Queue {
 
 	//does not read value unless there is a new value in queue
 	synchronized int get() {
+		System.out.println("AVAILABLE: BEFORE GET " + available);
 		System.out.println("Got: " + n);
 		System.out.println("PRE-REMOVE,CHECKING DATA:" + a + "," + n);
 		while (available == false) {
@@ -30,11 +31,15 @@ class Queue {
 		System.out.println("POST-FIRST ADD,CHECKING DATA:" + a + "," + n);
 		notifyAll();
 		System.out.println("Get Done! " + n);
+		System.out.println("AVAILABLE: AFTER GET " + available);
+
 		return n;
 	}
 
 	//does not put value unless value has been read
 	synchronized void put(int n) {
+		System.out.println("AVAILABLE: BEFORE PUT " + available);
+
 		System.out.println("Put: " + n);
 		System.out.println("PRE-ADD,CHECKING DATA:" + a + "," + n);
 		while (available == true) {
@@ -55,6 +60,7 @@ class Queue {
 		System.out.println("POST-SECOND ADD,CHECKING DATA :" + a + "," + n);
 		notifyAll();
 		System.out.println("Put done " + n);
+		System.out.println("AVAILABLE: AFTER PUT " + available);
 
 	}
 

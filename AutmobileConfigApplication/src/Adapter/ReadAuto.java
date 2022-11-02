@@ -4,8 +4,9 @@ import Model.Automobile;
 import Model.LHMAuto;
 
 public interface ReadAuto {
-	 float getTotalPrice();
+	float getTotalPrice();
 
-	 void printOptionChoices();
+	void printOptionChoices();
+
 
 }

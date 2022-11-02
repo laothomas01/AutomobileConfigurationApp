@@ -22,9 +22,23 @@ public class BuildAuto extends ProxyAutomobile implements CreateAuto, UpdateAuto
 		getAutos().addAuto(a1);
 	}
 
-	//an Automobile linked hashmap
-	public LHMAuto<Automobile> getAutos() {
+	/**
+	 * synchronized for access to linked hashmap of automobile
+	 *
+	 * @return
+	 */
+	public synchronized LHMAuto<Automobile> getAutos() {
 		return autos;
+	}
+
+	/**
+	 * synchronized for access to automobile object of linked hashmap of automobile
+	 *
+	 * @param modelName model name look up
+	 * @return cached automobile object
+	 */
+	public synchronized Automobile getAuto(String modelName) {
+		return autos.getAuto(modelName);
 	}
 
 	public void addAuto(Automobile a1) {
@@ -35,12 +49,6 @@ public class BuildAuto extends ProxyAutomobile implements CreateAuto, UpdateAuto
 		getAutos().removeAuto(modelName);
 	}
 
-	//get an Automobile
-
-
-	public Automobile getAuto(String modelName) {
-		return getAutos().getAuto(modelName);
-	}
 
 	public void setAutoLHM(LHMAuto lhm) {
 		autos = lhm;
@@ -74,6 +82,11 @@ public class BuildAuto extends ProxyAutomobile implements CreateAuto, UpdateAuto
 		getAuto(modelName).setOptnPrice(i, j, newPrice);
 	}
 
+	@Override
+	public void setOptnName(String modelName, int i, int j, String newName) throws IOException {
+		getAuto(modelName).setOptnName(i, j, newName);
+	}
+
 	/**
 	 * Loop through each automobile in linked hashmap and calculate the total price of selected options
 	 *
@@ -93,6 +106,7 @@ public class BuildAuto extends ProxyAutomobile implements CreateAuto, UpdateAuto
 	public void addOptnChoice(int i, int j) throws IOException {
 		a1.addOptionChoice(i, j);
 	}
+
 	@Override
 	public void removeOptnChoice(int i) {
 		a1.removeOptionChoice(i);

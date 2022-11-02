@@ -115,13 +115,29 @@ public class Automobile implements Serializable {
 		setBasePrice(price);
 	}
 
-	public OptionSet getOptnSet(int i) throws IOException {
+	public ArrayList<OptionSet> getOptnSets() {
+		return optnSets;
+	}
+
+	public OptionSet createOptnSet(String name, int size) {
+		//updates the option set instance to a blank option set with N option instances
+		return new OptionSet(name, size);
+	}
+
+	/**
+	 * synchronized to handle multiple user access to an option set object
+	 *
+	 * @param i option set index
+	 * @return return an option set object
+	 * @throws IOException index does not find searched object
+	 */
+	public synchronized OptionSet getOptnSet(int i) throws IOException {
 		try {
 			if (getOptnSets().get(i) == null) {
 				throw new AutoException(3);
 			}
 		} catch (AutoException e) {
-			e.setErrorMsg("Cannot Find File Name!");
+			e.setErrorMsg("Option Set does not exist!");
 			e.printMyProblem();
 			String exception = e.getErrorNo() + "|" + e.getErrorMsg();
 			FileIO.writeToFile("listOfErrors.txt", exception);
@@ -134,9 +150,6 @@ public class Automobile implements Serializable {
 		getOptnSet(i).setName(name);
 	}
 
-	public ArrayList<OptionSet> getOptnSets() {
-		return optnSets;
-	}
 
 	public int getOptnSetsSize() {
 		return getOptnSets().size();
@@ -162,10 +175,6 @@ public class Automobile implements Serializable {
 		}
 	}
 
-	public OptionSet createOptnSet(String name, int size) {
-		//updates the option set instance to a blank option set with N option instances
-		return new OptionSet(name, size);
-	}
 
 	public void updateOptnSet(int i, OptionSet os) {
 		getOptnSets().set(i, os);
@@ -174,47 +183,105 @@ public class Automobile implements Serializable {
 	public void updateOptnSet(int i, String name, int size) {
 		updateOptnSet(i, createOptnSet(name, size));
 	}
-	public void updateOptnSetName(int i, String newName) throws IOException {getOptnSet(i).setName(newName);}
-	public void updateOptnSetPrice(int i,float newPrice) throws IOException {getOptnSet(i).setOptnPrice(i,newPrice);}
+
+	public void updateOptnSetName(int i, String newName) throws IOException {
+		getOptnSet(i).setName(newName);
+	}
+
+	public void updateOptnSetPrice(int i, float newPrice) throws IOException {
+		getOptnSet(i).setOptnPrice(i, newPrice);
+	}
+
 	public int getOptnSetSize(int i) throws IOException {
 		return getOptnSet(i).getOptnsListSize();
 	}
+
 	public String getOptnSetName(int i) throws IOException {
 		return getOptnSet(i).getName();
 	}
-	public ArrayList<OptionSet.Option> getOptns(int i) throws IOException {
+
+	/**
+	 * @param i option set object index
+	 * @return ArrayList<OptionSet.Option> options
+	 * @throws IOException invalid index search
+	 */
+	public ArrayList<OptionSet.Option> getOptnList(int i) throws IOException {
 		return getOptnSet(i).getOptns();
 	}
 
+
 	public int getOptnListSize(int i) throws IOException {
 		return getOptnSet(i).getOptnsListSize();
+	}
+
+	/**
+	 * synchronized there can be multiple access to same Option Instance
+	 *
+	 * @param i option set index
+	 * @param j option index
+	 * @return option object
+	 * @throws IOException invalid index
+	 */
+	public synchronized OptionSet.Option getOptn(int i, int j) throws IOException {
+		return getOptnSet(i).getOptn(j);
+	}
+
+	/**
+	 * synchronized for multi-threaded editing
+	 *
+	 * @param i option set index
+	 * @param j option index
+	 * @param n new name
+	 * @param p new price
+	 * @throws IOException
+	 */
+	public synchronized void setOptn(int i, int j, String n, float p) throws IOException {
+		getOptnSet(i).getOptn(j).setName(n);
+		getOptnSet(i).getOptn(j).setPrice(p);
 	}
 
 	public void setOptn(int i, int j, OptionSet.Option o) throws IOException {
 		getOptnSet(i).getOptns().set(j, o);
 	}
 
-	public void setOptnName(int i, int j, String n) throws IOException {
+	/**
+	 * synchronized for multi-threaded editing
+	 *
+	 * @param i option set index
+	 * @param j option index
+	 * @param n new name
+	 * @throws IOException
+	 */
+	public synchronized void setOptnName(int i, int j, String n) throws IOException {
 		getOptnSet(i).getOptn(j).setName(n);
 	}
 
-	public void setOptnPrice(int i, int j, float p) throws IOException {
+	/**
+	 * synchronized for multi-threaded editing
+	 *
+	 * @param i option set index
+	 * @param j option index
+	 * @param p new price
+	 * @throws IOException
+	 */
+	public synchronized void setOptnPrice(int i, int j, float p) throws IOException {
 		getOptnSet(i).getOptn(j).setPrice(p);
 	}
 
-	public void setOptn(int i, int j, String n, float p) throws IOException {
-		getOptnSet(i).getOptn(j).setName(n);
-		getOptnSet(i).getOptn(j).setPrice(p);
-	}
-	public void setOptnChoice(int i, int j) throws IOException {
-		getOptnSet(i).setOptnChoice(j);
-	}
+
 	public OptionSet.Option getOptnChoice(int i) throws IOException {
 		return getOptnSet(i).getOptnChoice();
 	}
+
+	public void setOptnChoice(int i, int j) throws IOException {
+		getOptnSet(i).setOptnChoice(j);
+	}
+
+
 	public String getOptnChoiceName(int i) throws IOException {
 		return getOptnSet(i).getOptnChoice().getName();
 	}
+
 	public float getOptnChoicePrice(int i) throws IOException {
 		return getOptnSet(i).getOptnChoice().getPrice();
 	}

@@ -13,7 +13,7 @@ public interface UpdateAuto {
 
 	void setOptnPrice(String modelName, int i, int j, float newPrice) throws IOException;
 
-	float getTotalPrice();
+	void setOptnName(String modelName, int i, int j, String newName) throws IOException;
 
 	void addOptnChoice(String optSetName, String optionName);
 

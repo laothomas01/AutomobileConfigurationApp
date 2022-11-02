@@ -1,7 +1,8 @@
 package MultiThreading.TestPrograms;
+
 //Showing how to share an object with n threads - sychronized
 class Goofy extends Thread {
-	static String[] msg = { "Example","of","how","messy","Java","is","without","synchronization" };
+	static String[] msg = {"Example", "of", "how", "messy", "Java", "is", "without", "synchronization"};
 
 	public static void main(String[] args) {
 		Goofy t1 = new Goofy("t1: ");
@@ -14,16 +15,16 @@ class Goofy extends Thread {
 		boolean t2IsAlive = true;
 
 		do {
-			if(t1IsAlive && !t1.isAlive()) {
+			if (t1IsAlive && !t1.isAlive()) {
 				t1IsAlive = false;
 				System.out.println("t1 is dead.");
 			}
 
-			if(t2IsAlive && !t2.isAlive()) {
+			if (t2IsAlive && !t2.isAlive()) {
 				t2IsAlive = false;
 				System.out.println("t2 is dead.");
 			}
-		} while(t1IsAlive || t2IsAlive);
+		} while (t1IsAlive || t2IsAlive);
 	}
 
 	public Goofy(String id) {
@@ -32,16 +33,16 @@ class Goofy extends Thread {
 
 	void randomWait() {
 		try {
-			Thread.currentThread().sleep((long)(3000*Math.random()));
-		} catch(InterruptedException e) {
+			Thread.currentThread().sleep((long) (3000 * Math.random()));
+		} catch (InterruptedException e) {
 			System.out.println("Interrupted!");
 		}
 	}
 
 
 	public void run() {
-		synchronized(System.out) {
-			for( int i=0; i<msg.length; i++ ) {
+		synchronized (System.out) {
+			for (int i = 0; i < msg.length; i++) {
 				randomWait();
 				System.out.println(getName() + msg[i]);
 			}

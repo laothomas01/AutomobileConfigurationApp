@@ -7,15 +7,11 @@ import Exception.Fix1to100;
 
 import java.io.IOException;
 
-
-public class BuildAuto
-		extends
-		ProxyAutomobile
-		implements
-		CreateAuto,
-		UpdateAuto,
-		ReadAuto,
-		FixAuto {
+/**
+ * - Building an API to create an automobile through implementing interfaces and an Automobile instance
+ * - perform CRUD on the automobile instance
+ */
+public class BuildAuto extends ProxyAutomobile implements CreateAuto, UpdateAuto, ReadAuto, FixAuto {
 
 
 	@Override
@@ -23,17 +19,27 @@ public class BuildAuto
 		FileIO io = new FileIO(fileName);
 		a1 = io.loadAutomotive();
 		setAutoLHM(new LHMAuto<>());
-
+		getAutos().addAuto(a1);
 	}
 
 	//an Automobile linked hashmap
-	public LHMAuto<Automobile> getAutoLHM() {
+	public LHMAuto<Automobile> getAutos() {
 		return autos;
 	}
 
+	public void addAuto(Automobile a1) {
+		getAutos().addAuto(a1);
+	}
+
+	public void removeAuto(String modelName) {
+		getAutos().removeAuto(modelName);
+	}
+
 	//get an Automobile
-	public Automobile getAuto() {
-		return a1;
+
+
+	public Automobile getAuto(String modelName) {
+		return getAutos().getAuto(modelName);
 	}
 
 	public void setAutoLHM(LHMAuto lhm) {
@@ -43,24 +49,40 @@ public class BuildAuto
 
 	@Override
 	public void printAuto(String modelName) {
-		System.out.println(a1);
-	}
-
-
-	@Override
-	public void updateOptnSetName(String modelName, String OptionSetName, String newName) {
+		System.out.println(getAuto(modelName));
 	}
 
 	@Override
-	public void updateOptnPrice(String modelName, String OptionSetName, String OptionName, float newPrice) {
+	public void setOptnSetName(String modelName, int i, String newName) throws IOException {
+		getAuto(modelName).setOptnSetName(i, newName);
+	}
+
+	@Override
+	public void setOptnSetName(String modelName, String OptionSetName, String newName) {
 
 	}
 
+	@Override
+	public void setOptnPrice(String modelName, String OptionSetName, String OptionName, float newPrice) {
+
+	}
+	// access linked hashmap of automobiles, select a valid automobile name,select the option set you want to modify
+	// modify its attribute
+
+	@Override
+	public void setOptnPrice(String modelName, int i, int j, float newPrice) throws IOException {
+		getAuto(modelName).setOptnPrice(i, j, newPrice);
+	}
+
+	/**
+	 * Loop through each automobile in linked hashmap and calculate the total price of selected options
+	 *
+	 * @return total price of automobile options
+	 */
 	@Override
 	public float getTotalPrice() {
 		return a1.getTotalPrice();
 	}
-
 
 	@Override
 	public void addOptnChoice(String optSetName, String optionName) {
@@ -71,8 +93,6 @@ public class BuildAuto
 	public void addOptnChoice(int i, int j) throws IOException {
 		a1.addOptionChoice(i, j);
 	}
-
-
 	@Override
 	public void removeOptnChoice(int i) {
 		a1.removeOptionChoice(i);

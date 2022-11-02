@@ -1,13 +1,9 @@
 package Driver;
 
-import Adapter.BuildAuto;
-import Adapter.CreateAuto;
-import Adapter.EditOptions;
-import Model.Automobile;
-import Utils.FileIO;
+import Adapter.*;
+import Scale.EditOptions;
 
 import java.io.*;
-import java.util.Random;
 
 import Exception.AutoException;
 
@@ -24,8 +20,8 @@ public class CarConfigApplication {
 		String configurationFile = "CarConfigs.txt";
 		BuildAuto auto = new BuildAuto();
 		auto.buildAuto(configurationFile);
+		System.out.println(auto.getAuto("FordWagonZTW"));
 		EditOptions eo = new EditOptions(auto);
-
 	}
 
 	public static void Lab2Test() throws IOException {

@@ -5,9 +5,13 @@ import java.io.IOException;
 
 public interface UpdateAuto {
 
-	void updateOptnSetName(String modelName, String OptionSetName, String newName);
+	void setOptnSetName(String modelName, String OptionSetName, String newName);
 
-	void updateOptnPrice(String modelName, String OptionSetName, String OptionName, float newPrice);
+	void setOptnPrice(String modelName, String OptionSetName, String OptionName, float newPrice);
+
+	void setOptnSetName(String modelName, int i, String newName) throws IOException;
+
+	void setOptnPrice(String modelName, int i, int j, float newPrice) throws IOException;
 
 	float getTotalPrice();
 

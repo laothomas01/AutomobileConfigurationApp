@@ -130,7 +130,7 @@ public class FileIO {
 					String[] optnPrices = optnSet[2].split(" ");
 					//needs to finish populating the option sets with empty options
 					for (int j = 0; j < optnNames.length; j++) {
-						a1.setOptnSet(i, optnSetName, optnNames.length);
+						a1.updateOptnSet(i, optnSetName, optnNames.length);
 					}
 					//populate empty options with new data
 					for (int j = 0; j < optnNames.length; j++) {

@@ -115,7 +115,6 @@ public class Automobile implements Serializable {
 		setBasePrice(price);
 	}
 
-
 	public OptionSet getOptnSet(int i) throws IOException {
 		try {
 			if (getOptnSets().get(i) == null) {
@@ -151,11 +150,9 @@ public class Automobile implements Serializable {
 		getOptnSets().add(createOptnSet(name, size));
 	}
 
-
 	public void deleteOptnSet(int i) {
 		getOptnSets().remove(i);
 	}
-
 
 	public void deleteOptnSet(String name) throws IOException {
 		for (int i = 0; i < getOptnSetsSize(); i++) {
@@ -165,64 +162,62 @@ public class Automobile implements Serializable {
 		}
 	}
 
-
 	public OptionSet createOptnSet(String name, int size) {
+		//updates the option set instance to a blank option set with N option instances
 		return new OptionSet(name, size);
 	}
 
-	public void setOptnSet(int i, OptionSet os) {
+	public void updateOptnSet(int i, OptionSet os) {
 		getOptnSets().set(i, os);
 	}
 
-	public void setOptnSet(int i, String name, int size) {
-		setOptnSet(i, createOptnSet(name, size));
+	public void updateOptnSet(int i, String name, int size) {
+		updateOptnSet(i, createOptnSet(name, size));
 	}
-
+	public void updateOptnSetName(int i, String newName) throws IOException {getOptnSet(i).setName(newName);}
+	public void updateOptnSetPrice(int i,float newPrice) throws IOException {getOptnSet(i).setOptnPrice(i,newPrice);}
 	public int getOptnSetSize(int i) throws IOException {
 		return getOptnSet(i).getOptnsListSize();
 	}
-
 	public String getOptnSetName(int i) throws IOException {
 		return getOptnSet(i).getName();
 	}
-
 	public ArrayList<OptionSet.Option> getOptns(int i) throws IOException {
 		return getOptnSet(i).getOptns();
 	}
-
 
 	public int getOptnListSize(int i) throws IOException {
 		return getOptnSet(i).getOptnsListSize();
 	}
 
-
 	public void setOptn(int i, int j, OptionSet.Option o) throws IOException {
 		getOptnSet(i).getOptns().set(j, o);
+	}
+
+	public void setOptnName(int i, int j, String n) throws IOException {
+		getOptnSet(i).getOptn(j).setName(n);
+	}
+
+	public void setOptnPrice(int i, int j, float p) throws IOException {
+		getOptnSet(i).getOptn(j).setPrice(p);
 	}
 
 	public void setOptn(int i, int j, String n, float p) throws IOException {
 		getOptnSet(i).getOptn(j).setName(n);
 		getOptnSet(i).getOptn(j).setPrice(p);
 	}
-
-
 	public void setOptnChoice(int i, int j) throws IOException {
 		getOptnSet(i).setOptnChoice(j);
 	}
-
-
 	public OptionSet.Option getOptnChoice(int i) throws IOException {
 		return getOptnSet(i).getOptnChoice();
 	}
-
 	public String getOptnChoiceName(int i) throws IOException {
 		return getOptnSet(i).getOptnChoice().getName();
 	}
-
 	public float getOptnChoicePrice(int i) throws IOException {
 		return getOptnSet(i).getOptnChoice().getPrice();
 	}
-
 
 	public void addOptionChoice(int i, int j) throws IOException {
 		setOptnChoice(i, j);

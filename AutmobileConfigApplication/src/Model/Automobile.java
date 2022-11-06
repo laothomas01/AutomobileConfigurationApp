@@ -125,13 +125,13 @@ public class Automobile implements Serializable {
 	}
 
 	/**
-	 * synchronized to handle multiple user access to an option set object
+	 * to handle multiple user access to an option set object
 	 *
 	 * @param i option set index
 	 * @return return an option set object
 	 * @throws IOException index does not find searched object
 	 */
-	public synchronized OptionSet getOptnSet(int i) throws IOException {
+	public OptionSet getOptnSet(int i) throws IOException {
 		try {
 			if (getOptnSets().get(i) == null) {
 				throw new AutoException(3);
@@ -144,6 +144,15 @@ public class Automobile implements Serializable {
 			FileIO.writeToLogFile(exception);
 		}
 		return getOptnSets().get(i);
+	}
+
+	public OptionSet getOptnSet(String optnSetName) throws IOException {
+		for (int i = 0; i < getOptnSets().size(); i++) {
+			if (getOptnSet(i).equals(optnSetName)) {
+				return getOptnSets().get(i);
+			}
+		}
+		return null;
 	}
 
 	public void setOptnSetName(int i, String name) throws IOException {
@@ -215,19 +224,23 @@ public class Automobile implements Serializable {
 	}
 
 	/**
-	 * synchronized there can be multiple access to same Option Instance
+	 * there can be multiple access to same Option Instance
 	 *
 	 * @param i option set index
 	 * @param j option index
 	 * @return option object
 	 * @throws IOException invalid index
 	 */
-	public synchronized OptionSet.Option getOptn(int i, int j) throws IOException {
+	public OptionSet.Option getOptn(int i, int j) throws IOException {
 		return getOptnSet(i).getOptn(j);
 	}
 
+	public String getOptnName(int i, int j) throws IOException {
+		return getOptnSet(i).getOptnName(j);
+	}
+
 	/**
-	 * synchronized for multi-threaded editing
+	 * for multi-threaded editing
 	 *
 	 * @param i option set index
 	 * @param j option index
@@ -235,7 +248,7 @@ public class Automobile implements Serializable {
 	 * @param p new price
 	 * @throws IOException
 	 */
-	public synchronized void setOptn(int i, int j, String n, float p) throws IOException {
+	public void setOptn(int i, int j, String n, float p) throws IOException {
 		getOptnSet(i).getOptn(j).setName(n);
 		getOptnSet(i).getOptn(j).setPrice(p);
 	}
@@ -245,26 +258,38 @@ public class Automobile implements Serializable {
 	}
 
 	/**
-	 * synchronized for multi-threaded editing
+	 * for multi-threaded editing
 	 *
 	 * @param i option set index
 	 * @param j option index
 	 * @param n new name
 	 * @throws IOException
 	 */
-	public synchronized void setOptnName(int i, int j, String n) throws IOException {
+	public void setOptnName(int i, int j, String n) throws IOException {
 		getOptnSet(i).getOptn(j).setName(n);
 	}
 
+	public void setOptnName(String optionSetName, String optionName, String newName) throws IOException {
+		for (int i = 0; i < this.getOptnSetsSize(); i++) {
+			for (int j = 0; j < this.getOptnSetSize(i); j++) {
+				if (this.getOptnSetName(i).equals(optionSetName)) {
+					if (this.getOptnName(i, j).equals(optionName)) {
+						this.setOptnName(i, j, newName);
+					}
+				}
+			}
+		}
+	}
+
 	/**
-	 * synchronized for multi-threaded editing
+	 * for multi-threaded editing
 	 *
 	 * @param i option set index
 	 * @param j option index
 	 * @param p new price
 	 * @throws IOException
 	 */
-	public synchronized void setOptnPrice(int i, int j, float p) throws IOException {
+	public void setOptnPrice(int i, int j, float p) throws IOException {
 		getOptnSet(i).getOptn(j).setPrice(p);
 	}
 
@@ -275,6 +300,10 @@ public class Automobile implements Serializable {
 
 	public void setOptnChoice(int i, int j) throws IOException {
 		getOptnSet(i).setOptnChoice(j);
+	}
+
+	public void setOptnChoice(String optnSetName, String optnName) {
+//		getOptnSet()
 	}
 
 
@@ -290,6 +319,11 @@ public class Automobile implements Serializable {
 		setOptnChoice(i, j);
 		optnChoice.add(getOptnChoice(i));
 	}
+
+	public void addOptionChoice(String optnSetName, String optnName) {
+
+	}
+
 
 	public void removeOptionChoice(int i) {
 		optnChoice.remove(i);
@@ -314,7 +348,7 @@ public class Automobile implements Serializable {
 
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
-		sb.append("\n" + getMaker() + "-" + this.getModel() + "-" + getYear() + "|" + this.getBasePrice());
+//		sb.append("\n" + getMaker() + "-" + this.getModel() + "-" + getYear() + "|" + this.getBasePrice());
 		// new implementation using an array list
 		for (int i = 0; i < getOptnSetsSize(); i++) {
 			try {

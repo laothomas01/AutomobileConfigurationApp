@@ -357,21 +357,17 @@ public class EditOptions
 		switch (operation) {
 			case 0:
 				h.unsynchedEditOptionName("Colors", "Blue", args[0]);
-
 				break;
 			case 1:
 				h.unsynchedEditOptionName("Colors", "Blue", args[1]);
 				break;
 			case 2:
-				h.synchedEditOptionName("Colors", "Blue", args[3]);
-
-				break;
-			case 3:
-
 				h.synchedEditOptionName("Colors", "Blue", args[2]);
 				break;
+			case 3:
+				h.synchedEditOptionName("Colors", "Blue", args[3]);
+				break;
 		}
-		h.getAutomobile();
 
 
 	}
@@ -427,7 +423,6 @@ public class EditOptions
 			//tell all waiting threads DEBUG = false
 			notifyAll();
 			System.out.println("NOTIFIED ALL THREADS!");
-
 			auto.setOptnName(optionSetName, optionName, newName);
 			System.out.println("FINISHED EDITING!");
 		}

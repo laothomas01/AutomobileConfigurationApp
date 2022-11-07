@@ -265,69 +265,86 @@ public class EditOptions
 	//operation number
 	private int operation;
 
-	/**
-	 * @param modelName automobile model name
-	 * @param operation synchronized and un-synchronized function number
-	 * @param args      array of strings used to
-	 */
-	public EditOptions(String modelName, int operation, String[] args) {
-		this.modelName = modelName;
-		this.operation = operation;
+	//	/**
+//	 * @param modelName automobile model name
+//	 * @param operation synchronized and un-synchronized function number
+//	 * @param args      array of strings used to
+//	 */
+	public EditOptions(
+			String modelName, int operation, String[] args
+	) {
+		setModelName(modelName);
+		setOperation(operation);
+		setArgs(args);
+		setAuto(autos.getAuto(modelName));
+	}
+
+	public Automobile getAuto() {
+		return this.auto;
+	}
+
+	public void setAuto(Automobile a) {
+		this.auto = a;
+	}
+
+	public String getModelName() {
+		return modelName;
+	}
+
+	public int getOperation() {
+		return operation;
+	}
+
+	public String[] getArgs() {
+		return args;
+	}
+
+	public void setArgs(String[] args) {
 		this.args = args;
-//		this.t = new Thread(this);
-		this.auto = autos.getAuto(modelName);
+	}
+
+	public void setModelName(String name) {
+		this.modelName = name;
+	}
+
+	public void setOperation(int o) {
+		this.operation = o;
 	}
 
 
 	//select 1 method to run per thread
 	@Override
 	public void run() {
-		System.out.println("THREAD ID:" + Thread.currentThread().getId());
-		System.out.println("THREAD STATE:" + Thread.currentThread().getState());
 		try {
-			Thread.currentThread().sleep(500);
 			ops();
 		} catch (IOException e) {
-			throw new RuntimeException(e);
-		} catch (InterruptedException e) {
 			throw new RuntimeException(e);
 		}
 	}
 
 	public void ops() throws IOException {
 
+		System.out.println("THREAD ID:" + Thread.currentThread().getId());
+		System.out.println("THREAD STATE:" + Thread.currentThread().getState());
 		Helper h = new Helper(); //add synchronized/non sychronized methods here
 		//pick an operation
 		switch (operation) {
-			/**
-			 * UN-SYNCHRONIZED CASES!
-			 *
-			 */
 			case 0:
-				//Call method in helper class
-				//Update the option name from blue to dark blue - non synchronized operation
-				System.out.println("BEFORE:" + a1.toString() + "\n-------------------------");
+
 				h.unsynchedEditOptionName("Colors", "Blue", args[0]);
-				System.out.println("AFTER:" + a1.toString() + "\n------------------------ - ");
+//				h.unsynchedEditOptionName("Colors", "Blue", args[0]);
+				//update DEBUG
 				break;
 			case 1:
-				System.out.println("BEFORE:" + a1.toString() + "\n-------------------------");
 				h.unsynchedEditOptionName("Colors", "Blue", args[1]);
-				System.out.println("AFTER:" + a1.toString() + "\n------------------------ - ");
+
 				break;
-			case 2:
-				System.out.println("BEFORE:" + a1.toString() + "\n-------------------------");
-				h.unsynchedEditOptionName("Colors", "Blue", args[2]);
-				System.out.println("AFTER:" + a1.toString() + "\n------------------------ - ");
-				break;
-			case 3:
-				System.out.println("BEFORE:" + a1.toString() + "\n-------------------------");
-				h.unsynchedEditOptionName("Colors", "Blue", args[2]);
-				System.out.println("AFTER:" + a1.toString() + "\n------------------------ - ");
-				break;
+
+
 			/**
 			 * SYNCHRONIZED CASES!
 			 */
+
 
 //			case 1:
 //				//Call method in helper class
@@ -345,7 +362,7 @@ public class EditOptions
 //				h.synchedEditOptionName("Colors", "Blue", "DarkBlue");
 //				break;
 		}
-
+		System.out.println("AFTER EDIT" + getAuto());
 		//begin thread
 		//we will call start else where. this is stupid implementation
 //		t.start();
@@ -361,25 +378,62 @@ public class EditOptions
 	//inner class so we dont have to instantiate EditOptions class for access to its members
 	class Helper {
 		public void unsynchedEditOptionName(String optionSetName, String optionName, String newName) throws IOException {
+			System.out.println(auto.hashCode());
 			auto.setOptnName(optionSetName, optionName, newName);
 		}
 
 		public synchronized void synchedEditOptionName(String optionSetName, String optionName, String newName) throws IOException {
+			//while Debug == false, wait
+			//base case
+			System.out.println(" CAN EDIT STATE: " + DEBUG);
+			System.out.println(" PERFORMING OPS........ ");
+			System.out.println(" THREAD ID: " + Thread.currentThread().getId());
+			System.out.println(" THREAD STATE: " + Thread.currentThread().getState());
+
 			while (DEBUG == false) {
 				try {
+					System.out.println("BEFORE WAIT!");
+					System.out.println(" THREAD ID: " + Thread.currentThread().getId());
+					System.out.println(" THREAD STATE: " + Thread.currentThread().getState());
 					//wait for Edit Operation to update value
 					System.out.println("Waiting to Edit....");
 					wait();
+					System.out.println(" THREAD ID: " + Thread.currentThread().getId());
+					System.out.println(" THREAD STATE: " + Thread.currentThread().getState());
 				} catch (InterruptedException e) {
-					System.out.println("Edit done waiting!");
+					System.out.println("Wait Finished Edit Done Waiting!");
+
 				}
 			}
+
+			//when DEBUG = true, set to false to lock next thread
 			DEBUG = false;
-			System.out.println("Notifying all threads!");
+			// if DEBUG == true, do something
+
+			// set DEBUG = false
+
+			//update optn name
+			System.out.println("NOTIFYING ALL....");
+			//notify all threads they cannot edit until DEBUG = true
 			notifyAll();
 			auto.setOptnName(optionSetName, optionName, newName);
+			//FINISHED EDITING!
 			System.out.println("Edit Done!");
-			DEBUG = true;
+//			while (DEBUG == true) {
+//				try {
+//					System.out.println(" THREAD ID: " + Thread.currentThread().getId());
+//					System.out.println(" THREAD STATE: " + Thread.currentThread().getState());
+//					//wait for Edit Operation to update value
+//					System.out.println("Waiting to Finish Editing....");
+//					wait();
+//				} catch (InterruptedException e) {
+//					System.out.println("Wait Finished Edit Done Waiting!");
+//				}
+//			}
+//			DEBUG = true;
+//			System.out.println("NOTIFYING ALL.....");
+//			notifyAll();
+//			System.out.println("FINISHED EDITING!");
 		}
 
 	}

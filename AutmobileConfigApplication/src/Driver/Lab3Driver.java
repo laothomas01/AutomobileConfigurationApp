@@ -2,9 +2,6 @@ package Driver;
 
 import Adapter.BuildAuto;
 import Adapter.CreateAuto;
-import Adapter.ReadAuto;
-import Adapter.UpdateAuto;
-import Scale.EditAuto;
 
 import java.io.IOException;
 

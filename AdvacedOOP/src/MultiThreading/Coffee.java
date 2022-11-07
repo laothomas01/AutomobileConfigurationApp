@@ -18,7 +18,7 @@ class Coffee {
 		while (available == false) {
 			try {
 				// wait for Producer to put value
-				System.out.println("Get Waiting "+ contents);
+				System.out.println("Get Waiting " + contents);
 				//synchronnized wait means the thread will keep waiting until
 				// something flips the switch
 				wait();
@@ -27,14 +27,14 @@ class Coffee {
 			//blocked state because thread is hanging.
 			//no other thread will wake it up
 			catch (InterruptedException e) {
-				System.out.println("Get done waiting "+ contents);
+				System.out.println("Get done waiting " + contents);
 			}
 		}
 		available = false;
 		// notify Producer that value has been retrieved
-		System.out.println("Get Notifyall "+ contents);
+		System.out.println("Get Notifyall " + contents);
 		notifyAll();
-		System.out.println("Get Done! "+ contents);
+		System.out.println("Get Done! " + contents);
 		return contents;
 	}
 
@@ -46,24 +46,24 @@ class Coffee {
 
 	*/
 	public synchronized void put(int value) {
-		System.out.println("Entering Post method "+ contents);
+		System.out.println("Entering Post method " + contents);
 		while (available == true) {
 			try {
 				// wait for Consumer to get value
-				System.out.println("Put Waiting "+ contents);
+				System.out.println("Put Waiting " + contents);
 				wait();
 
 			} catch (InterruptedException e) {
-				System.out.println("Put done waiting "+ contents);
+				System.out.println("Put done waiting " + contents);
 
 			}
 		}
 		contents = value;
 		available = true;
 		// notify Consumer that value has been set
-		System.out.println("Put added new value - notifyall "+ contents);
+		System.out.println("Put added new value - notifyall " + contents);
 		//wake up all threads in wake state
 		notifyAll();
-		System.out.println("Put done "+ contents);
+		System.out.println("Put done " + contents);
 	}
 }

@@ -2,7 +2,6 @@ package Adapter;
 
 import Model.Automobile;
 import Model.LHMAuto;
-import Scale.EditAuto;
 import Scale.EditOptions;
 import Utils.FileIO;
 import Exception.Fix1to100;
@@ -16,15 +15,19 @@ import java.io.IOException;
 public class BuildAuto extends ProxyAutomobile implements CreateAuto, ReadAuto, UpdateAuto, FixAuto, EditAuto {
 
 
-//	public BuildAuto(String fileName) throws IOException {
+	//	public BuildAuto(String fileName) throws IOException {
 //		FileIO io = new FileIO(fileName);
 //		a1 = io.loadAutomotive();
 //		setAutoLHM(new LHMAuto<>());
 //		getAutos().addAuto(a1);
 //	}
 
+	EditOptions eo = null;
+
 	public BuildAuto(String fileName) throws IOException {
 		buildAuto(fileName);
+		eo = new EditOptions("Hello World", 0, null);
+
 	}
 
 	public BuildAuto() {
@@ -38,6 +41,7 @@ public class BuildAuto extends ProxyAutomobile implements CreateAuto, ReadAuto, 
 		setAutoLHM(new LHMAuto<>());
 		addAuto(a1);
 	}
+
 
 	/**
 	 * synchronized for access to linked hashmap of automobile
@@ -201,10 +205,31 @@ public class BuildAuto extends ProxyAutomobile implements CreateAuto, ReadAuto, 
 
 	@Override
 	public void editThread(String ModelName, int operation, String[] args) throws IOException {
-//		System.out.println("BEFORE:" + a1.toString() + "\n----------");
+		/**
+		 * Testing CRUD ops on edit option instance
+		 */
+		eo.setModelName(ModelName);
+		eo.setOperation(operation);
+		eo.setArgs(args);
+		eo.setAuto(getAuto(eo.getModelName()));
+		Thread t = new Thread(eo);
+		t.start();
+//		System.out.println(eo.getModelName());
+//		System.out.println(eo.getOperation());
+//		System.out.println(eo.getArgs()[0]);
 
+
+		//thread operates on same EditOption instance
+//		eo.setModelName(ModelName);
+//		System.out.println(eo.getModelName());
+////		eo.setOperation(operation);
+////		eo.setStringArgs(args);
+//		Thread t = new Thread(eo);
+//		t.start();
+//		Thread t = new Thread(eo);
+//		t.start();
+//		System.out.println("AFTER:" + a1.toString());
 		//		System.out.println("STARTING DATA:" + a1.toString());
-//		EditOptions eo = new EditOptions(ModelName, operation, args);
 //
 //		//instantiates a thread
 //
@@ -226,7 +251,15 @@ public class BuildAuto extends ProxyAutomobile implements CreateAuto, ReadAuto, 
 //		System.out.println("AFTER:" + a1.toString());
 
 //		System.out.println("END DATA:" + a1.toString());
+//		for (int i = 0; i < args.length; i++) {
+
+		//start -> run -> ops -> modify object
+		//problem is with this instantiation. its not the same object!
+
+//		Thread t = new Thread(eo);
+//		t.start();
 	}
+//		}
 
 	public String toString() {
 		return a1.toString();

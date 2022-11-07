@@ -23,10 +23,12 @@ public class BuildAuto extends ProxyAutomobile implements CreateAuto, ReadAuto, 
 //	}
 
 	EditOptions eo = null;
+	EditOptions eo2 = null;
 
 	public BuildAuto(String fileName) throws IOException {
 		buildAuto(fileName);
 		eo = new EditOptions("Hello World", 0, null);
+		eo2 = new EditOptions("Hello World", 0, null);
 
 	}
 
@@ -208,12 +210,21 @@ public class BuildAuto extends ProxyAutomobile implements CreateAuto, ReadAuto, 
 		/**
 		 * Testing CRUD ops on edit option instance
 		 */
-		eo.setModelName(ModelName);
-		eo.setOperation(operation);
-		eo.setArgs(args);
-		eo.setAuto(getAuto(eo.getModelName()));
-		Thread t = new Thread(eo);
-		t.start();
+//		eo.setModelName(ModelName);
+//		eo.setOperation(operation);
+//		eo.setArgs(args);
+//		eo.setAuto(getAuto(eo.getModelName()));
+//		Thread t = new Thread(eo);
+//		t.start();
+//
+//
+		eo2.setModelName(ModelName);
+		eo2.setOperation(operation);
+		eo2.setArgs(args);
+		eo2.setAuto(getAuto(eo.getModelName()));
+
+		Thread t2 = new Thread(eo);
+		t2.start();
 //		System.out.println(eo.getModelName());
 //		System.out.println(eo.getOperation());
 //		System.out.println(eo.getArgs()[0]);

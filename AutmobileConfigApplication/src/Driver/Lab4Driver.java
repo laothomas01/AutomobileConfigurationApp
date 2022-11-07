@@ -16,12 +16,14 @@ public class Lab4Driver {
 
 	public static void Lab4Test() throws IOException {
 		String configurationFile = "CarConfigs.txt";
-		String[] args = {"DarkBlue", "Red"};
+		String[] args = {"DarkBlue", "Red","Green","White"};
 		EditAuto a1 = new BuildAuto(configurationFile);
-		for (int i = 0; i < 10; i++) {
-			a1.editThread("FordWagonZTW", 0, args);
-			a1.editThread("FordWagonZTW", 1, args);
-		}
+		//unsynchronized threads
+		a1.editThread("FordWagonZTW", 2, args);
+//		a1.editThread("FordWagonZTW", 3, args);
+//		//sychronized
+//		a1.editThread("FordWagonZTW", 2, args);
+//		a1.editThread("FordWagonZTW", 3, args);
 //		for (int i = 0; i < args.length; i++) {
 //			a1.editThread("FordWagonZTW", i, args);
 //		}

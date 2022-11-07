@@ -16,10 +16,26 @@ public class Lab4Driver {
 
 	public static void Lab4Test() throws IOException {
 		String configurationFile = "CarConfigs.txt";
-		String[] args = {"DarkBlue", "Red","Green","White"};
+		String[] args = {"Red", "DarkBlue", "Green", "White"};
 		EditAuto a1 = new BuildAuto(configurationFile);
-		//unsynchronized threads
+		//unsynchronized functions
+		/**
+		 * Expected results: automobile should have all selections be darkblue because of data corruption
+		 */
+		a1.editThread("FordWagonZTW", 0, args);
+		a1.editThread("FordWagonZTW", 1, args);
+
+		//sychronized  functions
+
+		/**
+		 * Expected results: auto mobile should replace blue with white because green updates first then white
+		 * updates over green after waiting
+		 */
 		a1.editThread("FordWagonZTW", 2, args);
+		a1.editThread("FordWagonZTW", 3, args);
+
+
+//		a1.editThread("FordWagonZTW", 0, args);
 //		a1.editThread("FordWagonZTW", 3, args);
 //		//sychronized
 //		a1.editThread("FordWagonZTW", 2, args);

@@ -29,7 +29,6 @@ public class BuildAuto extends ProxyAutomobile implements CreateAuto, ReadAuto, 
 		buildAuto(fileName);
 		eo = new EditOptions("Hello World", 0, null);
 		eo2 = new EditOptions("Hello World", 0, null);
-
 	}
 
 	public BuildAuto() {
@@ -207,24 +206,51 @@ public class BuildAuto extends ProxyAutomobile implements CreateAuto, ReadAuto, 
 
 	@Override
 	public void editThread(String ModelName, int operation, String[] args) throws IOException {
-		/**
-		 * Testing CRUD ops on edit option instance
-		 */
-//		eo.setModelName(ModelName);
-//		eo.setOperation(operation);
-//		eo.setArgs(args);
-//		eo.setAuto(getAuto(eo.getModelName()));
-//		Thread t = new Thread(eo);
-//		t.start();
-//
-//
-		eo2.setModelName(ModelName);
-		eo2.setOperation(operation);
-		eo2.setArgs(args);
-		eo2.setAuto(getAuto(eo.getModelName()));
+//		/**
+//		 * Testing CRUD ops on edit option instance
+//		 */
 
-		Thread t2 = new Thread(eo);
-		t2.start();
+
+		/**
+		 * Unsynchronized operations on edit option1 instance
+		 */
+		if (operation == 0 || operation == 1) {
+			System.out.println("EO:" + eo.hashCode());
+			eo.setModelName(ModelName);
+			eo.setOperation(operation);
+			eo.setArgs(args);
+			eo.setAuto(getAuto(eo.getModelName()));
+			eo.threadStart();
+			eo.ops();
+//			eo.threadStart();
+//			eo.ops();
+		}
+
+
+		/**
+		 * Unsynchronized operations on edit option2 instance
+		 */
+		if (operation > 1) {
+			System.out.println("EO2:" + eo2.hashCode());
+			eo2.setModelName(ModelName);
+			eo2.setOperation(operation);
+			eo2.setArgs(args);
+			eo2.setAuto(getAuto(eo2.getModelName()));
+			eo2.threadStart();
+			eo2.ops();
+		}
+
+////		Thread t = new Thread(eo);
+////		t.start();
+////
+////
+//		eo2.setModelName(ModelName);
+//		eo2.setOperation(operation);
+//		eo2.setArgs(args);
+//		eo2.setAuto(getAuto(eo.getModelName()));
+//
+//		Thread t2 = new Thread(eo);
+//		t2.start();
 //		System.out.println(eo.getModelName());
 //		System.out.println(eo.getOperation());
 //		System.out.println(eo.getArgs()[0]);

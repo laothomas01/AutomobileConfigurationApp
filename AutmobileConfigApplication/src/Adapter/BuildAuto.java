@@ -97,27 +97,12 @@ public class BuildAuto extends ProxyAutomobile implements CreateAuto, ReadAuto, 
 	public void setOptnPrice(String modelName, String OptionSetName, String OptionName, float newPrice) {
 
 	}
-	// access linked hashmap of automobiles, select a valid automobile name,select the option set you want to modify
-	// modify its attribute
-
 
 	@Override
 	public void setOptnPrice(String modelName, int i, int j, float newPrice) throws IOException {
 		getAuto(modelName).setOptnPrice(i, j, newPrice);
 	}
 
-//	/**
-//	 * @param modelName     automobile name
-//	 * @param optionSetName option set name
-//	 * @param optionName    option name
-//	 * @param newName       replacement name
-//	 * @throws IOException
-//	 */
-////	public void setOptnName(String modelName, String optionSetName, String optionName, String newName) throws IOException {
-//
-//		Automobile auto = getAuto(modelName);
-//		auto.setOptnName(optionSetName, optionName, newName);
-//	}
 
 	@Override
 	public void setOptnName(String modelName, int i, int j, String newName) throws IOException {

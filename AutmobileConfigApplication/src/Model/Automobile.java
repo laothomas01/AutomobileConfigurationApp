@@ -148,7 +148,7 @@ public class Automobile implements Serializable {
 
 	public OptionSet getOptnSet(String optnSetName) throws IOException {
 		for (int i = 0; i < getOptnSets().size(); i++) {
-			if (getOptnSet(i).equals(optnSetName)) {
+			if (getOptnSet(i).getName().equals(optnSetName)) {
 				return getOptnSets().get(i);
 			}
 		}
@@ -237,6 +237,19 @@ public class Automobile implements Serializable {
 
 	public String getOptnName(int i, int j) throws IOException {
 		return getOptnSet(i).getOptnName(j);
+	}
+
+	public String getOptnName(String optnSetName, String optnName) throws IOException {
+		for (int i = 0; i < this.getOptnSetsSize(); i++) {
+			for (int j = 0; j < this.getOptnSetSize(i); j++) {
+				if (this.getOptnSetName(i).equals(optnSetName)) {
+					if (this.getOptnName(i, j).equals(optnName)) {
+						return this.getOptnName(i, j);
+					}
+				}
+			}
+		}
+		return null;
 	}
 
 	/**

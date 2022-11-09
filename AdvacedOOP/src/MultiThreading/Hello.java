@@ -37,11 +37,11 @@ public class Hello extends Thread {
 	}
 
 	public static void main(String[] args) {
-		Coffee c1 = new Coffee();
-		Hello get = new Hello(0, c1);
-		Hello put = new Hello(1, c1);
-		get.start();
-		put.start();
+//		Coffee c1 = new Coffee();
+//		Helo get = new Helo(0, c1);
+//		Helo put = new Helo(1, c1);
+//		get.start();
+//		put.start();
 
 	}
 }

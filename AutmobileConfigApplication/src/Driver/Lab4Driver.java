@@ -18,21 +18,23 @@ public class Lab4Driver {
 		String configurationFile = "CarConfigs.txt";
 		String[] args = {"Red", "DarkBlue", "Green", "White"};
 		EditAuto a1 = new BuildAuto(configurationFile);
+		a1.editThread("FordWagonZTW", 0, args);
+		a1.editThread("FordWagonZTW", 1, args);
 		//unsynchronized functions
 		/**
 		 * Expected results: automobile should have all selections be darkblue because of data corruption
 		 */
-		a1.editThread("FordWagonZTW", 0, args);
-		a1.editThread("FordWagonZTW", 1, args);
-
-		//sychronized  functions
-
-		/**
-		 * Expected results: auto mobile should replace blue with white because green updates first then white
-		 * updates over green after waiting
-		 */
-		a1.editThread("FordWagonZTW", 2, args);
-		a1.editThread("FordWagonZTW", 3, args);
+//		a1.editThread("FordWagonZTW",0,args);
+//		a1.editThread("FordWagonZTW", 1, args);
+		//
+//		//sychronized  functions
+//
+//		/**
+//		 * Expected results: auto mobile should replace blue with white because green updates first then white
+//		 * updates over green after waiting
+//		 */
+//		a1.editThread("FordWagonZTW", 2, args);
+//		a1.editThread("FordWagonZTW", 3, args);
 
 
 //		a1.editThread("FordWagonZTW", 0, args);

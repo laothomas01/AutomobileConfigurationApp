@@ -146,6 +146,7 @@ public class Automobile implements Serializable {
 		return getOptnSets().get(i);
 	}
 
+	//WORKS
 	public OptionSet getOptnSet(String optnSetName) throws IOException {
 		for (int i = 0; i < getOptnSets().size(); i++) {
 			if (getOptnSet(i).getName().equals(optnSetName)) {
@@ -155,11 +156,12 @@ public class Automobile implements Serializable {
 		return null;
 	}
 
+	//WORKS
 	public void setOptnSetName(int i, String name) throws IOException {
 		getOptnSet(i).setName(name);
 	}
 
-
+	//WORKS
 	public int getOptnSetsSize() {
 		return getOptnSets().size();
 	}
@@ -205,6 +207,7 @@ public class Automobile implements Serializable {
 		return getOptnSet(i).getOptnsListSize();
 	}
 
+	//WORKS
 	public String getOptnSetName(int i) throws IOException {
 		return getOptnSet(i).getName();
 	}

@@ -249,202 +249,294 @@ import java.io.IOException;
 
 //simplify your approach
 //HELLO
-public class EditOptions
-		//gives me automatic access to linked hash map
-		extends ProxyAutomobile implements Runnable {
-	//instantiate thread per edit options instance
-	/**
-	 * We will be creating multiple threads from within this one EditOptions class instance
-	 */
-	private Thread t;
+//public class EditOptions
+//		//gives me automatic access to linked hash map
+//		extends ProxyAutomobile implements Runnable {
+//	//instantiate thread per edit options instance
+//	/**
+//	 * We will be creating multiple threads from within this one EditOptions class instance
+//	 */
+//	private Thread t;
+//	private Automobile auto;
+//	private boolean DEBUG = true;
+//	private String modelName;
+//	//string arguments
+//	private String[] args;
+//	//operation number
+//	private int operation;
+//
+//	//	/**
+////	 * @param modelName automobile model name
+////	 * @param operation synchronized and un-synchronized function number
+////	 * @param args      array of strings used to
+////	 */
+//	public EditOptions(String modelName, int operation, String[] args) {
+//		setModelName(modelName);
+//		setOperation(operation);
+//		setArgs(args);
+//		setAuto(autos.getAuto(modelName));
+//	}
+//
+//	public Automobile getAuto() {
+//		return this.auto;
+//	}
+//
+//	public void setAuto(Automobile a) {
+//		this.auto = a;
+//	}
+//
+//	public String getModelName() {
+//		return modelName;
+//	}
+//
+//	public int getOperation() {
+//		return operation;
+//	}
+//
+//	public String[] getArgs() {
+//		return args;
+//	}
+//
+//	public void setArgs(String[] args) {
+//		this.args = args;
+//	}
+//
+//	public void setModelName(String name) {
+//		this.modelName = name;
+//	}
+//
+//	public void setOperation(int o) {
+//		this.operation = o;
+//	}
+//
+//	//select 1 method to run per thread
+//	@Override
+//	public void run() {
+////		try {
+////			switch (operation) {
+////				case 0:
+////					System.out.println("THREAD ID:" + Thread.currentThread().getId());
+////					System.out.println("THREAD STATE:" + Thread.currentThread().getState());
+////					break;
+////				case 1:
+////					System.out.println("THREAD ID:" + Thread.currentThread().getId());
+////					System.out.println("THREAD STATE:" + Thread.currentThread().getState());
+////					break;
+////				case 2:
+////					System.out.println("THREAD ID:" + Thread.currentThread().getId());
+////					System.out.println("THREAD STATE:" + Thread.currentThread().getState());
+////					break;
+////				case 3:
+////					System.out.println("THREAD ID:" + Thread.currentThread().getId());
+////					System.out.println("THREAD STATE:" + Thread.currentThread().getState());
+////					break;
+////			}
+//		try {
+//			ops();
+//		} catch (IOException e) {
+//			throw new RuntimeException(e);
+//		}
+////			System.out.println("Stopping thread " + Thread.currentThread().getId());
+////		} catch (IOException e) {
+////			throw new RuntimeException(e);
+////		}
+//	}
+//
+//	// we need multiple threads editing a singular object
+//	//dont want to instantiate thread in just edit options class becuase that is
+//	// bad implementation
+//
+//	/**
+//	 * -multiple calls to editThread should update the value of the edit options instance
+//	 * -instantiate a new thread with each new edit Thread call
+//	 * - each new thhread should operate on the same edit option instance
+//	 */
+//	public void threadStart() {
+//		this.t = new Thread(this);
+//		t.start();
+//	}
+//
+//	public void ops() throws IOException {
+//		Helper h = new Helper(); //add synchronized/non sychronized methods here
+//		switch (operation) {
+//			case 0:
+//				h.set("Colors", "Blue", "Yellow");
+//				h.get();
+//				break;
+//			case 1:
+//				h.set("Colors", "Blue", "Green");
+//				h.get();
+//				break;
+////			case 0:
+////				if (!auto.getOptnName(0, 0).equals("Green")) {
+////					System.out.println("CANNOT EDIT!");
+////					System.out.println("CURRENT OPTION NAME:" + auto.getOptnName(0, 0));
+////				} else {
+////					System.out.println("MATCHED OPTION NAME!");
+////					auto.setOptnName(0, 0, "Green");
+////				}
+//////				h.unsynchedEditOptionName("Colors", "Blue", "Green");
+////				break;
+////			case 1:
+////				if (!auto.getOptnName(0, 0).equals("Yellow")) {
+////					System.out.println("CANNOT EDIT!");
+////					System.out.println("CURRENT OPTION NAME:" + auto.getOptnName(0, 0));
+////				} else {
+////					System.out.println("MATCHED OPTION NAME!");
+////					auto.setOptnName(0, 0, "Yellow");
+////				}
+////				h.unsynchedEditOptionName("Colors", "Blue", "Yellow");
+//		}
+//
+//
+//	}
+//
+//
+//	//inner class for sake of easier member access
+//	class Helper {
+//		public void set
+//
+//				(String optionSetName, String optionName, String newName)
+//
+//				throws IOException {
+//			auto.setOptnName(optionSetName, optionName, newName);
+//		}
+//
+//		public void get
+//				()
+//				throws IOException {
+//			System.out.println(auto.getOptnSet("Colors"));
+//		}
+//
+//
+////		public synchronized Automobile getAutomobile() {
+////			System.out.println("ENTER GET AUTO METHOD");
+////			//when object is locked down, unlock it and return automobile instance
+////			while (DEBUG == true) {
+////				try {
+////					System.out.println(Thread.currentThread().getId() + " WAITING TO GET ");
+////					wait();
+////				}
+////				//blocked state because thread is hanging.
+////				//no other thread will wake it up
+////				catch (InterruptedException e) {
+////					System.out.println(Thread.currentThread().getId() + " GET DONE WAITING");
+////				}
+////			}
+////			DEBUG = true;
+////			System.out.println("GET NOTIFY ALL");
+////			notifyAll();
+////			System.out.println("GET DONE!");
+////			return auto;
+////		}
+//
+//		public synchronized void synchedEditOptionName(String optionSetName, String optionName, String newName) throws IOException {
+//			//currently object is unlocked
+//			//DEBUG = true
+//			//locking down the object and waiting until DEBUG = true
+//			//base case
+//			//immediately lock down the object if unlocked so other threads cannot access
+//			//perform option name edit
+//			//if DEBUG = true, unlock it
+//			//tell all waiting threads DEBUG = false
+//			auto.setOptnName(optionSetName, optionName, newName);
+//			System.out.println("FINISHED EDITING!");
+//		}
+//
+//	}
+
+//}
+
+//iteration #2
+public class EditOptions extends ProxyAutomobile implements Runnable {
+	public Thread t;
 	private Automobile auto;
 	private boolean DEBUG = true;
 	private String modelName;
-	//string arguments
 	private String[] args;
-	//operation number
 	private int operation;
 
-	//	/**
-//	 * @param modelName automobile model name
-//	 * @param operation synchronized and un-synchronized function number
-//	 * @param args      array of strings used to
-//	 */
-	public EditOptions(String modelName, int operation, String[] args) {
-		setModelName(modelName);
-		setOperation(operation);
-		setArgs(args);
-		setAuto(autos.getAuto(modelName));
+	public EditOptions(String modelName, int operation, String[] args) throws InterruptedException {
+		this.modelName = modelName;
+		this.operation = operation;
+		this.args = args;
+		this.t = new Thread(this);
+		this.auto = autos.getAuto(modelName);
 	}
 
 	public Automobile getAuto() {
 		return this.auto;
 	}
 
-	public void setAuto(Automobile a) {
-		this.auto = a;
-	}
-
-	public String getModelName() {
-		return modelName;
-	}
-
-	public int getOperation() {
-		return operation;
-	}
-
-	public String[] getArgs() {
-		return args;
-	}
-
-	public void setArgs(String[] args) {
-		this.args = args;
-	}
-
-	public void setModelName(String name) {
-		this.modelName = name;
+	public void setModelName(String n) {
+		this.modelName = n;
 	}
 
 	public void setOperation(int o) {
 		this.operation = o;
 	}
 
-	//select 1 method to run per thread
+	public void setArgs(String[] arr) {
+		this.args = arr;
+	}
+
+	public void setAuto(Automobile a1) {
+		this.auto = a1;
+	}
+
 	@Override
 	public void run() {
-//		try {
-//			switch (operation) {
-//				case 0:
-//					System.out.println("THREAD ID:" + Thread.currentThread().getId());
-//					System.out.println("THREAD STATE:" + Thread.currentThread().getState());
-//					break;
-//				case 1:
-//					System.out.println("THREAD ID:" + Thread.currentThread().getId());
-//					System.out.println("THREAD STATE:" + Thread.currentThread().getState());
-//					break;
-//				case 2:
-//					System.out.println("THREAD ID:" + Thread.currentThread().getId());
-//					System.out.println("THREAD STATE:" + Thread.currentThread().getState());
-//					break;
-//				case 3:
-//					System.out.println("THREAD ID:" + Thread.currentThread().getId());
-//					System.out.println("THREAD STATE:" + Thread.currentThread().getState());
-//					break;
-//			}
 		try {
 			ops();
 		} catch (IOException e) {
 			throw new RuntimeException(e);
+		} catch (InterruptedException e) {
+			throw new RuntimeException(e);
 		}
-//			System.out.println("Stopping thread " + Thread.currentThread().getId());
-//		} catch (IOException e) {
-//			throw new RuntimeException(e);
-//		}
 	}
 
-	// we need multiple threads editing a singular object
-	//dont want to instantiate thread in just edit options class becuase that is
-	// bad implementation
-
-	/**
-	 * -multiple calls to editThread should update the value of the edit options instance
-	 * -instantiate a new thread with each new edit Thread call
-	 * - each new thhread should operate on the same edit option instance
-	 */
-	public void threadStart() {
-		this.t = new Thread(this);
+	public void start() {
 		t.start();
 	}
 
-	public void ops() throws IOException {
-		Helper h = new Helper(); //add synchronized/non sychronized methods here
+	public void ops() throws IOException, InterruptedException {
+		System.out.println("ID:" + t.getId());
+		System.out.println("STATE:" + t.getState());
+		Helper h = new Helper();
 		switch (operation) {
 			case 0:
-				h.set("Colors", "Blue", "Yellow");
-				h.get();
+				h.non_synchEditOptionName("Colors", "Blue", args[0]);
 				break;
 			case 1:
-				h.set("Colors", "Blue", "Green");
-				h.get();
+				h.non_synchEditOptionName("Colors", "Blue", args[1]);
 				break;
-//			case 0:
-//				if (!auto.getOptnName(0, 0).equals("Green")) {
-//					System.out.println("CANNOT EDIT!");
-//					System.out.println("CURRENT OPTION NAME:" + auto.getOptnName(0, 0));
-//				} else {
-//					System.out.println("MATCHED OPTION NAME!");
-//					auto.setOptnName(0, 0, "Green");
-//				}
-////				h.unsynchedEditOptionName("Colors", "Blue", "Green");
-//				break;
-//			case 1:
-//				if (!auto.getOptnName(0, 0).equals("Yellow")) {
-//					System.out.println("CANNOT EDIT!");
-//					System.out.println("CURRENT OPTION NAME:" + auto.getOptnName(0, 0));
-//				} else {
-//					System.out.println("MATCHED OPTION NAME!");
-//					auto.setOptnName(0, 0, "Yellow");
-//				}
-//				h.unsynchedEditOptionName("Colors", "Blue", "Yellow");
+			case 2:
+				h.sychEditOptionName("Colors", "Blue", args[2]);
+				break;
+			case 3:
+				h.sychEditOptionName("Colors", "Blue", args[3]);
+				break;
 		}
-
 
 	}
 
-
-	//inner class for sake of easier member access
 	class Helper {
-		public void set
-
-				(String optionSetName, String optionName, String newName)
-
-				throws IOException {
-			auto.setOptnName(optionSetName, optionName, newName);
+		void non_synchEditOptionName(String optnSetName, String optnName, String newName) throws IOException {
+			auto.setOptnName(optnSetName, optnName, newName);
+			System.out.println(getAuto());
 		}
 
-		public void get
-				()
-				throws IOException {
-			System.out.println(auto.getOptnSet("Colors"));
+		synchronized void sychEditOptionName(String optnSetName, String optnName, String newName) throws IOException {
+			auto.setOptnName(optnSetName, optnName, newName);
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				System.out.println(e);
+			}
+			//edit has ended
+			System.out.println(t.getId() + " Finished Editing!" + getAuto());
 		}
-
-
-//		public synchronized Automobile getAutomobile() {
-//			System.out.println("ENTER GET AUTO METHOD");
-//			//when object is locked down, unlock it and return automobile instance
-//			while (DEBUG == true) {
-//				try {
-//					System.out.println(Thread.currentThread().getId() + " WAITING TO GET ");
-//					wait();
-//				}
-//				//blocked state because thread is hanging.
-//				//no other thread will wake it up
-//				catch (InterruptedException e) {
-//					System.out.println(Thread.currentThread().getId() + " GET DONE WAITING");
-//				}
-//			}
-//			DEBUG = true;
-//			System.out.println("GET NOTIFY ALL");
-//			notifyAll();
-//			System.out.println("GET DONE!");
-//			return auto;
-//		}
-
-		public synchronized void synchedEditOptionName(String optionSetName, String optionName, String newName) throws IOException {
-			//currently object is unlocked
-			//DEBUG = true
-			//locking down the object and waiting until DEBUG = true
-			//base case
-			//immediately lock down the object if unlocked so other threads cannot access
-			//perform option name edit
-			//if DEBUG = true, unlock it
-			//tell all waiting threads DEBUG = false
-			auto.setOptnName(optionSetName, optionName, newName);
-			System.out.println("FINISHED EDITING!");
-		}
-
 	}
-
 }
 
 

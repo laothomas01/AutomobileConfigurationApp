@@ -22,13 +22,13 @@ public class BuildAuto extends ProxyAutomobile implements CreateAuto, ReadAuto, 
 //		getAutos().addAuto(a1);
 //	}
 
-	EditOptions eo = null;
-	EditOptions eo2 = null;
+//	EditOptions eo = null;
+//	EditOptions eo2 = null;
 
-	public BuildAuto(String fileName) throws IOException {
+	public BuildAuto(String fileName) throws IOException, InterruptedException {
 		buildAuto(fileName);
-		eo = new EditOptions("Hello World", 0, null);
-		eo2 = new EditOptions("Hello World", 0, null);
+//		eo = new EditOptions("Hello World", 0, null);
+//		eo2 = new EditOptions("Hello World", 0, null);
 	}
 
 	public BuildAuto() {
@@ -41,6 +41,10 @@ public class BuildAuto extends ProxyAutomobile implements CreateAuto, ReadAuto, 
 		a1 = io.loadAutomotive();
 		setAutoLHM(new LHMAuto<>());
 		addAuto(a1);
+		/**
+		 * Let's test some modifications to automobile first
+		 */
+
 	}
 
 
@@ -59,6 +63,7 @@ public class BuildAuto extends ProxyAutomobile implements CreateAuto, ReadAuto, 
 	 * @param modelName model name look up
 	 * @return cached automobile object
 	 */
+	//WORKS
 	public Automobile getAuto(String modelName) {
 		return autos.getAuto(modelName);
 	}
@@ -188,16 +193,82 @@ public class BuildAuto extends ProxyAutomobile implements CreateAuto, ReadAuto, 
 		return true;
 	}
 
-	public void editThread(String n, int o, String[] arr) throws IOException {
-		eo.setModelName(n);
-		eo.setOperation(o);
-		eo.setArgs(arr);
-		//retrieve data of automobile instance
-		eo.setAuto(getAuto(eo.getModelName()));
-		eo.ops();
+	/**
+	 * Modification of automobile instance over multiple threads created by different instances of class EditOption
+	 *
+	 * @param ModelName
+	 * @param operation
+	 * @param args
+	 * @throws IOException
+	 * @throws InterruptedException
+	 */
+	@Override
+	public void editThread(String ModelName, int operation, String[] args) throws IOException, InterruptedException {
+		/**
+		 * Each instance of EditOptions is a separate thread that operates on the same automobile object
+		 */
+		//thread 1
+		EditOptions eo = new EditOptions(ModelName, operation, args);
+		eo.start();
+		System.out.println("ID:" + eo.t.getId());
+		System.out.println("STATE:" + eo.t.getState());
+//		//thread 2
+//		EditOptions eo1 = new EditOptions(ModelName, operation, args);
+//		eo0.ops();
+//		eo1.ops();
+//		eo0.start();
+//		System.out.println(eo0.t.getId() + "," + eo0.t.getState());
+//		eo1.start();
+//		System.out.println(eo1.t.getId() + "," + eo1.t.getState());
 
+		//thread 3
+//		EditOptions eo2 = new EditOptions(ModelName, operation, args);
+//		//thread 4
+//		EditOptions eo3 = new EditOptions(ModelName, operation, args);
+//		if (operation == 0 || operation == 1) {
+//			eo0.ops();
+//			eo1.ops();
+//			eo0.t.join();
+//			eo1.t.join();
+//		}
 
 	}
+
+	//		eo.setModelName(ModelName);
+//		eo.setArgs(args);
+//		eo.setOperation(operation);
+//		eo.setAuto(getAuto(ModelName));
+//		eo.ops();
+////		eo.t.join();
+//
+//		System.out.println("ID:" + eo.t.getId());
+//		System.out.println("STATE:" + eo.t.getState());
+//		System.out.println("BEFORE");
+//		for (int i = 0; i < getAuto(ModelName).getOptnSetsSize(); i++) {
+//			System.out.println(getAuto(ModelName).getOptnSetName(i));
+//			System.out.println(getAuto(ModelName).getOptnSet(getAuto(ModelName).getOptnSetName(i)));
+//		}
+//
+//		for (int i = 0; i < getAuto(ModelName).getOptnSetsSize(); i++) {
+//			getAuto(ModelName).setOptnSetName(i, "HelloWorld");
+//		}
+//		System.out.println("AFTER");
+//		for (int i = 0; i < getAuto(ModelName).getOptnSetsSize(); i++) {
+//			System.out.println(getAuto(ModelName).getOptnSetName(i));
+//			System.out.println(getAuto(ModelName).getOptnSet(getAuto(ModelName).getOptnSetName(i)));
+//		}
+}
+
+//	public void editThread(String n, int o, String[] arr) throws IOException {
+//		eo.setModelName(n);
+//		eo.setOperation(o);
+//		eo.setArgs(arr);
+//		//retrieve data of automobile instance
+//		eo.setAuto(getAuto(eo.getModelName()));
+//		eo.ops();
+//
+//
+//	}
 
 
 //	@Override
@@ -300,4 +371,3 @@ public class BuildAuto extends ProxyAutomobile implements CreateAuto, ReadAuto, 
 //	public void editThread(String ModelName, int operation, String[] args) {
 //
 //	}
-}

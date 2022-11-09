@@ -9,17 +9,19 @@ import java.io.IOException;
 import Exception.AutoException;
 
 public class Lab4Driver {
-	public static void main(String args[]) throws IOException, AutoException {
+	public static void main(String args[]) throws IOException, AutoException, InterruptedException {
 		Lab4Test();
 	}
 
 
-	public static void Lab4Test() throws IOException {
+	public static void Lab4Test() throws IOException, InterruptedException {
 		String configurationFile = "CarConfigs.txt";
 		String[] args = {"Red", "DarkBlue", "Green", "White"};
 		EditAuto a1 = new BuildAuto(configurationFile);
 		a1.editThread("FordWagonZTW", 0, args);
 		a1.editThread("FordWagonZTW", 1, args);
+		a1.editThread("FordWagonZTW", 2, args);
+		a1.editThread("FordWagonZTW", 3, args);
 		//unsynchronized functions
 		/**
 		 * Expected results: automobile should have all selections be darkblue because of data corruption

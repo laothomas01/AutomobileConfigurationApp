@@ -18,42 +18,15 @@ public class Lab4Driver {
 		String configurationFile = "CarConfigs.txt";
 		String[] args = {"Red", "DarkBlue", "Green", "White"};
 		EditAuto a1 = new BuildAuto(configurationFile);
+		/**
+		 * Each call to edit thread instantiates a new thread operating on the same automobile
+		 *
+		 * - 2 non-synchronized calls
+		 * - 2 synchronized calls
+		 */
 		a1.editThread("FordWagonZTW", 0, args);
 		a1.editThread("FordWagonZTW", 1, args);
 		a1.editThread("FordWagonZTW", 2, args);
 		a1.editThread("FordWagonZTW", 3, args);
-		//unsynchronized functions
-		/**
-		 * Expected results: automobile should have all selections be darkblue because of data corruption
-		 */
-//		a1.editThread("FordWagonZTW",0,args);
-//		a1.editThread("FordWagonZTW", 1, args);
-		//
-//		//sychronized  functions
-//
-//		/**
-//		 * Expected results: auto mobile should replace blue with white because green updates first then white
-//		 * updates over green after waiting
-//		 */
-//		a1.editThread("FordWagonZTW", 2, args);
-//		a1.editThread("FordWagonZTW", 3, args);
-
-
-//		a1.editThread("FordWagonZTW", 0, args);
-//		a1.editThread("FordWagonZTW", 3, args);
-//		//sychronized
-//		a1.editThread("FordWagonZTW", 2, args);
-//		a1.editThread("FordWagonZTW", 3, args);
-//		for (int i = 0; i < args.length; i++) {
-//			a1.editThread("FordWagonZTW", i, args);
-//		}
-//		a1.editThread("FordWagonZTW", 5, args);
-//		a1.editThread("DASDAS", 0, args);
-
-//		a1.editThread("FordWagonZTW", 0, args);
-//		a1.editThread("FordWagonZTW", 0, args);
-//		a1.editThread("FordWagonZTW", 1, args);
-
-//			}
 	}
 }

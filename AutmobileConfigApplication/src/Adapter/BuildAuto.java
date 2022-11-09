@@ -8,27 +8,12 @@ import Exception.Fix1to100;
 
 import java.io.IOException;
 
-/**
- * - Building an API to create an automobile through implementing interfaces and an Automobile instance
- * - perform CRUD on the automobile instance
- */
 public class BuildAuto extends ProxyAutomobile implements CreateAuto, ReadAuto, UpdateAuto, FixAuto, EditAuto {
 
 
-	//	public BuildAuto(String fileName) throws IOException {
-//		FileIO io = new FileIO(fileName);
-//		a1 = io.loadAutomotive();
-//		setAutoLHM(new LHMAuto<>());
-//		getAutos().addAuto(a1);
-//	}
-
-//	EditOptions eo = null;
-//	EditOptions eo2 = null;
-
 	public BuildAuto(String fileName) throws IOException, InterruptedException {
 		buildAuto(fileName);
-//		eo = new EditOptions("Hello World", 0, null);
-//		eo2 = new EditOptions("Hello World", 0, null);
+
 	}
 
 	public BuildAuto() {
@@ -41,28 +26,16 @@ public class BuildAuto extends ProxyAutomobile implements CreateAuto, ReadAuto, 
 		a1 = io.loadAutomotive();
 		setAutoLHM(new LHMAuto<>());
 		addAuto(a1);
-		/**
-		 * Let's test some modifications to automobile first
-		 */
+
 
 	}
 
 
-	/**
-	 * synchronized for access to linked hashmap of automobile
-	 *
-	 * @return
-	 */
 	public LHMAuto<Automobile> getAutos() {
 		return autos;
 	}
 
-	/**
-	 * synchronized for access to automobile object of linked hashmap of automobile
-	 *
-	 * @param modelName model name look up
-	 * @return cached automobile object
-	 */
+
 	//WORKS
 	public Automobile getAuto(String modelName) {
 		return autos.getAuto(modelName);
@@ -115,11 +88,6 @@ public class BuildAuto extends ProxyAutomobile implements CreateAuto, ReadAuto, 
 	}
 
 
-	/**
-	 * Loop through each automobile in linked hashmap and calculate the total price of selected options
-	 *
-	 * @return total price of automobile options
-	 */
 	@Override
 	public float getTotalPrice() {
 		return a1.getTotalPrice();
@@ -204,170 +172,13 @@ public class BuildAuto extends ProxyAutomobile implements CreateAuto, ReadAuto, 
 	 */
 	@Override
 	public void editThread(String ModelName, int operation, String[] args) throws IOException, InterruptedException {
-		/**
-		 * Each instance of EditOptions is a separate thread that operates on the same automobile object
-		 */
 		//thread 1
 		EditOptions eo = new EditOptions(ModelName, operation, args);
 		eo.start();
 		System.out.println("ID:" + eo.t.getId());
 		System.out.println("STATE:" + eo.t.getState());
-//		//thread 2
-//		EditOptions eo1 = new EditOptions(ModelName, operation, args);
-//		eo0.ops();
-//		eo1.ops();
-//		eo0.start();
-//		System.out.println(eo0.t.getId() + "," + eo0.t.getState());
-//		eo1.start();
-//		System.out.println(eo1.t.getId() + "," + eo1.t.getState());
-
-		//thread 3
-//		EditOptions eo2 = new EditOptions(ModelName, operation, args);
-//		//thread 4
-//		EditOptions eo3 = new EditOptions(ModelName, operation, args);
-//		if (operation == 0 || operation == 1) {
-//			eo0.ops();
-//			eo1.ops();
-//			eo0.t.join();
-//			eo1.t.join();
-//		}
 
 	}
 
-	//		eo.setModelName(ModelName);
-//		eo.setArgs(args);
-//		eo.setOperation(operation);
-//		eo.setAuto(getAuto(ModelName));
-//		eo.ops();
-////		eo.t.join();
-//
-//		System.out.println("ID:" + eo.t.getId());
-//		System.out.println("STATE:" + eo.t.getState());
-//		System.out.println("BEFORE");
-//		for (int i = 0; i < getAuto(ModelName).getOptnSetsSize(); i++) {
-//			System.out.println(getAuto(ModelName).getOptnSetName(i));
-//			System.out.println(getAuto(ModelName).getOptnSet(getAuto(ModelName).getOptnSetName(i)));
-//		}
-//
-//		for (int i = 0; i < getAuto(ModelName).getOptnSetsSize(); i++) {
-//			getAuto(ModelName).setOptnSetName(i, "HelloWorld");
-//		}
-//		System.out.println("AFTER");
-//		for (int i = 0; i < getAuto(ModelName).getOptnSetsSize(); i++) {
-//			System.out.println(getAuto(ModelName).getOptnSetName(i));
-//			System.out.println(getAuto(ModelName).getOptnSet(getAuto(ModelName).getOptnSetName(i)));
-//		}
 }
 
-//	public void editThread(String n, int o, String[] arr) throws IOException {
-//		eo.setModelName(n);
-//		eo.setOperation(o);
-//		eo.setArgs(arr);
-//		//retrieve data of automobile instance
-//		eo.setAuto(getAuto(eo.getModelName()));
-//		eo.ops();
-//
-//
-//	}
-
-
-//	@Override
-//	public void editThread(String ModelName, int operation, String[] args) throws IOException {
-////		/**
-////		 * Testing CRUD ops on edit option instance
-////		 */
-//		/**
-//		 * Unsynchronized operations on edit option1 instance
-//		 */
-//		System.out.println("EO: " + eo.hashCode());
-//		eo.setModelName(ModelName);
-//		eo.setOperation(operation);
-//		eo.setArgs(args);
-//		eo.setAuto(getAuto(eo.getModelName()));
-//		System.out.println(getAuto(ModelName));
-////		eo.threadStart();
-////		eo.ops();
-//
-//
-//		/**
-//		 * Unsynchronized operations on edit option2 instance
-//		 */
-////		if (operation > 1) {
-////			System.out.println("EO2: " + eo2.hashCode());
-////			eo2.setModelName(ModelName);
-////			eo2.setOperation(operation);
-////			eo2.setArgs(args);
-////			eo2.setAuto(getAuto(eo2.getModelName()));
-////			eo2.threadStart();
-////			eo2.ops();
-////		}
-//
-////		System.out.println(eo2.getAuto());
-//
-//////		Thread t = new Thread(eo);
-//////		t.start();
-//////
-//////
-////		eo2.setModelName(ModelName);
-////		eo2.setOperation(operation);
-////		eo2.setArgs(args);
-////		eo2.setAuto(getAuto(eo.getModelName()));
-////
-////		Thread t2 = new Thread(eo);
-////		t2.start();
-////		System.out.println(eo.getModelName());
-////		System.out.println(eo.getOperation());
-////		System.out.println(eo.getArgs()[0]);
-//
-//
-//		//thread operates on same EditOption instance
-////		eo.setModelName(ModelName);
-////		System.out.println(eo.getModelName());
-//////		eo.setOperation(operation);
-//////		eo.setStringArgs(args);
-////		Thread t = new Thread(eo);
-////		t.start();
-////		Thread t = new Thread(eo);
-////		t.start();
-////		System.out.println("AFTER:" + a1.toString());
-//		//		System.out.println("STARTING DATA:" + a1.toString());
-////
-////		//instantiates a thread
-////
-////		eo.ops();
-////
-////
-////		Thread t = new Thread(eo);
-////		t.start();
-////		System.out.println("THREAD ID:" + t.getId());
-////		System.out.println("THREAD STATE:" + t.getState());
-////		Thread t2 = new Thread();
-////		Thread t3 = new Thread();
-////		Thread t4 = new Thread();
-//
-//
-////		//call ops -> run -> ops -> start thread -> run -> ops -> start thread
-////		//perform edit option operations
-////		eo.ops();
-////		System.out.println("AFTER:" + a1.toString());
-//
-////		System.out.println("END DATA:" + a1.toString());
-////		for (int i = 0; i < args.length; i++) {
-//
-//		//start -> run -> ops -> modify object
-//		//problem is with this instantiation. its not the same object!
-//
-////		Thread t = new Thread(eo);
-////		t.start();
-//	}
-//		}
-
-//	public String toString() {
-//		return a1.toString();
-//	}
-
-
-//	@Override
-//	public void editThread(String ModelName, int operation, String[] args) {
-//
-//	}

@@ -25,7 +25,6 @@ class CallerSolution implements Runnable {
 		msg = s;
 		t = new Thread(this);
 		t.start();
-//		t.join();
 	}
 
 	public void run() {

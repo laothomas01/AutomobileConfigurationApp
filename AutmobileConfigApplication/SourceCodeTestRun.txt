@@ -1,17 +1,21 @@
-AutoException [errorno=1, errormsg=null
-AutoException [errorno=1, errormsg=Missing Automobile Price!
-Oct 22, 2022 5:28:35 PM Utils.FileIO writeToLogFile
-WARNING: warning message
-PROBLEM(S) FIXED = false
-FIXING PROBLEMS.......
-FIXING PROBLEMS.......
-FIXING PROBLEMS.......
-DONE!
-PROBLEM(S) FIXED = true
-DO SOMETHING!
-true
+/usr/lib/jvm/java-1.11.0-openjdk-amd64/bin/java -javaagent:/snap/intellij-idea-ultimate/386/lib/idea_rt.jar=43071:/snap/intellij-idea-ultimate/386/bin -Dfile.encoding=UTF-8 -classpath /home/thomas/AutomobileConfigurationApp/AutmobileConfigApplication/out/production/AutmobileConfigApplication:/home/thomas/.m2/repository/org/junit/jupiter/junit-jupiter/5.8.1/junit-jupiter-5.8.1.jar:/home/thomas/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.8.1/junit-jupiter-api-5.8.1.jar:/home/thomas/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar:/home/thomas/.m2/repository/org/junit/platform/junit-platform-commons/1.8.1/junit-platform-commons-1.8.1.jar:/home/thomas/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/home/thomas/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.8.1/junit-jupiter-params-5.8.1.jar:/home/thomas/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.8.1/junit-jupiter-engine-5.8.1.jar:/home/thomas/.m2/repository/org/junit/platform/junit-platform-engine/1.8.1/junit-platform-engine-1.8.1.jar Driver.Lab4Driver
+ID:21
+ID:21
+STATE:RUNNABLE
+STATE:RUNNABLE
+ID:22
+ID:22
+STATE:RUNNABLE
+STATE:RUNNABLE
+ID:23
+ID:23
+STATE:RUNNABLE
+STATE:RUNNABLE
+ID:24
+ID:24
+STATE:RUNNABLE
+STATE:RUNNABLE
 
-Ford-FordWagonZTW-2000|128500.0
 
 automatic 0.0
 manual -815.0
@@ -20,8 +24,7 @@ standard 0.0
 abs 400.0
 abs-with-advance-trac 1625.0
 
-Fort-Knox-Gold-Clearcoat-Metallic 0.0
-Liquid-Grey-Clearcoat-Metallic 0.0
+Red 0.0
 Infra-Red-Clearcoat 0.0
 Grabber-Green-Clearcoat-Metallic 0.0
 Sangria-RedClearcoat-Metallic 0.0
@@ -36,7 +39,77 @@ not-present 350.0
 
 present 0.0
 not-present 595.0
-[automatic 0.0, standard 0.0, standard 0.0, not-present 350.0]
-128850.0
+
+
+automatic 0.0
+manual -815.0
+
+standard 0.0
+abs 400.0
+abs-with-advance-trac 1625.0
+
+Red 0.0
+Infra-Red-Clearcoat 0.0
+Grabber-Green-Clearcoat-Metallic 0.0
+Sangria-RedClearcoat-Metallic 0.0
+French-Blue-Clearcoat-Metallic 0.0
+Twilight-Blue-Clearcoat-Metallic 0.0
+CD-Silver-Clearcoat-Metallic 0.0
+Pitch-Black-Clearcoat 0.0
+Cloud-9-White-Clearcoat 0.0
+
+present 0.0
+not-present 350.0
+
+present 0.0
+not-present 595.0
+23 Finished Editing!
+
+automatic 0.0
+manual -815.0
+
+standard 0.0
+abs 400.0
+abs-with-advance-trac 1625.0
+
+Red 0.0
+Infra-Red-Clearcoat 0.0
+Grabber-Green-Clearcoat-Metallic 0.0
+Sangria-RedClearcoat-Metallic 0.0
+French-Blue-Clearcoat-Metallic 0.0
+Twilight-Blue-Clearcoat-Metallic 0.0
+CD-Silver-Clearcoat-Metallic 0.0
+Pitch-Black-Clearcoat 0.0
+Cloud-9-White-Clearcoat 0.0
+
+present 0.0
+not-present 350.0
+
+present 0.0
+not-present 595.0
+24 Finished Editing!
+
+automatic 0.0
+manual -815.0
+
+standard 0.0
+abs 400.0
+abs-with-advance-trac 1625.0
+
+Red 0.0
+Infra-Red-Clearcoat 0.0
+Grabber-Green-Clearcoat-Metallic 0.0
+Sangria-RedClearcoat-Metallic 0.0
+French-Blue-Clearcoat-Metallic 0.0
+Twilight-Blue-Clearcoat-Metallic 0.0
+CD-Silver-Clearcoat-Metallic 0.0
+Pitch-Black-Clearcoat 0.0
+Cloud-9-White-Clearcoat 0.0
+
+present 0.0
+not-present 350.0
+
+present 0.0
+not-present 595.0
 
 Process finished with exit code 0

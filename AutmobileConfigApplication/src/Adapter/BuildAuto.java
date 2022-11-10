@@ -129,7 +129,7 @@ public class BuildAuto extends ProxyAutomobile implements CreateAuto, ReadAuto, 
 
 	@Override
 	public void printOptionChoices() {
-		System.out.println(a1.getOptnChoice().toString());
+		System.out.println(a1.getOptnChoices().toString());
 	}
 
 	/**

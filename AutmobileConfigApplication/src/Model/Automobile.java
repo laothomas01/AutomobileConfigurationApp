@@ -310,7 +310,7 @@ public class Automobile implements Serializable {
 	}
 
 
-	public OptionSet.Option getOptnChoice(int i) throws IOException {
+	public OptionSet.Option getOptnChoices(int i) throws IOException {
 		return getOptnSet(i).getOptnChoice();
 	}
 
@@ -319,7 +319,6 @@ public class Automobile implements Serializable {
 	}
 
 	public void setOptnChoice(String optnSetName, String optnName) {
-//		getOptnSet()
 	}
 
 
@@ -333,7 +332,7 @@ public class Automobile implements Serializable {
 
 	public void addOptionChoice(int i, int j) throws IOException {
 		setOptnChoice(i, j);
-		optnChoice.add(getOptnChoice(i));
+		optnChoice.add(getOptnChoices(i));
 	}
 
 	public void addOptionChoice(String optnSetName, String optnName) {
@@ -345,8 +344,12 @@ public class Automobile implements Serializable {
 		optnChoice.remove(i);
 	}
 
-	public ArrayList<OptionSet.Option> getOptnChoice() {
+	public ArrayList<OptionSet.Option> getOptnChoices() {
 		return optnChoice;
+	}
+
+	public void printOptionChoices() {
+		System.out.println(getOptnChoices().toString());
 	}
 
 	//--------------------------------------------- NEW CODE USING ARRAY-LIST -----------------------------------------

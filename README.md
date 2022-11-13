@@ -1,6 +1,6 @@
 # AutomobileConfigurationApp
 # readme quick notes
-#usage 
+
 -learn about multi-threading
 -software engineering principles
 -system design

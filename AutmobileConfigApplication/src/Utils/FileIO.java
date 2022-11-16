@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import Exception.AutoException;
 
+import java.util.Properties;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 
@@ -71,6 +72,51 @@ public class FileIO {
 		return flag;
 	}
 
+	public Object loadProperties(String fname) {
+		Properties props = new Properties();
+		try {
+			props.load(new FileInputStream(fname));
+		} catch (FileNotFoundException e) {
+			System.err.println("Err in file directory  ... ");
+			System.exit(1);
+		} catch (IOException e) {
+			System.err.println("Error reading file from director ... ");
+			System.exit(1);
+		}
+		return props;
+	}
+
+	public String getFileName() {
+		return this.fileName;
+	}
+
+	public Automobile loadAutomotive(Object obj) throws IOException {
+		Properties prop = (Properties) obj;
+
+		/**
+		 * Find a more optimal way to parse these property keys
+		 */
+		String carModel = prop.getProperty("carmodel");
+		float carPrice = Float.parseFloat(prop.getProperty("carprice"));
+		String[] brakes = prop.getProperty("brakes").split("\\|");
+		System.out.println(brakes[0]);
+		System.out.println(brakes[1]);
+		String[] colors = prop.getProperty("colors").split("\\|");
+		System.out.println(colors[0]);
+		System.out.println(colors[1]);
+		String[] airbags = prop.getProperty("airbags").split("\\|");
+		System.out.println(airbags[0]);
+		System.out.println(airbags[1]);
+		String[] powermoonroof = prop.getProperty("powermoonroof").split("\\|");
+		System.out.println(powermoonroof[0]);
+		System.out.println(powermoonroof[1]);
+		int optnSetSize = prop.size() - 2;
+		Automobile a1 = new Automobile();
+		return a1;
+
+
+	}
+
 	//if file can be opened, proceed with attempt to populate automobile instance with read text data
 	public Automobile loadAutomotive() throws IOException {
 		//intialize as empty automobile
@@ -80,34 +126,11 @@ public class FileIO {
 			BufferedReader br1 = new BufferedReader(new FileReader(fileName));
 			//we do not count the first line as part of option sets size
 			optionSetsSize = getLineCount(br1) - 1;
-//		//populate automobile with empty option set instances
-//
-//		//automobile gets 5 option set instances
-//		a1 = new Automobile(optionSetsSize);
 //
 			br1.close();
 			BufferedReader br2 = new BufferedReader(new FileReader(fileName));
-//
-//		//read first line from carconfigs.txt
 			String line = br2.readLine();
 			String[] carNameAndPrice = line.split("\\|");
-//		for (int i = 0; i < a1.getOptnSetsSize(); i++) {
-//			line = br2.readLine();
-//			String[] optnSet = line.split("\\|");
-//			String optnSetName = optnSet[0];
-//			String[] optnNames = optnSet[1].split(" ");
-//			String[] optnPrices = optnSet[2].split(" ");
-//			//needs to finish populating the option sets with empty options
-//			for (int j = 0; j < optnNames.length; j++) {
-//				a1.setOptnSet(i, optnSetName, optnNames.length);
-//			}
-//			//populate empty options with new data
-//			for (int j = 0; j < optnNames.length; j++) {
-//				a1.setOptn(i, j, optnNames[j], Float.parseFloat(optnPrices[j]));
-//			}
-//		}
-
-			//handling malformation of text file
 			try {
 				//handling malformed pricing of automobile in text file
 				if (MiscUtils.getPrimitiveDataTypeForNumberString(carNameAndPrice[1]) == "Unknown") {
@@ -221,70 +244,70 @@ public class FileIO {
 	}
 
 
-	public Automobile loadAutomobileOptionSets() throws IOException {
-		//intialize as empty automobile
-		int optionSetsSize;
-		BufferedReader br1 = new BufferedReader(new FileReader(fileName));
-		//we do not count the first line as part of option sets size
-		optionSetsSize = getLineCount(br1) - 1;
-
-		//populate automobile with empty option set instances
-
-		//automobile gets 5 option set instances
-		Automobile a1 = new Automobile(optionSetsSize);
-
-		br1.close();
-		BufferedReader br2 = new BufferedReader(new FileReader(fileName));
-
-		//read first line from carconfigs.txt
-		String line = br2.readLine();
-
-
-		//CO//loop 5 times, each iteration =  a text file line (excluding the first line)
-
-//		for (int i = 0; i < a1.getOptionSetsSize(); i++) {
-//			line = br2.readLine();
-//			String[] optionSet = line.split("\\|");
-//			String optionSetName = optionSet[0];
-//			String[] optionNames = optionSet[1].split(" ");
-//			String[] optionPrices = optionSet[2].split(" ");
+//	public Automobile loadAutomobileOptionSets() throws IOException {
+//		//intialize as empty automobile
+//		int optionSetsSize;
+//		BufferedReader br1 = new BufferedReader(new FileReader(fileName));
+//		//we do not count the first line as part of option sets size
+//		optionSetsSize = getLineCount(br1) - 1;
 //
-//			//populate
-//			for (int j = 0; j < optionNames.length; j++) {
-//				//throw auto exception here if option set text file data is improper
-//				a1.updateOptionSetInstance(i, a1.createOptionSetInstance(optionSetName, optionNames.length));
-//			}
-//			for (int j = 0; j < optionNames.length; j++) {
-//				//throw auto exception here if option text file data is improper
-//				a1.updateOptionClassInstance(i, j, optionNames[j], Float.parseFloat(optionPrices[j]));
-//			}
-//		}for (int i = 0; i < a1.getOptionSetsSize(); i++) {
-// OLD CODE
-		line = br2.readLine();
-		String[] optionSet = line.split("\\|");
-		String optionSetName = optionSet[0];
-		String[] optionNames = optionSet[1].split(" ");
-		String[] optionPrices = optionSet[2].split(" ");
-
-		for (int j = 0; j < optionNames.length; j++) {
-//					//throw auto exception here if option set text file data is improper
-
-			a1.setOptnSetName(j, optionSetName);
-
-			//OLD CODE: SETTING OPTION SET INSTANCE NAME
-//					a1.updateOptionSetInstance(i, a1.createOptionSetInstance(optionSetName, optionNames.length))
-		}
-		for (int j = 0; j < optionNames.length; j++) {
-//					//throw auto exception here if option text file data is improper
-			//		OLD CODE: SETTING OPTION INSTANCE PRICES
-//					a1.updateOptionClassInstance(i, j, optionNames[j], Float.parseFloat(optionPrices[j]));
-			a1.setOptn(j, j, optionNames[j], Float.parseFloat(optionPrices[j]));
-		}
-
-
-		br2.close();
-		return a1;
-	}
+//		//populate automobile with empty option set instances
+//
+//		//automobile gets 5 option set instances
+//		Automobile a1 = new Automobile(optionSetsSize);
+//
+//		br1.close();
+//		BufferedReader br2 = new BufferedReader(new FileReader(fileName));
+//
+//		//read first line from carconfigs.txt
+//		String line = br2.readLine();
+//
+//
+//		//CO//loop 5 times, each iteration =  a text file line (excluding the first line)
+//
+////		for (int i = 0; i < a1.getOptionSetsSize(); i++) {
+////			line = br2.readLine();
+////			String[] optionSet = line.split("\\|");
+////			String optionSetName = optionSet[0];
+////			String[] optionNames = optionSet[1].split(" ");
+////			String[] optionPrices = optionSet[2].split(" ");
+////
+////			//populate
+////			for (int j = 0; j < optionNames.length; j++) {
+////				//throw auto exception here if option set text file data is improper
+////				a1.updateOptionSetInstance(i, a1.createOptionSetInstance(optionSetName, optionNames.length));
+////			}
+////			for (int j = 0; j < optionNames.length; j++) {
+////				//throw auto exception here if option text file data is improper
+////				a1.updateOptionClassInstance(i, j, optionNames[j], Float.parseFloat(optionPrices[j]));
+////			}
+////		}for (int i = 0; i < a1.getOptionSetsSize(); i++) {
+//// OLD CODE
+//		line = br2.readLine();
+//		String[] optionSet = line.split("\\|");
+//		String optionSetName = optionSet[0];
+//		String[] optionNames = optionSet[1].split(" ");
+//		String[] optionPrices = optionSet[2].split(" ");
+//
+//		for (int j = 0; j < optionNames.length; j++) {
+////					//throw auto exception here if option set text file data is improper
+//
+//			a1.setOptnSetName(j, optionSetName);
+//
+//			//OLD CODE: SETTING OPTION SET INSTANCE NAME
+////					a1.updateOptionSetInstance(i, a1.createOptionSetInstance(optionSetName, optionNames.length))
+//		}
+//		for (int j = 0; j < optionNames.length; j++) {
+////					//throw auto exception here if option text file data is improper
+//			//		OLD CODE: SETTING OPTION INSTANCE PRICES
+////					a1.updateOptionClassInstance(i, j, optionNames[j], Float.parseFloat(optionPrices[j]));
+//			a1.setOptn(j, j, optionNames[j], Float.parseFloat(optionPrices[j]));
+//		}
+//
+//
+//		br2.close();
+//		return a1;
+//	}
 
 	public Automobile deserializeAutomotive(String filename) {
 		Automobile car = null;

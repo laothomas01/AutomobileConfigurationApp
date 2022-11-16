@@ -1,6 +1,8 @@
 package Adapter;
 
-
+/**
+ * External API
+ */
 import java.io.IOException;
 
 public interface UpdateAuto {

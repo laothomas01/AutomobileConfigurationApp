@@ -1,7 +1,7 @@
 package Driver;
 
 import Adapter.BuildAuto;
-import Adapter.EditAuto;
+import Scale.EditThread;
 
 import java.io.IOException;
 
@@ -17,7 +17,7 @@ public class Lab4Driver {
 	public static void Lab4Test() throws IOException, InterruptedException {
 		String configurationFile = "CarConfigs.txt";
 		String[] args = {"Red", "DarkBlue", "Green", "White"};
-		EditAuto a1 = new BuildAuto(configurationFile);
+		EditThread a1 = new BuildAuto(configurationFile);
 		/**
 		 * Each call to edit thread instantiates a new thread operating on the same automobile
 		 *

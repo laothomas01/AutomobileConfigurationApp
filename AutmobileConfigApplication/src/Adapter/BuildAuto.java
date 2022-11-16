@@ -3,13 +3,22 @@ package Adapter;
 import Model.Automobile;
 import Model.LHMAuto;
 import Scale.EditOptions;
+import Scale.EditThread;
 import Utils.FileIO;
 import Exception.Fix1to100;
 
 import java.io.IOException;
 
-public class BuildAuto extends ProxyAutomobile implements CreateAuto, ReadAuto, UpdateAuto, FixAuto, EditAuto {
-
+public class BuildAuto
+		extends
+		ProxyAutomobile
+		implements
+		CreateAuto,
+		ReadAuto,
+		UpdateAuto,
+		FixAuto,
+		EditThread {
+	FileIO io = null;
 
 	public BuildAuto(String fileName) throws IOException, InterruptedException {
 		buildAuto(fileName);
@@ -22,21 +31,24 @@ public class BuildAuto extends ProxyAutomobile implements CreateAuto, ReadAuto, 
 
 	@Override
 	public void buildAuto(String fileName) throws IOException {
-		FileIO io = new FileIO(fileName);
+//		FileIO io = new FileIO(fileName);
+		io = new FileIO(fileName);
 		a1 = io.loadAutomotive();
 		setAutoLHM(new LHMAuto<>());
 		addAuto(a1);
-
-
 	}
 
+							//carconfig     .properties
+	@Override
+	public void buildAuto(String fileName, String fileType) throws IOException {
+		io = new FileIO(fileName + fileType);
+		a1
+	}
 
 	public LHMAuto<Automobile> getAutos() {
 		return autos;
 	}
 
-
-	//WORKS
 	public Automobile getAuto(String modelName) {
 		return autos.getAuto(modelName);
 	}
@@ -49,17 +61,14 @@ public class BuildAuto extends ProxyAutomobile implements CreateAuto, ReadAuto, 
 		getAutos().removeAuto(modelName);
 	}
 
-
 	public void setAutoLHM(LHMAuto lhm) {
 		autos = lhm;
 	}
-
 
 	@Override
 	public void printAuto(String modelName) {
 		System.out.println(getAuto(modelName));
 	}
-
 
 	@Override
 	public void setOptnSetName(String modelName, int i, String newName) throws IOException {
@@ -81,36 +90,20 @@ public class BuildAuto extends ProxyAutomobile implements CreateAuto, ReadAuto, 
 		getAuto(modelName).setOptnPrice(i, j, newPrice);
 	}
 
-
 	@Override
 	public void setOptnName(String modelName, int i, int j, String newName) throws IOException {
 		getAuto(modelName).setOptnName(i, j, newName);
 	}
-
 
 	@Override
 	public float getTotalPrice() {
 		return a1.getTotalPrice();
 	}
 
-//	@Override
-//	public void addOptnChoice(String optnSetName, String optnName) throws IOException {
-//		for (int i = 0; i < a1.getOptnSetsSize(); i++) {
-//			for (int j = 0; j < a1.getOptnSetSize(i); j++) {
-//				if (a1.getOptnSetName(i).equals(optnSetName)) {
-//					if (a1.getOptnName(i, j).equals(optnName)) {
-//
-//					}
-//				}
-//			}
-//		}
-//	}
-
 	@Override
 	public void addOptnChoice(int i, int j) throws IOException {
 		a1.addOptionChoice(i, j);
 	}
-
 
 	@Override
 	public void removeOptnChoice(int i) {
@@ -171,13 +164,13 @@ public class BuildAuto extends ProxyAutomobile implements CreateAuto, ReadAuto, 
 	 * @throws InterruptedException
 	 */
 	@Override
-	public void editThread(String ModelName, int operation, String[] args) throws IOException, InterruptedException {
+	public void editThread(String ModelName, int operation, String[] args)
+			throws IOException, InterruptedException {
 		//thread 1
 		EditOptions eo = new EditOptions(ModelName, operation, args);
 		eo.start();
 		System.out.println("ID:" + eo.t.getId());
 		System.out.println("STATE:" + eo.t.getState());
-
 	}
 
 }

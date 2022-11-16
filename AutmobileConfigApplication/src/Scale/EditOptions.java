@@ -19,7 +19,8 @@ public class EditOptions extends ProxyAutomobile implements Runnable {
 	private String[] args;
 	private int operation;
 
-	public EditOptions(String modelName, int operation, String[] args) throws InterruptedException {
+	public EditOptions(String modelName, int operation, String[] args)
+			throws InterruptedException {
 		this.modelName = modelName;
 		this.operation = operation;
 		this.args = args;

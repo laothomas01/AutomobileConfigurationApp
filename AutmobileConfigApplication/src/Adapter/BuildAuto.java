@@ -8,6 +8,7 @@ import Utils.FileIO;
 import Exception.Fix1to100;
 
 import java.io.IOException;
+import java.util.Properties;
 
 public class BuildAuto
 		extends
@@ -20,9 +21,11 @@ public class BuildAuto
 		EditThread {
 	FileIO io = null;
 
+	public BuildAuto(String fileName, String fileType) throws IOException, InterruptedException {
+		buildAuto(fileName, fileType);
+	}
 	public BuildAuto(String fileName) throws IOException, InterruptedException {
 		buildAuto(fileName);
-
 	}
 
 	public BuildAuto() {
@@ -38,11 +41,13 @@ public class BuildAuto
 		addAuto(a1);
 	}
 
-							//carconfig     .properties
+	//carconfig     .properties
 	@Override
 	public void buildAuto(String fileName, String fileType) throws IOException {
 		io = new FileIO(fileName + fileType);
-		a1
+		Properties prop = (Properties) io.loadProperties(io.getFileName());
+		a1 = io.loadAutomotive(prop);
+
 	}
 
 	public LHMAuto<Automobile> getAutos() {

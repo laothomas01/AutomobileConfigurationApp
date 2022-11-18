@@ -26,6 +26,7 @@ public class BuildAuto
 	public BuildAuto(String fileName, String fileType) throws IOException, InterruptedException {
 		buildAuto(fileName, fileType);
 	}
+
 	public BuildAuto(String fileName) throws IOException, InterruptedException {
 		buildAuto(fileName);
 	}

@@ -5,6 +5,9 @@ import java.io.*;
 
 import Adapter.Debuggable;
 
+/**
+ * Interaction with a client's menu system for building car models from the server-side
+ */
 public class DefaultSocketClient extends Thread implements Debuggable {
 
 	////////// PROPERTIES //////////
@@ -28,7 +31,9 @@ public class DefaultSocketClient extends Thread implements Debuggable {
 		if (DEBUG)
 			System.out.println("Creating server object streams ... ");
 		try {
+			//for serialization of objects
 			out = new ObjectOutputStream(sock.getOutputStream());
+			//for deserialization of objects
 			in = new ObjectInputStream(sock.getInputStream());
 		} catch (IOException e) {
 			System.err.println("Error creating server object streams ... ");
@@ -37,6 +42,9 @@ public class DefaultSocketClient extends Thread implements Debuggable {
 
 
 		protocol = new BuildCarModelOptions();
+		/**
+		 * Bulk of the server client is in this menu
+		 */
 		String menu = "\nEnter 1 to upload a new Automobile\n"
 		              + "Enter 2 to configure an Automobile\n"
 		              + "Enter 0 to terminate connection\n";
@@ -45,23 +53,27 @@ public class DefaultSocketClient extends Thread implements Debuggable {
 			do {
 				if (DEBUG)
 					System.out.println("Sending client interaction choices ... ");
+				//serialize the menu object, wait for response
+				//will be deserialized in the client-side client socket
 				sendOutput(menu);
-
 				if (DEBUG)
 					System.out.println("Reading client request ... ");
+				//client-side client socket sends serialized input
+				//deserialize request
+				//handle response to the server-side client menu
 				int request = Integer.parseInt(in.readObject().toString());
 				if (DEBUG)
 					System.out.println(request);
 				if (request == 0)
 					break;
-
 				if (DEBUG)
 					System.out.println("Sending client request follow-up ... ");
+				//serialize returned string from input request
+
 				sendOutput(protocol.setRequest(request));
 
 				if (request >= 1 && request <= 2)
 					handleInput(request);
-
 			} while (in.readObject() != null);
 
 			if (DEBUG)
@@ -78,6 +90,7 @@ public class DefaultSocketClient extends Thread implements Debuggable {
 
 	public void sendOutput(Object obj) {
 		try {
+			//write to object output stream via serialization
 			out.writeObject(obj);
 		} catch (IOException e) {
 			System.err.println("Error returning output to client ... ");
@@ -87,6 +100,7 @@ public class DefaultSocketClient extends Thread implements Debuggable {
 
 	public void handleInput(int request) {
 		Object fromClient = null;
+
 		Object toClient = null;
 
 		try {
@@ -94,11 +108,15 @@ public class DefaultSocketClient extends Thread implements Debuggable {
 				case 1: //Client request to build Automobile
 					if (DEBUG)
 						System.out.println("Waiting for client to upload file ... ");
+					//deserialize object sent from client
+					//properties file has been located and uploaded
 					fromClient = in.readObject();
 					if (DEBUG) {
 						System.out.println(fromClient);
 						System.out.println("Adding new Automobile to database ... ");
 					}
+
+
 					toClient = protocol.processRequest(fromClient);
 					sendOutput(toClient);
 					break;
@@ -112,9 +130,7 @@ public class DefaultSocketClient extends Thread implements Debuggable {
 					toClient = protocol.processRequest(fromClient);
 					sendOutput(toClient);
 					break;
-
 				default: //Invalid requests
-					;
 			}
 		} catch (ClassNotFoundException e) {
 			System.err.println("Error in uploaded object, file may be corrupted ... ");
@@ -125,7 +141,7 @@ public class DefaultSocketClient extends Thread implements Debuggable {
 		}
 	}
 
-	//when starting server, server starts new instance of socket client
+	//when starting server, server starts new instance of client's socket
 	@Override
 	public void run() {
 		handleConnection(clientSocket);

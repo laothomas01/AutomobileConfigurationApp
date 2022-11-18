@@ -16,4 +16,6 @@ abstract public class ProxyAutomobile {
 	 */
 	static protected Automobile a1;
 	static protected LHMAuto<Automobile> autos;
+
+
 }

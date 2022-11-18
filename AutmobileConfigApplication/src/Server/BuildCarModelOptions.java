@@ -2,6 +2,8 @@ package Server;
 
 import Adapter.*;
 
+import java.util.Properties;
+
 /**
  * back-forth operation happening between client and server
  */
@@ -33,7 +35,7 @@ public class BuildCarModelOptions extends ProxyAutomobile {
 		Object toClient = null;
 		if (state == REQUEST_BUILD_AUTO) {
 			// add code to build auto
-
+			
 			//deserialize properties file
 			//use data from properties file and
 		} else if (state == REQUEST_CONFIGURE_AUTO) {

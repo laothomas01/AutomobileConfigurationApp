@@ -47,6 +47,7 @@ public class DefaultServerSocket extends Thread implements Debuggable {
 			try {
 
 				//will be stuck in this block until the port has been connected to
+				//will start once the client-side socket client starts
 				clientSocket = server.accept();
 
 			} catch (IOException e) {

@@ -4,6 +4,7 @@ import java.net.*;
 import java.io.*;
 
 import Adapter.Debuggable;
+import Model.Automobile;
 
 /**
  * Interaction with a client's menu system for building car models from the server-side
@@ -99,16 +100,18 @@ public class DefaultSocketClient extends Thread implements Debuggable {
 	}
 
 	public void handleInput(int request) {
+		//deserialize object from client
 		Object fromClient = null;
-
+		//serialize object to client
 		Object toClient = null;
 
 		try {
 			switch (request) {
+
 				case 1: //Client request to build Automobile
 					if (DEBUG)
 						System.out.println("Waiting for client to upload file ... ");
-					//deserialize object sent from client
+					//input stream deserializes object sent from client
 					//properties file has been located and uploaded
 					fromClient = in.readObject();
 					if (DEBUG) {
@@ -116,6 +119,7 @@ public class DefaultSocketClient extends Thread implements Debuggable {
 						System.out.println("Adding new Automobile to database ... ");
 					}
 
+					//serialize to
 
 					toClient = protocol.processRequest(fromClient);
 					sendOutput(toClient);

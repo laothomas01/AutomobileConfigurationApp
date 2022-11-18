@@ -26,29 +26,23 @@ public class KnockKnockServer {
 		try {
 			//server socket accepts the client socket
 			//listens for a client connecting to the port
-			//method is blocked until a connection is found
+			//method is blocked until a connection to client is found
 			clientSocket = serverSocket.accept();
 		} catch (IOException e) {
 			System.err.println("Accept failed.");
 			System.exit(1);
 		}
 
-
-		//read the output of the client
+		//read output from client socket
 		PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
-		//reads input from the client
+		//read input from client socket
 		BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 		String inputLine, outputLine;
-
-
-		//operations that will be communicated between client and server
+		//class instance to perform operations for client or server
 		KnockKnockProtocol kkp = new KnockKnockProtocol();
-
 		//output line = a specific knock knock protocol
 		outputLine = kkp.processInput(null);
 		out.println(outputLine);
-
-
 		while ((inputLine = in.readLine()) != null) {
 			//set output line as input from client
 			outputLine = kkp.processInput(inputLine);

@@ -21,7 +21,6 @@ public class KnockKnockProtocol {
 			"Is there an owl in here?",
 			"Is there an echo in here?"};
 
-
 	public String processInput(String theInput) {
 		String theOutput = null;
 

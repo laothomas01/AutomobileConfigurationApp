@@ -4,6 +4,7 @@ import Model.Automobile;
 import Model.LHMAuto;
 import Scale.EditOptions;
 import Scale.EditThread;
+import Server.AutoServer;
 import Utils.FileIO;
 import Exception.Fix1to100;
 
@@ -18,6 +19,7 @@ public class BuildAuto
 		ReadAuto,
 		UpdateAuto,
 		FixAuto,
+		AutoServer,
 		EditThread {
 	FileIO io = null;
 
@@ -178,5 +180,9 @@ public class BuildAuto
 		System.out.println("STATE:" + eo.t.getState());
 	}
 
+	@Override
+	public void server(int port) {
+
+	}
 }
 

@@ -5,6 +5,7 @@ import Adapter.*;
 import java.io.*;
 import java.net.*;
 
+
 /*
 
 We will be running this server and processing client requests and object streams
@@ -39,16 +40,22 @@ public class DefaultServerSocket extends Thread implements Debuggable {
 
 	@Override
 	public void run() {
-
+		//let's instantiate a socket instance
 		Socket clientSocket = null;
-
+		if (DEBUG) {
+			System.out.println("---------------------------------");
+			System.out.println("Server has started!");
+		}
+		System.out.println("Waiting for connection......");
 		while (true) {
+			System.out.println("---------------------------------");
+
 			//Accept client
 			try {
-
-				//will be stuck in this block until the port has been connected to
-				//will start once the client-side socket client starts
-				clientSocket = server.accept();
+				//set socket instance to socket accepted and connecting into server port
+				if (DEBUG)
+//					System.out.println("Waiting for connection......");
+					clientSocket = server.accept();
 
 			} catch (IOException e) {
 				System.err.println("Error establishing client connection ... ");
@@ -60,9 +67,8 @@ public class DefaultServerSocket extends Thread implements Debuggable {
 				System.out.println(clientSocket.getLocalAddress());
 			//running the server also runs this default socket client thread
 
-
-			//client on the server-side
-			new DefaultSocketClient(clientSocket).start();
+			//pass in connected socket into default socket and start thread
+			new DefaultSocket(clientSocket).start();
 
 		}
 	}

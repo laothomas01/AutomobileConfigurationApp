@@ -27,19 +27,13 @@ public class BuildCarModelOptions extends ProxyAutomobile {
 
 	//Method 1)
 
-	//accept properties object from client socket over ObjectStream
 
-	//create an automobile
 
 	public Object processRequest(Object obj) {
 		Object toClient = null;
 		if (state == REQUEST_BUILD_AUTO) {
-			// add code to build auto
-			
-			//deserialize properties file
-			//use data from properties file and
+
 		} else if (state == REQUEST_CONFIGURE_AUTO) {
-			// add code for configuring auto
 		} else {
 
 		}

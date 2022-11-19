@@ -43,12 +43,11 @@ public class DefaultServerSocket extends Thread implements Debuggable {
 		//let's instantiate a socket instance
 		Socket clientSocket = null;
 		if (DEBUG) {
-			System.out.println("---------------------------------");
 			System.out.println("Server has started!");
+			System.out.println("Waiting for connection......");
+
 		}
-		System.out.println("Waiting for connection......");
 		while (true) {
-			System.out.println("---------------------------------");
 
 			//Accept client
 			try {

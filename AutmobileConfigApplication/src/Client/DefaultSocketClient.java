@@ -51,7 +51,6 @@ public class DefaultSocketClient extends Thread implements Debuggable {
 		Object fromServer, toServer = null;
 
 		try {
-			System.out.println("---------------------------------");
 			if (DEBUG)
 				System.out.println("Communicating with host ... ");
 

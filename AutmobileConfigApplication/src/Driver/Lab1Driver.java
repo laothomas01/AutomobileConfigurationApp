@@ -17,7 +17,7 @@ public class Lab1Driver {
 			}
 			System.out.println();
 		}
-		a1.setOptnName("Colors", "Blue", "Green");
+		a1.updateOptnName("Colors", "Blue", "Green");
 		System.out.println(a1.getOptnName("Colors", "Green"));
 		a1.addOptionChoice(0, 0);
 		a1.addOptionChoice(0, 1);

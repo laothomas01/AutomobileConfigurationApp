@@ -264,12 +264,12 @@ public class Automobile implements Serializable {
 	 * @param p new price
 	 * @throws IOException
 	 */
-	public void setOptn(int i, int j, String n, float p) throws IOException {
+	public void updateOptn(int i, int j, String n, float p) throws IOException {
 		getOptnSet(i).getOptn(j).setName(n);
 		getOptnSet(i).getOptn(j).setPrice(p);
 	}
 
-	public void setOptn(int i, int j, OptionSet.Option o) throws IOException {
+	public void updateOptn(int i, int j, OptionSet.Option o) throws IOException {
 		getOptnSet(i).getOptns().set(j, o);
 	}
 
@@ -281,16 +281,16 @@ public class Automobile implements Serializable {
 	 * @param n new name
 	 * @throws IOException
 	 */
-	public void setOptnName(int i, int j, String n) throws IOException {
+	public void updateOptnName(int i, int j, String n) throws IOException {
 		getOptnSet(i).getOptn(j).setName(n);
 	}
 
-	public void setOptnName(String optionSetName, String optionName, String newName) throws IOException {
+	public void updateOptnName(String optionSetName, String optionName, String newName) throws IOException {
 		for (int i = 0; i < this.getOptnSetsSize(); i++) {
 			for (int j = 0; j < this.getOptnSetSize(i); j++) {
 				if (this.getOptnSetName(i).equals(optionSetName)) {
 					if (this.getOptnName(i, j).equals(optionName)) {
-						this.setOptnName(i, j, newName);
+						this.updateOptnName(i, j, newName);
 					}
 				}
 			}

@@ -100,7 +100,7 @@ public class BuildAuto
 
 	@Override
 	public void setOptnName(String modelName, int i, int j, String newName) throws IOException {
-		getAuto(modelName).setOptnName(i, j, newName);
+		getAuto(modelName).updateOptnName(i, j, newName);
 	}
 
 	@Override

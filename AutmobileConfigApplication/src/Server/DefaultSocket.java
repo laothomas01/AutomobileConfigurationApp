@@ -59,42 +59,31 @@ public class DefaultSocket extends Thread implements Debuggable {
 		              "Enter 2 to configure an Automobile\n" +
 		              "Enter 0 to terminate connection\n";
 		try {
+			//while server can receive responses from client, continue to handle
 			do {
 				if (DEBUG) System.out.println("Sending client interaction choices ... ");
-				//serialize the menu object, wait for response
-				//will be deserialized in the client-side client socket
-//				sendOutput(menu);
 				try {
 					//serialize object
 					//send out menu prompt to client
-
-					/*
-					 "\nEnter 1 to upload a new Automobile\n" +
-					 "Enter 2 to configure an Automobile\n" +
-					 "Enter 0 to terminate connection\n";
-					 */
 					send.writeObject(menu);
 				} catch (IOException e) {
 					System.err.println("Error returning output to client ... ");
 					System.exit(1);
 				}
-				if (DEBUG) System.out.println("Reading client request ... ");
-				//deserialize received object
-				//parse the object
-				/**
-				 * e.g 1
-				 */
+				if (DEBUG) System.out.println("Reading client request ... " + "\n" + "----------" + "\n");
+
+				//what is causing the code block to be blocked until a response is received????
+
+
+				//request has been received and parsed
 				int request = Integer.parseInt(receive.readObject().toString());
 				if (DEBUG) System.out.println(request);
 				if (request == 0) break;
 				if (DEBUG) System.out.println("Sending client request follow-up ... ");
-				//serialize returned string from input request
 
-//				sendOutput(protocol.setRequest(request));
 				try {
-					//inputs request into protocol function
-					//serialize
-					//send out resulting from request to client
+					//serialize and send object to client
+					//object sent is class String
 					send.writeObject(protocol.setRequest(request));
 				} catch (IOException e) {
 					System.err.println("Error returning output to client ... ");
@@ -136,17 +125,15 @@ public class DefaultSocket extends Thread implements Debuggable {
 
 		try {
 			switch (request) {
-
 				case 1: //Client request to build Automobile
 					if (DEBUG) System.out.println("Waiting for client to upload file ... ");
-					//received and de-serialized object
+					//client sends out .txt or .prop file
 					fromClient = receive.readObject();
 					if (DEBUG) {
 						System.out.println(fromClient);
 						System.out.println("Adding new Automobile to database ... ");
 					}
 
-					//de-serialized object sent to a protocol and returned back with result
 					toClient = protocol.processRequest(fromClient);
 //					sendOutput(toClient);
 					try {

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import Exception.AutoException;
 
 import java.util.Properties;
+import java.util.Set;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 
@@ -33,6 +34,10 @@ public class FileIO {
 
 	public FileIO(String fileName) {
 		this.fileName = fileName;
+	}
+
+	public FileIO() {
+
 	}
 
 
@@ -97,22 +102,84 @@ public class FileIO {
 		/**
 		 * Find a more optimal way to parse these property keys
 		 */
-		String carModel = prop.getProperty("carmodel");
-		float carPrice = Float.parseFloat(prop.getProperty("carprice"));
-		String[] brakes = prop.getProperty("brakes").split("\\|");
-		System.out.println(brakes[0]);
-		System.out.println(brakes[1]);
-		String[] colors = prop.getProperty("colors").split("\\|");
-		System.out.println(colors[0]);
-		System.out.println(colors[1]);
-		String[] airbags = prop.getProperty("airbags").split("\\|");
-		System.out.println(airbags[0]);
-		System.out.println(airbags[1]);
-		String[] powermoonroof = prop.getProperty("powermoonroof").split("\\|");
-		System.out.println(powermoonroof[0]);
-		System.out.println(powermoonroof[1]);
-		int optnSetSize = prop.size() - 2;
-		Automobile a1 = new Automobile();
+		int optionSetsSize = prop.size() - 3;
+		Automobile a1 = new Automobile(optionSetsSize);
+		Set<Object> keys = prop.keySet();
+		//option set indices
+		int i = 0;
+		/**
+		 * 	for (int j = 0; j < optnNames.length; j++) {
+		 * 						a1.updateOptnSet(i, optnSetName, optnNames.length);
+		 *                                        }
+		 * 					//populate empty options with new data
+		 * 					for (int j = 0; j < optnNames.length; j++) {
+		 * 						a1.setOptn(i, j, optnNames[j], Float.parseFloat(optnPrices[j]));
+		 *                    }
+		 */
+		for (Object k : keys) {
+			String key = (String) k;
+			String optionSetName;
+			String[] optionSet;
+			String[] optionPrices;
+			String[] optionNames;
+			if (key.equals("carmaker")) {
+				a1.setMaker(prop.getProperty(key));
+			} else if (key.equals("carmodel")) {
+				a1.setModel(prop.getProperty(key));
+			} else if (key.equals("carprice")) {
+				a1.setBasePrice(Float.parseFloat(prop.getProperty(key)));
+			} else {
+				/**
+				 * Handle option sets
+				 */
+				optionSetName = key;
+				optionSet = prop.getProperty(optionSetName).split("\\|");
+				optionNames = optionSet[0].split(" ");
+				optionPrices = optionSet[1].split(" ");
+				//update each option set instance with an option set name and how many options are in each name
+//				System.out.println(i + ":" + optionSetName + ":" + optionNames.length);
+				a1.updateOptnSet(i, optionSetName, optionNames.length);
+				for (int j = 0; j < optionNames.length; j++) {
+					a1.updateOptn(i, j, optionNames[j], Float.parseFloat(optionPrices[j]));
+				}
+				i++;
+
+			}
+//			System.out.println("CHECKING OPTION SET INSTANCE:" + a1.getOptnSet(0));
+
+		}
+
+		/**
+		 * Hard coded algorithm
+		 */
+//		if (carMaker != null) {
+//			String carModel = prop.getProperty("carmodel");
+//			float carPrice = Float.parseFloat(prop.getProperty("carprice"));
+//			String[] brakes = prop.getProperty("brakes").split("\\|");
+//
+//			String[] brakeNames = brakes[0].split(" ");
+//			String[] brakePrices = brakes[1].split(" ");
+//
+//			String[] colors = prop.getProperty("colors").split("\\|");
+//			String[] colorNames = colors[0].split(" ");
+//			String[] colorPrices = colors[1].split(" ");
+//
+//			String[] airbags = prop.getProperty("airbags").split("\\|");
+//			String[] airbagNames = airbags[0].split(" ");
+//			String[] airbagPrices = airbags[1].split(" ");
+//
+//			String[] powermoonroof = prop.getProperty("powermoonroof").split("\\|");
+//			String[] powermoonroofnames = powermoonroof[0].split(" ");
+//			String[] powermoonroofprices = powermoonroof[1].split(" ");
+//
+//			int optnSetsSize = prop.size() - 3;
+//			a1 = new Automobile(carModel, carPrice, optnSetsSize);
+//			a1.setMaker(carMaker);
+////			for(int i = 0; i )
+//
+//		}
+
+
 		return a1;
 
 
@@ -158,8 +225,9 @@ public class FileIO {
 					}
 					//populate empty options with new data
 					for (int j = 0; j < optnNames.length; j++) {
-						a1.setOptn(i, j, optnNames[j], Float.parseFloat(optnPrices[j]));
+						a1.updateOptn(i, j, optnNames[j], Float.parseFloat(optnPrices[j]));
 					}
+
 				}
 			}
 

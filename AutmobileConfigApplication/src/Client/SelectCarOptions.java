@@ -18,7 +18,7 @@ public class SelectCarOptions {
 	////////// INSTANCE METHODS //////////
 
 	public void configureAuto(Object obj) {
-
+		//@TODO: fill in with code to select configurations for automobile
 	}
 
 	public boolean isAutomobile(Object obj) {

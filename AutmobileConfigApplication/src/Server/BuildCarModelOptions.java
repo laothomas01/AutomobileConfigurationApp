@@ -1,7 +1,10 @@
 package Server;
 
 import Adapter.*;
+import Model.Automobile;
+import Utils.FileIO;
 
+import java.io.IOException;
 import java.util.Properties;
 
 /**
@@ -16,10 +19,12 @@ public class BuildCarModelOptions extends ProxyAutomobile {
 
 	private int state = WAITING;
 
+	private FileIO io = null;
+
 	////////// CONSTRUCTORS //////////
 
 	public BuildCarModelOptions() {
-
+		io = new FileIO();
 	}
 
 	////////// INSTANCE METHODS //////////
@@ -28,12 +33,16 @@ public class BuildCarModelOptions extends ProxyAutomobile {
 	//Method 1)
 
 
-
-	public Object processRequest(Object obj) {
+	public Object processRequest(Object obj) throws IOException {
 		Object toClient = null;
+		Automobile a1 = null;
 		if (state == REQUEST_BUILD_AUTO) {
+			Properties props = (Properties) obj;
+			//@TODO use fileIO function to parse props object
+			a1 = io.loadAutomotive(props);
 
 		} else if (state == REQUEST_CONFIGURE_AUTO) {
+
 		} else {
 
 		}

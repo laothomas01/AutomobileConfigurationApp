@@ -1,11 +1,7 @@
 package Scale;
 
-import Adapter.BuildAuto;
-import Adapter.BuildableAuto;
 import Adapter.ProxyAutomobile;
-import Adapter.UpdateAuto;
 import Model.Automobile;
-import Model.LHMAuto;
 
 import java.io.IOException;
 
@@ -90,12 +86,12 @@ public class EditOptions extends ProxyAutomobile implements Runnable {
 
 	class Helper {
 		void non_synchEditOptionName(String optnSetName, String optnName, String newName) throws IOException {
-			auto.setOptnName(optnSetName, optnName, newName);
+			auto.updateOptnName(optnSetName, optnName, newName);
 			System.out.println(getAuto());
 		}
 
 		synchronized void synchEditOptionName(String optnSetName, String optnName, String newName) throws IOException {
-			auto.setOptnName(optnSetName, optnName, newName);
+			auto.updateOptnName(optnSetName, optnName, newName);
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {

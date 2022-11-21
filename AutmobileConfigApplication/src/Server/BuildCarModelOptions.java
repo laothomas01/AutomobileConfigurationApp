@@ -40,12 +40,15 @@ public class BuildCarModelOptions extends ProxyAutomobile {
 			Properties props = (Properties) obj;
 			//@TODO use fileIO function to parse props object
 			a1 = io.loadAutomotive(props);
-
-		} else if (state == REQUEST_CONFIGURE_AUTO) {
-
-		} else {
-
+			//store each loaded automobile into linked hashmap
+			autos.addAuto(a1);
+			toClient = a1;
 		}
+//		else if (state == REQUEST_CONFIGURE_AUTO) {
+//
+//		} else {
+//
+//		}
 		this.state = WAITING;
 
 		return toClient;

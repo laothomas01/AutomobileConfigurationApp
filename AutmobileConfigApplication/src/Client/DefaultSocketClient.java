@@ -30,7 +30,6 @@ public class DefaultSocketClient extends Thread implements Debuggable {
 		try {
 			if (DEBUG) System.out.println("Connecting to host ... ");
 			this.sock = new Socket(strHost, iPort);
-
 			if (DEBUG) System.out.println("Connected to host, creating object streams ... ");
 			send = new ObjectOutputStream(sock.getOutputStream());
 			receive = new ObjectInputStream(sock.getInputStream());

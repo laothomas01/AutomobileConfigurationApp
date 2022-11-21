@@ -155,7 +155,7 @@ class OptionSet implements Serializable {
 		return sb.toString();
 	}
 
-	protected class Option {
+	protected class Option implements Serializable {
 
 		private String name;
 		private float price;

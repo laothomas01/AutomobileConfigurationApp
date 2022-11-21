@@ -137,48 +137,15 @@ public class FileIO {
 				optionNames = optionSet[0].split(" ");
 				optionPrices = optionSet[1].split(" ");
 				//update each option set instance with an option set name and how many options are in each name
-//				System.out.println(i + ":" + optionSetName + ":" + optionNames.length);
 				a1.updateOptnSet(i, optionSetName, optionNames.length);
 				for (int j = 0; j < optionNames.length; j++) {
 					a1.updateOptn(i, j, optionNames[j], Float.parseFloat(optionPrices[j]));
 				}
 				i++;
-
 			}
 //			System.out.println("CHECKING OPTION SET INSTANCE:" + a1.getOptnSet(0));
 
 		}
-
-		/**
-		 * Hard coded algorithm
-		 */
-//		if (carMaker != null) {
-//			String carModel = prop.getProperty("carmodel");
-//			float carPrice = Float.parseFloat(prop.getProperty("carprice"));
-//			String[] brakes = prop.getProperty("brakes").split("\\|");
-//
-//			String[] brakeNames = brakes[0].split(" ");
-//			String[] brakePrices = brakes[1].split(" ");
-//
-//			String[] colors = prop.getProperty("colors").split("\\|");
-//			String[] colorNames = colors[0].split(" ");
-//			String[] colorPrices = colors[1].split(" ");
-//
-//			String[] airbags = prop.getProperty("airbags").split("\\|");
-//			String[] airbagNames = airbags[0].split(" ");
-//			String[] airbagPrices = airbags[1].split(" ");
-//
-//			String[] powermoonroof = prop.getProperty("powermoonroof").split("\\|");
-//			String[] powermoonroofnames = powermoonroof[0].split(" ");
-//			String[] powermoonroofprices = powermoonroof[1].split(" ");
-//
-//			int optnSetsSize = prop.size() - 3;
-//			a1 = new Automobile(carModel, carPrice, optnSetsSize);
-//			a1.setMaker(carMaker);
-////			for(int i = 0; i )
-//
-//		}
-
 
 		return a1;
 

@@ -89,9 +89,11 @@ public class DefaultSocket extends Thread implements Debuggable {
 					System.err.println("Error returning output to client ... ");
 					System.exit(1);
 				}
-				if (request >= 1 && request <= 2)
+				if (request >= 1 && request <= 2) {
 					//handle received deserialized input
+
 					handleInput(request);
+				}
 			} while (receive.readObject() != null);
 
 			if (DEBUG) System.out.println("Closing server input stream for client " + sock.getInetAddress() + " ... ");
@@ -122,7 +124,6 @@ public class DefaultSocket extends Thread implements Debuggable {
 		Object fromClient = null;
 		//sent out a serialized object
 		Object toClient = null;
-
 		try {
 			switch (request) {
 				case 1: //Client request to build Automobile
@@ -130,16 +131,19 @@ public class DefaultSocket extends Thread implements Debuggable {
 					//client sends out .txt or .prop file
 					fromClient = receive.readObject();
 					if (DEBUG) {
-						System.out.println(fromClient);
+						//properties file being receives
+						System.out.println("Received " + fromClient);
 						System.out.println("Adding new Automobile to database ... ");
 					}
 
 					toClient = protocol.processRequest(fromClient);
+//					System.out.println(toClient);
 //					sendOutput(toClient);
 					try {
-						//write to object output stream via serialization
+						//process request, send automobile object to client
 						send.writeObject(toClient);
 					} catch (IOException e) {
+						e.printStackTrace();
 						System.err.println("Error returning output to client ... ");
 						System.exit(1);
 					}

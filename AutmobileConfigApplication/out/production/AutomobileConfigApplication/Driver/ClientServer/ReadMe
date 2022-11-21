@@ -1,0 +1,10 @@
+Submission requirements:
+[-]1) class diagram
+[X] 2) program works. no errors
+[X] 3) re-usable code
+[X] 4) packages created in plan of attack
+[X] 5) expose linked hashmap through interfaces
+[-] 6) buildauto class has no defined methods.(only overrided)
+[X] 7) client, server classes use object streams only
+[X] 8) server not store any info about class configuration
+[X] 9) default socket client used in server implementation

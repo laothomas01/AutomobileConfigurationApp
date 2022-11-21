@@ -10,7 +10,7 @@ import java.util.Properties;
 /**
  * back-forth operation happening between client and server
  */
-public class BuildCarModelOptions extends ProxyAutomobile {
+public class BuildCarModelOptions extends ProxyAutomobile implements AutoServer {
 ////////// PROPERTIES //////////
 
 	private static final int WAITING = 0;
@@ -33,22 +33,15 @@ public class BuildCarModelOptions extends ProxyAutomobile {
 	//Method 1)
 
 
-	public Object processRequest(Object obj) throws IOException {
+	public Object processRequest(Object obj) throws IOException, InterruptedException {
 		Object toClient = null;
-		Automobile a1 = null;
 		if (state == REQUEST_BUILD_AUTO) {
 			Properties props = (Properties) obj;
-			//@TODO use fileIO function to parse props object
-			a1 = io.loadAutomotive(props);
-			//store each loaded automobile into linked hashmap
-			autos.addAuto(a1);
-			toClient = a1;
+			//build automobile and store into linked hash map
+		} else if (state == REQUEST_CONFIGURE_AUTO) {
+		} else {
+
 		}
-//		else if (state == REQUEST_CONFIGURE_AUTO) {
-//
-//		} else {
-//
-//		}
 		this.state = WAITING;
 
 		return toClient;
@@ -70,4 +63,13 @@ public class BuildCarModelOptions extends ProxyAutomobile {
 		return output;
 	}
 
+	@Override
+	public void server(int port) {
+
+	}
+
+	@Override
+	public void addAuto(Automobile auto) {
+		autos.addAuto(auto);
+	}
 }

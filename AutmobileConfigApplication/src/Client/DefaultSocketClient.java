@@ -56,6 +56,7 @@ public class DefaultSocketClient extends Thread implements Debuggable {
 				//-----------------HANDLING RESPONSES FROM SERVER ------------------
 
 				if (DEBUG) System.out.println("Received server response ... ");
+
 				System.out.println(fromServer.toString());
 
 				System.out.println("Response to server: ");

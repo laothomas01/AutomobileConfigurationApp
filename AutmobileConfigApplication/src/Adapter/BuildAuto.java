@@ -5,6 +5,7 @@ import Model.LHMAuto;
 import Scale.EditOptions;
 import Scale.EditThread;
 import Server.AutoServer;
+import Server.DefaultServerSocket;
 import Utils.FileIO;
 import Exception.Fix1to100;
 
@@ -31,9 +32,15 @@ public class BuildAuto
 		buildAuto(fileName);
 	}
 
+	public BuildAuto(Object file) throws IOException {
+		buildAuto(file);
+	}
+
+
 	public BuildAuto() {
 
 	}
+
 
 	@Override
 	public void buildAuto(String fileName) throws IOException {
@@ -41,7 +48,7 @@ public class BuildAuto
 		io = new FileIO(fileName);
 		a1 = io.loadAutomotive();
 		setAutoLHM(new LHMAuto<>());
-		addAuto(a1);
+//		addAuto(a1);
 	}
 
 	//carconfig     .properties
@@ -50,7 +57,13 @@ public class BuildAuto
 		io = new FileIO(fileName + fileType);
 		Properties prop = (Properties) io.loadProperties(io.getFileName());
 		a1 = io.loadAutomotive(prop);
+	}
 
+	@Override
+	public void buildAuto(Object file) throws IOException {
+		io = new FileIO();
+		a1 = io.loadAutomotive(file);
+		setAutoLHM(new LHMAuto<>());
 	}
 
 	public LHMAuto<Automobile> getAutos() {
@@ -61,9 +74,6 @@ public class BuildAuto
 		return autos.getAuto(modelName);
 	}
 
-	public void addAuto(Automobile a1) {
-		getAutos().addAuto(a1);
-	}
 
 	public void removeAuto(String modelName) {
 		getAutos().removeAuto(modelName);
@@ -76,6 +86,11 @@ public class BuildAuto
 	@Override
 	public void printAuto(String modelName) {
 		System.out.println(getAuto(modelName));
+	}
+
+	@Override
+	public Automobile getAuto() {
+		return a1;
 	}
 
 	@Override
@@ -183,7 +198,13 @@ public class BuildAuto
 
 	@Override
 	public void server(int port) {
+		DefaultServerSocket server = new DefaultServerSocket(port);
+		server.start();
+	}
 
+	@Override
+	public void addAuto(Automobile auto) {
+		autos.addAuto(auto);
 	}
 }
 

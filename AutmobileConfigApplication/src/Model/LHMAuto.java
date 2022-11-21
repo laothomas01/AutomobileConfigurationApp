@@ -46,5 +46,9 @@ public class LHMAuto<T extends Automobile> {
 		getAuto(name).updateAutomobile(setName, setPrice);
 	}
 
+	public String toString() {
+		return cacheAuto.toString();
+	}
+
 
 }

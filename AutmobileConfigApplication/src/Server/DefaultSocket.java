@@ -171,6 +171,8 @@ public class DefaultSocket extends Thread implements Debuggable {
 		} catch (IOException e) {
 			System.err.println("Error in retrieving object from client ... ");
 			System.exit(1);
+		} catch (InterruptedException e) {
+			throw new RuntimeException(e);
 		}
 	}
 

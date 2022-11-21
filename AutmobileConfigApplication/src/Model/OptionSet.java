@@ -137,6 +137,10 @@ class OptionSet implements Serializable {
 		choice = getOptn(i);
 	}
 
+	protected void setOptnChoice(String optnName) throws IOException {
+		choice = getOptn(optnName);
+	}
+
 	protected Option getOptnChoice() {
 		return choice;
 	}
@@ -195,7 +199,7 @@ class OptionSet implements Serializable {
 
 		public String toString() {
 			StringBuffer sb = new StringBuffer();
-			sb.append(getName() + " " + getPrice());
+			sb.append("NAME: " + getName() + "\n" + "PRICE: " + getPrice());
 			return sb.toString();
 		}
 

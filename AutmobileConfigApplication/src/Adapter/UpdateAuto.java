@@ -25,6 +25,6 @@ public interface UpdateAuto {
 
 	void setOptnChoice(int i, int j) throws IOException;
 
-	void setOptnChoice(String optSetName, String optionName);
+	void setOptnChoice(String optSetName, String optionName) throws IOException;
 
 }

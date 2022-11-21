@@ -48,8 +48,6 @@ public class DefaultSocketClient extends Thread implements Debuggable {
 
 		try {
 			if (DEBUG) System.out.println("Communicating with host ... ");
-
-
 			//as long as client can receive responses from server, keep loop running
 			//when server closes, close the client
 			while ((fromServer = receive.readObject()) != null) {
@@ -57,23 +55,21 @@ public class DefaultSocketClient extends Thread implements Debuggable {
 
 				if (DEBUG) System.out.println("Received server response ... ");
 
-				System.out.println(fromServer.toString());
 
 				System.out.println("Response to server: ");
-
-				//checking if object received is an automobile
-				if (clientProtocol.isAutomobile(fromServer))
+				//handle received automobile instance from server after client enters in
+				if (clientProtocol.isAutomobile(fromServer)) {
+					System.out.println("Is an automobile!");
 					clientProtocol.configureAuto(fromServer);
-
+				}
+//				else {
+				System.out.println(fromServer.toString());
 				//-----------------HANDLING RESPONSES TO SERVER ------------------
 
-				/**
-				 * What are we sending to server?
-				 * 1) request number responses
-				 * 2) file name
-				 */
+				//basic user input
 				toServer = stdIn.readLine();
 
+				//checking the user response
 				if (toServer.toString().contains(".prop")) {
 					toServer = clientFTP.loadPropsFile(toServer.toString());
 				}
@@ -90,6 +86,9 @@ public class DefaultSocketClient extends Thread implements Debuggable {
 					break;
 				}
 				//---------------------------------------------------------------------
+//				}
+
+
 			}
 
 			if (DEBUG) System.out.println("Closing client input stream ... ");

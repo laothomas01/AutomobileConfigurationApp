@@ -11,32 +11,21 @@ import Utils.FileIO;
  * Synchronize these methods
  */
 public class Automobile implements Serializable {
-	//	private String name;
 	private float basePrice;
-	//automobile manufacturer
 	private String maker;
 
-
-	//automobile year
 	private int year;
-	//
 	private String model;
 
 
-	//array of Option Set instances
-
-	//stores all possible configurations for an automobile
-//	private OptionSet[] optionSets;
-	//stores all possible configurations for an automobile
+	//collection of option lists
 	private ArrayList<OptionSet> optnSets;
+	//collection of user configurations
 	private ArrayList<OptionSet.Option> optnChoice;
-
 
 	public Automobile(String n, float p, int size) {
 		setModel(n);
 		setBasePrice(p);
-
-
 		optnSets = new ArrayList<>();
 
 		for (int i = 0; i < size; i++) {
@@ -318,7 +307,8 @@ public class Automobile implements Serializable {
 		getOptnSet(i).setOptnChoice(j);
 	}
 
-	public void setOptnChoice(String optnSetName, String optnName) {
+	public void setOptnChoice(String optnSetName, String optnName) throws IOException {
+		getOptnSet(optnSetName).setOptnChoice(optnName);
 	}
 
 
@@ -335,8 +325,8 @@ public class Automobile implements Serializable {
 		optnChoice.add(getOptnChoices(i));
 	}
 
-	public void addOptionChoice(String optnSetName, String optnName) {
-
+	public void addOptionChoice(String optnSetName, String optnName) throws IOException {
+		setOptnChoice(optnSetName, optnName);
 	}
 
 
@@ -371,7 +361,7 @@ public class Automobile implements Serializable {
 		// new implementation using an array list
 		for (int i = 0; i < getOptnSetsSize(); i++) {
 			try {
-				sb.append("\n" + this.getOptnSet(i));
+				sb.append(this.getOptnSet(i));
 			} catch (IOException e) {
 				throw new RuntimeException(e);
 			}

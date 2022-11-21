@@ -16,16 +16,15 @@ public class CarModelOptionsIO {
 
 	////////// INSTANCE METHODS //////////
 
+	//@TODO replace with FIleIO functions
 	public Object loadPropsFile(String fname) {
 		Properties props = new Properties();
 		try {
 			props.load(new FileInputStream(fname));
-		}
-		catch (FileNotFoundException e) {
+		} catch (FileNotFoundException e) {
 			System.err.println("Error in file directory ... ");
 			System.exit(1);
-		}
-		catch (IOException e) {
+		} catch (IOException e) {
 			System.err.println("Error reading file from directory ... ");
 			System.exit(1);
 		}
@@ -52,12 +51,10 @@ public class CarModelOptionsIO {
 				counter++;
 			}
 			buff.close();
-		}
-		catch (FileNotFoundException e) {
+		} catch (FileNotFoundException e) {
 			System.err.println("Error in file directory ... ");
 			System.exit(1);
-		}
-		catch (IOException e) {
+		} catch (IOException e) {
 			System.err.println("Error reading file from directory ... ");
 			System.exit(1);
 		}

@@ -32,8 +32,8 @@ public class BuildAuto
 		buildAuto(fileName);
 	}
 
-	public BuildAuto(Object file) throws IOException {
-		buildAuto(file);
+	public BuildAuto(Object fileType) throws IOException {
+		buildAuto(fileType);
 	}
 
 
@@ -66,6 +66,10 @@ public class BuildAuto
 		setAutoLHM(new LHMAuto<>());
 	}
 
+	/**
+	 * @return
+	 * @TODO Below: these 4 non-overrided methods need to be put into an interface
+	 */
 	public LHMAuto<Automobile> getAutos() {
 		return autos;
 	}
@@ -139,8 +143,8 @@ public class BuildAuto
 	}
 
 	@Override
-	public void setOptnChoice(String optSetName, String optionName) {
-
+	public void setOptnChoice(String optSetName, String optionName) throws IOException {
+		a1.setOptnChoice(optSetName, optionName);
 	}
 
 	@Override
@@ -205,6 +209,16 @@ public class BuildAuto
 	@Override
 	public void addAuto(Automobile auto) {
 		autos.addAuto(auto);
+	}
+
+	@Override
+	public String displayAvailableModels() {
+		return autos.toString();
+	}
+
+	@Override
+	public String getAllModels() {
+		return autos.displayAutoNames();
 	}
 }
 

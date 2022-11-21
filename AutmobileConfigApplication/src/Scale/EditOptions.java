@@ -5,8 +5,12 @@ import Model.Automobile;
 
 import java.io.IOException;
 
-
-//give edit options access to instances used by BuildAuto class
+/**
+ * Purpose of the class:
+ * - to learn how multi-threading works
+	 * - synchronized functions and multi-thread access
+ * - to update the automobile's configurations
+ */
 public class EditOptions extends ProxyAutomobile implements Runnable {
 	public Thread t;
 	private Automobile auto;
@@ -81,6 +85,11 @@ public class EditOptions extends ProxyAutomobile implements Runnable {
 				break;
 		}
 
+	}
+
+	@Override
+	public String getAllModels() {
+		return "";
 	}
 
 

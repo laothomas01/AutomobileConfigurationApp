@@ -17,6 +17,7 @@ import Adapter.Debuggable;
  */
 
 
+//Default Socket Client
 public class DefaultSocket extends Thread implements Debuggable {
 
 	////////// PROPERTIES //////////
@@ -55,9 +56,7 @@ public class DefaultSocket extends Thread implements Debuggable {
 		/**
 		 * Bulk of the server client is in this menu
 		 */
-		String menu = "\nEnter 1 to upload a new Automobile\n" +
-		              "Enter 2 to configure an Automobile\n" +
-		              "Enter 0 to terminate connection\n";
+
 		try {
 			//while server can receive responses from client, continue to handle
 			do {
@@ -65,6 +64,10 @@ public class DefaultSocket extends Thread implements Debuggable {
 				try {
 					//serialize object
 					//send out menu prompt to client
+					String menu = "\nEnter 1 to upload a new Automobile\n" +
+					              "Enter 2 to configure an Automobile\n" +
+					              "Enter 0 to terminate connection\n";
+
 					send.writeObject(menu);
 				} catch (IOException e) {
 					System.err.println("Error returning output to client ... ");
@@ -137,8 +140,6 @@ public class DefaultSocket extends Thread implements Debuggable {
 					}
 
 					toClient = protocol.processRequest(fromClient);
-//					System.out.println(toClient);
-//					sendOutput(toClient);
 					try {
 						//process request, send automobile object to client
 						send.writeObject(toClient);
@@ -151,7 +152,7 @@ public class DefaultSocket extends Thread implements Debuggable {
 
 				case 2: //Client request to configure Automobile
 					if (DEBUG) System.out.println("Waiting for client to select Automobile ... ");
-					fromClient = Integer.parseInt(receive.readObject().toString());
+					fromClient = receive.readObject();
 					if (DEBUG) System.out.println("Sending Automobile object to client ... ");
 					toClient = protocol.processRequest(fromClient);
 //					sendOutput(toClient);

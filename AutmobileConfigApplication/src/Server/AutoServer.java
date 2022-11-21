@@ -8,8 +8,9 @@ public interface AutoServer {
 	 *
 	 * @param port server port num
 	 */
-	public void server(int port);
+	 void server(int port);
 
-	public void addAuto(Automobile auto);
+	 void addAuto(Automobile auto);
 
+	String displayAvailableModels();
 }

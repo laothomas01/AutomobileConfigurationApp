@@ -29,6 +29,10 @@ public class DefaultServerSocket extends Thread implements Debuggable {
 	public DefaultServerSocket(int port) {
 		this.port = port;
 		try {
+			/**
+			 * Setup a java Server Socket which will run an instance of build car
+			 * model option class to build automobile using properties file
+			 */
 			this.server = new ServerSocket(port);
 		} catch (IOException e) {
 			System.err.println("Could not listen on port " + port + " ... ");
@@ -53,9 +57,7 @@ public class DefaultServerSocket extends Thread implements Debuggable {
 			try {
 				//set socket instance to socket accepted and connecting into server port
 				if (DEBUG)
-//					System.out.println("Waiting for connection......");
 					clientSocket = server.accept();
-
 			} catch (IOException e) {
 				System.err.println("Error establishing client connection ... ");
 				System.exit(1);

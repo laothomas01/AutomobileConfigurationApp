@@ -166,8 +166,7 @@ public class Automobile implements Serializable {
 
 
 	/**
-	 *
-	 * @param i option set look up index
+	 * @param i    option set look up index
 	 * @param name new option set name
 	 * @param size size of option set instance
 	 */
@@ -175,6 +174,11 @@ public class Automobile implements Serializable {
 		getOptnSets().set(i, createOptnSet(name, size));
 	}
 
+	/**
+	 * @param i       look up index
+	 * @param newName replacement string
+	 * @throws IOException
+	 */
 	public void updateOptnSetName(int i, String newName) throws IOException {
 		getOptnSet(i).setName(newName);
 	}
@@ -187,7 +191,10 @@ public class Automobile implements Serializable {
 		return getOptnSet(i).getOptnsListSize();
 	}
 
-	//WORKS
+	public int getOptnSetSize(String name) throws IOException {
+		return getOptnSet(name).getOptnsListSize();
+	}
+
 	public String getOptnSetName(int i) throws IOException {
 		return getOptnSet(i).getName();
 	}
@@ -200,7 +207,6 @@ public class Automobile implements Serializable {
 	public ArrayList<OptionSet.Option> getOptnList(int i) throws IOException {
 		return getOptnSet(i).getOptns();
 	}
-
 
 	public int getOptnListSize(int i) throws IOException {
 		return getOptnSet(i).getOptnsListSize();

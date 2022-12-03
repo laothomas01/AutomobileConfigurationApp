@@ -49,7 +49,6 @@ public class DefaultServerSocket extends Thread implements Debuggable {
 		if (DEBUG) {
 			System.out.println("Server has started!");
 			System.out.println("Waiting for connection......");
-
 		}
 		while (true) {
 

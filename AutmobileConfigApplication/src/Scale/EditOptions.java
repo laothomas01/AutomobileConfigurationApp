@@ -8,7 +8,7 @@ import java.io.IOException;
 /**
  * Purpose of the class:
  * - to learn how multi-threading works
-	 * - synchronized functions and multi-thread access
+ * - synchronized functions and multi-thread access
  * - to update the automobile's configurations
  */
 public class EditOptions extends ProxyAutomobile implements Runnable {

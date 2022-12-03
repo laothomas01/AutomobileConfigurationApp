@@ -44,8 +44,8 @@ public class DefaultSocketClient extends Thread implements Debuggable {
 	}
 
 	public void handleConnection() {
-		Object fromServer, toServer = null;
-
+		Object fromServer,toServer = null;
+		
 		try {
 			if (DEBUG) System.out.println("Communicating with host ... ");
 			//as long as client can receive responses from server, keep loop running
@@ -78,8 +78,13 @@ public class DefaultSocketClient extends Thread implements Debuggable {
 				}
 
 				if (DEBUG) System.out.println("\n----------\nSending " + toServer + " to server ... ");
-				sendOutput(toServer);
-
+//				sendOutput(toServer);
+				try {
+					send.writeObject(toServer);
+				} catch (IOException e) {
+					System.err.println("Error in I/O stream while sending object to host ... ");
+					System.exit(1);
+				}
 				System.out.println("");
 
 				if (toServer.equals("0")) {

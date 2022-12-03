@@ -7,58 +7,50 @@ import java.util.ArrayList;
 import Exception.AutoException;
 import Utils.FileIO;
 
-/**
- * Synchronize these methods
- */
 public class Automobile implements Serializable {
+	//car base price
 	private float basePrice;
+	//creator of car
 	private String maker;
-
+	//creation date of car
 	private int year;
+	//car model name
 	private String model;
 
 
-	//collection of option lists
+	//set option sets
 	private ArrayList<OptionSet> optnSets;
-	//collection of user configurations
+
+	//set of user chosen configurations
 	private ArrayList<OptionSet.Option> optnChoice;
 
-	public Automobile(String n, float p, int size) {
-		setModel(n);
-		setBasePrice(p);
+	public Automobile(String carName, float carPrice, int optionSetSize) {
+		this.model = carName;
+		this.basePrice = carPrice;
 		optnSets = new ArrayList<>();
-
-		for (int i = 0; i < size; i++) {
+		for (int i = 0; i < optionSetSize; i++) {
+			// create X number of blank option set instances
+			// add into super set
 			optnSets.add(createOptnSet("BLANK", 0));
 		}
 		optnChoice = new ArrayList<>();
-
 		maker = "";
 		year = 0;
 	}
 
 	public Automobile(String n, int size) {
+
 		this(n, 0f, size);
 	}
 
-	/**
-	 * @param size
-	 * @param p
-	 */
 	public Automobile(int size, float p) {
 		this("BLANK", p, size);
 	}
 
-	/**
-	 * @param p
-	 */
 	public Automobile(float p) {
 		this("BLANK", p, 0);
 	}
 
-	/**
-	 * @param size
-	 */
 	public Automobile(int size) {
 		this("BLANK", 0, size);
 	}
@@ -104,25 +96,22 @@ public class Automobile implements Serializable {
 		setBasePrice(price);
 	}
 
+	// return super set of option sets
 	public ArrayList<OptionSet> getOptnSets() {
 		return optnSets;
 	}
 
+	//instantiate option set instance
 	public OptionSet createOptnSet(String name, int size) {
 		//updates the option set instance to a blank option set with N option instances
 		return new OptionSet(name, size);
 	}
 
-	/**
-	 * to handle multiple user access to an option set object
-	 *
-	 * @param i option set index
-	 * @return return an option set object
-	 * @throws IOException index does not find searched object
-	 */
+	//return option set instance from collection of option sets
 	public OptionSet getOptnSet(int i) throws IOException {
 		try {
 			if (getOptnSets().get(i) == null) {
+				//self-healing software fixture
 				throw new AutoException(3);
 			}
 		} catch (AutoException e) {
@@ -135,7 +124,7 @@ public class Automobile implements Serializable {
 		return getOptnSets().get(i);
 	}
 
-	//WORKS
+	//look up option set via name
 	public OptionSet getOptnSet(String optnSetName) throws IOException {
 		for (int i = 0; i < getOptnSets().size(); i++) {
 			if (getOptnSet(i).getName().equals(optnSetName)) {
@@ -145,28 +134,28 @@ public class Automobile implements Serializable {
 		return null;
 	}
 
-	//WORKS
-	public void setOptnSetName(int i, String name) throws IOException {
-		getOptnSet(i).setName(name);
-	}
-
-	//WORKS
 	public int getOptnSetsSize() {
 		return getOptnSets().size();
 	}
 
-	public void addOptnSet(OptionSet os) {
-		getOptnSets().add(os);
+	/**
+	 * @param i       index of looked up option set
+	 * @param newName new replacing option set name
+	 * @throws IOException
+	 */
+	public void setOptnSetName(int i, String newName) throws IOException {
+		getOptnSet(i).setName(newName);
 	}
 
-	public void addOptnSet(String name, int size) {
-		getOptnSets().add(createOptnSet(name, size));
-	}
 
 	public void deleteOptnSet(int i) {
 		getOptnSets().remove(i);
 	}
 
+	/**
+	 * @param name looked up option set name used for deletion
+	 * @throws IOException
+	 */
 	public void deleteOptnSet(String name) throws IOException {
 		for (int i = 0; i < getOptnSetsSize(); i++) {
 			if (getOptnSet(i).getName().equals(name)) {
@@ -176,12 +165,14 @@ public class Automobile implements Serializable {
 	}
 
 
-	public void updateOptnSet(int i, OptionSet os) {
-		getOptnSets().set(i, os);
-	}
-
+	/**
+	 *
+	 * @param i option set look up index
+	 * @param name new option set name
+	 * @param size size of option set instance
+	 */
 	public void updateOptnSet(int i, String name, int size) {
-		updateOptnSet(i, createOptnSet(name, size));
+		getOptnSets().set(i, createOptnSet(name, size));
 	}
 
 	public void updateOptnSetName(int i, String newName) throws IOException {

@@ -21,7 +21,6 @@ import Adapter.Debuggable;
 public class DefaultSocket extends Thread implements Debuggable {
 
 	////////// PROPERTIES //////////
-
 	private ObjectOutputStream send;
 	private ObjectInputStream receive;
 	private Socket clientSocket;
@@ -79,7 +78,11 @@ public class DefaultSocket extends Thread implements Debuggable {
 
 
 				//request has been received and parsed
-				int request = Integer.parseInt(receive.readObject().toString());
+				int request
+						=
+						Integer.parseInt(
+						receive.readObject().toString()
+				);
 				if (DEBUG) System.out.println(request);
 				if (request == 0) break;
 				if (DEBUG) System.out.println("Sending client request follow-up ... ");

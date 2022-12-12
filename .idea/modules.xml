@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/AutomobileConfigurationApp.iml" filepath="$PROJECT_DIR$/.idea/AutomobileConfigurationApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/AutmobileConfigApplication.iml" filepath="$PROJECT_DIR$/.idea/modules/AutmobileConfigApplication.iml" />
     </modules>
   </component>
 </project>
